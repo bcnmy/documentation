@@ -1,0 +1,29 @@
+# Getting Started
+
+retrieve bundlerUrl and paymasterUrl from the [dashboard](https://dashboard.biconomy.io)
+
+:::code-group
+ 
+```ts twoslash [index.ts]
+import { walletClient } from "./walletClient.ts"
+import { createSmartAccountClient } from "@biconomy/account"
+
+export const smartAccountClient = await createSmartAccountClient({  // [!code focus] 
+    bundlerUrl: "",  // [!code focus] 
+    paymasterUrl: "",  // [!code focus] 
+    signer: walletClient  // [!code focus] 
+})  // [!code focus] 
+```
+ 
+```ts twoslash [walletClient.ts] filename="walletClient.ts"
+import { polygonAmoy } from 'viem/chains'
+import { generatePrivateKey, privateKeyToAccount } from "viem/accounts"
+import { createWalletClient, http } from "viem"
+
+export const walletClient = createWalletClient({ 
+    account: privateKeyToAccount(generatePrivateKey()),
+    chain: polygonAmoy,
+    transport: http()
+})
+```
+:::
