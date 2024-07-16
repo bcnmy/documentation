@@ -32,7 +32,6 @@ ReactDOM.createRoot(document?.getElementById("root")!).render(
           config={{
             biconomyPaymasterApiKey: "_sTfkyAEp.552504b5-9093-4d4b-94dd-701f85a267ea",
             bundlerUrl: "https://bundler.biconomy.io/api/v2/80002/cJPK7B3ru.dd7f7861-190d-45ic-af80-6877f74b8f44",
-            chainId: 80002
           }}
           queryClient={queryClient}
         >
