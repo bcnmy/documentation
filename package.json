@@ -1,22 +1,26 @@
 {
-  "name": "documentation",
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vocs dev",
-    "build": "vocs build",
-    "preview": "vocs preview"
-  },
-  "dependencies": {
-    "@types/react": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "tailwindcss": "^3.4.4",
-    "typescript": "latest",
-    "vocs": "latest"
-  },
-  "devDependencies": {
-    "@biconomy/account": "^4.5.2",
-    "viem": "^2.17.3"
-  }
+	"name": "documentation",
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vocs dev",
+		"build": "vocs build",
+		"preview": "vocs preview"
+	},
+	"dependencies": {
+		"@types/react": "latest",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"tailwindcss": "^3.4.4",
+		"typescript": "latest",
+		"vocs": "latest"
+	},
+	"devDependencies": {
+		"@biconomy/account": "^4.5.3",
+		"@biconomy/use-aa": "^1.0.14",
+		"@tanstack/react-query": "^5.51.1",
+		"@types/react-dom": "^18.3.0",
+		"viem": "^2.17.3",
+		"wagmi": "^2.10.11"
+	}
 }
