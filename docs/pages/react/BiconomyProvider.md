@@ -1,8 +1,8 @@
-[**@biconomy/use-aa**](./index.md) • **Provider**
+[**@biconomy/use-aa**](https://github.com/bcnmy/useAA) • **Provider**
 
 ---
 
-[@biconomy/use-aa](./index.md) / BiconomyProvider
+[@biconomy/use-aa](https://github.com/bcnmy/useAA) / BiconomyProvider
 
 # Provider: BiconomyProvider
 
