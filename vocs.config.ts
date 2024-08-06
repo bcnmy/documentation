@@ -508,6 +508,11 @@ export const defaultSidebar = [
 ];
 
 export default defineConfig({
+  theme: {
+    accentColor: "#FF4E17",
+  },
+  ogImageUrl: 'https://vocs.dev/api/og?logo=%logo&title=%title&description=%description',
+  logoUrl: "/logo.svg",
   description:
     "Biconomy is the world's most popular account abstraction infrastructure platform",
   title: "Biconomy",
