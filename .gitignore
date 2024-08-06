@@ -1,3 +1,4 @@
 node_modules
 dist
 vocs.config.ts.timestamp*
+.env

@@ -1,4 +1,7 @@
 import { defineConfig } from "vocs";
+import { config } from "dotenv";
+
+config();
 
 export const defaultSidebar = [
   { link: "/overview", text: "Overview" },
@@ -333,7 +336,6 @@ export const defaultSidebar = [
       },
     ],
   },
-
   {
     link: "/bundler",
     text: "Bundler",
@@ -517,4 +519,12 @@ export default defineConfig({
     text: "Edit on GitHub",
   },
   sidebar: defaultSidebar,
+  vite: {
+    define: {
+      'process.env': {
+        GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+        PAYMASTER_TOKENS_GOOGLE_SHEET_ID: process.env.PAYMASTER_TOKENS_GOOGLE_SHEET_ID
+      }
+    }
+  }
 });
