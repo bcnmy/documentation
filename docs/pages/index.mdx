@@ -1,16 +1,36 @@
 ---
 layout: landing
+
+title: 'Home | Biconomy Docs'
 ---
 
 import { HomePage } from 'vocs/components'
 
 <HomePage.Root>
   <HomePage.Logo />
-  <HomePage.Tagline>Biconomy Docs</HomePage.Tagline>
+  <HomePage.Tagline>Biconomy is the world's most advanced ERC-4337 account abstraction infrastructure platform. Leverage our highly customisable transaction infra to build seamless dApps for every user.</HomePage.Tagline>
   <HomePage.InstallPackage name="biconomy-client-sdk" type="add" />
-  <HomePage.Description>This is a description of my documentation website.</HomePage.Description>
+  {/* <HomePage.Description>Superpowers for your Web3 stack.</HomePage.Description> */}
   <HomePage.Buttons>
     <HomePage.Button href="/quickstart-react" variant="accent">Get started</HomePage.Button>
-    <HomePage.Button href="https://github.com/bcnmy/biconomy-client-sdk">GitHub</HomePage.Button>
+    <HomePage.Button href="https://dashboard.biconomy.io/">Dashboard</HomePage.Button>
   </HomePage.Buttons>
+
+<div className="mx-0 mt-4 md:mx-4 xl:-mx-12 2xl:-mx-24">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+            ## [<span className="underline text-orange-600 hover:text-orange-800 hover:underline">sdk →</span>](/quickstart-react)
+            Our TypeScript library built on viem for interacting with ERC-4337 bundlers, paymasters, and user operations.
+        </div>
+        <div>
+            ## [<span className="underline text-blue-600 hover:text-blue-800 hover:underline">Bundler →</span>](/bundler)
+            Powering smart accounts by relaying ERC-4337 user operations for fast and reliable on-chain inclusion.
+        </div>
+        <div>
+            ## [<span className="underline text-teal-600 hover:text-teal-800 hover:underline">Paymasters →</span>](/paymaster)
+            Sponsoring the gas fees for user operations on hundreds of chains with a simple API endpoint.
+        </div>
+    </div>
+</div>
+
 </HomePage.Root>

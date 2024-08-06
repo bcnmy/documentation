@@ -1,4 +1,7 @@
 import { defineConfig } from "vocs";
+import { config } from "dotenv";
+
+config();
 
 export const defaultSidebar = [
   { link: "/overview", text: "Overview" },
@@ -333,7 +336,6 @@ export const defaultSidebar = [
       },
     ],
   },
-
   {
     link: "/bundler",
     text: "Bundler",
@@ -506,6 +508,11 @@ export const defaultSidebar = [
 ];
 
 export default defineConfig({
+  theme: {
+    accentColor: "#FF4E17",
+  },
+  ogImageUrl: 'https://vocs.dev/api/og?logo=%logo&title=%title&description=%description',
+  logoUrl: "/logo.svg",
   description:
     "Biconomy is the world's most popular account abstraction infrastructure platform",
   title: "Biconomy",
@@ -517,4 +524,12 @@ export default defineConfig({
     text: "Edit on GitHub",
   },
   sidebar: defaultSidebar,
+  vite: {
+    define: {
+      'process.env': {
+        GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+        PAYMASTER_TOKENS_GOOGLE_SHEET_ID: process.env.PAYMASTER_TOKENS_GOOGLE_SHEET_ID
+      }
+    }
+  }
 });

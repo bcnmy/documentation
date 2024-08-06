@@ -44,7 +44,7 @@ The module passed during the deployment acts as the default validation module. T
 
 ## Validation Modules
 
-![validationModule.png](../images/modules/validationModule.png)
+![validationModule.png](/modules/validationModule.png)
 
 The validation Module is a module that extends the abstract contract **BaseAuthorizationModule\*\*** - which implements the **IBaseAuthorizationModule** interface. This interface requires the implementation of the following methods:
 
@@ -96,7 +96,7 @@ After thorough testing and auditing, a pull request (PR) can be submitted to int
 There are two default execution functions - called execute and executeBatch which allow for open-ended execution that is required for AA-flow. The custom execution module needs to call back into Smart Account to initialize a function call from within the context of the account.
 The diagram below illustrates the execution flow for Modular Smart Accounts.
 
-![executionModule.png](../images/modules/executionModule.png)
+![executionModule.png](/modules/executionModule.png)
 
 :::caution
 Execution modules should be carefully developed and integrated, as they directly control the actions an account can perform.
