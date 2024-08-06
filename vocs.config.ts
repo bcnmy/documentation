@@ -51,6 +51,14 @@ export const defaultSidebar = [
       },
       { link: "/react/useSession", text: "UseSession" },
       {
+        link: "/react/useCreateSessionWithDistributedKey",
+        text: "UseCreateSessionWithDistributedKey",
+      },
+      {
+        link: "/react/useSessionWithDistributedKey",
+        text: "UseSessionWithDistributedKey",
+      },
+      {
         link: "/react/useSmartAccount",
         text: "UseSmartAccount",
       },
@@ -61,6 +69,7 @@ export const defaultSidebar = [
   {
     link: "/tutorials",
     text: "Tutorials",
+    collapsed: true,
     items: [
       {
         link: "/tutorials/apiIntegration",
@@ -109,7 +118,6 @@ export const defaultSidebar = [
       {
         link: "/tutorials/sessions",
         text: "Sessions",
-        collapsed: true,
         items: [
           {
             link: "/tutorials/sessions/createBatchSession",
@@ -136,7 +144,6 @@ export const defaultSidebar = [
       {
         link: "/tutorials/utils",
         text: "Utils",
-        collapsed: true,
         items: [
           {
             link: "/tutorials/utils/offsetGasValues",
@@ -145,6 +152,20 @@ export const defaultSidebar = [
           {
             link: "/tutorials/utils/transferOwnership",
             text: "Transfer Ownership",
+          },
+          {
+            link: "/tutorials/utils/DAN",
+            text: "DAN",
+            items: [
+              {
+                link: "/tutorials/utils/DAN/generateSessionKey",
+                text: "generateSessionKey",
+              },
+              {
+                link: "/tutorials/utils/DAN/signMessage",
+                text: "signMessage",
+              },
+            ],
           },
         ],
       },
@@ -162,7 +183,6 @@ export const defaultSidebar = [
       {
         link: "/account/signers",
         text: "Signers",
-        collapsed: true,
         items: [
           { link: "/account/signers/capsule", text: "Capsule" },
           {
@@ -174,7 +194,6 @@ export const defaultSidebar = [
           {
             link: "/account/signers/eoa",
             text: "Eoa",
-            collapsed: true,
             items: [
               {
                 link: "/account/signers/eoa/ethers",
@@ -210,7 +229,6 @@ export const defaultSidebar = [
       {
         link: "/account/smartAccountv1",
         text: "SmartAccountv1",
-        collapsed: true,
         items: [
           {
             link: "/account/smartAccountv1/methods",
@@ -223,12 +241,10 @@ export const defaultSidebar = [
           {
             link: "/account/smartAccountv1/tutorials",
             text: "Tutorials",
-            collapsed: true,
             items: [
               {
                 link: "/account/smartAccountv1/tutorials/React_vite",
                 text: "React_vite",
-                collapsed: true,
                 items: [
                   {
                     link: "/account/smartAccountv1/tutorials/React_vite/_category_.json",
@@ -267,7 +283,6 @@ export const defaultSidebar = [
               {
                 link: "/account/smartAccountv1/tutorials/nextjs",
                 text: "Nextjs",
-                collapsed: true,
                 items: [
                   {
                     link: "/account/smartAccountv1/tutorials/nextjs/_category_.json",
@@ -302,7 +317,6 @@ export const defaultSidebar = [
               {
                 link: "/account/smartAccountv1/tutorials/nodejs",
                 text: "Nodejs",
-                collapsed: true,
                 items: [
                   {
                     link: "/account/smartAccountv1/tutorials/nodejs/_category_.json",
@@ -344,7 +358,6 @@ export const defaultSidebar = [
       {
         link: "/bundler/api",
         text: "Api",
-        collapsed: true,
         items: [
           { link: "/bundler/api/chainId", text: "ChainId" },
           {
@@ -393,7 +406,6 @@ export const defaultSidebar = [
       {
         link: "/paymaster/7677",
         text: "7677",
-        collapsed: true,
         items: [
           {
             link: "/paymaster/7677/pm_getPaymasterData",
@@ -408,7 +420,6 @@ export const defaultSidebar = [
       {
         link: "/paymaster/api",
         text: "Api",
-        collapsed: true,
         items: [
           {
             link: "/paymaster/api/explorer",
@@ -450,19 +461,29 @@ export const defaultSidebar = [
     collapsed: true,
     items: [
       {
-        link: "/modules/BatchedSession",
-        text: "BatchedSession",
-      },
-      {
-        link: "/modules/abiSessionValidationModule",
-        text: "AbiSessionValidationModule",
+        link: "/modules/sessions",
+        text: "Sessions",
+        items: [
+          {
+            link: "/modules/sessions/abiSessionValidationModule",
+            text: "AbiSessionValidationModule",
+          },
+          {
+            link: "/modules/sessions/DistributedSessions",
+            text: "DistributedSessions",
+          },
+          {
+            link: "/modules/sessions/BatchedSession",
+            text: "BatchedSession",
+          },
+          {
+            link: "/modules/sessions/sessionvalidationmodule",
+            text: "Sessionvalidationmodule",
+          },
+        ],
       },
       { link: "/modules/ecdsa", text: "Ecdsa" },
       { link: "/modules/multichain", text: "Multichain" },
-      {
-        link: "/modules/sessionvalidationmodule",
-        text: "Sessionvalidationmodule",
-      },
     ],
   },
 
@@ -511,7 +532,8 @@ export default defineConfig({
   theme: {
     accentColor: "#FF4E17",
   },
-  ogImageUrl: 'https://vocs.dev/api/og?logo=%logo&title=%title&description=%description',
+  ogImageUrl:
+    "https://vocs.dev/api/og?logo=%logo&title=%title&description=%description",
   logoUrl: "/logo.svg",
   description:
     "Biconomy is the world's most popular account abstraction infrastructure platform",
@@ -526,10 +548,11 @@ export default defineConfig({
   sidebar: defaultSidebar,
   vite: {
     define: {
-      'process.env': {
+      "process.env": {
         GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
-        PAYMASTER_TOKENS_GOOGLE_SHEET_ID: process.env.PAYMASTER_TOKENS_GOOGLE_SHEET_ID
-      }
-    }
-  }
+        PAYMASTER_TOKENS_GOOGLE_SHEET_ID:
+          process.env.PAYMASTER_TOKENS_GOOGLE_SHEET_ID,
+      },
+    },
+  },
 });

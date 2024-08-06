@@ -1,0 +1,10 @@
+# DAN
+
+[Read more about Distributed Keys here](/modules/sessions/DistributedSessions)
+
+```ts
+import { danSDK } from "@biconomy/account"
+
+const danSessionKeyPayload = await danSDK.generateSessionKey(...options);
+const signature = await danSDK.signMessage("My message", ...moreOptions);
+```
