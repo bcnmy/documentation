@@ -17,3 +17,8 @@
 :root.dark {
     --vocs-color_background: #232225;
 }
+
+.vocs_HomePage_logo {
+    width: 500px;
+    height: 96px !important;
+}
