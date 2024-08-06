@@ -5,7 +5,7 @@ title: "Send a batch of transactions"
 ---
 
 :::info
-Building in React? [check here](../react/useSendTransaction.md)
+Building in React? [check here](/react/useSendTransaction.md)
 :::
 
 ### Overview
