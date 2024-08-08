@@ -5,7 +5,7 @@ title: "Pay gas in ERC20 tokens"
 ---
 
 :::info
-Building in React? [check here](../react/useSendGasTokenTransaction.md)
+Building in React? [check here](/react/useSendGasTokenTransaction.md)
 :::
 
 ### Overview

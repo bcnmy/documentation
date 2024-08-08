@@ -226,128 +226,6 @@ export const defaultSidebar = [
           },
         ],
       },
-      {
-        link: "/account/smartAccountv1",
-        text: "SmartAccountv1",
-        items: [
-          {
-            link: "/account/smartAccountv1/methods",
-            text: "Methods",
-          },
-          {
-            link: "/account/smartAccountv1/quickstartv1",
-            text: "Quickstartv1",
-          },
-          {
-            link: "/account/smartAccountv1/tutorials",
-            text: "Tutorials",
-            items: [
-              {
-                link: "/account/smartAccountv1/tutorials/React_vite",
-                text: "React_vite",
-                items: [
-                  {
-                    link: "/account/smartAccountv1/tutorials/React_vite/_category_.json",
-                    text: "_category_.json",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/React_vite/counter",
-                    text: "Counter",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/React_vite/first-dapp",
-                    text: "First dapp",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/React_vite/gasless-txn",
-                    text: "Gasless txn",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/React_vite/initialize",
-                    text: "Initialize",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/React_vite/register",
-                    text: "Register",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/React_vite/sdk-integration",
-                    text: "Sdk-integration",
-                  },
-                ],
-              },
-              {
-                link: "/account/smartAccountv1/tutorials/V2Upgrade",
-                text: "V2Upgrade",
-              },
-              {
-                link: "/account/smartAccountv1/tutorials/nextjs",
-                text: "Nextjs",
-                items: [
-                  {
-                    link: "/account/smartAccountv1/tutorials/nextjs/_category_.json",
-                    text: "_category_.json",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nextjs/dashboard",
-                    text: "Dashboard",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nextjs/gaslesstransaction",
-                    text: "Gaslesstransaction",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nextjs/initialize",
-                    text: "Initialize",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nextjs/introduction",
-                    text: "Introduction",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nextjs/nft",
-                    text: "Nft",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nextjs/sdkintegration",
-                    text: "Sdkintegration",
-                  },
-                ],
-              },
-              {
-                link: "/account/smartAccountv1/tutorials/nodejs",
-                text: "Nodejs",
-                items: [
-                  {
-                    link: "/account/smartAccountv1/tutorials/nodejs/_category_.json",
-                    text: "_category_.json",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nodejs/batchingTransactions",
-                    text: "Batching Transactions",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nodejs/environmentsetup",
-                    text: "Environment setup",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nodejs/gaslessmint",
-                    text: "Gaslessmint",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nodejs/initializeaccount",
-                    text: "Initializeaccount",
-                  },
-                  {
-                    link: "/account/smartAccountv1/tutorials/nodejs/paywitherc20",
-                    text: "Pay with erc20",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
     ],
   },
   {
@@ -512,10 +390,6 @@ export const defaultSidebar = [
     text: "Troubleshooting",
     collapsed: true,
     items: [
-      {
-        link: "/troubleshooting/_category_.json",
-        text: "_category_.json",
-      },
       {
         link: "/troubleshooting/commonerrors",
         text: "Commonerrors",

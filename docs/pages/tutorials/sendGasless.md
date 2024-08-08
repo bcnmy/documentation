@@ -5,7 +5,7 @@ title: "Send a gasless transaction"
 ---
 
 :::info
-Building in React? [check here](../react/useSendSponsoredTransaction.md)
+Building in React? [check here](/react/useSendSponsoredTransaction.md)
 :::
 
 ### Overview

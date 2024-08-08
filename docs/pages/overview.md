@@ -50,7 +50,7 @@ If you want to start diving into Smart Accounts you can begin [here](/account). 
 
 View the audit reports for smart accounts and Modules [here](audits).
 
-![FullStakAA](./images/overview/fullstackaa.png)
+![FullStakAA](/overview/fullstackaa.png)
 
 ## [Bundler](/bundler)
 
