@@ -8,8 +8,7 @@ slug: /
 The Biconomy SDK is an Account Abstraction toolkit that enables the simplest UX on your dApp, wallet, or appchain.
 Built on top of [ERC 4337](https://eips.ethereum.org/EIPS/eip-4337), we offer a full-stack solution for tapping into the power of our Smart Accounts Platform, Paymasters, and Bundlers.
 
-<details>
-  <summary>Introduction to Account Abstraction</summary>
+## Introduction to Account Abstraction
 
 Account Abstraction aims to enhance user experience by making user accounts more flexible and functional. Instead of using an Externally Owned Account, a Smart Contract can act as your account, powered by code instead of the Elliptic Curve Digital Signature Algorithm (ECDSA).
 
@@ -37,7 +36,7 @@ A smart account sends a userOp to execute a transaction. Bundlers then watch the
 
 Now, you have a basic understanding of the ERC 4337 flow for account abstraction.
 
-</details>
+
 ## [Smart Accounts Platform](/account)
 
 The Biconomy's Modular Smart Account is an ERC 4337-compliant solution that works with any Paymaster and Bundler service. Biconomy Smart Accounts are signer agnostic, which means you can use any authorization package as long as a signer is passed to our SDK during Smart Account creation. Explore different methods for creating Smart Accounts [here](/account/signers).

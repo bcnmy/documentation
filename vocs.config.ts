@@ -71,26 +71,41 @@ export const defaultSidebar = [
     text: "Tutorials",
     collapsed: true,
     items: [
+
+      { link: "/tutorials/sendSimpleTransaction", text: "Send a simple transaction" },
+      { link: "/tutorials/sendTransactionsBatch", text: "Send transactions batch" },
+      { link: "/tutorials/sendGasless", text: "Send a gasless transaction" },
       {
-        link: "/tutorials/apiIntegration",
-        text: "Api Integration",
-        collapsed: true,
+        link: "/tutorials/payERC20Token",
+        text: "Pay gas in ERC20 token",
+      },
+      {
+        link: "/tutorials/parallelUserOps",
+        text: "Send parallel userOps",
+      },
+      {
+        link: "/tutorials/sessions",
+        text: "Sessions",
         items: [
           {
-            link: "/tutorials/apiIntegration/paymasterERC20",
-            text: "PaymasterERC20",
+            link: "/tutorials/sessions/createBatchSession",
+            text: "Create Batch Session",
           },
           {
-            link: "/tutorials/apiIntegration/paymasterSponsored",
-            text: "PaymasterSponsored",
+            link: "/tutorials/sessions/createSession",
+            text: "Create Session",
           },
           {
-            link: "/tutorials/apiIntegration/signUserOperation",
-            text: "SignUserOperation",
+            link: "/tutorials/sessions/customSessionStorage",
+            text: "Custom Session Storage",
           },
           {
-            link: "/tutorials/apiIntegration/userSponsored",
-            text: "UserSponsored",
+            link: "/tutorials/sessions/useBatchSession",
+            text: "Use Batch Session",
+          },
+          {
+            link: "/tutorials/sessions/useSession",
+            text: "Use Session",
           },
         ],
       },
@@ -99,55 +114,12 @@ export const defaultSidebar = [
         text: "Custom Validation Module",
       },
       {
-        link: "/tutorials/parallelUserOps",
-        text: "ParallelUserOps",
-      },
-      {
-        link: "/tutorials/payERC20Token",
-        text: "PayERC20Token",
-      },
-      { link: "/tutorials/sendGasless", text: "SendGasless" },
-      {
-        link: "/tutorials/sendSimpleTransaction",
-        text: "SendSimpleTransaction",
-      },
-      {
-        link: "/tutorials/sendTransactionsBatch",
-        text: "SendTransactionsBatch",
-      },
-      {
-        link: "/tutorials/sessions",
-        text: "Sessions",
-        items: [
-          {
-            link: "/tutorials/sessions/createBatchSession",
-            text: "CreateBatchSession",
-          },
-          {
-            link: "/tutorials/sessions/createSession",
-            text: "CreateSession",
-          },
-          {
-            link: "/tutorials/sessions/customSessionStorage",
-            text: "CustomSessionStorage",
-          },
-          {
-            link: "/tutorials/sessions/useBatchSession",
-            text: "UseBatchSession",
-          },
-          {
-            link: "/tutorials/sessions/useSession",
-            text: "UseSession",
-          },
-        ],
-      },
-      {
         link: "/tutorials/utils",
         text: "Utils",
         items: [
           {
             link: "/tutorials/utils/offsetGasValues",
-            text: "OffsetGasValues",
+            text: "Offset Gas Values",
           },
           {
             link: "/tutorials/utils/transferOwnership",
@@ -159,16 +131,41 @@ export const defaultSidebar = [
             items: [
               {
                 link: "/tutorials/utils/DAN/generateSessionKey",
-                text: "generateSessionKey",
+                text: "Generate session key",
               },
               {
                 link: "/tutorials/utils/DAN/signMessage",
-                text: "signMessage",
+                text: "Sign message",
               },
             ],
           },
         ],
       },
+      {
+        link: "/tutorials/apiIntegration",
+        text: "API Integration",
+        collapsed: true,
+        items: [
+          {
+            link: "/tutorials/apiIntegration/userSponsored",
+            text: "User sponsored",
+          },
+          {
+            link: "/tutorials/apiIntegration/paymasterSponsored",
+            text: "Paymaster Sponsored",
+          },
+          {
+            link: "/tutorials/apiIntegration/paymasterERC20",
+            text: "Paymaster ERC20",
+          },
+          
+          {
+            link: "/tutorials/apiIntegration/signUserOperation",
+            text: "Sign userOp",
+          },
+          
+        ],
+      },   
       { link: "/tutorials/v4Migration", text: "V4 Migration" },
     ],
   },
@@ -177,20 +174,13 @@ export const defaultSidebar = [
     text: "Smart Account",
     collapsed: true,
     items: [
-      { link: "/account/fiatonramp", text: "Enable Fiat On-Ramp" },
       { link: "/account/integration", text: "Integration" },
       { link: "/account/methods", text: "Methods" },
       {
         link: "/account/signers",
         text: "Signers",
         items: [
-          { link: "/account/signers/capsule", text: "Capsule" },
-          {
-            link: "/account/signers/description",
-            text: "Description",
-          },
-          { link: "/account/signers/dfns", text: "Dfns" },
-          { link: "/account/signers/dynamic", text: "Dynamic" },
+          { link: "/account/signers/description", text: "Description"},
           {
             link: "/account/signers/eoa",
             text: "Eoa",
@@ -209,6 +199,9 @@ export const defaultSidebar = [
               },
             ],
           },
+          { link: "/account/signers/capsule", text: "Capsule" },
+          { link: "/account/signers/dfns", text: "Dfns" },
+          { link: "/account/signers/dynamic", text: "Dynamic" },
           { link: "/account/signers/magic", text: "Magic" },
           {
             link: "/account/signers/particle",
@@ -226,6 +219,7 @@ export const defaultSidebar = [
           },
         ],
       },
+      { link: "/account/fiatonramp", text: "Enable Fiat On-Ramp" },
     ],
   },
   {
@@ -237,12 +231,12 @@ export const defaultSidebar = [
         link: "/bundler/api",
         text: "Api",
         items: [
+          { link: "/bundler/api/explorer", text: "Explorer" },
           { link: "/bundler/api/chainId", text: "ChainId" },
           {
             link: "/bundler/api/estimate-useroperation-gas",
             text: "Estimate-useroperation-gas",
           },
-          { link: "/bundler/api/explorer", text: "Explorer" },
           {
             link: "/bundler/api/get-gas-fee-values",
             text: "Get-gas-fee-values",
@@ -338,6 +332,8 @@ export const defaultSidebar = [
     text: "Modules",
     collapsed: true,
     items: [
+      { link: "/modules/ecdsa", text: "Ecdsa" },
+      { link: "/modules/multichain", text: "Multichain" },
       {
         link: "/modules/sessions",
         text: "Sessions",
@@ -360,8 +356,6 @@ export const defaultSidebar = [
           },
         ],
       },
-      { link: "/modules/ecdsa", text: "Ecdsa" },
-      { link: "/modules/multichain", text: "Multichain" },
     ],
   },
 
@@ -420,6 +414,30 @@ export default defineConfig({
     text: "Edit on GitHub",
   },
   sidebar: defaultSidebar,
+  topNav: [
+    { text: 'Dashboard', link: 'https://dashboard.biconomy.io/' },
+    { text: 'Add Ons', link: '/addOns' },
+    { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
+    { text: 'Blog', link: 'https://www.biconomy.io/blog' },
+  ],
+  socials: [
+    {
+      icon: 'discord',
+      link: 'https://discord.com/invite/biconomy',
+    },
+    {
+      icon: 'github',
+      link: 'https://github.com/bcnmy/docs',
+    },
+    {
+      icon: 'warpcast',
+      link: 'https://warpcast.com/biconomy',
+    },
+    {
+      icon: 'x',
+      link: 'https://x.com/biconomy',
+    },
+  ],
   vite: {
     define: {
       "process.env": {

@@ -14,16 +14,16 @@ To integrate a `Biconomy Smart Account`, you'll need the [bundler url](/dashboar
 First, install the following packages for initializing the Smart Account.
 
 ```bash
-
 npm install @biconomy/account
-
 ```
 
 ## Integration
 
 Specify `PRIVATE_KEY`, `BUNDLER_URL`, and `RPC_URL` (for ethers) to create a smart account.
 
-```typescript
+:::code-group
+
+```typescript [Viem]
 import { Hex, createWalletClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { polygonAmoy } from "viem/chains";
@@ -49,7 +49,7 @@ const smartAccountAddress = await smartAccount.getAccountAddress();
 console.log("Smart Account Address", smartAccountAddress);
 ```
 
-```typescript
+```typescript  [Ethers]
 import { ethers } from "ethers";
 import { createSmartAccountClient } from "@biconomy/account";
 
@@ -68,7 +68,7 @@ const smartAccountAddress = await smartAccount.getAccountAddress();
 console.log("Smart Account Address", smartAccountAddress);
 ```
 
-```typescript
+```typescript [Alchemy]
 import { ethers } from "ethers";
 import { polygonAmoy } from "viem/chains";
 import { createSmartAccountClient } from "@biconomy/account";
