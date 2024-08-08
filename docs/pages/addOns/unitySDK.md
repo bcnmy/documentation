@@ -1,6 +1,5 @@
 ---
-sidebar_label: "Unity SDK"
-sidebar_position: 6
+title : Unity SDK
 ---
 
 # Lync - Unity SDK 
@@ -13,6 +12,6 @@ The LYNC AA SDK is tailored to enhance the gaming experience, offering a user-fr
 
 Embrace the future of gaming with the LYNC Account Abstraction SDK. Simplify your game’s user experience and open doors to a wider audience in the ever-expanding world of Web3 gaming.
 
-![Image1](./img/lync.png)
+![Image1](/addOns/lync.png)
 
 **[Contact](https://t.me/SarDwi8) Biconomy's BD/Sales team to integrate with Lync AA SDK.**

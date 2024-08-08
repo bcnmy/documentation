@@ -1,12 +1,6 @@
 ---
-layout: minimal
-date: 2023-11-25
+title : Wallet UI Kit
 ---
-
-<!-- ---
-sidebar_label: "Wallet UI Kit"
-sidebar_position: 5
---- -->
 
 # Obvious - Embedded Wallet UI Kit
 
@@ -23,11 +17,11 @@ Developers can now integrate Biconomy’s account abstraction-based wallet in th
 
 The pictures below give you a peek into what the Obvious Embed UI looks like and the cool features it comes with.
 
-![Image 1](./img/image1.png) ![Image2](./img/image2.png) ![Image3](./img/image3.png) ![Image4](./img/image4.png)
+![Image 1](/addOns/image1.png) ![Image2](/addOns/image2.png) ![Image3](/addOns/image3.png) ![Image4](/addOns/image4.png)
 
 This is how the wallet embed might be integrated into the application, seamlessly blending with its interface and functionality.
 
-![Image5](./img/image5.png)
+![Image5](/addOns/image5.png)
 
 [**Link for the SDK Docs**](https://obvious-embed.vercel.app/docs)
 

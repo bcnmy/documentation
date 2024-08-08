@@ -396,6 +396,37 @@ export const defaultSidebar = [
   { link: "/supportedNetworks", text: "SupportedNetworks" },
 ];
 
+export const addOnsSidebar = [
+  {
+    text: "Overview",
+    link: "/addOns/overview",
+  },
+  {
+    text: "Flat Rails",
+    link: "/addOns/fiatRails",
+  },
+  {
+    text: "Social Login Partners",
+    link: "/addOns/socialLogins",
+  },
+  {
+    text: "Fund Smart Accounts",
+    link: "/addOns/fundSmartAccounts",
+  },
+  {
+    text: "Wallet UI kit",
+    link: "/addOns/walletUiKit",
+  },
+  {
+    text: "Unity SDK",
+    link: "/addOns/unitySDK",
+  },
+  {
+    text: "Cross Chain Swaps",
+    link: "/addOns/crosschain",
+  },
+]
+
 export default defineConfig({
   theme: {
     accentColor: "#FF4E17",
@@ -413,10 +444,14 @@ export default defineConfig({
       "https://github.com/bcnmy/documentation/edit/develop/docs/pages/:path",
     text: "Edit on GitHub",
   },
-  sidebar: defaultSidebar,
+  sidebar: {
+    "/": defaultSidebar,
+    "/addOns": addOnsSidebar
+  },
   topNav: [
+    { text: 'SDKs', link: '/quickstart-react'},
     { text: 'Dashboard', link: 'https://dashboard.biconomy.io/' },
-    { text: 'Add Ons', link: '/addOns' },
+    { text: 'Add Ons', link: '/addOns/overview', match: "/addOns" },
     { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
     { text: 'Blog', link: 'https://www.biconomy.io/blog' },
   ],

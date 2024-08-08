@@ -1,6 +1,5 @@
 ---
-sidebar_label: "Social Login Partners"
-sidebar_position: 3
+title : Social Login
 ---
 
 # Social Login - Signers for your SA
