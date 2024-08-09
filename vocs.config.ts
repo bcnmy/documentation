@@ -231,35 +231,36 @@ export const defaultSidebar = [
         text: "Api",
         items: [
           { link: "/bundler/api/explorer", text: "Explorer" },
-          { link: "/bundler/api/chainId", text: "ChainId" },
+          
           {
             link: "/bundler/api/estimate-useroperation-gas",
-            text: "Estimate-useroperation-gas",
-          },
-          {
-            link: "/bundler/api/get-gas-fee-values",
-            text: "Get-gas-fee-values",
-          },
-          {
-            link: "/bundler/api/get-useroperation-by-hash",
-            text: "Get-useroperation-by-hash",
-          },
-          {
-            link: "/bundler/api/get-useroperation-receipt",
-            text: "Get-useroperation-receipt",
-          },
-          {
-            link: "/bundler/api/get-useroperation-status",
-            text: "Get-useroperation-status",
+            text: "eth_estimateUserOperationGas",
           },
           {
             link: "/bundler/api/send-UserOperation",
-            text: "Send-UserOperation",
+            text: "eth_sendUserOperation",
           },
           {
-            link: "/bundler/api/supported-EntryPoints",
-            text: "Supported-EntryPoints",
+            link: "/bundler/api/get-useroperation-receipt",
+            text: "eth_getUserOperationReceipt",
           },
+          {
+            link: "/bundler/api/get-useroperation-by-hash",
+            text: "eth_getUserOperationByHash",
+          },
+          { link: "/bundler/api/chainId", text: "eth_chainId" },
+          {
+            link: "/bundler/api/supported-EntryPoints",
+            text: "eth_supportedEntryPoints",
+          },
+          {
+            link: "/bundler/api/get-gas-fee-values",
+            text: "biconomy_getGasFeeValues",
+          },
+          {
+            link: "/bundler/api/get-useroperation-status",
+            text: "biconomy_getUserOperationStatus",
+          },     
         ],
       },
       {
@@ -280,11 +281,11 @@ export const defaultSidebar = [
         items: [
           {
             link: "/paymaster/7677/pm_getPaymasterData",
-            text: "Pm_getPaymasterData",
+            text: "pm_getPaymasterData",
           },
           {
             link: "/paymaster/7677/pm_getPaymasterStubData",
-            text: "Pm_getPaymasterStubData",
+            text: "pm_getPaymasterStubData",
           },
         ],
       },
