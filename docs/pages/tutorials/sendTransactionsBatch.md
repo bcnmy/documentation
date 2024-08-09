@@ -26,7 +26,9 @@ https://bundler.biconomy.io/api/v2/80002/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f
 
 ### Step 1: Generate the config and Create Biconomy Smart Account
 
-```typescript
+:::code-group
+
+```typescript [Viem]
 import { createWalletClient } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { polygonAmoy } from "viem/chains";
@@ -56,7 +58,7 @@ const saAddress = await smartWallet.getAccountAddress();
 console.log("SA Address", saAddress);
 ```
 
-```typescript
+```typescript [Ethers]
 import { ethers } from "ethers";
 import { createSmartAccountClient } from "@biconomy/account";
 
