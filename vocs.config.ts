@@ -88,24 +88,24 @@ export const defaultSidebar = [
         text: "Sessions",
         items: [
           {
-            link: "/tutorials/sessions/createBatchSession",
-            text: "Create Batch Session",
-          },
-          {
             link: "/tutorials/sessions/createSession",
             text: "Create Session",
           },
           {
-            link: "/tutorials/sessions/customSessionStorage",
-            text: "Custom Session Storage",
+            link: "/tutorials/sessions/useSession",
+            text: "Use Session",
+          },
+          {
+            link: "/tutorials/sessions/createBatchSession",
+            text: "Create Batch Session",
           },
           {
             link: "/tutorials/sessions/useBatchSession",
             text: "Use Batch Session",
           },
           {
-            link: "/tutorials/sessions/useSession",
-            text: "Use Session",
+            link: "/tutorials/sessions/customSessionStorage",
+            text: "Custom Session Storage",
           },
         ],
       },
@@ -180,7 +180,6 @@ export const defaultSidebar = [
         link: "/account/signers",
         text: "Signers",
         items: [
-          { link: "/account/signers/description", text: "Description"},
           {
             link: "/account/signers/eoa",
             text: "Eoa",
@@ -364,8 +363,6 @@ export const defaultSidebar = [
     text: "Dashboard",
     collapsed: true,
     items: [
-      { link: "/dashboard/apis", text: "APIs" },
-      { link: "/dashboard/organization", text: "Organization" },
       { link: "/dashboard/paymaster", text: "Paymaster" },
       {
         link: "/dashboard/paymasterRules",
@@ -375,6 +372,8 @@ export const defaultSidebar = [
         link: "/dashboard/spendingLimits",
         text: "Spending Limits",
       },
+      { link: "/dashboard/organization", text: "Organization" },
+      { link: "/dashboard/apis", text: "APIs" },
     ],
   },
   { link: "/contracts", text: "Contracts" },
@@ -386,7 +385,7 @@ export const defaultSidebar = [
     items: [
       {
         link: "/troubleshooting/commonerrors",
-        text: "Commonerrors",
+        text: "Common errors",
       },
       { link: "/troubleshooting/polyfill", text: "Polyfill" },
     ],
