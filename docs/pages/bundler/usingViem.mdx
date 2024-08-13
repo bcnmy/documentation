@@ -1,0 +1,59 @@
+---
+sidebar_position: 3
+custom_edit_url: https://github.com/bcnmy/docs/blob/master/docs/Bundler/usingViem.mdx
+---
+
+## Using Viem SDK
+
+This guide focuses on using the Biconomy Bundler with the Viem SDK to execute smart account transactions. You can use any of the [smart accounts](https://viem.sh/account-abstraction/accounts/smart) supported by viem.
+
+### Create bundler client 
+
+Use [createBundlerClient](https://viem.sh/account-abstraction/clients/bundler) to create bundler instance.
+
+```typescript
+import { createPublicClient, http, parseEther } from 'viem';
+import { createBundlerClient, toCoinbaseSmartAccount, createPaymasterClient, toSoladySmartAccount } from 'viem/account-abstraction';
+import { sepolia } from 'viem/chains';
+import { privateKeyToAccount } from 'viem/accounts';
+
+const main = async () => {
+  const client = createPublicClient({
+    chain: sepolia,
+    transport: http(),
+  })
+
+  const owner = privateKeyToAccount('PRIVATE_KEY')
+  console.log(owner.address)
+
+  const account = await toCoinbaseSmartAccount({
+    client,
+    owners: [owner]
+  })
+
+  const bundlerClient = createBundlerClient({
+    account,
+    client,
+    transport: http('https://bundler.biconomy.io/api/v2/11155111/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44'),
+  })
+
+  console.log(account.address);
+
+  const userOpHash = await bundlerClient.sendUserOperation({
+    account,
+    calls: [{
+      to: '0xcb98643b8786950F0461f3B0edf99D88F274574D',
+      value: parseEther('0.001')
+    }]
+  })
+  console.log(userOpHash)
+}
+
+main()
+```
+
+:::info
+  The Bundler URL provided above is a testnet endpoint. To obtain the mainnet Bundler URL, log in to the [Dashboard](https://dashboard.biconomy.io/).
+::::
+
+

@@ -268,6 +268,7 @@ export const defaultSidebar = [
         text: "Bundler Methods",
       },
       { link: "/bundler/integration", text: "Integration" },
+      { link: "/bundler/usingViem", text: "Using Viem" },
     ],
   },
   {
@@ -287,6 +288,7 @@ export const defaultSidebar = [
             link: "/paymaster/7677/pm_getPaymasterStubData",
             text: "pm_getPaymasterStubData",
           },
+          { link: "/paymaster/7677/usingViem", text: "Using Viem" },
         ],
       },
       {
