@@ -454,6 +454,7 @@ export default defineConfig({
     { text: 'Add Ons', link: '/addOns/overview', match: "/addOns" },
     { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
     { text: 'Blog', link: 'https://www.biconomy.io/blog' },
+    { text: 'Legacy docs', link: 'https://legacy-docs.biconomy.io/' },
   ],
   socials: [
     {
