@@ -299,15 +299,15 @@ export const defaultSidebar = [
           },
           {
             link: "/paymaster/api/get-fee-quotes",
-            text: "Get-fee-quotes",
+            text: "pm_getFeeQuoteOrData",
           },
           {
             link: "/paymaster/api/sponsor-useroperation",
-            text: "Sponsor-useroperation",
+            text: "pm_sponsorUserOperation",
           },
           {
             link: "/paymaster/api/webhookapi",
-            text: "Webhookapi",
+            text: "Webhook api",
           },
         ],
       },
@@ -462,7 +462,7 @@ export default defineConfig({
     },
     {
       icon: 'github',
-      link: 'https://github.com/bcnmy/docs',
+      link: 'https://github.com/bcnmy/documentation',
     },
     {
       icon: 'warpcast',
