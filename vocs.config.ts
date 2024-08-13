@@ -288,7 +288,7 @@ export const defaultSidebar = [
             link: "/paymaster/7677/pm_getPaymasterStubData",
             text: "pm_getPaymasterStubData",
           },
-          { link: "/paymaster/7677/usingViem", text: "Using Viem" },
+          // { link: "/paymaster/7677/usingViem", text: "Using Viem" },
         ],
       },
       {
