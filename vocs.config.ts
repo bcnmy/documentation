@@ -462,7 +462,7 @@ export default defineConfig({
     },
     {
       icon: 'github',
-      link: 'https://github.com/bcnmy/docs',
+      link: 'https://github.com/bcnmy/documentation',
     },
     {
       icon: 'warpcast',
