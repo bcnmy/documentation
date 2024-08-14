@@ -5,11 +5,14 @@ custom_edit_url: https://github.com/bcnmy/docs/blob/master/docs/Bundler/usingVie
 
 ## Using Viem SDK
 
-This guide focuses on using the Biconomy Bundler with the Viem SDK to execute smart account transactions. You can use any of the [smart accounts](https://viem.sh/account-abstraction/accounts/smart) supported by viem.
+This guide explains how to use the Biconomy Bundler with the Viem SDK to perform smart account transactions. You can use any of the [smart accounts](https://viem.sh/account-abstraction/accounts/smart) supported by viem.
 
 ### Create bundler client 
 
-Use [createBundlerClient](https://viem.sh/account-abstraction/clients/bundler) to create bundler instance.
+- Follow the step-by-step guide for executing a transaction with the [viem SDK](https://viem.sh/account-abstraction/guides/sending-user-operations).
+- To create a bundler instance, pass the Biconomy Bundler URL to the [createBundlerClient](https://viem.sh/account-abstraction/guides/sending-user-operations#2-set-up-a-bundler-client) method. 
+
+In the example below, we will send 0.001 ETH to a random address.
 
 ```typescript
 import { createPublicClient, http, parseEther } from 'viem';
@@ -31,11 +34,11 @@ const main = async () => {
     owners: [owner]
   })
 
-  const bundlerClient = createBundlerClient({
-    account,
-    client,
-    transport: http('https://bundler.biconomy.io/api/v2/11155111/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44'),
-  })
+  const bundlerClient = createBundlerClient({ // [!code focus]
+    account, // [!code focus]
+    client, // [!code focus]
+    transport: http('https://bundler.biconomy.io/api/v2/11155111/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44'), // [!code focus]
+  }) // [!code focus]
 
   console.log(account.address);
 
