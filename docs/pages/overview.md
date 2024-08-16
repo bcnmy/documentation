@@ -57,7 +57,14 @@ The Bundler is a service that tracks userOps that exist in an alternative mem po
 
 This is the final piece of the flow where after constructing your userOp and then potentially signing it with data from a paymaster, you send the userOp on-chain to be handled and executed as a transaction on the EVM. You can start using our Bundlers right now in your dApps. Each of our [tutorials](/tutorials) will walk you through how to use them in different scenarios.
 
+#### Bundler url
 View the list of supported networks by Biconomy bundler [here](/supportedNetworks).
+To start, send your transaction using this URL on the test networks:
+
+```bash
+https://bundler.biconomy.io/api/v2/{chain-id-here}/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44
+```
+For the mainnet bundler URL, reach out to us via [email](bd@biconomy.io) or [telegram](https://t.me/sardwi8). 
 
 If you are looking to integrate account abstraction using APIs, checkout the [bundler APIs](/bundler/api) and [tutorials](/tutorials/apiIntegration/).
 
