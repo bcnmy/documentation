@@ -135,7 +135,7 @@ Body
 
 | Param     | Type    | Description                            | Required |
 | --------- | ------- | -------------------------------------- | -------- |
-| webhookId | string  | Webhook Id recieved when first created | Required |
+| webhookId | string  | Webhook Id received when first created | Required |
 | active    | boolean | Address of smart contract              | Required |
 
 Responses
@@ -199,7 +199,7 @@ Body
 
 | Param     | Type   | Description                            | Required |
 | --------- | ------ | -------------------------------------- | -------- |
-| webhookId | string | Webhook Id recieved when first created | Required |
+| webhookId | string | Webhook Id received when first created | Required |
 
 > **_200 OK_**
 
