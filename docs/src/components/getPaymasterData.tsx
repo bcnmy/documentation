@@ -100,7 +100,7 @@ export default function GoogleSheetsDataPage() {
         Object.keys(fetchedData).map(sheetTitle => (
           <div key={sheetTitle}>
             <h3>{sheetTitle}</h3>
-            <table>
+            <table cellPadding="6">
               <thead>
                 <tr>
                   <th>Symbol</th>
