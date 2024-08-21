@@ -400,6 +400,7 @@ export const defaultSidebar = [
 
   { link: "/FAQ", text: "FAQ" },
   { link: "/supportedNetworks", text: "SupportedNetworks" },
+  { link: "/toolkit", text: "ToolKit" },
 ];
 
 export default defineConfig({
