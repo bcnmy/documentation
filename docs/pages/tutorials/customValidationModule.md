@@ -10,7 +10,7 @@ This section of the tutorial requires Solidity knowledge and smart contract deve
 
 In this tutorial, we will look at how to create your own validation module using solidity
 
-As mentioned in the [overview](./../modules#how-to-create-a-custom-validation-module), any custom validation module needs to extend the abstract contract [BaseAuthorizationModule](https://github.com/bcnmy/scw-contracts/blob/main/contracts/smart-account/modules/BaseAuthorizationModule.sol). This contract is crucial as it connects your module to essential authorization functions.
+As mentioned in the [overview](/modules#how-to-create-a-custom-validation-module), any custom validation module needs to extend the abstract contract [BaseAuthorizationModule](https://github.com/bcnmy/scw-contracts/blob/main/contracts/smart-account/modules/BaseAuthorizationModule.sol). This contract is crucial as it connects your module to essential authorization functions.
 The following implementation enables a module to receive userOp data and provide validation results back to the SmartAccount.
 
 Let's take a look at the step-by-step guide to create a custom Validation Module.

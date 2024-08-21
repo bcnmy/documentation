@@ -2,7 +2,7 @@
 
 ## Description
 
-Sends a transaction, taking an erc20 token of choice as payment for the gas. token can be specified in advance by providing the tokenParam as a Hex address, or user can set the token dynamically by setting the tokenParam to a [feeQuote](./useTokenFees.md)
+Sends a transaction, taking an erc20 token of choice as payment for the gas. token can be specified in advance by providing the tokenParam as a Hex address, or user can set the token dynamically by setting the tokenParam to a [feeQuote](/react/useTokenFees)
 
 ## Usage
 

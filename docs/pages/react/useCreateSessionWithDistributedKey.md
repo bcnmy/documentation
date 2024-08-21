@@ -4,7 +4,7 @@
 
 Creates a session to be used when submitting tx in the context of a users smart account.
 
-Please carefully read [this](../tutorials/sessions/index.md) information regarding `Rules` and how they should be constructed before building your Policy.
+Please carefully read [this](/tutorials/sessions) information regarding `Rules` and how they should be constructed before building your Policy.
 
 ## Usage
 

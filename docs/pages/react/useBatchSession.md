@@ -2,7 +2,7 @@
 
 ## Description
 
-Uses a previously created batch session ([see here](./useCreateBatchSession.md)) which batches transactions in the context of a users smart account.
+Uses a previously created batch session ([see here](/react/useCreateBatchSession)) which batches transactions in the context of a users smart account.
 
 ## Usage
 
