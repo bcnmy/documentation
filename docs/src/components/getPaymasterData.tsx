@@ -95,25 +95,24 @@ export default function GoogleSheetsDataPage() {
 
   return (
     <div>
-
       {dataLoaded ? (
         Object.keys(fetchedData).map(sheetTitle => (
           <div key={sheetTitle}>
-            <h3>{sheetTitle}</h3>
-            <table cellPadding="6">
+            <h4 className='vocs_H4 vocs_Heading'>{sheetTitle}</h4>
+            <table className="vocs_Table">
               <thead>
-                <tr>
-                  <th>Symbol</th>
-                  <th>Name</th>
-                  <th>Address</th>
+                <tr className="vocs_TableRow">
+                  <th className="vocs_TableHeader">Symbol</th>
+                  <th className="vocs_TableHeader">Name</th>
+                  <th className="vocs_TableHeader">Address</th>
                 </tr>
               </thead>
               <tbody>
                 {fetchedData[sheetTitle].map((row, rowIndex) => (
-                  <tr key={`${`n-${rowIndex}`}`}>
+                  <tr className="vocs_TableRow" key={`${`n-${rowIndex}`}`}>
                     {/* biome-ignore lint/suspicious/noExplicitAny: <explanation> */}
                     {row.map((cell: any, i: number) => (
-                      <td key={`n-${i + 1}`}>{cell}</td>
+                      <td className="vocs_TableCell" key={`n-${i + 1}`}>{cell}</td>
                     ))}
                   </tr>
                 ))}
