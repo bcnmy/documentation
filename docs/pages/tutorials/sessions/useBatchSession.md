@@ -5,7 +5,7 @@ title: "Use a batch session"
 ---
 
 :::info
-Building in React? [check here](../../react/useBatchSession.md)
+Building in React? [check here](/react/useBatchSession.md)
 :::
 
 ### Overview
@@ -23,7 +23,7 @@ You can get your Biconomy Paymaster API key from the dashboard [here](https://da
 https://bundler.biconomy.io/api/v2/80002/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44
 ```
 
-- A session granted by a user [see the previous step](./createBatchSession)
+- A session granted by a user [see the previous step](/tutorials/sessions/createBatchSession)
 
 ### Step 1: Setup
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-Uses a previously created session ([see here](./useCreateSession.md)) which sends transactions in the context of a users smart account.
+Uses a previously created session ([see here](/react/useCreateSession)) which sends transactions in the context of a users smart account.
 
 ## Usage
 

@@ -17,20 +17,38 @@ import { HomePage } from 'vocs/components'
   </HomePage.Buttons>
 
 <div className="mx-0 mt-4 md:mx-4 xl:-mx-12 2xl:-mx-24">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div>
-            ## [<span className="underline text-orange-600 hover:text-orange-800 hover:underline">SDK →</span>](/quickstart-react)
+<div className="mx-0 mt-4 md:mx-4 xl:-mx-12 2xl:-mx-24">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
+            <h3 className="text-[#ff4e17] font-bold text-xl mb-2">
+                <a href="/quickstart-react" className="no-underline hover:text-[#ff2600]">
+                    SDK →
+                </a>
+            </h3>
             Our TypeScript library built on viem for interacting with ERC-4337 bundlers, paymasters, and user operations.
         </div>
-        <div>
-            ## [<span className="underline text-blue-600 hover:text-blue-800 hover:underline">Bundler →</span>](/bundler)
+        <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
+            <h3 className="text-orange-600 font-bold text-xl mb-2">
+                <a href="/bundler" className="no-underline hover:text-orange-800">
+                    Bundler →
+                </a>
+            </h3>
             Powering smart accounts by relaying ERC-4337 user operations for fast and reliable on-chain inclusion.
         </div>
-        <div>
-            ## [<span className="underline text-teal-600 hover:text-teal-800 hover:underline">Paymasters →</span>](/paymaster)
+        <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
+            <h3 className="text-orange-600 font-bold text-xl mb-2">
+                <a href="/paymaster" className="no-underline hover:text-orange-800">
+                    Paymasters →
+                </a>
+            </h3>
             Sponsoring the gas fees for user operations on hundreds of chains with a simple API endpoint.
         </div>
     </div>
 </div>
 
+
+</div>
+
+
 </HomePage.Root>
+
