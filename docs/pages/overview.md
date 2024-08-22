@@ -47,7 +47,7 @@ Modular architecture enables developers to easily & securely plug-in programmabl
 
 If you want to start diving into Smart Accounts you can begin [here](/account). For those, who are already familiar with Smart Accounts and prefer to start with modules, you can check out [here](/modules) or follow this step-by-step [tutorial](/tutorials/sessions/createSession) on how to build a dApp that utilizes session key modules.
 
-View the audit reports for smart accounts and Modules [here](audits).
+View the audit reports for smart accounts and Modules [here](/audits).
 
 ![FullStakAA](/overview/fullstackaa.png)
 
@@ -68,7 +68,7 @@ For the mainnet bundler URL, reach out to us via [email](bd@biconomy.io) or [tel
 
 If you are looking to integrate account abstraction using APIs, checkout the [bundler APIs](/bundler/api) and [tutorials](/tutorials/apiIntegration/).
 
-## [Paymaster](paymaster)
+## [Paymaster](/paymaster)
 
 Biconomy's paymaster service enables Dapps to sponsor transactions and, also allows users to use ERC-20 tokens as payment for gas. Log in to the [Biconomy dashboard](/dashboard) to get the paymaster URL and switch modes between our sponsorship and token Paymaster. Make use of different [Spending limits](/dashboard/spendingLimits) to customize the paymaster usage.
 
@@ -82,4 +82,4 @@ Switching your Paymaster mode to ERC20 enables users to pay gas fees with ERC20 
 
 Learn how to utilize either of these Paymasters by checking out our How To Guide on [Executing transactions](/tutorials)
 
-**Next:** Checkout the [quickstart](quickstart) guide to start the integration.
+**Next:** Checkout the [quickstart](/quickstart) guide to start the integration.

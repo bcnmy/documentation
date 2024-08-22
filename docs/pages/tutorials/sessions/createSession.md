@@ -5,7 +5,7 @@ title: "Create a session"
 ---
 
 :::info
-Building in React? [check here](../../react/useCreateSession.md)
+Building in React? [check here](/react/useCreateSession)
 :::
 
 ### Overview

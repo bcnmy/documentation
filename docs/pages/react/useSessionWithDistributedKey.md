@@ -2,7 +2,7 @@
 
 ## Description
 
-Uses a previously created session ([see here](./useCreateSessionWithDistributedKey.md)) which sends transactions in the context of a users smart account.
+Uses a previously created session ([see here](/react/useCreateSessionWithDistributedKey)) which sends transactions in the context of a users smart account.
 
 ## Usage
 
