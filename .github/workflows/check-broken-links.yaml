@@ -1,0 +1,49 @@
+name: Check broken links
+
+on:
+  deployment:
+  push:
+    branches:
+      - main  # Set the branch to main or master
+  pull_request: 
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install -g linkinator@6.1.1
+
+      - name: Check links
+        run: linkinator https://docs.pimlico.io https://pimlico.io -r --retry --format json --skip api.pimlico.io  --concurrency 5 > links-report.json
+
+      - name: Prepare report
+        id: prepare-report
+        run: |
+          LENGTH=$(jq '[.links[] | select(.state == "BROKEN" and .status!=403 and .status!=429 and .status!=0)] | length' links-report.json)
+
+          if [ "$LENGTH" -gt 0 ]; then
+              echo "send_report=true" >> $GITHUB_OUTPUT
+          else
+              echo "send_report=false" >> $GITHUB_OUTPUT
+          fi
+
+          {
+            echo 'report_message<<EOF'
+            echo 'Broken links found in the docs 😱:'
+
+            jq -r '.links[] | select(.state == "BROKEN" and .status!=403 and .status!=429 and .status!=0) | "• `\(.url)` (status: `\(.status)`) on the page \(.parent)"' links-report.json
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Send report
+        uses: slackapi/slack-github-action@v1.26.0
+        if: steps.prepare-report.outputs.send_report == 'true'
+        with:
+          channel-id: ${{ vars.REPORTS_CHANNEL_ID }}
+          slack-message: ${{ steps.prepare-report.outputs.report_message }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
