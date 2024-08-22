@@ -429,6 +429,74 @@ export const addOnsSidebar = [
   },
 ]
 
+export const nexusSidebar = [
+  {
+    text: "Overview",
+    link: "/nexus/overview",
+  },
+  {
+    text: "Quickstart",
+    link: "/nexus/quickstart",
+  },
+  {
+    text: "ERC-7579 Modules",
+    link: "/nexus/modules",
+    collapsed: false,
+    items: [
+      {
+        link: "/nexus/modules/validators",
+        text: "Validators",
+        collapsed: true,
+        items: [
+          {
+            link: "/nexus/modules/validators/k1Validator",
+            text: "K1Validator (ECDSA)",
+            items: [
+              {
+                link: "/nexus/modules/validators/k1Validator/tutorial",
+                text: "Tutorial"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        link: "/nexus/modules/executors",
+        text: "Executors",
+        collapsed: true,
+        items: [
+          {
+            link: "/nexus/modules/executors/OwnableExecutor",
+            text: "OwnableExecutor",
+            items: [
+              {
+                link: "/nexus/modules/executors/OwnableExecutor",
+                text: "Overview"
+              },
+              {
+                link: "/nexus/modules/executors/OwnableExecutor/methods",
+                text: "Methods"
+              },
+              {
+                link: "/nexus/modules/executors/OwnableExecutor/tutorial",
+                text: "Tutorial"
+              }
+            ]
+          }
+        ]
+      },
+    ]
+  },
+  {
+    text: "Nexus Smart Account",
+    link: "/nexus/smart-account",
+    items: [{
+      text: "ERC-7579 Methods",
+      link: "/nexus/smart-account/7579methods",
+    }]
+  },
+]
+
 export default defineConfig({
   theme: {
     accentColor: "#FF4E17",
@@ -448,13 +516,15 @@ export default defineConfig({
   },
   sidebar: {
     "/": defaultSidebar,
-    "/addOns": addOnsSidebar
+    "/addOns": addOnsSidebar,
+    "/nexus": nexusSidebar
   },
   topNav: [
-    { text: 'SDKs', link: '/quickstart-react'},
+    { text: 'SDK v4', link: '/quickstart-react'},
+    { text: 'Nexus SDK', link: '/nexus/overview', match: "/nexus"},
     { text: 'Dashboard', link: 'https://dashboard.biconomy.io/' },
     { text: 'Add Ons', link: '/addOns/overview', match: "/addOns" },
-    { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
+    // { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
     { text: 'Blog', link: 'https://www.biconomy.io/blog' },
     { text: 'Legacy docs', link: 'https://legacy-docs.biconomy.io/' },
   ],
