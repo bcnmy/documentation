@@ -64,7 +64,7 @@ To start, send your transaction using this URL on the test networks:
 ```bash
 https://bundler.biconomy.io/api/v2/{chain-id-here}/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44
 ```
-For the mainnet bundler URL, reach out to us via [email](bd@biconomy.io) or [telegram](https://t.me/sardwi8). 
+For the mainnet bundler URL, reach out to us via email at ```bd@biconomy.io``` or [telegram](https://t.me/sardwi8). 
 
 If you are looking to integrate account abstraction using APIs, checkout the [bundler APIs](/bundler/api) and [tutorials](/tutorials/apiIntegration/).
 

@@ -175,7 +175,7 @@ const feeQuotesResponse = await biconomyPaymaster.getPaymasterFeeQuotesOrData(
 );
 ```
 
-**2. Update userOp**: After getting this information we need to build our updated userOp with the preferred `feeQuote` from the `feeQuotes` array.
+**2. Update userOp**: After getting this information we need to build our updated userOp with the preferred `feeQuote` from the `feeQuotes` array. Here spender is the ERC20 paymaster contract address.
 
 ```ts
 finalUserOp = await smartAccount.buildTokenPaymasterUserOp(userOp, {
