@@ -14,6 +14,12 @@ This tutorial demonstrates how a dapp can create a number of simple sessions usi
 
 You can get your Biconomy Paymaster API key from the dashboard [here](https://dashboard.biconomy.io/).
 
+:::tip
+
+Check out an end-to-end integration of Sessions Key for Batched Transaction with Biconomy on this [example app](https://aasessionsbatchtxn.vercel.app/) and [repo](https://github.com/bcnmy/biconomy_batch_sessions_example)!
+
+:::
+
 ### Prerequisites
 
 - Biconomy Paymaster API key
