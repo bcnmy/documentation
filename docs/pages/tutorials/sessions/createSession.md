@@ -16,7 +16,7 @@ You can get your Biconomy Paymaster API key from the dashboard [here](https://da
 
 :::tip
 
-Check out an end-to-end integration of Magic with Biconomy on this [example app](https://aasessions.vercel.app/) and [repo](https://github.com/bcnmy/biconomy_sessions_example)!
+Check out an end-to-end integration of Sessions Key with Biconomy on this [example app](https://aasessions.vercel.app/) and [repo](https://github.com/bcnmy/biconomy_sessions_example)!
 
 :::
 
