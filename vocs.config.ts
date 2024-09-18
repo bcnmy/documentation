@@ -5,8 +5,8 @@ config();
 
 export const defaultSidebar = [
   { link: "/overview", text: "Overview" },
-  { link: "/quickstart-react", text: "Quickstart: React" },
-  { link: "/quickstart", text: "Quickstart: Core SDK" },
+  { link: "/quickstart-react", text: "Quickstart - React" },
+  { link: "/quickstart", text: "Quickstart - Core SDK" },
   {
     link: "/react",
     text: "React",
@@ -536,10 +536,6 @@ export default defineConfig({
     {
       icon: 'github',
       link: 'https://github.com/bcnmy/documentation',
-    },
-    {
-      icon: 'warpcast',
-      link: 'https://warpcast.com/biconomy',
     },
     {
       icon: 'x',

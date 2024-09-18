@@ -6,6 +6,23 @@ title: Nexus SDK Overview
 # What is Nexus?
 Nexus represents the next generation of smart account technology, built on the foundation of ERC-7579. It's a significant evolution from our previous [Biconomy Smart Account v2](https://docs.biconomy.io/account), offering:
 
+```tsx twoslash
+import { createNexusClient } from "nexus/packages/sdk";
+import { privateKeyToAccount } from "viem/accounts";
+import { baseSepolia } from "viem/chains";
+import { http } from "viem";
+
+const privateKey = "0x...";
+const account = privateKeyToAccount(`0x${privateKey}`)
+const nexusClient = await createNexusClient({
+    owner: account,
+    chain: baseSepolia,
+    transport: http()
+});
+
+const address = await nexusClient.account.getAddress();
+```
+
 - Enhanced gas optimization
 - Top notch security, audited by the best in the industry
 - Extensive customization options through modular architecture
@@ -25,39 +42,6 @@ The Nexus SDK is a powerful toolkit designed to streamline your interaction with
 :::warning
 The current version of Nexus SDK is still in beta, we are actively improving and working towards new features so the SDK might suffer several breaking or non-breaking changes.
 :::
-
-
-```ts
-    import { http,createWalletClient,encodePacked } from "viem"
-    import { privateKeyToAccount } from "viem/accounts"
-    import { baseSepolia } from "viem/chains"
-    import { ModuleType, OWNABLE_EXECUTOR, createSmartAccountClient } from "@biconomy/account"
-
-    const account = privateKeyToAccount(`0x${privateKey}`)
-    const walletClient = createWalletClient({
-        account, 
-        chain: baseSepolia,
-        transport: http()
-    })
-
-    // By default, the validation module will be K1Validator (previous ECDSA Validator)
-    const smartAccount = await createSmartAccountClient({
-        signer: walletClient,
-        bundlerUrl // Get this from your Dashboard
-    })
-
-    // Install an executor module
-    const receipt = await smartAccount.installModule({
-        moduleAddress: OWNABLE_EXECUTOR,
-        type: 'executor',
-        data: encodePacked(
-            ["address"],
-            [await smartAccount.getAddress()]
-        )
-    })
-
-    smartAccount.setActiveExecutionModule(ownableExecutorModule)
-```
 
 ### Seamless Integration
 Seamlessly integrate powerful Modular Smart Account features into your project with our comprehensive SDK. 
