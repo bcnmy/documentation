@@ -5,7 +5,7 @@ For integration with Biconomy, you will need to use the `raas-request` API to su
 
 ### 1. Raas Provider request Endpoint:
 
-**POST API Path:** `/public/raas-request`
+**POST API Endpoint:** `https://paymaster-dashboard-backend.prod.biconomy.io/api/v2/public/raas-request`
  
 This endpoint processes incoming webhook requests from RAAS providers, such as Conduit. It performs validation, updates the database, and triggers Slack notifications.
 
