@@ -11,7 +11,7 @@ This endpoint processes incoming webhook requests from RAAS providers, such as C
 
 **Header**
 
-Based on each RAAS provider a new header will be generated. for eg. `X-Conduit-Integration-Secret` (Header name for conduit)
+Based on each RAAS provider a new header will be generated. for eg. `X-Conduit-Integration-Secret` (Header name for conduit). You can reach out to us on [Telegram](https://t.me/monikatudja) or [discord](https://discord.com/invite/biconomy) for the same.
 
 **Request Payload Structure**
 
@@ -20,7 +20,7 @@ The payload received at this endpoint must adhere to the following structure:
 ```json
 {
   "event": "INSTALLING",
-  "id": "unique-event-id",
+  "id": "unique-request-id",
   "chain_id": "1",
   "parent_chain_id": "0",
   "type": "rollup",
@@ -54,6 +54,26 @@ The payload received at this endpoint must adhere to the following structure:
   }
 }
 ```
+**Response**
+
+```json
+{
+    "status": "INSTALLING",
+    "eta_seconds": 1209600, // Estimated time of completion in seconds
+    "manage_integration_link": "https://dashboard.biconomy.io"
+}
+```
+Here’s a breakdown of the fields:
+- `status`: Indicates the current status of the integration. Possible values include:
+
+    - "INSTALLING": The integration is currently in progress.
+    - "INSTALLED": The integration has been successfully completed.
+    - "UNINSTALLED": The integration has been removed.
+    - "NOT_INSTALLED": The integration has not been attempted or is not applicable.
+
+- `eta_seconds`: The estimated time of completion for the integration, expressed in seconds. This value provides an estimate of how long it will take for the integration to be finalized. For example, 1209600 seconds equals approximately 14 days.
+
+- `manage_integration_link`: A URL that directs to the Biconomy dashboard where you can manage and monitor the integration status.
 
 
 ### 2. RAAS Provider Update Endpoint:
@@ -69,4 +89,4 @@ We will require an endpoint for updating the status of installations/completions
 }
 ```
 
-Do reach out to us on Telegram or discord, if you plan to integrate.
+You can contact us via [Telegram](https://t.me/monikatudja) or [discord](https://discord.com/invite/biconomy) for further queries.
