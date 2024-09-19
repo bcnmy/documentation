@@ -1,8 +1,10 @@
 # One click integration for RAAS providers
 
-For integration with Biconomy, you will need to use the `raas-request` API to submit your requests. The request will be reviewed internally and subsequently the status will be updated through an `update` API at your end.
+This guide walks you through the process of integrating with Biconomy using a one-click setup on RAAS (Rollup as a service) provider platforms.
 
-### 1. Raas provider request Endpoint:
+Essentially, you will need to use the `raas-request` API to submit your requests. The request will be reviewed internally and subsequently the status will be updated through an `update` API at your end.
+
+### 1. RAAS provider request Endpoint:
 
 **POST API Endpoint**
 
@@ -14,7 +16,7 @@ This endpoint processes incoming webhook requests from RAAS providers, such as C
 
 **Header**
 
-Based on each RAAS provider a new header will be generated. for eg. `X-Conduit-Integration-Secret` (Header name for conduit). You can reach out to us on [Telegram](https://t.me/monikatudja) or [discord](https://discord.com/invite/biconomy) for the same.
+Based on each RAAS provider a new header will be generated. for eg. `X-Conduit-Integration-Secret` (Header name for conduit). You can reach out to us on [Telegram](https://t.me/monikatudja) or [discord](https://discord.com/invite/biconomy) for the new header.
 
 **Request Payload Structure**
 
