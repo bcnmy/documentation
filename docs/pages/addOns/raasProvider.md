@@ -1,10 +1,14 @@
-# One click integration for RAAS Providers
+# One click integration for RAAS providers
 
 For integration with Biconomy, you will need to use the `raas-request` API to submit your requests. The request will be reviewed internally and subsequently the status will be updated through an `update` API at your end.
 
-### 1. Raas Provider request Endpoint:
+### 1. Raas provider request Endpoint:
 
-**POST API Endpoint:** `https://paymaster-dashboard-backend.prod.biconomy.io/api/v2/public/raas-request`
+**POST API Endpoint**
+
+```bash
+https://paymaster-dashboard-backend.prod.biconomy.io/api/v2/public/raas-request
+``` 
  
 This endpoint processes incoming webhook requests from RAAS providers, such as Conduit. It performs validation, updates the database, and triggers Slack notifications.
 
@@ -82,9 +86,9 @@ We will require an endpoint for updating the status of installations/completions
 **Payload**
 ```json
 {
-    status: "INSTALLED", // ["INSTALLING", "INSTALLED", "UNINSTALLED", "NOT_INSTALLED"]
-    id: <request-id>,
-    manage_integration_link: <biconomy-dashboard-url>
+    "status": "INSTALLED", // ["INSTALLING", "INSTALLED", "UNINSTALLED", "NOT_INSTALLED"]
+    "id": "unique-request-id",
+    "manage_integration_link": "<biconomy-dashboard-url>"
 }
 ```
 
