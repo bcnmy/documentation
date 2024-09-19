@@ -1,5 +1,4 @@
-# RAAS Integration and Event Handling
-
+# One click integration for RAAS Providers
 
 For integration with Biconomy, you will need to use the `raas-request` API to submit your requests. The request will be reviewed internally and subsequently the status will be updated through an `update` API at your end.
 
