@@ -25,13 +25,13 @@ npm install @biconomy/account
 To create a bundler instance pass the bundler url, with other optional params.
 
 ```typescript
-import { create } from "@biconomy/account";
+import { createBundler } from "@biconomy/account";
 
 const userOpReceiptMaxDurationIntervals: { [key in number]?: number } = {
   [80002]: 60000,
 };
 
-const bundler = await create({
+const bundler = await createBundler({
   bundlerUrl: "", // <-- Read about this at https://docs.biconomy.io/dashboard#bundler-url
   userOpReceiptMaxDurationIntervals,
 });

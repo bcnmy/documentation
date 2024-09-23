@@ -167,6 +167,10 @@ export const defaultSidebar = [
         ],
       },   
       { link: "/tutorials/v4Migration", text: "V4 Migration" },
+      {
+        text: "Migrate from stackUp",
+        link: "/tutorials/migrate",
+      },
     ],
   },
   {
@@ -396,6 +400,7 @@ export const defaultSidebar = [
 
   { link: "/FAQ", text: "FAQ" },
   { link: "/supportedNetworks", text: "SupportedNetworks" },
+  { link: "/api", text: "APIs" },
 ];
 
 export const addOnsSidebar = [
@@ -427,6 +432,11 @@ export const addOnsSidebar = [
     text: "Cross Chain Swaps",
     link: "/addOns/crosschain",
   },
+  {
+    text: "RAAS Integration",
+    link: "/addOns/raasProvider",
+  },
+  
 ]
 
 export const nexusSidebar = [

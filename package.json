@@ -10,7 +10,7 @@
   "dependencies": {
     "@types/react": "latest",
     "dotenv": "^16.4.5",
-    "nexus": "github:bcnmy/biconomy-client-sdk#d5c3c831f11c54ba811a1b31612d787de2f10eb8",
+    "nexus": "github:bcnmy/sdk",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.2",

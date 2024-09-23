@@ -14,6 +14,12 @@ This tutorial demonstrates how a dapp can create a simple session using viem and
 
 You can get your Biconomy Paymaster API key from the dashboard [here](https://dashboard.biconomy.io/).
 
+:::tip
+
+Check out an end-to-end integration of Sessions Key with Biconomy on this [example app](https://aasessions.vercel.app/) and [repo](https://github.com/bcnmy/biconomy_sessions_example)!
+
+:::
+
 ### Prerequisites
 
 - Biconomy Paymaster API key [If you are using paymaster rules in the dashbaord, make sure you have whitelisted session Module contract 0x000002fbffedd9b33f4e7156f2de8d48945e7489]
