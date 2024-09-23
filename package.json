@@ -8,6 +8,7 @@
 		"preview": "vocs preview"
 	},
 	"dependencies": {
+		"nexus": "github:bcnmy/sdk",
 		"@types/react": "latest",
 		"dotenv": "^16.4.5",
 		"linkinator": "^6.1.1",
