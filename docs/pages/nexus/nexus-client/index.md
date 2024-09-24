@@ -2,20 +2,22 @@ Creates a Nexus Client for interacting with the Nexus smart account system.
 
 ## Usage
 
-```typescript
-import { createNexusClient } from '@biconomy/sdk'
-import { http, privateKeyToAccount } from 'viem'
-import { mainnet } from 'viem/chains'
+```typescript twoslash
+import { privateKeyToAccount } from "viem/accounts";
+import { createNexusClient } from "@biconomy/sdk-canary";
+import { baseSepolia } from "viem/chains"; 
+import { http } from "viem"; 
 
-const account = privateKeyToAccount(`0x${PRIVATE_KEY}`)
+const privateKey = "PRIVATE_KEY";
+const account = privateKeyToAccount(`0x${privateKey}`)
+const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
 
 const nexusClient = await createNexusClient({
-  chain: mainnet,
-  transport: http('https://mainnet.infura.io/v3/YOUR-PROJECT-ID'),
-  bundlerTransport: http('BUNDLER_URL'),
-  holder: account,
+  holder: account, 
+  chain: baseSepolia,
+  transport: http(), 
+  bundlerTransport: http(bundlerUrl), 
 })
-
 ```
 ## Parameters
 

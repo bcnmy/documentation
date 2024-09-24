@@ -8,10 +8,12 @@
 		"preview": "vocs preview"
 	},
 	"dependencies": {
-		"nexus": "github:bcnmy/sdk",
+		"@biconomy/sdk-canary": "^0.0.1",
 		"@types/react": "latest",
+		"@typescript/twoslash": "^3.2.8",
 		"dotenv": "^16.4.5",
 		"linkinator": "^6.1.1",
+		"nexus": "github:bcnmy/sdk",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-hook-form": "^7.52.2",

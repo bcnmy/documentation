@@ -28,7 +28,7 @@ We have created a quick start template repository that you can use to get starte
 ### 1. Set up an owner account
 First, we need to set up an Owner for the Smart Account which will be used to sign User Operations (transactions) for the Smart Account.
 
-```typescript
+```typescript twoslash
 import { privateKeyToAccount } from "viem/accounts";
 
 const privateKey = "PRIVATE_KEY";
@@ -40,7 +40,7 @@ const account = privateKeyToAccount(`0x${privateKey}`)
 A Smart Account needs access to the Network to query for information about its state (e.g. nonce, address, etc). Let's configure a client for the Smart Account.
 A `bundlerUrl` is required to submit User Operations to the Network, which will initialize the Smart Account.
 
-```typescript
+```typescript twoslash
 import { privateKeyToAccount } from "viem/accounts";
 import { createNexusClient } from "@biconomy/sdk-canary"; // [!code focus]
 import { baseSepolia } from "viem/chains"; // [!code focus]
@@ -69,7 +69,7 @@ Next, we'll send a User Operation to the Bundler. In the example below, 0.001 ET
 Ensure your smart account has sufficient funds to execute the transaction below. If not, please transfer funds to the `smartAccountAddress`
 :::
 
-```typescript
+```typescript twoslash
 import { privateKeyToAccount } from "viem/accounts";
 import { createNexusClient } from "@biconomy/sdk-canary";
 import { baseSepolia } from "viem/chains"; 
