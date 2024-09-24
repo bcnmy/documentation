@@ -42,6 +42,17 @@ const receipt = await nexusClient.waitForUserOperationReceipt({
 })
 ```
 
+### Parameters
+- hash `'0x${string}'`: A User Operation hash.
+- pollingInterval (optional) `number`: Polling frequency (in ms) 
+- retryCount (optional) `number`: The number of times to retry. Default value is 6.
+- timeout (optional) `number`: Optional timeout (in ms) to wait before stopping polling. Default value is 5000.
+
+### Response
+- receipt `Promise<UserOperationReceipt>`: The User Operation receipt.
+
+
+
 ## estimateUserOperationGas
 
 Estimates the gas values for a User Operation to be executed successfully.
@@ -83,14 +94,6 @@ const gas = await nexusClient.estimateUserOperationGas({
  
 
 
-### Parameters
-- hash `'0x${string}'`: A User Operation hash.
-- pollingInterval (optional) `number`: Polling frequency (in ms) 
-- retryCount (optional) `number`: The number of times to retry. Default value is 6.
-- timeout (optional) `number`: Optional timeout (in ms) to wait before stopping polling. Default value is 5000.
-
-### Response
-- receipt `Promise<UserOperationReceipt>`: The User Operation receipt.
 
 
 ## getUserOperation
