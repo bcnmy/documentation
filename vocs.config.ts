@@ -450,7 +450,6 @@ export const nexusSidebar = [
   },
   {
     text: "Tutorials",
-    link: "/nexus/tutorials",
     items: [
       {
         text: "Send gasless Transactions",
@@ -464,8 +463,11 @@ export const nexusSidebar = [
   },
   {
     text: "Nexus Client",
-    link: "/nexus/nexus-client",
     items: [
+      {
+        text: "Integration",
+        link: "/nexus/nexus-client",
+      },
       {
         text: "Methods",
         link: "/nexus/nexus-client/methods",
@@ -535,7 +537,6 @@ export const nexusSidebar = [
   },
   {
     text: "Infra",
-    link: "/nexus/infra/index",
     items: [
       {
         text: "Bundler",
