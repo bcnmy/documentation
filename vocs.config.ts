@@ -449,61 +449,115 @@ export const nexusSidebar = [
     link: "/nexus/quickstart",
   },
   {
-    text: "ERC-7579 Modules",
-    link: "/nexus/modules",
-    collapsed: false,
+    text: "Tutorials",
+    link: "/nexus/tutorials",
     items: [
       {
-        link: "/nexus/modules/validators",
-        text: "Validators",
-        collapsed: true,
-        items: [
-          {
-            link: "/nexus/modules/validators/k1Validator",
-            text: "K1Validator (ECDSA)",
-            items: [
-              {
-                link: "/nexus/modules/validators/k1Validator/tutorial",
-                text: "Tutorial"
-              }
-            ]
-          }
-        ]
+        text: "Send gasless Transactions",
+        link: "/nexus/tutorials/gasless",
       },
       {
-        link: "/nexus/modules/executors",
-        text: "Executors",
-        collapsed: true,
-        items: [
-          {
-            link: "/nexus/modules/executors/OwnableExecutor",
-            text: "OwnableExecutor",
-            items: [
-              {
-                link: "/nexus/modules/executors/OwnableExecutor",
-                text: "Overview"
-              },
-              {
-                link: "/nexus/modules/executors/OwnableExecutor/methods",
-                text: "Methods"
-              },
-              {
-                link: "/nexus/modules/executors/OwnableExecutor/tutorial",
-                text: "Tutorial"
-              }
-            ]
-          }
-        ]
-      },
+        text: "Send Batch Transactions",
+        link: "/nexus/tutorials/batch",
+      }
     ]
   },
   {
-    text: "Nexus Smart Account",
-    link: "/nexus/smart-account",
-    items: [{
-      text: "ERC-7579 Methods",
-      link: "/nexus/smart-account/7579methods",
-    }]
+    text: "Nexus Client",
+    link: "/nexus/nexus-client",
+    items: [
+      {
+        text: "Methods",
+        link: "/nexus/nexus-client/methods",
+      }
+    ]
+  },
+  // {
+  //   text: "ERC-7579 Modules",
+  //   link: "/nexus/modules",
+  //   collapsed: false,
+  //   items: [
+  //     {
+  //       link: "/nexus/modules/validators",
+  //       text: "Validators",
+  //       collapsed: true,
+  //       items: [
+  //         {
+  //           link: "/nexus/modules/validators/k1Validator",
+  //           text: "K1Validator (ECDSA)",
+  //           items: [
+  //             {
+  //               link: "/nexus/modules/validators/k1Validator/tutorial",
+  //               text: "Tutorial"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       link: "/nexus/modules/executors",
+  //       text: "Executors",
+  //       collapsed: true,
+  //       items: [
+  //         {
+  //           link: "/nexus/modules/executors/OwnableExecutor",
+  //           text: "OwnableExecutor",
+  //           items: [
+  //             {
+  //               link: "/nexus/modules/executors/OwnableExecutor",
+  //               text: "Overview"
+  //             },
+  //             {
+  //               link: "/nexus/modules/executors/OwnableExecutor/methods",
+  //               text: "Methods"
+  //             },
+  //             {
+  //               link: "/nexus/modules/executors/OwnableExecutor/tutorial",
+  //               text: "Tutorial"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     },
+  //   ]
+  // },
+  // {
+  //   text: "Nexus Smart Account",
+  //   link: "/nexus/smart-account",
+  //   items: [{
+  //     text: "ERC-7579 Methods",
+  //     link: "/nexus/smart-account/7579methods",
+  //   }]
+  // },
+  {
+    text: "Contracts & Audits",
+    link: "/nexus/contractsAndAudits",
+  },
+  {
+    text: "Infra",
+    link: "/nexus/infra/index",
+    items: [
+      {
+        text: "Bundler",
+        link: "/nexus/infra/bundler/integration",
+        items: [
+          {
+            text: "Methods",
+            link: "/nexus/infra/bundler/methods",
+          }
+        ]
+      },
+      {
+        text: "Paymaster",
+        link: "/nexus/infra/paymaster/integration",
+        items: [
+          {
+            text: "Methods",
+            link: "/nexus/infra/paymaster/methods",
+          }
+        ]
+      }
+    ]
   },
 ]
 
