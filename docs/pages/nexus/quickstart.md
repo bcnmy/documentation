@@ -59,7 +59,7 @@ const nexusClient = await createNexusClient({ // [!code focus]
 const smartAccountAddress = await nexusClient.account.address; // [!code focus]
 ```
 
-See createNexusClient Docs
+[See createNexusClient Docs](/nexus/nexus-client)
 
 ### 3. Send User Operation
 
@@ -105,9 +105,9 @@ You can now view the transaction on the Base Sepolia explorer. By submitting thi
 - Executed a simple transaction using smart accounts.
 
 
-See sendUserOperation Docs
+[See sendTransaction Docs](/nexus/nexus-client/methods#sendtransaction)
 
-See waitForUserOperationReceipt Docs
+[See waitForUserOperationReceipt Docs](/nexus/nexus-client/methods#waitforuseroperationreceipt)
 
 ### 4. Optional: Sponsor User Operation
 
