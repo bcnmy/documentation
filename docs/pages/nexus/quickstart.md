@@ -18,7 +18,7 @@ bun i @biconomy/sdk viem
  
 :::
 
-We have created a quick start template repository that you can use to get started. It comes set up with Typescript, `viem`, and `@biconomy/sdk`.
+We have created a quick start [template](https://github.com/bcnmy/examples/tree/main/quickstart) repository that you can use to get started. It comes set up with Typescript, `viem`, and `@biconomy/sdk`.
 
 
 ## Sending your first User Operation with Nexus SDK ⚡️
