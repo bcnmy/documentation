@@ -1,0 +1,194 @@
+openapi: 3.0.3
+info:
+  title: Biconomy Bundler API
+  version: 1.0.0
+  description: API for interacting with the Biconomy Bundler
+servers:
+- url: https://bundler.biconomy.io
+paths:
+  /api/v2/public/{chainId}/rpc:
+    post:
+      summary: RPC Endpoint
+      description: Endpoint for all RPC calls
+      operationId: rpcEndpoint
+      parameters:
+        - name: chainId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The chain ID for the network
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jsonrpc:
+                  type: string
+                  enum: ['2.0']
+                id:
+                  type: integer
+                method:
+                  type: string
+                params:
+                  type: array
+            examples:
+              Estimate User Operation Gas:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: eth_estimateUserOperationGas
+                  params:
+                    - sender: '0x1234567890123456789012345678901234567890'
+                      nonce: '0x5'
+                      initCode: '0x'
+                      callData: '0xa9059cbb000000000000000000000000...'
+                      callGasLimit: '0x5208'
+                      verificationGasLimit: '0x5208'
+                      preVerificationGas: '0x5208'
+                      maxFeePerGas: '0x3b9aca00'
+                      maxPriorityFeePerGas: '0x3b9aca00'
+                      paymasterAndData: '0x'
+                      signature: '0x...'
+                    - '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
+              Get Gas Price:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: eth_gasPrice
+                  params: []
+              Get User Operation Status:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: biconomy_getUserOperationStatus
+                  params:
+                    - '0xf1876000b7103c1d2e1bd42a6afc25da50cf567c475dbec2ad11dfaf3356919c'
+              Get User Operation By Hash:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: eth_getUserOperationByHash
+                  params:
+                    - '0xf1876000b7103c1d2e1bd42a6afc25da50cf567c475dbec2ad11dfaf3356919c'
+              Get User Operation Receipt:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: eth_getUserOperationReceipt
+                  params:
+                    - '0x0474d05518cd4f7131fe487d42f83f20b69fbd0e281d704dac8ea7a99cabdee5'
+              Send User Operation:
+                value:
+                  jsonrpc: '2.0'
+                  id: 1
+                  method: eth_sendUserOperation
+                  params:
+                    - sender: '0x1234567890123456789012345678901234567890'
+                      nonce: '0x5'
+                      initCode: '0x'
+                      callData: '0xa9059cbb000000000000000000000000...'
+                      callGasLimit: '0x5208'
+                      verificationGasLimit: '0x5208'
+                      preVerificationGas: '0x5208'
+                      maxFeePerGas: '0x3b9aca00'
+                      maxPriorityFeePerGas: '0x3b9aca00'
+                      paymasterAndData: '0x'
+                      signature: '0x...'
+                    - '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jsonrpc:
+                    type: string
+                  id:
+                    type: integer
+                  result:
+                    type: object
+              examples:
+                Estimate User Operation Gas:
+                  value:
+                    jsonrpc: '2.0'
+                    id: 1
+                    result:
+                      preVerificationGas: '0x5208'
+                      verificationGasLimit: '0x5208'
+                      callGasLimit: '0x5208'
+                Get Gas Price:
+                  value:
+                    jsonrpc: '2.0'
+                    id: 1
+                    result: '0x3b9aca00'
+                Get User Operation Status:
+                  value:
+                    jsonrpc: '2.0'
+                    id: 1
+                    result:
+                      status: 'success'
+                      transactionHash: '0x1234567890123456789012345678901234567890123456789012345678901234'
+                Get User Operation By Hash:
+                  value:
+                    jsonrpc: '2.0'
+                    id: 1
+                    result:
+                      userOperation:
+                        sender: '0x1234567890123456789012345678901234567890'
+                        nonce: '0x5'
+                        initCode: '0x'
+                        callData: '0xa9059cbb000000000000000000000000...'
+                        callGasLimit: '0x5208'
+                        verificationGasLimit: '0x5208'
+                        preVerificationGas: '0x5208'
+                        maxFeePerGas: '0x3b9aca00'
+                        maxPriorityFeePerGas: '0x3b9aca00'
+                        paymasterAndData: '0x'
+                        signature: '0x...'
+                      entryPoint: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
+                      blockNumber: '0x1234'
+                      blockHash: '0x1234567890123456789012345678901234567890123456789012345678901234'
+                      transactionHash: '0x1234567890123456789012345678901234567890123456789012345678901234'
+                Get User Operation Receipt:
+                  value:
+                    jsonrpc: '2.0'
+                    id: 1
+                    result:
+                      userOpHash: '0x0474d05518cd4f7131fe487d42f83f20b69fbd0e281d704dac8ea7a99cabdee5'
+                      sender: '0x1234567890123456789012345678901234567890'
+                      nonce: '0x5'
+                      paymaster: '0x1234567890123456789012345678901234567890'
+                      actualGasCost: '0x5208'
+                      actualGasUsed: '0x5208'
+                      success: true
+                      logs: []
+                      receipt:
+                        transactionHash: '0x1234567890123456789012345678901234567890123456789012345678901234'
+                        transactionIndex: '0x1'
+                        blockHash: '0x1234567890123456789012345678901234567890123456789012345678901234'
+                        blockNumber: '0x1234'
+                        from: '0x1234567890123456789012345678901234567890'
+                        to: '0x1234567890123456789012345678901234567890'
+                        cumulativeGasUsed: '0x5208'
+                        gasUsed: '0x5208'
+                        contractAddress: null
+                        logs: []
+                        logsBloom: '0x00...00'
+                        status: '0x1'
+                Send User Operation:
+                  value:
+                    jsonrpc: '2.0'
+                    id: 1
+                    result: '0x0474d05518cd4f7131fe487d42f83f20b69fbd0e281d704dac8ea7a99cabdee5'
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+tags:
+  - name: RPC
+    description: RPC methods for interacting with the Biconomy Bundler
