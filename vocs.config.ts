@@ -400,7 +400,6 @@ export const defaultSidebar = [
 
   { link: "/FAQ", text: "FAQ" },
   { link: "/supportedNetworks", text: "SupportedNetworks" },
-  { link: "/api", text: "APIs" },
 ];
 
 export const addOnsSidebar = [
