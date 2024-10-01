@@ -451,11 +451,11 @@ export const nexusSidebar = [
     text: "Tutorials",
     items: [
       {
-        text: "Send gasless Transactions",
+        text: "How to send gasless transactions",
         link: "/nexus/tutorials/gasless",
       },
       {
-        text: "Send Batch Transactions",
+        text: "How to send batch transactions",
         link: "/nexus/tutorials/batch",
       }
     ]
