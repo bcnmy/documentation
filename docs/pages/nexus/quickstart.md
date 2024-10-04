@@ -95,9 +95,7 @@ const hash = await nexusClient.sendTransaction({ // [!code focus]
     }, // [!code focus]
   ], // [!code focus]
 }); // [!code focus]
-const receipt = await nexusClient.waitForUserOperationReceipt({ hash }); // [!code focus]
 ```
-
 
 You can now view the transaction on the Base Sepolia explorer. By submitting this user operation, you've:
 
@@ -107,9 +105,8 @@ You can now view the transaction on the Base Sepolia explorer. By submitting thi
 
 [See sendTransaction Docs](/nexus/nexus-client/methods#sendtransaction)
 
-[See waitForUserOperationReceipt Docs](/nexus/nexus-client/methods#waitforuseroperationreceipt)
+Use [waitfortransactionreceipt](https://viem.sh/docs/actions/public/waitForTransactionReceipt#waitfortransactionreceipt) method to get for the transaction receipt.
 
 ### 4. Optional: Sponsor User Operation
 
-By using a Paymaster, we can add sponsorship of User Operation fees.
-
+By using a Paymaster, we can add sponsorship of gas fees. Checkout [sponsoring user operations](/nexus/tutorials/gasless) for more information.

@@ -73,7 +73,6 @@ const hash = await nexusClient.sendTransaction({ // [!code focus:11]
         },
     ], 
 }); 
-const receipt = await nexusClient.waitForUserOperationReceipt({ hash }); 
 ```
 ::::
 
@@ -82,6 +81,5 @@ You have successfully sent batch transactions using the Nexus SDK. For more adva
 
 [See sendTransaction Docs](/nexus/nexus-client/methods#sendtransaction)
 
-[See waitForUserOperationReceipt Docs](/nexus/nexus-client/methods#waitforuseroperationreceipt)
-
+Use [waitfortransactionreceipt](https://viem.sh/docs/actions/public/waitForTransactionReceipt#waitfortransactionreceipt) method to get for the transaction receipt.
 
