@@ -20,6 +20,7 @@ bun i @biconomy/sdk viem
 
 We have created a quick start [template](https://github.com/bcnmy/examples/tree/main/quickstart) repository that you can use to get started. It comes set up with Typescript, `viem`, and `@biconomy/sdk`.
 
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/bcnmy/examples/tree/main/nextjs-quickstart)
 
 ## Sending your first User Operation with Nexus SDK ⚡️
 
