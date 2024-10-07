@@ -6,7 +6,7 @@ The Nexus Client is an interface for interacting with Nexus smart accounts. It a
 
 ```typescript twoslash
 import { privateKeyToAccount } from "viem/accounts";
-import { createNexusClient } from "@biconomy/sdk-canary";
+import { createNexusClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http } from "viem"; 
 
@@ -15,7 +15,7 @@ const account = privateKeyToAccount(`0x${privateKey}`)
 const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
 
 const nexusClient = await createNexusClient({
-  holder: account, 
+  signer: account, 
   chain: baseSepolia,
   transport: http(), 
   bundlerTransport: http(bundlerUrl), 
@@ -68,17 +68,54 @@ Type: `Address`
 
 The address of the smart account factory contract, responsible for creating new smart accounts.
 
+```typescript twoslash
+import { baseSepolia } from "viem/chains"; 
+import { http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { createNexusClient } from "@biconomy/sdk"; // [!code focus] 
 
-### holder 
+const privateKey = "PRIVATE_KEY";
+const account = privateKeyToAccount(`0x${privateKey}`);
+const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+
+const nexusClient = await createNexusClient({
+    signer: account,
+    chain: baseSepolia,
+    transport: http(),
+    bundlerTransport: http(bundlerUrl),
+    factoryAddress: "0xabc...." // [!code focus] 
+});
+```
+
+### signer 
 Type: `UnknownHolder`
 
 The owner of the smart account, represented by an Account object, which holds the private key and serves as the controller for the smart account actions.
 
 ### index (optional)
-Type `bigint`
-
 The index of the smart account being created. By default, the first smart account is created with an index of 0. If multiple smart accounts are needed, you can specify the index here.
 
+**Type** `bigint`
+
+```typescript twoslash
+import { baseSepolia } from "viem/chains"; 
+import { http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { createNexusClient } from "@biconomy/sdk"; // [!code focus] 
+
+const privateKey = "PRIVATE_KEY";
+const account = privateKeyToAccount(`0x${privateKey}`);
+const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+
+const nexusClient = await createNexusClient({
+    signer: account,
+    chain: baseSepolia,
+    transport: http(),
+    bundlerTransport: http(bundlerUrl),
+    index: 1n // [!code focus] 
+});
+
+```
 
 ### k1ValidatorAddress (optional)
 
@@ -100,6 +137,30 @@ A name for the client.
 ### paymaster (optional)
 
 The optional paymaster responsible for sponsoring transaction fees on behalf of the smart account owner, enabling gasless transactions.
+
+Type: `BicoPaymasterClient`
+
+```typescript twoslash
+import { baseSepolia } from "viem/chains"; 
+import { http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk"; // [!code focus] 
+
+const privateKey = "PRIVATE_KEY";
+const account = privateKeyToAccount(`0x${privateKey}`);
+const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+
+const paymasterUrl = "";  // [!code focus] 
+const nexusClient = await createNexusClient({
+    signer: account,
+    chain: baseSepolia,
+    transport: http(),
+    bundlerTransport: http(bundlerUrl),
+    paymaster: createBicoPaymasterClient({paymasterUrl}) // [!code focus] 
+});
+
+```
+
 
 ### paymasterContext (optional)
 Type: `unknown`
