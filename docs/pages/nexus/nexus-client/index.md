@@ -167,12 +167,15 @@ Type: `unknown`
 
 Paymaster context is an object containing additional metadata required to pass to `getPaymasterData` and `getPaymasterStubData` calls.
 
+When using the Biconomy Paymaster, it will be set by default. If you're using other paymasters that require passing the context, you can do so using this field.
 
 ### pollingInterval (optional)
 
 Type: `number`
-Frequency (in ms) for polling enabled actions & events.
+
 Default: `4_000`
+
+Frequency (in ms) for polling enabled actions & events.
 
 
 ### rpcSchema (optional)
