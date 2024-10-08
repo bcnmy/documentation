@@ -442,6 +442,7 @@ export default defineConfig({
   theme: {
     accentColor: "#FF4E17",
   },
+  iconUrl: "/favicon.png",
   ogImageUrl:
     "https://vocs.dev/api/og?logo=%logo&title=%title&description=%description",
   logoUrl: "/logo.svg",
