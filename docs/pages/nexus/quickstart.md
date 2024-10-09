@@ -43,7 +43,7 @@ A `bundlerUrl` is required to submit User Operations to the Network, which will 
 
 ```typescript twoslash
 import { privateKeyToAccount } from "viem/accounts";
-import { createNexusClient } from "@biconomy/sdk-canary"; // [!code focus]
+import { createNexusClient } from "@biconomy/sdk"; // [!code focus]
 import { baseSepolia } from "viem/chains"; // [!code focus]
 import { http, parseEther } from "viem"; // [!code focus]
 
@@ -72,7 +72,7 @@ Ensure your smart account has sufficient funds to execute the transaction below.
 
 ```typescript twoslash
 import { privateKeyToAccount } from "viem/accounts";
-import { createNexusClient } from "@biconomy/sdk-canary";
+import { createNexusClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther } from "viem"; 
 

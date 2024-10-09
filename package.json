@@ -9,7 +9,6 @@
 	},
 	"dependencies": {
 		"@biconomy/sdk": "^0.0.1",
-		"@biconomy/sdk-canary": "^0.0.1",
 		"@types/react": "latest",
 		"@typescript/twoslash": "^3.2.8",
 		"dotenv": "^16.4.5",
