@@ -123,17 +123,6 @@ Type: `Address`
 
 The address of the key (k1) validator, which ensures the owner module’s validation during transactions.
 
-
-### key (optional)
-Type: `string`
-A key for the client.
-
-
-### name (optional)
-Type: `string`
-A name for the client.
-
-
 ### paymaster (optional)
 
 The optional paymaster responsible for sponsoring transaction fees on behalf of the smart account owner, enabling gasless transactions.
