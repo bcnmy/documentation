@@ -4,23 +4,20 @@ title: Nexus SDK Overview
 ---
 
 # What is Nexus?
-Nexus represents the next generation of smart account technology, built on the foundation of ERC-7579. It's a significant evolution from our previous [Biconomy Smart Account v2](https://docs.biconomy.io/account), offering:
-
-- Enhanced gas optimization
-- Top notch security, audited by the best in the industry
-- Extensive customization options through modular architecture
-- Continuous development through community module development
-- Improved session key flow through Permissions and Policies
+Nexus is the next generation of smart account technology, built on the ERC-7579 standard. It’s a major upgrade from the [Biconomy Smart Account v2](https://docs.biconomy.io/account), delivering enhanced modularity, security, and scalability.
 
 ### Key Features
-- **Modular Design:** Easily extend functionality with plug-and-play modules
-- **Gas Efficiency:** Optimized transactions for lower costs
-- **ERC-7579 Compliant:** Built on the latest standards for smart account interoperability
+- **Modular:** Nexus implements the 7579 modular interface, which works with a growing list of open sourced modules to tap into permissionless innovation. You can choose from a wide range of third party modules to easily plug-in new capabilities.
+- **Gas Efficiency:** Optimized transactions for lower costs.
+- **Security:** Nexus is highly audited and extensively tested to ensure every dapp that integrates it doesn’t need to worry about attacks via their smart account implementation. Thanks to rigorous audits by Spearbit & Cyfrin, two of the best in the business, devs can rest assured about security.
+- **ERC-7579 Compliant:** Built on the latest standards for smart account interoperability.
+- **Build for scalability:** Nexus is designed to scale with the growing needs of users, providing them with high flexibility and future-proofing their accounts with new modules development.
+- **Improved session key flow:** Improved session key flow through Permissions and Policies
 
 Nexus opens up a world of possibilities for developers looking to create powerful, efficient, and adaptable blockchain applications.
 
 # Nexus SDK
-The Nexus SDK is a powerful toolkit designed to streamline your interaction with the ERC-7579 Nexus Smart Account.
+The Nexus SDK simplifies interaction with the ERC-7579 Nexus Smart Account, offering a complete toolkit to integrate Modular Smart Accounts effortlessly.
 
 ```ts twoslash
 import { privateKeyToAccount } from "viem/accounts";
@@ -42,15 +39,17 @@ const nexusClient = await createNexusClient({
 const smartAccountAddress = await nexusClient.account.address; 
 ```
 
-### Seamless Integration
-Seamlessly integrate powerful Modular Smart Account features into your project with our comprehensive SDK. 
+### Key SDK Features
+
+- **Seamless Integration:** Seamlessly integrate powerful Modular Smart Account features into your project with our comprehensive SDK. 
 Leverage a rich array of built-in methods for both modules and smart account utilities, streamlining your development process.
 
-### Comprehensive Module Support
-Access a wide array of pre-built audited modules to extend your smart account capabilities. 
+- **Comprehensive Module Support:** Access a wide array of pre-built audited modules to extend your smart account capabilities. 
 
-### Intuitive Interface
-Leverage the power of our intuitive SDK interface, featuring pre-built classes for each Module. This streamlined architecture simplifies module integration, accelerating your development process and enhancing code maintainability.
+- **Intuitive Interface:** Leverage the power of our intuitive SDK interface, featuring pre-built classes for each Module. This streamlined architecture simplifies module integration, accelerating your development process and enhancing code maintainability.
+
+- **Entrypoint V7 compatible:** Nexus is fully compatible with Entrypoint v7, ensuring smooth and secure account execution. 
+
 
 ### Getting Started
 To begin on your journey with Nexus, check out our [Quick Start Guide](/nexus/quickstart).

@@ -175,6 +175,57 @@ Type: `transport`
 
 This parameter defines the RPC URL to use. It is advisable to use a paid RPC URL to prevent errors.
 
+### userOperation (optional)
+
+This optional configuration enables the customization of a specific user operation within the Nexus client, encapsulating a transaction flow within the smart account system. It allows for the modification of function calls to accommodate unique use cases as required.
+
+For example, to modify the maxFeePerGas and maxPriorityFeePerGas, you can obtain these fees and apply a multiplier as shown in the example below.
+
+:::code-group
+
+```typescript twoslash [example.ts]
+import { baseSepolia } from "viem/chains"; 
+import { http } from "viem";
+import { createNexusClient } from "@biconomy/sdk"; // [!code focus] 
+import { publicClient } from "./publicClient";
+import { safeMultiplier } from "./utils";
+
+const privateKey = "PRIVATE_KEY";
+const account = privateKeyToAccount(`0x${privateKey}`);
+const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+
+const nexusClient = await createNexusClient({
+    signer: account,
+    chain: baseSepolia,
+    transport: http(),
+    bundlerTransport: http(bundlerUrl),
+    userOperation: { // [!code focus:9] 
+        estimateFeesPerGas: async (_) => { 
+          const feeData = await publicClient.estimateFeesPerGas()
+          return {
+            maxFeePerGas: safeMultiplier( feeData.maxFeePerGas, 1.25),
+            maxPriorityFeePerGas: safeMultiplier( feeData.maxPriorityFeePerGas, 1.25)
+          }
+        }
+    } 
+});
+
+```
+
+```typescript twoslash [publicClient.ts] filename="publicClient.ts"
+import { http, createPublicClient } from "viem";
+import { baseSepolia } from "viem/chains"; 
+export const publicClient = createPublicClient({chain: baseSepolia, transport: http()}); 
+
+```
+
+```typescript twoslash [utils.ts] filename="utils.ts"
+export const safeMultiplier = (bI: bigint, multiplier: number): bigint =>
+  BigInt(Math.round(Number(bI) * multiplier))
+
+```
+
+:::
 
 ## Response
 - `Promise<NexusClient>` : Nexus client
