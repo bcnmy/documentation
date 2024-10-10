@@ -23,50 +23,35 @@ const nexusClient = await createNexusClient({
 ```
 ## Parameters
 
-### account (optional)
-
-The Account to use for the Client. This will be used for Actions that require an account as an argument.
-
 ### activeModule (optional)
 
-Type `BaseValidationModule`
+Type: `ToValidationModuleReturnType`
 
-The active validation module that governs how transactions from this smart account are validated (e.g., signature schemes, permissions).
+Default: `k1ValidatorModule`
+
+Possible values: k1ValidatorModule, ownableValidatorModule 
+
+The active validation module that governs how transactions from this smart account are validated (e.g., signature schemes, permissions). For information on setting an active module, refer to the account section.
+
 
 ### bundlerTransport
 
 Type: `transport`
 
-The transport of the Bundler Client.
-
-### cacheTime (optional)
-
-Type: `number`
-Time (in ms) that cached data will remain in memory.
-Default: `4_000`
+This parameter specifies the transport for the Bundler Client. You can use the provided testnet URL in the example above or contact us for the mainnet URL.
 
 ### chain (optional)
 Type: `Chain`
 
 The blockchain network (chain) for the client. It defines the specific network (e.g., Sepolia, Ethereum) the smart account will interact with.
 
-### client (optional)
-
-Type: `Client`
-Client that points to an Execution RPC URL.
-
-
-### executorModule (optional)
-
-Type `BaseExecutionModule`
-
-The execution module that defines how transactions are executed, allowing for customization of execution flows and smart account behavior.
-
 ### factoryAddress (optional)
 
 Type: `Address`
 
-The address of the smart account factory contract, responsible for creating new smart accounts.
+Default: `0x887Ca6FaFD62737D0E79A2b8Da41f0B15A864778`
+
+This parameter specifies the address of the smart account factory contract, which is responsible for creating new smart accounts. By default, it uses the standard factory address, but you can also provide a custom factory address.
 
 ```typescript twoslash
 import { baseSepolia } from "viem/chains"; 
@@ -83,19 +68,23 @@ const nexusClient = await createNexusClient({
     chain: baseSepolia,
     transport: http(),
     bundlerTransport: http(bundlerUrl),
-    factoryAddress: "0xabc...." // [!code focus] 
+    factoryAddress: "0x887Ca6FaFD62737D0E79A2b8Da41f0B15A864778" // [!code focus] 
 });
 ```
 
 ### signer 
+
 Type: `UnknownHolder`
 
 The owner of the smart account, represented by an Account object, which holds the private key and serves as the controller for the smart account actions.
 
+
 ### index (optional)
+
+Type: `bigint`
+
 The index of the smart account being created. By default, the first smart account is created with an index of 0. If multiple smart accounts are needed, you can specify the index here.
 
-**Type** `bigint`
 
 ```typescript twoslash
 import { baseSepolia } from "viem/chains"; 
@@ -117,17 +106,13 @@ const nexusClient = await createNexusClient({
 
 ```
 
-### k1ValidatorAddress (optional)
-
-Type: `Address`
-
-The address of the key (k1) validator, which ensures the owner module’s validation during transactions.
 
 ### paymaster (optional)
 
+Type: `BicoPaymasterClient`
+
 The optional paymaster responsible for sponsoring transaction fees on behalf of the smart account owner, enabling gasless transactions.
 
-Type: `BicoPaymasterClient`
 
 ```typescript twoslash
 import { baseSepolia } from "viem/chains"; 
@@ -154,36 +139,44 @@ const nexusClient = await createNexusClient({
 ### paymasterContext (optional)
 Type: `unknown`
 
+Default: 
+
+```typescript
+const biconomyPaymasterContext = {
+  mode: "SPONSORED",
+  expiryDuration: 300,
+  calculateGasLimits: true,
+  sponsorshipInfo: {
+    smartAccountInfo: {
+      name: "BICONOMY",
+      version: "2.0.0"
+    }
+  }
+}
+```
+
 Paymaster context is an object containing additional metadata required to pass to `getPaymasterData` and `getPaymasterStubData` calls.
 
-When using the Biconomy Paymaster, it will be set by default. If you're using other paymasters that require passing the context, you can do so using this field.
+The Biconomy Paymaster context is automatically set as the default. If you're using other paymasters that require context, you can specify it using this field.
 
 ### pollingInterval (optional)
 
 Type: `number`
 
-Default: `4_000`
+Default: `4_000` (4 seconds)
 
-Frequency (in ms) for polling enabled actions & events.
-
-
-### rpcSchema (optional)
-
-Typed JSON-RPC schema for the client.
+This parameter specifies the frequency in milliseconds for polling enabled actions and events within the Nexus client. This includes tasks such as fetching the transaction receipt, which is essential for tracking the status of transactions. By adjusting this value, you can control how often the client checks for updates. 
+A reduced interval can be beneficial for chains that produce blocks more rapidly.
 
 
 ### transport
+
 Type: `transport`
 
-The RPC transport.
-
-
-### userOperation (optional)
-
-An optional configuration that allows you to define and customize a specific user operation within the Nexus client, representing a transaction flow in the smart account system.
+This parameter defines the RPC URL to use. It is advisable to use a paid RPC URL to prevent errors.
 
 
 ## Response
 - `Promise<NexusClient>` : Nexus client
 
-
+The Nexus client provides extensive information about the nexus smart account.
