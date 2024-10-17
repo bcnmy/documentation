@@ -1,6 +1,13 @@
-Nexus smart accounts are compatible with the Entrypoint v7.
 
-### Bundler URL
+## Bundler
+
+Nexus smart accounts are compatible with the Entrypoint v7. To maximize efficiency, [Entrypoint v0.7.0](https://github.com/eth-infinitism/account-abstraction/releases/tag/v0.7.0) has introduced optimized data structures that significantly reduce transaction costs and enhance contract performance.
+
+:::tip
+The key difference from EntryPoint v0.6 is that in v0.7, the request no longer includes `initCode`; instead, it uses `factory` and `factoryData`. 
+:::
+
+## How to get Bundler URL
 
 To start, send your transaction using this URL on the test networks:
 
@@ -9,15 +16,14 @@ https://bundler.biconomy.io/api/v2/{chain-id-here}/nJPK7B3ru.dd7f7861-190d-41bd-
 ```
 For the mainnet bundler URL, reach out to us via email at ```bd@biconomy.io``` or [telegram](https://t.me/VenmusTheRapper). 
 
-Below are the supported endpoints:
 
-## Endpoints
+## Supported Endpoints
 
 ### eth_sendUserOperation
 
 This method submits the user operation for on-chain execution and returns the userOpHash if it succeeds (or gets queued). In case of failure, an error will be returned.
 
-To maximize efficiency, [Entrypoint v0.7.0](https://github.com/eth-infinitism/account-abstraction/releases/tag/v0.7.0) has introduced optimized data structures that significantly reduce transaction costs and enhance contract performance.
+
 **Parameters**
 
 | Param   | Type   | Description                                                                            | Required |
@@ -123,7 +129,6 @@ To maximize efficiency, [Entrypoint v0.7.0](https://github.com/eth-infinitism/ac
     "callGasLimit": "0x2aea540",
     "paymasterVerificationGasLimit": "0x0",
     "paymasterPostOpGasLimit": "0x0",
-    "userOpHash" : "" // optional
   }
 }
 ```

@@ -540,22 +540,11 @@ export const nexusSidebar = [
       {
         text: "Bundler",
         link: "/nexus/infra/bundler/integration",
-        items: [
-          {
-            text: "Methods",
-            link: "/nexus/infra/bundler/methods",
-          }
-        ]
+        
       },
       {
         text: "Paymaster",
         link: "/nexus/infra/paymaster/integration",
-        items: [
-          {
-            text: "Methods",
-            link: "/nexus/infra/paymaster/methods",
-          }
-        ]
       }
     ]
   },
