@@ -2,6 +2,7 @@
 
 This document provides a step-by-step guide on how to set up and use the Smart Sessions Module with the Nexus client. The module allows you to manage user sessions in a secure and streamlined way, integrated with your Nexus-powered account. Below is a breakdown of how to create, install, and use the module's functionality.
 
+::::steps
 
 ### 1. Set up an owner account
 First, we need to set up an Owner for the Smart Account which will be used to sign User Operations (transactions) for the Smart Account.
@@ -62,14 +63,13 @@ const sessionsModule = toSmartSessionsValidator({ // [!code focus:3]
 });
 ```
 
-### 4. Install the smart sessions module on the Nexus client's smart contract account
+### 4. Install the smart sessions module 
 
 ```typescript
-const hash = await nexusClient.installModule({ // [!code focus:3]
+const hash = await nexusClient.installModule({ 
     module: sessionsModule.moduleInitData
 })
 const { success: installSuccess } = await nexusClient.waitForUserOperationReceipt({ hash })
-
 ```
 
 ### 5. Extend the Nexus client with smart session creation actions
@@ -78,7 +78,6 @@ const { success: installSuccess } = await nexusClient.waitForUserOperationReceip
 const nexusSessionClient = nexusClient.extend(
     smartSessionCreateActions(sessionsModule)
 )
-
 ```
 
 ### 6. create session data and session
@@ -114,7 +113,6 @@ const createSessionsResponse = await nexusSessionClient.createSessions({
 const { success: sessionCreateSuccess } = await usersNexusClient.waitForUserOperationReceipt({
     hash: createSessionsResponse.userOpHash
 });
-
 ```
 
 ### 7. Get the session details
@@ -145,4 +143,5 @@ const smartSessionNexusClient = await createNexusSessionClient({
     bundlerTransport: http(bundlerUrl)
 })
 ```
+::::
 
