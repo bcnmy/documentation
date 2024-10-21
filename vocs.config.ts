@@ -457,6 +457,10 @@ export const nexusSidebar = [
       {
         text: "How to send batch transactions",
         link: "/nexus/tutorials/batch",
+      },
+      {
+        text: "How to use smart sessions",
+        link: "/nexus/tutorials/smart-sessions",
       }
     ]
   },
