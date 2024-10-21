@@ -64,7 +64,7 @@ const smartAccountAddress = await nexusClient.account.address; // [!code focus]
 
 ### 3. Send User Operation
 
-Next, we'll send a User Operation to the Bundler. In the example below, 0.001 ETH will be transferred from the smart account to a random address.
+Next, we'll send a User Operation to the Bundler. In the example below, 0.001 ETH will be transferred from the smart account to a random address. After sending the transaction, we'll use the `waitForTransactionReceipt` function to wait for the transaction to be mined and get its receipt. This function takes the transaction hash as a parameter and returns a promise that resolves to the transaction receipt once the transaction is confirmed on the blockchain.
 
 :::tip
 Ensure your smart account has sufficient funds to execute the transaction below. If not, please transfer funds to the `smartAccountAddress`
@@ -96,6 +96,7 @@ const hash = await nexusClient.sendTransaction({ // [!code focus]
     }, // [!code focus]
   ], // [!code focus]
 }); // [!code focus]
+const receipt = await nexusClient.waitForTransactionReceipt({ hash }); // [!code focus]
 ```
 
 You can now view the transaction on the Base Sepolia explorer. By submitting this user operation, you've:

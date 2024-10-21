@@ -68,6 +68,7 @@ const hash = await nexusClient.sendTransaction({ calls:
     [{to : '0xf5715961C550FC497832063a98eA34673ad7C816', value: parseEther('0.0001')}] },
 );
 console.log("Transaction hash: ", hash)
+const receipt = await nexusClient.waitForTransactionReceipt({ hash }); // [!code focus]
 
 ```
 

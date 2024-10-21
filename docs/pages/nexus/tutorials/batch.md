@@ -73,6 +73,7 @@ const hash = await nexusClient.sendTransaction({ // [!code focus:11]
         },
     ], 
 }); 
+const receipt = await nexusClient.waitForTransactionReceipt({ hash }); // [!code focus]
 ```
 ::::
 
