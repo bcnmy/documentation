@@ -1,0 +1,27 @@
+# K1Validator Overview
+
+The `K1Validator` is a simple validator module designed for testing Nexus Smart Accounts. It provides basic signature validation functionality and owner management for smart contract accounts.
+
+## Key Features
+
+- Validates user operation signatures for smart accounts
+- Manages ownership of associated smart accounts
+- Supports ERC-1271 signature validation
+- Allows ownership transfer
+
+## Core Functionality
+
+- Installation and uninstallation as a module
+- User operation validation
+- ERC-1271 compliant signature checks
+- Ownership management and transfer
+
+## Usage
+
+This validator can be installed on Nexus Smart Accounts to handle signature validations in testing and development environments. It's designed to be a straightforward implementation for basic validation needs.
+
+## Security Note
+
+While functional for testing, this validator may require additional security measures for production use. It includes basic checks like preventing contract addresses from being set as owners.
+
+The `K1Validator` serves as a practical example of a validator module for ERC-7579 and ERC-4337 compliant smart accounts, demonstrating core concepts of module integration and signature validation in the Nexus Smart Account ecosystem.

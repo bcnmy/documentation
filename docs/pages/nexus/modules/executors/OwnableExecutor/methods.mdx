@@ -1,0 +1,73 @@
+# Ownable Executor SDK Methods
+
+## `execute`
+Executes a transaction on a smart account through the Ownable Executor module.
+
+**Usage Example**
+
+```typescript
+const userOpReceipt: UserOpReceipt = await ownableExecutorModule.execute(
+    transaction,
+    ownedSmartAccountAddress,
+);
+```
+
+**Parameters**
+
+- execution ([Transaction](https://github.com/bcnmy/biconomy-client-sdk/blob/b3fe78f74ec366f50bbbb5ad8cf043e689df6bff/src/account/utils/Types.ts#L346) | `Transaction[]`, required)
+- ownedAccountAddress (`Address`, required) 
+
+**Returns**
+
+- `Promise<UserOpReceipt>`: A promise of [UserOpReceipt](https://github.com/bcnmy/biconomy-client-sdk/blob/b3fe78f74ec366f50bbbb5ad8cf043e689df6bff/src/bundler/utils/Types.ts#L23) 
+
+## `addOwner`
+Add a new owner to the smart account
+
+**Usage Example**
+
+```typescript
+const userOpReceipt: UserOpReceipt = await ownableExecutorModule.addOwner(newOwner);
+```
+
+**Parameters**
+
+- newOwner (`Address`, required) 
+
+**Returns**
+
+- `Promise<UserOpReceipt>`: A promise of [UserOpReceipt](https://github.com/bcnmy/biconomy-client-sdk/blob/b3fe78f74ec366f50bbbb5ad8cf043e689df6bff/src/bundler/utils/Types.ts#L23) 
+
+## `removeOwner`
+Remove an owner from the smart account
+
+**Usage Example**
+
+```typescript
+const userOpReceipt: UserOpReceipt = await ownableExecutorModule.removeOwner(ownerToRemove);
+```
+
+**Parameters**
+
+- ownerToRemove (`Address`, required) 
+
+**Returns**
+
+- `Promise<UserOpReceipt>`: A promise of [UserOpReceipt](https://github.com/bcnmy/biconomy-client-sdk/blob/b3fe78f74ec366f50bbbb5ad8cf043e689df6bff/src/bundler/utils/Types.ts#L23) 
+
+## `getOwners`
+Get owners of the smart account for Ownable Executor module
+
+**Usage Example**
+
+```typescript
+const userOpReceipt: UserOpReceipt = await ownableExecutorModule.getOwners();
+```
+
+**Parameters**
+
+- accountAddress (`Address`, optional): Pass this parameter when you want to get the owners of another smart account
+
+**Returns**
+
+- `Promise<UserOpReceipt>`: A promise of [UserOpReceipt](https://github.com/bcnmy/biconomy-client-sdk/blob/b3fe78f74ec366f50bbbb5ad8cf043e689df6bff/src/bundler/utils/Types.ts#L23) 
