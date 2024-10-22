@@ -177,15 +177,26 @@ console.log(`Transaction hash: ${userOpHash}`);
 
 :::details[Click here]
 
-:::code-group
-
-```typescript twoslash [example.ts]
-import { createNexusClient, toSmartSessionsValidator, smartSessionCreateActions, smartSessionUseActions, CreateSessionDataParams, SessionData } from "@biconomy/sdk";
+```typescript twoslash
+import {
+    createNexusClient, toSmartSessionsValidator, smartSessionCreateActions,
+    smartSessionUseActions, CreateSessionDataParams, SessionData,
+    createNexusSessionClient
+} from "@biconomy/sdk";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { baseSepolia } from "viem/chains";
 import { Hex, encodeFunctionData, http } from "viem";
 import { SmartSessionMode } from "@rhinestone/module-sdk/module"
 
+const CounterAbi = [
+    {
+        inputs: [],
+        name: "incrementNumber",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function"
+    },
+]
 const privateKey = "";
 const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 
@@ -194,23 +205,26 @@ export const createAccountAndSendTransaction = async () => {
     const sessionOwner = privateKeyToAccount(generatePrivateKey())
     const sessionPublicKey = sessionOwner.address;
 
+    // 2. Set up Nexus client
     const nexusClient = await createNexusClient({
         signer: userAccount,
         chain: baseSepolia,
         transport: http(),
         bundlerTransport: http(bundlerUrl),
     });
-    
-    const sessionsModule = toSmartSessionsValidator({ 
+
+    // 3. Create a smart sessions module for the user's account
+    const sessionsModule = toSmartSessionsValidator({
         account: nexusClient.account,
         signer: userAccount
     });
 
+    // 4. Install the smart sessions module
     const hash = await nexusClient.installModule({
         module: sessionsModule.moduleInitData
     })
     const { success: installSuccess } = await nexusClient.waitForUserOperationReceipt({ hash })
-    
+
 
     const nexusSessionClient = nexusClient.extend(
         smartSessionCreateActions(sessionsModule)
@@ -218,62 +232,64 @@ export const createAccountAndSendTransaction = async () => {
 
     const sessionRequestedInfo: CreateSessionDataParams[] = [
         {
-          sessionPublicKey, // Public key of the session
-          actionPoliciesInfo: [
-            {
-              contractAddress: "0xabc",
-              rules: [],
-              functionSelector: "0x273ea3e3" as Hex // Selector for 'incrementNumber'
-            }
-          ]
+            sessionPublicKey, // Public key of the session
+            actionPoliciesInfo: [
+                {
+                    contractAddress: "0xabc",
+                    rules: [],
+                    functionSelector: "0x273ea3e3" as Hex // Selector for 'incrementNumber'
+                }
+            ]
         }
     ]
 
 
-    // Create the smart session
+    // 5. Create the smart session
     const createSessionsResponse = await nexusSessionClient.grantPermission({
         sessionRequestedInfo
     })
 
     const [cachedPermissionId] = createSessionsResponse.permissionIds
 
-    // Wait for the session creation transaction to be mined and check its success
     const { success } =
-      await nexusClient.waitForUserOperationReceipt({
-        hash: createSessionsResponse.userOpHash
-    })
+        await nexusClient.waitForUserOperationReceipt({
+            hash: createSessionsResponse.userOpHash
+        })
 
+
+    // Use the Smart Session
+
+    // 1. Create active session data
     const sessionData: SessionData = {
         granter: nexusClient.account.address,
         sessionPublicKey,
         moduleData: {
-          permissionId: cachedPermissionId,
-          mode: SmartSessionMode.USE
+            permissionId: cachedPermissionId,
+            mode: SmartSessionMode.USE
         }
     }
 
-    // use session
+    // 2. Create a Nexus Client for Using the Session
     const smartSessionNexusClient = await createNexusSessionClient({
         chain: baseSepolia,
         accountAddress: sessionData.granter,
         signer: sessionOwner,
         transport: http(),
         bundlerTransport: http(bundlerUrl)
-      })
-  
-    // Create a new smart sessions module with the session key
+    })
+
+    // 3. Create a Smart Sessions Module for the Session Key
     const usePermissionsModule = toSmartSessionsValidator({
         account: smartSessionNexusClient.account,
         signer: sessionOwner,
         moduleData: sessionData.moduleData
     })
 
-    // Extend the session client with smart session use actions
     const useSmartSessionNexusClient = smartSessionNexusClient.extend(
         smartSessionUseActions(usePermissionsModule)
     )
-  
-      // Use the session to perform an action (increment the counter)
+
+    // 4. Send transactions with sessions
     const userOpHash = await useSmartSessionNexusClient.usePermission({
         actions: [
             {
@@ -289,44 +305,5 @@ export const createAccountAndSendTransaction = async () => {
 }
 
 createAccountAndSendTransaction()
-```
-
-```typescript twoslash [abi.ts] filename="abi.ts"
-export const CounterAbi = [
-  {
-    inputs: [],
-    name: "decrementNumber",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "getNumber",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "incrementNumber",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "revertOperation",
-    outputs: [],
-    stateMutability: "pure",
-    type: "function"
-  }
-]
 ```
 :::
