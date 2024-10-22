@@ -6,7 +6,7 @@ Gasless transactions enable users to interact with the blockchain without paying
 
 ::::steps
 
-### 1. Set up an owner account
+### Set up an owner account
 First, we need to set up an Owner for the Smart Account which will be used to sign User Operations (transactions) for the Smart Account.
 
 ```typescript twoslash
@@ -16,7 +16,7 @@ const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`);
 ```
 
-### 2. Set up Nexus client with paymaster
+### Set up Nexus client with paymaster
 Let's configure a client for the Smart Account with a `paymasterUrl` to enable gasless transactions. A `bundlerUrl` is required to submit User Operations to the Network, which will initialize the Smart Account.
 
 ```typescript twoslash
@@ -40,7 +40,7 @@ const nexusClient = await createNexusClient({
 });
 ```
 
-### 3. Send gasless transaction
+### Send gasless transaction
 Next, define the transaction you want to send. Use the `sendTransaction` method to send the transaction. Since we have a paymaster configured, this transaction will be gasless.
 
 ```typescript twoslash

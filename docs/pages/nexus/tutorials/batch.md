@@ -6,7 +6,7 @@ We have created a quick start [template](https://github.com/bcnmy/examples/tree/
 
 ::::steps
 
-### 1. Set up an owner account
+### Set up an owner account
 First, we need to set up an Owner for the Smart Account which will be used to sign User Operations (transactions) for the Smart Account.
 
 ```typescript twoslash
@@ -16,7 +16,7 @@ const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`);
 ```
 
-### 2. Set up Nexus client
+### Set up Nexus client
 
 A Smart Account needs access to the Network to query for information about its state (e.g., nonce, address, etc.). Let's configure a client for the Smart Account. A `bundlerUrl` is required to submit User Operations to the Network, which will initialize the Smart Account.
 
@@ -39,7 +39,7 @@ const nexusClient = await createNexusClient({
 });
 ```
 
-### 3. Send batch transactions
+### Send batch transactions
 
 Next, define the transactions you want to send in a batch. Each transaction should specify the necessary parameters. Use the `sendTransaction` method to send the batch of transactions.
 

@@ -8,7 +8,7 @@
 		"preview": "vocs preview"
 	},
 	"dependencies": {
-		"@biconomy/sdk": "^0.0.5",
+		"@biconomy/sdk": "^0.0.6",
 		"@types/react": "latest",
 		"@typescript/twoslash": "^3.2.8",
 		"dotenv": "^16.4.5",
