@@ -174,7 +174,9 @@ console.log(`Transaction hash: ${userOpHash}`);
 ::::
 
 ## Full Code
-### Usage
+
+:::details[Click here]
+
 :::code-group
 
 ```typescript twoslash [example.ts]
