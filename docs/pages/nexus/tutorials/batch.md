@@ -82,5 +82,4 @@ You have successfully sent batch transactions using the Nexus SDK. For more adva
 
 [See sendTransaction Docs](/nexus/nexus-client/methods#sendtransaction)
 
-Use [waitfortransactionreceipt](https://viem.sh/docs/actions/public/waitForTransactionReceipt#waitfortransactionreceipt) method to get for the transaction receipt.
 

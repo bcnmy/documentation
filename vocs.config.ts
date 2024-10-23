@@ -458,10 +458,10 @@ export const nexusSidebar = [
         text: "How to send batch transactions",
         link: "/nexus/tutorials/batch",
       },
-      {
-        text: "How to use smart sessions",
-        link: "/nexus/tutorials/smart-sessions",
-      }
+      // {
+      //   text: "How to use smart sessions",
+      //   link: "/nexus/tutorials/smart-sessions",
+      // }
     ]
   },
   {
@@ -578,10 +578,10 @@ export default defineConfig({
     "/nexus": nexusSidebar
   },
   topNav: [
-    { text: 'SDK v4', link: '/quickstart-react'},
     { text: 'Nexus SDK', link: '/nexus/overview', match: "/nexus"},
-    { text: 'Dashboard', link: 'https://dashboard.biconomy.io/' },
+    { text: 'SDK v4 (Previous)', link: '/quickstart-react'},
     { text: 'Add Ons', link: '/addOns/overview', match: "/addOns" },
+    { text: 'Dashboard', link: 'https://dashboard.biconomy.io/' },
     // { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
     { text: 'Blog', link: 'https://www.biconomy.io/blog' },
     { text: 'Legacy docs', link: 'https://legacy-docs.biconomy.io/' },

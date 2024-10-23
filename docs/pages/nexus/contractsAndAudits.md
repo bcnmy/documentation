@@ -10,7 +10,7 @@
 
 ### Audits
 
-| Audited by    | Address    | 
+| Audited by    | Links    | 
 |-------------|-------------|
 | Cyfrin  | [report](https://github.com/bcnmy/nexus/blob/dev/audits/CodeHawks-Cyfrin-Competition-170924.pdf)  |
 | Spearbit  | [report](https://github.com/bcnmy/nexus/blob/dev/audits/report-cantinacode-biconomy-0708-final.pdf)  |

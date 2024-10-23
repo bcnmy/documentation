@@ -18,7 +18,7 @@ bun i @biconomy/sdk viem
  
 :::
 
-We have created a quick start [template](https://github.com/bcnmy/examples/tree/main/quickstart) repository that you can use to get started. It comes set up with Typescript, `viem`, and `@biconomy/sdk`.
+We have created a quick start [template](https://github.com/bcnmy/examples/tree/main/nextjs-quickstart) repository that you can use to get started. It comes set up with Typescript, `viem`, and `@biconomy/sdk`.
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/bcnmy/examples/tree/main/nextjs-quickstart)
 
@@ -106,8 +106,6 @@ You can now view the transaction on the Base Sepolia explorer. By submitting thi
 
 
 [See sendTransaction Docs](/nexus/nexus-client/methods#sendtransaction)
-
-Use [waitfortransactionreceipt](https://viem.sh/docs/actions/public/waitForTransactionReceipt#waitfortransactionreceipt) method to get for the transaction receipt.
 
 ### 4. Optional: Sponsor User Operation
 

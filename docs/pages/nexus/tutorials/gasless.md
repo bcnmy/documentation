@@ -75,5 +75,3 @@ const receipt = await nexusClient.waitForTransactionReceipt({ hash }); // [!code
 By following these steps, you have successfully sent a gasless transaction using the Nexus SDK. For more advanced features and options, refer to the official documentation.
 
 [See sendTransaction Docs](/nexus/nexus-client/methods#sendtransaction)
-
-Use [waitfortransactionreceipt](https://viem.sh/docs/actions/public/waitForTransactionReceipt#waitfortransactionreceipt) method to get for the transaction receipt.
