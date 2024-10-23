@@ -539,6 +539,10 @@ export const nexusSidebar = [
     link: "/nexus/contractsAndAudits",
   },
   {
+    text: "Supported Networks",
+    link: "/nexus/supportedNetworks",
+  },
+  {
     text: "Infra",
     items: [
       {
@@ -582,9 +586,11 @@ export default defineConfig({
     { text: 'SDK v4 (Previous)', link: '/quickstart-react'},
     { text: 'Add Ons', link: '/addOns/overview', match: "/addOns" },
     { text: 'Dashboard', link: 'https://dashboard.biconomy.io/' },
-    // { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
-    { text: 'Blog', link: 'https://www.biconomy.io/blog' },
-    { text: 'Legacy docs', link: 'https://legacy-docs.biconomy.io/' },
+    { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
+    { text: 'More', items: [
+      { text: 'Blog', link: 'https://www.biconomy.io/blog' },
+      { text: 'Legacy V3 docs', link: 'https://legacy-docs.biconomy.io/' },
+    ]}
   ],
   socials: [
     {
