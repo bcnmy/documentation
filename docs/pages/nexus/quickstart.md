@@ -5,15 +5,15 @@
 :::code-group
  
 ```bash [npm]
-npm i @biconomy/sdk viem
+npm i @biconomy/sdk viem @rhinestone/module-sdk
 ```
  
 ```bash [pnpm]
-pnpm i @biconomy/sdk viem
+pnpm i @biconomy/sdk viem @rhinestone/module-sdk
 ```
  
 ```bash [bun]
-bun i @biconomy/sdk viem
+bun i @biconomy/sdk viem @rhinestone/module-sdk
 ```
  
 :::
