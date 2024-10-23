@@ -589,7 +589,7 @@ export default defineConfig({
     { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
     { text: 'More', items: [
       { text: 'Blog', link: 'https://www.biconomy.io/blog' },
-      { text: 'Legacy V3 docs', link: 'https://legacy-docs.biconomy.io/' },
+      { text: 'Legacy docs', link: 'https://legacy-docs.biconomy.io/' },
     ]}
   ],
   socials: [
