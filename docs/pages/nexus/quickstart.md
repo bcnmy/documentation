@@ -26,7 +26,7 @@ We have created a quick start [template](https://github.com/bcnmy/examples/tree/
 
 ::::steps
 
-### 1. Set up an owner account
+### Set up an owner account
 First, we need to set up an Owner for the Smart Account which will be used to sign User Operations (transactions) for the Smart Account.
 
 ```typescript twoslash
@@ -36,7 +36,7 @@ const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
 ```
 
-### 2. Set up nexus client
+### Set up nexus client
 
 A Smart Account needs access to the Network to query for information about its state (e.g. nonce, address, etc). Let's configure a client for the Smart Account.
 A `bundlerUrl` is required to submit User Operations to the Network, which will initialize the Smart Account.
@@ -62,7 +62,7 @@ const smartAccountAddress = await nexusClient.account.address; // [!code focus]
 
 [See createNexusClient Docs](/nexus/nexus-client)
 
-### 3. Send User Operation
+### Send User Operation
 
 Next, we'll send a transaction to the Bundler. In the example below, 0.001 ETH will be transferred from the smart account to a random address. After sending the transaction, we'll use the `waitForTransactionReceipt` function to wait for the transaction to be mined and get its receipt. This function takes the transaction hash as a parameter and returns a promise that resolves to the transaction receipt once the transaction is confirmed on the blockchain.
 
@@ -107,6 +107,6 @@ You can now view the transaction on the Base Sepolia explorer. By submitting thi
 
 [See sendTransaction Docs](/nexus/nexus-client/methods#sendtransaction)
 
-### 4. Optional: Sponsor transaction
+### Optional: Sponsor transaction
 
 By using a Paymaster, we can add sponsorship of gas fees. Checkout [sponsoring transaction](/nexus/tutorials/gasless) for more information.
