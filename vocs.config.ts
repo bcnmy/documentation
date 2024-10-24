@@ -441,7 +441,7 @@ export const addOnsSidebar = [
 export const nexusSidebar = [
   {
     text: "Overview",
-    link: "/nexus/overview",
+    link: "/nexus",
   },
   {
     text: "Quickstart",
@@ -582,7 +582,7 @@ export default defineConfig({
     "/nexus": nexusSidebar
   },
   topNav: [
-    { text: 'Nexus SDK', link: '/nexus/overview', match: "/nexus"},
+    { text: 'Nexus SDK', link: '/nexus', match: "/nexus"},
     { text: 'SDK v4 (Previous)', link: '/quickstart-react'},
     { text: 'Add Ons', link: '/addOns/overview', match: "/addOns" },
     { text: 'Dashboard', link: 'https://dashboard.biconomy.io/' },
