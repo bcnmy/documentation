@@ -17,7 +17,7 @@ const account = privateKeyToAccount(`0x${privateKey}`);
 ```
 
 ### Set up Nexus client with paymaster
-Let's configure a client for the Smart Account with a `paymasterUrl` to enable gasless transactions. A `bundlerUrl` is required to submit User Operations to the Network, which will initialize the Smart Account.
+Let's configure a client for the Smart Account with a `paymasterUrl` to enable gasless transactions. A `bundlerUrl` is required to submit transactions to the Network, which will initialize the Smart Account.
 
 ```typescript twoslash
 import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk";

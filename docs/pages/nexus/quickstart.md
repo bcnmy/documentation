@@ -22,7 +22,7 @@ We have created a quick start [template](https://github.com/bcnmy/examples/tree/
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/bcnmy/examples/tree/main/nextjs-quickstart)
 
-## Sending your first User Operation with Nexus SDK ⚡️
+## Sending your first transaction with Nexus SDK ⚡️
 
 ::::steps
 
@@ -64,9 +64,9 @@ const smartAccountAddress = await nexusClient.account.address; // [!code focus]
 
 ### 3. Send User Operation
 
-Next, we'll send a User Operation to the Bundler. In the example below, 0.001 ETH will be transferred from the smart account to a random address. After sending the transaction, we'll use the `waitForTransactionReceipt` function to wait for the transaction to be mined and get its receipt. This function takes the transaction hash as a parameter and returns a promise that resolves to the transaction receipt once the transaction is confirmed on the blockchain.
+Next, we'll send a transaction to the Bundler. In the example below, 0.001 ETH will be transferred from the smart account to a random address. After sending the transaction, we'll use the `waitForTransactionReceipt` function to wait for the transaction to be mined and get its receipt. This function takes the transaction hash as a parameter and returns a promise that resolves to the transaction receipt once the transaction is confirmed on the blockchain.
 
-:::tip
+:::warning
 Ensure your smart account has sufficient funds to execute the transaction below. If not, please transfer funds to the `smartAccountAddress`
 :::
 
@@ -107,6 +107,6 @@ You can now view the transaction on the Base Sepolia explorer. By submitting thi
 
 [See sendTransaction Docs](/nexus/nexus-client/methods#sendtransaction)
 
-### 4. Optional: Sponsor User Operation
+### 4. Optional: Sponsor transaction
 
-By using a Paymaster, we can add sponsorship of gas fees. Checkout [sponsoring user operations](/nexus/tutorials/gasless) for more information.
+By using a Paymaster, we can add sponsorship of gas fees. Checkout [sponsoring transaction](/nexus/tutorials/gasless) for more information.
