@@ -1,4 +1,4 @@
-# Sending Batch Transactions with Nexus SDK ⚡️
+## Sending Batch Transactions with Nexus SDK ⚡️
 
 Account abstraction enables the bundling of multiple transactions into a single transaction. This can be useful in various scenarios, such as executing multiple trades at once on a decentralized exchange or making batch payments. For instance, you can deploy an NFT contract, mint an NFT, and transfer it, all with a single user action and transaction.
 

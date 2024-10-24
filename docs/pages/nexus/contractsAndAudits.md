@@ -1,4 +1,4 @@
-### Contracts
+## Contracts
 
 | Name    | Address    | 
 |-------------|-------------|
@@ -9,7 +9,7 @@
 | Entrypoint V7 | 0x0000000071727de22e5e9d8baf0edac6f37da032 |
 | Sponsorship Paymaster | 0x0000006087310897e0BFfcb3f0Ed3704f7146852 |
 
-### Audits
+## Audits
 
 | Audited by    | Links    | 
 |-------------|-------------|
