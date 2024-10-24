@@ -1,0 +1,137 @@
+# Ownable Executor Module tutorial 
+
+This tutorial demonstrates how to install and use a `Ownable Executor Module` on a Nexus Smart Account using the Nexus SDK.
+
+## Setup the smart account
+
+First, import the necessary dependencies and set up 2 Nexus accounts
+
+```typescript
+import { createWalletClient, http, encodePacked } from "viem";
+import { baseSepolia } from "viem/chains";
+import { createSmartAccountClient, createOwnableExecutorModule } from "@biconomy/account";
+
+const bobWalletClient = createWalletClient({
+  bobAccount,
+  chain: baseSepolia,
+  transport: http()
+});
+const aliceWalletClient = createWalletClient({
+  aliceAccount,
+  chain: baseSepolia,
+  transport: http()
+});
+
+const bobSmartAccount = await createSmartAccountClient({
+  signer: bobWalletClient,
+  bundlerUrl: "https://bundler.biconomy.io/api/v2/...", // Your bundler URL
+});
+const aliceSmartAccount = await createSmartAccountClient({
+  signer: aliceWalletClient,
+  bundlerUrl: "https://bundler.biconomy.io/api/v2/...", // Your bundler URL
+});
+```
+
+## Install the module
+Now, let's install the `Ownable Executor Module` on Bob's account
+
+```typescript
+// Encode Bob's address
+const bobAddress = await bobWalletClient.account.address
+const bobInitData = encodePacked(["address"], [bobAddress]);
+
+// Create the module instance
+const ownableExecutorModule = await createOwnableExecutorModule(bobSmartAccount, bobInitData)
+
+// Install the module on Bob's account
+const userOpReceipt = await bobSmartAccount.installModule({
+  moduleAddress: ownableExecutorModule.moduleAddress,
+  type: ownableExecutorModule.type,
+  data: ownableExecutorModule.data
+});
+
+// Set the module to be active on the typescript instance
+bobSmartAccount.setActiveExecutionModule(ownableExecutorModule)
+```
+
+## Check if module is installed
+After installation, you can verify if the module is installed on the account.
+We do not need it to be installed on Alice's account.
+
+```typescript
+const isInstalled = await bobSmartAccount.isModuleInstalled({
+  moduleAddress: ownableExecutorModule.moduleAddress,
+  type: ownableExecutorModule.type
+});
+```
+
+## Add owner
+Now Bob can delegate ownership to Alice to run transactions on behalf his behalf
+
+```typescript
+const userOpReceipt = await ownableExecutorModule.addOwner(
+   await aliceSmartAccount.getAddress() // Note that an owner can also be an EOA
+)
+
+// We can check if Alice's smart account is now an owner of Bob's account
+const owners = await ownableExecutorModule.getOwners() 
+```
+
+## Send a transaction 
+Now Alice can send a transaction on Bob's behalf
+
+```typescript
+const transaction = {
+    to: targetContract,
+    data: "...",
+    value: 0n
+}
+// We need to set the execution module we want to use on the account 
+aliceSmartAccount.setActiveExecutionModule(ownableExecutorModule)
+const receipt = await aliceSmartAccount.sendTransactionWithExecutor([transaction], bobSmartAccountAddress);
+```
+
+We can also execute an action on Bob's account from an EOA if added as an owner, we will have to use viem's `sendTransaction` for this case.
+
+```typescript
+const moduleCalldata = encodeFunctionData({
+    abi: parseAbi([
+        "function executeOnOwnedAccount(address ownedAccount, bytes callData)"
+    ]),
+    functionName: "executeOnOwnedAccount",
+    args: [
+        await bobSmartAccount.getAddress(),
+        encodePacked(
+            ["address", "uint256", "bytes"],
+            [targetContract, BigInt(Number(0)), data]
+        )
+    ]
+})
+
+const txHash = await aliceWalletClient.sendTransaction({
+    account: aliceAccount, // Called by delegated EOA owner
+    to: ownableExecutorModule.moduleAddress,
+    data: moduleCalldata,
+    value: 0n
+})
+```
+
+Now Alice can send any user operation on behalf of Bob, with no restrictions, for example, if Bob's smart account had $100 in USDC, Alice can easily transfer those out of Bob's account. 
+
+## Remove owner
+We can remove Alice from our smart account owners at any time
+
+```typescript
+const receipt = await bobSmartAccount.ownableExecutorModule.removeOwner(aliceSmartAccountAddress);
+```
+
+## Uninstall the module
+We can uninstall the module at any time
+
+```typescript
+const receipt = await bobSmartAccount.uninstallModule({
+    moduleAddress: ownableExecutorModule.moduleAddress,
+    type: ownableExecutorModule.type,
+    data: ownableExecutorModule.data
+});
+```
