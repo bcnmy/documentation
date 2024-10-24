@@ -8,11 +8,11 @@ import { HomePage } from 'vocs/components'
 
 <HomePage.Root>
   <HomePage.Logo />
-  <HomePage.Tagline>Unlock seamless dApp experiences for all users with Biconomy, the pioneering ERC-4337 account abstraction infrastructure platform, offering unparalleled customizability in transaction infrastructure on 35+ chains.</HomePage.Tagline>
-  <HomePage.InstallPackage name="@biconomy/account viem" type="add" />
+  <HomePage.Tagline>Unlock seamless dApp experiences for all users with Biconomy, the pioneering ERC-4337 account abstraction infrastructure platform, offering unparalleled customizability in transaction infrastructure.</HomePage.Tagline>
+  <HomePage.InstallPackage name="@biconomy/sdk viem @rhinestone/module-sdk" type="add" />
   {/* <HomePage.Description>Superpowers for your Web3 stack.</HomePage.Description> */}
   <HomePage.Buttons>
-    <HomePage.Button href="/quickstart-react" variant="accent">Get started</HomePage.Button>
+    <HomePage.Button href="/nexus/quickstart" variant="accent">Get started</HomePage.Button>
     <HomePage.Button href="https://dashboard.biconomy.io/">Dashboard</HomePage.Button>
   </HomePage.Buttons>
 
@@ -20,35 +20,37 @@ import { HomePage } from 'vocs/components'
 <div className="mx-0 mt-4 md:mx-4 xl:-mx-12 2xl:-mx-24">
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
-            <h3 className="text-[#ff4e17] font-bold text-xl mb-2">
-                <a href="/quickstart-react" className="no-underline hover:text-[#ff2600]">
-                    SDK →
+            <h3 className="text-orange-600 font-bold text-xl mb-2">
+                <a href="/nexus" className="no-underline hover:text-orange-800">
+                    Nexus SDK →
                 </a>
             </h3>
-            Explore the full capabilities of our Smart Accounts Platform, Paymasters, and Bundlers with our comprehensive TypeScript-based account abstraction toolkit.
+            <a  href="/nexus" >
+                The most advanced ERC-7579 compliant modular smart accounts, designed for flexible, gas-efficient operations and seamless integration with third-party modules.
+            </a>
         </div>
         <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
             <h3 className="text-orange-600 font-bold text-xl mb-2">
-                <a href="/bundler" className="no-underline hover:text-orange-800">
+                <a href="/nexus/infra/bundler/integration" className="no-underline hover:text-orange-800">
                     Bundler & Paymaster →
                 </a>
             </h3>
             Utilize Bundler APIs to batch and relay multiple ERC-4337 user operations and paymasters for gasless transactions.
         </div>
         <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
-            <h3 className="text-orange-600 font-bold text-xl mb-2">
-                <a href="https://www.biconomy.io/post/nexus-modular-smart-account" className="no-underline hover:text-orange-800">
-                    Nexus (Coming soon)
+            <h3 className="text-[#ff4e17] font-bold text-xl mb-2">
+                <a href="/quickstart-react" className="no-underline hover:text-[#ff2600]">
+                    SDK V4 (Previous) →
                 </a>
             </h3>
-            <a  href="https://www.biconomy.io/post/nexus-modular-smart-account" >
-                The most advanced modular smart accounts, offering flexible, gas-efficient operations and enabling smooth integration of third-party modules. 
-            </a>
+            Explore the full capabilities of our Smart Accounts V2 Platform, Paymasters, and Bundlers with our comprehensive TypeScript-based account abstraction toolkit.
         </div>
     </div>
 </div>
+
 
 </div>
 
 
 </HomePage.Root>
+
