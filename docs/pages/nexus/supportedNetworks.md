@@ -1,9 +1,18 @@
 ## Supported Networks
 
-This is  the list of networks supported by Nexus.
+This is  the list of chains supported by Nexus.
 
 |Network | Testnet | Mainnet |   
 | --- | --- | --- |
-|Base | ✅ | ✅ |   
+|Base | ✅ | ✅ |  
+|Ethereum | Coming soon | Coming soon |  
+|Polygon | Coming soon | Coming soon |  
+|BSC | Coming soon | Coming soon |  
+|Optimism | Coming soon | Coming soon |  
+|Avalanche | Coming soon | Coming soon |  
+|Gnosis | Coming soon | Coming soon |  
+|Arbitrum | Coming soon | Coming soon |  
 
-Need support for a new chain? Contact us [here](https://meetings-eu1.hubspot.com/biconomy/monika).
+This is the list of chains by Nexus( EntryPoint v7). You can find the list of supported networks by our Bundlers & Paymasters using EP v6 [here](/supportedNetworks).
+
+Need support for a new chain? Contact us [here](https://forms.gle/nycUAs3Fwyzz772w7).
