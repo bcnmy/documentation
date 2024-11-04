@@ -15,4 +15,4 @@ This is  the list of chains supported by Nexus.
 
 This is the list of chains by Nexus( EntryPoint v7). You can find the list of supported networks by our Bundlers & Paymasters using EP v6 [here](/supportedTokens).
 
-Need support for a new chain? Contact us [here](https://meetings-eu1.hubspot.com/biconomy/monika).
+Need support for a new chain? Contact us [here](https://forms.gle/nycUAs3Fwyzz772w7).
