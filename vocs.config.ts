@@ -582,15 +582,15 @@ export default defineConfig({
     "/nexus": nexusSidebar
   },
   topNav: [
-    { text: 'Nexus SDK', link: '/nexus', match: "/nexus"},
-    { text: 'SDK v4 (Previous)', link: '/quickstart-react'},
+    { text: 'Docs', link: '/nexus', match: "/nexus"},
+    { text: 'Previous', items: [
+      { text: 'SDK v4', link: '/quickstart-react'},
+      { text: 'Legacy docs', link: 'https://legacy-docs.biconomy.io/' },
+    ]},
     { text: 'Add Ons', link: '/addOns/overview', match: "/addOns" },
     { text: 'Dashboard', link: 'https://dashboard.biconomy.io/' },
     { text: 'Ask a question', link: 'https://github.com/orgs/bcnmy/discussions/categories/q-a' },
-    { text: 'More', items: [
-      { text: 'Blog', link: 'https://www.biconomy.io/blog' },
-      { text: 'Legacy docs', link: 'https://legacy-docs.biconomy.io/' },
-    ]}
+    { text: 'Blog', link: 'https://www.biconomy.io/blog' }
   ],
   socials: [
     {

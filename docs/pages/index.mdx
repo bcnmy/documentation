@@ -17,38 +17,44 @@ import { HomePage } from 'vocs/components'
   </HomePage.Buttons>
 
 <div className="mx-0 mt-4 md:mx-4 xl:-mx-12 2xl:-mx-24">
-<div className="mx-0 mt-4 md:mx-4 xl:-mx-12 2xl:-mx-24">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
             <h3 className="text-orange-600 font-bold text-xl mb-2">
                 <a href="/nexus" className="no-underline hover:text-orange-800">
                     Nexus SDK →
                 </a>
             </h3>
-            <a  href="/nexus" >
+            <a href="/nexus">
                 The most advanced ERC-7579 compliant modular smart accounts, designed for flexible, gas-efficient operations and seamless integration with third-party modules.
             </a>
         </div>
         <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
             <h3 className="text-orange-600 font-bold text-xl mb-2">
                 <a href="/nexus/infra/bundler/integration" className="no-underline hover:text-orange-800">
-                    Bundler & Paymaster →
+                    Bundler & Paymaster (Entrypoint v7) →
                 </a>
             </h3>
             Utilize Bundler APIs to batch and relay multiple ERC-4337 user operations and paymasters for gasless transactions.
         </div>
-        <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+        <div className="p-6 border border-gray-200 rounded-lg opacity-50 blur-[0.2px]">
             <h3 className="text-[#ff4e17] font-bold text-xl mb-2">
                 <a href="/quickstart-react" className="no-underline hover:text-[#ff2600]">
-                    SDK V4 (Previous) →
+                    SDK V4 (Smart accounts V2) →
                 </a>
             </h3>
             Explore the full capabilities of our Smart Accounts V2 Platform, Paymasters, and Bundlers with our comprehensive TypeScript-based account abstraction toolkit.
         </div>
+        <div className="p-6 border border-gray-200 rounded-lg opacity-50 blur-[0.2px]">
+            <h3 className="text-orange-600 font-bold text-xl mb-2">
+                <a href="/bundler" className="no-underline hover:text-orange-800">
+                    Bundler & Paymaster (Entrypoint v6) →
+                </a>
+            </h3>
+            Utilize Bundler APIs to batch and relay multiple ERC-4337 user operations and paymasters for gasless transactions.
+        </div>
     </div>
-</div>
-
-
 </div>
 
 
