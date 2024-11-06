@@ -4,16 +4,18 @@ Account abstraction enables the bundling of multiple transactions into a single 
 
 We have created a quick start [template](https://github.com/bcnmy/examples/tree/main/quickstart) repository that you can use to get started. It comes set up with TypeScript, `viem`, and `@biconomy/sdk`.
 
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/bcnmy/examples/tree/main/nextjs-tutorial-batch-transactions?embed=1&file=index.ts&hideNavigation=1&hideDevTools=true&terminalHeight=1&hideExplorer=1&devtoolsheight=1&ctl=1"></iframe>
+
 ::::steps
 
 ### Set up an owner account
 First, we need to set up an Owner for the Smart Account which will be used to sign User Operations (transactions) for the Smart Account.
 
 ```typescript twoslash
-import { privateKeyToAccount } from "viem/accounts";
+import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
 
-const privateKey = "PRIVATE_KEY";
-const account = privateKeyToAccount(`0x${privateKey}`);
+const privateKey = generatePrivateKey();
+const account = privateKeyToAccount(`${privateKey}`);
 ```
 
 ### Set up Nexus client
@@ -24,18 +26,20 @@ A Smart Account needs access to the Network to query for information about its s
 import { createNexusClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http } from "viem"; 
-import { privateKeyToAccount } from "viem/accounts";
+import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
 
-const privateKey = "PRIVATE_KEY";
-const account = privateKeyToAccount(`0x${privateKey}`);
+const privateKey = generatePrivateKey();
+const account = privateKeyToAccount(`${privateKey}`);
 
-const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; // [!code focus:10]
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; // [!code focus:12]
+const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703";
 
 const nexusClient = await createNexusClient({ 
     signer: account, 
     chain: baseSepolia, 
     transport: http(), 
     bundlerTransport: http(bundlerUrl), 
+    paymaster: createBicoPaymasterClient({paymasterUrl})
 });
 ```
 
@@ -47,29 +51,31 @@ Next, define the transactions you want to send in a batch. Each transaction shou
 import { createNexusClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther } from "viem"; 
-import { privateKeyToAccount } from "viem/accounts";
+import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
 
-const privateKey = "PRIVATE_KEY";
-const account = privateKeyToAccount(`0x${privateKey}`);
+const privateKey = generatePrivateKey();
+const account = privateKeyToAccount(`${privateKey}`);
 
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
+const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703"; 
 
 const nexusClient = await createNexusClient({ 
     signer: account, 
     chain: baseSepolia, 
     transport: http(), 
     bundlerTransport: http(bundlerUrl), 
+    paymaster: createBicoPaymasterClient({paymasterUrl})
 });
 
 const hash = await nexusClient.sendTransaction({ // [!code focus:11]
     calls: [ 
         {
             to: '0xf5715961C550FC497832063a98eA34673ad7C816', 
-            value: parseEther('0.0001'), 
+            value: parseEther('0'), 
         },
         {
-            to: '0xf5715961C550FC497832063a98eA34673ad7C816',
-            value: parseEther('0.0002'), 
+            to: '0x0000000000000000000000000000000000000000',
+            data: "0x", 
         },
     ], 
 }); 
