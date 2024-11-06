@@ -12,7 +12,7 @@ The key difference from EntryPoint v0.6 is that in v0.7, the request no longer i
 To start, send your transaction using this URL on the test networks:
 
 ```bash
-https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44
+https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44
 ```
 For the mainnet bundler URL, reach out to us via email at `bd@biconomy.io` or [telegram](https://t.me/VenmusTheRapper). 
 

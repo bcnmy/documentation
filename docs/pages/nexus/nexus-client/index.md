@@ -12,7 +12,7 @@ import { http } from "viem";
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
-const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
 
 const nexusClient = await createNexusClient({
   signer: account, 
@@ -61,7 +61,7 @@ import { createNexusClient } from "@biconomy/sdk"; // [!code focus]
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`);
-const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 
 const nexusClient = await createNexusClient({
     signer: account,
@@ -94,7 +94,7 @@ import { createNexusClient } from "@biconomy/sdk"; // [!code focus]
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`);
-const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 
 const nexusClient = await createNexusClient({
     signer: account,
@@ -122,7 +122,7 @@ import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk"; //
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`);
-const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 
 const paymasterUrl = "";  // [!code focus] 
 const nexusClient = await createNexusClient({
@@ -192,7 +192,7 @@ import { safeMultiplier } from "./utils";
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`);
-const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 
 const nexusClient = await createNexusClient({
     signer: account,
