@@ -23,7 +23,7 @@ const account = privateKeyToAccount(`${privateKey}`);
 A Smart Account needs access to the Network to query for information about its state (e.g., nonce, address, etc.). Let's configure a client for the Smart Account. A `bundlerUrl` is required to submit User Operations to the Network, which will initialize the Smart Account.
 
 ```typescript twoslash
-import { createNexusClient } from "@biconomy/sdk";
+import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http } from "viem"; 
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
@@ -48,7 +48,7 @@ const nexusClient = await createNexusClient({
 Next, define the transactions you want to send in a batch. Each transaction should specify the necessary parameters. Use the `sendTransaction` method to send the batch of transactions.
 
 ```typescript twoslash
-import { createNexusClient } from "@biconomy/sdk";
+import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther } from "viem"; 
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
