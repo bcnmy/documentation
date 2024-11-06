@@ -20,8 +20,6 @@ bun i @biconomy/sdk viem @rhinestone/module-sdk
 
 We have created a quick start [template](https://github.com/bcnmy/examples/tree/main/nextjs-quickstart) repository that you can use to get started. It comes set up with Typescript, `viem`, and `@biconomy/sdk`.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/bcnmy/examples/tree/main/nextjs-quickstart)
-
 ## Sending your first transaction with Nexus SDK ⚡️
 
 ::::steps
@@ -49,7 +47,7 @@ import { http, parseEther } from "viem"; // [!code focus]
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
-const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; // [!code focus]
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; // [!code focus]
 
 const nexusClient = await createNexusClient({ // [!code focus]
     signer: account, // [!code focus]
@@ -64,7 +62,7 @@ const smartAccountAddress = await nexusClient.account.address; // [!code focus]
 
 ### Send User Operation
 
-Next, we'll send a transaction to the Bundler. In the example below, 0.001 ETH will be transferred from the smart account to a random address. After sending the transaction, we'll use the `waitForTransactionReceipt` function to wait for the transaction to be mined and get its receipt. This function takes the transaction hash as a parameter and returns a promise that resolves to the transaction receipt once the transaction is confirmed on the blockchain.
+Next, we'll send a transaction to the Bundler. In the example below, 0 ETH will be transferred from the smart account to a random address. After sending the transaction, we'll use the `waitForTransactionReceipt` function to wait for the transaction to be mined and get its receipt. This function takes the transaction hash as a parameter and returns a promise that resolves to the transaction receipt once the transaction is confirmed on the blockchain.
 
 :::warning
 Ensure your smart account has sufficient funds to execute the transaction below. If not, please transfer funds to the `smartAccountAddress`
@@ -78,7 +76,7 @@ import { http, parseEther } from "viem";
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
-const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 
 const nexusClient = await createNexusClient({ 
     signer: account, 
@@ -92,7 +90,7 @@ const hash = await nexusClient.sendTransaction({ // [!code focus]
   calls: [ // [!code focus]
     { // [!code focus]
       to: '0xf5715961C550FC497832063a98eA34673ad7C816', // [!code focus]
-      value: parseEther('0.0001'), // [!code focus]
+      value: parseEther('0'), // [!code focus]
     }, // [!code focus]
   ], // [!code focus]
 }); // [!code focus]
@@ -110,3 +108,6 @@ You can now view the transaction on the Base Sepolia explorer. By submitting thi
 ### Optional: Sponsor transaction
 
 By using a Paymaster, we can add sponsorship of gas fees. Checkout [sponsoring transaction](/nexus/tutorials/gasless) for more information.
+
+
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/edit/viem-getting-started?embed=1&file=index.ts&hideNavigation=1&hideDevTools=true&terminalHeight=1&hideExplorer=1&devtoolsheight=1&ctl=1"></iframe>

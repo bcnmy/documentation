@@ -31,7 +31,7 @@ import { privateKeyToAccount } from "viem/accounts";
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`);
 
-const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
 
 const nexusClient = await createNexusClient({ 
     signer: account, 
@@ -198,7 +198,7 @@ const CounterAbi = [
     },
 ]
 const privateKey = "";
-const bundlerUrl = "https://sdk-relayer.staging.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 
 export const createAccountAndSendTransaction = async () => {
     const userAccount = privateKeyToAccount(`0x${privateKey}`)
