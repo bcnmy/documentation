@@ -1,32 +1,33 @@
 {
-	"name": "documentation",
-	"version": "0.0.0",
-	"type": "module",
-	"scripts": {
-		"dev": "vocs dev",
-		"build": "vocs build",
-		"preview": "vocs preview"
-	},
-	"dependencies": {
-		"@biconomy/sdk": "^0.0.7",
-		"@types/react": "latest",
-		"@typescript/twoslash": "^3.2.8",
-		"dotenv": "^16.4.5",
-		"linkinator": "^6.1.1",
-		"nexus": "github:bcnmy/sdk",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
-		"react-hook-form": "^7.52.2",
-		"tailwindcss": "^3.4.4",
-		"typescript": "latest",
-		"vocs": "^1.0.0-alpha.55"
-	},
-	"devDependencies": {
-		"@biconomy/account": "^4.5.5",
-		"@biconomy/use-aa": "^1.1.0",
-		"@tanstack/react-query": "^5.51.1",
-		"@types/react-dom": "^18.3.0",
-		"viem": "^2.17.3",
-		"wagmi": "^2.10.11"
-	}
+  "name": "documentation",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vocs dev",
+    "build": "vocs build",
+    "preview": "vocs preview"
+  },
+  "dependencies": {
+    "@biconomy/sdk": "^0.0.8",
+    "@biconomy/sdk-canary": "0.0.12",
+    "@types/react": "^18.3.12",
+    "@typescript/twoslash": "^3.2.8",
+    "dotenv": "^16.4.5",
+    "linkinator": "^6.1.2",
+    "nexus": "github:bcnmy/sdk",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.1",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vocs": "^1.0.0-alpha.62"
+  },
+  "devDependencies": {
+    "@biconomy/account": "^4.5.7",
+    "@biconomy/use-aa": "^1.1.1",
+    "@tanstack/react-query": "^5.59.20",
+    "@types/react-dom": "^18.3.1",
+    "viem": "^2.21.41",
+    "wagmi": "^2.12.26"
+  }
 }

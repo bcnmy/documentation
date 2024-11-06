@@ -474,6 +474,20 @@ export const nexusSidebar = [
       {
         text: "Methods",
         link: "/nexus/nexus-client/methods",
+      },
+      {
+        text: "DAN Client",
+        link: "/nexus/nexus-client/dan-nexus-client",
+        items: [
+          {
+            text: "Overview",
+            link: "/nexus/nexus-client/dan-nexus-client",
+          },
+          {
+            text: "Methods",
+            link: "/nexus/nexus-client/dan-nexus-client/methods",
+          }
+        ]
       }
     ]
   },
