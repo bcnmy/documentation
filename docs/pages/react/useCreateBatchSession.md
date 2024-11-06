@@ -10,18 +10,17 @@ Please carefully read the sesions information regarding `Rules` and how they sho
 
 ```tsx twoslash
 import { useCreateBatchSession, useUserOpWait, Options } from "@biconomy/use-aa";
-import { PolicyLeaf } from "@biconomy/account";
 import { polygonAmoy } from "viem/chains";
 import { encodeFunctionData, parseAbi, Hex } from "viem";
 import React, { useEffect } from "react"
 
 const CreateBatchSession = ({ userSmartAccountAddress }: { userSmartAccountAddress: Hex }) => {
-  const leafPolicy: PolicyLeaf = {
+  const leafPolicy = {
     interval: {
       validUntil: 0,
       validAfter: 0,
     },
-    contractAddress: "0x1758f42Af7026fBbB559Dc60EcE0De3ef81f665e",
+    contractAddress: "0x1758f42Af7026fBbB559Dc60EcE0De3ef81f665e" as Hex,
     functionSelector: "safeMint(address)",
     rules: [
       {
@@ -33,7 +32,7 @@ const CreateBatchSession = ({ userSmartAccountAddress }: { userSmartAccountAddre
     valueLimit: 0n,
   };
 
-  const policyLeaves: PolicyLeaf[] = [leafPolicy, leafPolicy];
+  const policyLeaves = [leafPolicy, leafPolicy];
 
   const {
     mutate,

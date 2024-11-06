@@ -51,14 +51,6 @@ export const defaultSidebar = [
       },
       { link: "/react/useSession", text: "UseSession" },
       {
-        link: "/react/useCreateSessionWithDistributedKey",
-        text: "UseCreateSessionWithDistributedKey",
-      },
-      {
-        link: "/react/useSessionWithDistributedKey",
-        text: "UseSessionWithDistributedKey",
-      },
-      {
         link: "/react/useSmartAccount",
         text: "UseSmartAccount",
       },
@@ -71,9 +63,14 @@ export const defaultSidebar = [
     text: "Tutorials",
     collapsed: true,
     items: [
-
-      { link: "/tutorials/sendSimpleTransaction", text: "Send a simple transaction" },
-      { link: "/tutorials/sendTransactionsBatch", text: "Send transactions batch" },
+      {
+        link: "/tutorials/sendSimpleTransaction",
+        text: "Send a simple transaction",
+      },
+      {
+        link: "/tutorials/sendTransactionsBatch",
+        text: "Send transactions batch",
+      },
       { link: "/tutorials/sendGasless", text: "Send a gasless transaction" },
       {
         link: "/tutorials/payERC20Token",
@@ -125,20 +122,6 @@ export const defaultSidebar = [
             link: "/tutorials/utils/transferOwnership",
             text: "Transfer Ownership",
           },
-          {
-            link: "/tutorials/utils/DAN",
-            text: "DAN",
-            items: [
-              {
-                link: "/tutorials/utils/DAN/generateSessionKey",
-                text: "Generate session key",
-              },
-              {
-                link: "/tutorials/utils/DAN/signMessage",
-                text: "Sign message",
-              },
-            ],
-          },
         ],
       },
       {
@@ -158,14 +141,13 @@ export const defaultSidebar = [
             link: "/tutorials/apiIntegration/paymasterERC20",
             text: "Paymaster ERC20",
           },
-          
+
           {
             link: "/tutorials/apiIntegration/signUserOperation",
             text: "Sign userOp",
           },
-          
         ],
-      },   
+      },
       { link: "/tutorials/v4Migration", text: "V4 Migration" },
       {
         text: "Migrate from stackUp",
@@ -235,7 +217,7 @@ export const defaultSidebar = [
         text: "Api",
         items: [
           { link: "/bundler/api/explorer", text: "Explorer" },
-          
+
           {
             link: "/bundler/api/estimate-useroperation-gas",
             text: "eth_estimateUserOperationGas",
@@ -264,7 +246,7 @@ export const defaultSidebar = [
           {
             link: "/bundler/api/get-useroperation-status",
             text: "biconomy_getUserOperationStatus",
-          },     
+          },
         ],
       },
       {
@@ -435,8 +417,7 @@ export const addOnsSidebar = [
     text: "RAAS Integration",
     link: "/addOns/raasProvider",
   },
-  
-]
+];
 
 export const nexusSidebar = [
   {
@@ -608,20 +589,20 @@ export default defineConfig({
   ],
   socials: [
     {
-      icon: 'discord',
-      link: 'https://discord.com/invite/biconomy',
+      icon: "discord",
+      link: "https://discord.com/invite/biconomy",
     },
     {
-      icon: 'github',
-      link: 'https://github.com/bcnmy/documentation',
+      icon: "github",
+      link: "https://github.com/bcnmy/documentation",
     },
     {
-      icon: 'warpcast',
-      link: 'https://warpcast.com/biconomy',
+      icon: "warpcast",
+      link: "https://warpcast.com/biconomy",
     },
     {
-      icon: 'x',
-      link: 'https://x.com/biconomy',
+      icon: "x",
+      link: "https://x.com/biconomy",
     },
   ],
   vite: {

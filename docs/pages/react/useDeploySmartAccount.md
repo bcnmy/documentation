@@ -7,6 +7,7 @@ Deploys a users smartAccount contract. It is useful for deploying in a moment wh
 ## Usage
 
 ```tsx twoslash
+// @errors: 2304 2305 2339 2345
 import { useDeploySmartAccount, useUserOpWait, Options } from "@biconomy/use-aa";
 import { polygonAmoy } from "viem/chains";
 import { encodeFunctionData, parseAbi, Hex } from "viem";
