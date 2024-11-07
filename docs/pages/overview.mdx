@@ -1,0 +1,60 @@
+---
+id: overview
+title: Nexus SDK Overview
+---
+
+## What is Nexus?
+Nexus is the next generation smart account solution, built on the ERC-7579 standard, representing a significant upgrade from [Biconomy Smart Account v2](/smartAccountsV2/quickstart-react). It offers enhanced modularity, security, and scalability to meet the evolving needs of developers.
+
+:::info
+Learn more about Nexus Architecture here: [Nexus wiki](https://github.com/bcnmy/nexus/wiki)
+:::
+
+### Key Features
+**⚙️ Modular:** Nexus implements the 7579 modular interface, which works with a growing list of open sourced modules to tap into permissionless innovation. You can choose from a wide range of third party modules to easily plug-in new capabilities.
+
+**🔒 Security:** Nexus has been rigorously audited and tested, ensuring that dapps integrating it can trust its smart account implementation. [Audits](/nexus/contractsAndAudits) by leading firms Spearbit and Cyfrin provide top-tier security assurances. Backed by 92% score from the industry leader [@DefiSafety](https://www.defisafety.com/app/pqrs/603)!
+
+**🤸‍♂️ Standardization:** Nexus is compliant with multiple standards, including ERC-7579 for modularity and ERC-7484 for third-party module security, ensuring seamless interoperability across providers.
+
+**⛽ Gas Efficiency:** Nexus is extremely gas-efficient, helping to significantly reduce transaction costs.
+
+Nexus is designed to scale with the growing needs of developer use cases, providing them with high flexibility and future-proofing their accounts with new modules development.
+
+## Nexus SDK
+The Nexus SDK simplifies interaction with the ERC-7579 Nexus Smart Account, offering a complete toolkit to integrate Modular Smart Accounts effortlessly.
+
+```ts twoslash
+import { privateKeyToAccount } from "viem/accounts";
+import { createNexusClient } from "@biconomy/sdk";
+import { baseSepolia } from "viem/chains"; 
+import { http, parseEther } from "viem"; 
+
+const privateKey = "PRIVATE_KEY";
+const account = privateKeyToAccount(`0x${privateKey}`)
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
+
+const nexusClient = await createNexusClient({ 
+    signer: account, 
+    chain: baseSepolia,
+    transport: http(), 
+    bundlerTransport: http(bundlerUrl), 
+});
+
+const smartAccountAddress = await nexusClient.account.address; 
+```
+
+### Key Features
+
+- **Seamless Integration:** Seamlessly integrate powerful Modular Smart Account features into your project with our comprehensive SDK. 
+Leverage a rich array of built-in methods for both modules and smart account utilities, streamlining your development process.
+
+- **Comprehensive Module Support:** Access a wide array of pre-built audited modules to extend your smart account capabilities. 
+
+- **Intuitive Interface:** Leverage the power of our intuitive SDK interface, featuring pre-built classes for each Module. This streamlined architecture simplifies module integration, accelerating your development process and enhancing code maintainability.
+
+- **Entrypoint V7 compatible:** Nexus is fully compatible with Entrypoint v7, ensuring smooth and secure account execution. 
+
+## Getting Started
+To begin on your journey with Nexus, check out our [Quick Start Guide](/nexus/quickstart).
+
