@@ -1,12 +1,11 @@
 # Dashboard APIs
-
 Using these APIs allow you to perform various actions without the need to access the dashboard UI manually.
-
-### Auth Token
-
+## Auth Token
 To obtain an authToken required in the header, you can generate one in your account settings page on the [biconomy dashboard](https://dashboard.biconomy.io/account).
 
-#### 1. Get list of Paymasters:
+## Paymaster Setup
+
+### 1. Get list of Paymasters
 
 > **_GET Request_**
 
@@ -54,7 +53,7 @@ Responses
 }
 ```
 
-#### 2. Create a new Paymaster:
+### 2. Create a new Paymaster
 
 > **_POST Request_**
 
@@ -132,7 +131,9 @@ When creating your DApp, you will receive an "apiKey" as part of the registratio
 
 Alternatively, if you already have a DApp registered, you can find the "apiKey" in the list API of the DApp.
 
-#### 3. Whitelist a Smart Contract:
+## Configuring Paymaster Rules
+
+### 1. Whitelist a Smart Contract
 
 > **_POST Request_**
 
@@ -189,7 +190,7 @@ Smart Contract Already Exists
 }
 ```
 
-#### 4. Get List of Smart Contracts:
+### 2. Get List of Smart Contracts
 
 > **_GET Request_**
 
@@ -237,7 +238,7 @@ Header
 }
 ```
 
-#### 5. Update Smart Contract Whitelisted Methods:
+### 3. Update Smart Contract Whitelisted Methods
 
 > **_PATCH Request_**
 
@@ -315,11 +316,12 @@ Usually, this occurs when incorrect apiKey is used or the address is not added
 }
 ```
 
-#### 6. Update Sponsorship Paymaster Funding Wallet:
+### 4. Update Sponsorship Paymaster Funding Wallet
 
-##### It is a 3-step process.
+#### It is a 3-step process
+::::steps
 
-##### _1. Generate a message from biconomy servers, for the sponsorship paymaster._
+### Generate a message from Biconomy servers for the sponsorship paymaster
 
 > **_GET Request_**
 
@@ -357,9 +359,9 @@ Responses
 }
 ```
 
-##### _2. Sign the generated message using the private key of the EOA (Funding Wallet)._
+### Sign the generated message using the private key of the EOA (Funding Wallet).
 
-##### _3. Send the request to biconomy to update the funding wallet address._
+### Send the request to Biconomy to update the funding wallet address.
 
 > **_PATCH Request_**
 
@@ -432,8 +434,9 @@ Usually, this occurs when incorrect apiKey or authToken is used
     "message": "User not found"
 }
 ```
+::::
 
-#### 7. Delete Smart Contract
+### 5. Delete Smart Contract
 
 > **_DELETE Request_**
 
@@ -484,8 +487,9 @@ Responses
     "message": "Smart contract not found"
 }
 ```
+## Spending Limits & Webhooks
 
-#### 8. Add spending limit rule to a paymaster
+### 1. Add spending limit rule to a paymaster
 
 > **_POST Request_**
 
@@ -559,7 +563,7 @@ Responses
 }
 ```
 
-#### 9. Add a webhook rule to the paymaster
+### 2. Add a webhook rule to the paymaster
 
 > **_POST Request_**
 
@@ -624,7 +628,7 @@ Responses
 ```
 
 
-#### 10. Add a "Wallet Deployment" rule to the paymaster
+### 3. Add a "Wallet Deployment" rule to the paymaster
 
 > **_POST Request_**
 
@@ -684,7 +688,7 @@ Responses
 
 
 
-#### 11. Get all rules for a paymaster (spending limit, webhook, wallet deployment, whitelisted contracts)
+#### 3. Get all rules for a paymaster (spending limit, webhook, wallet deployment, whitelisted contracts)
 
 > **_GET Request_**
 
@@ -756,7 +760,7 @@ Responses
 }
 ```
 
-#### 12. Update spending limit rule for a paymaster
+### 4. Update spending limit rule for a paymaster
 
 > **_PATCH Request_**
 
@@ -810,7 +814,7 @@ On a successful update, the cycle of the spending limit will be reset and the ne
 }
 ```
 
-#### 12. Pause a paymaster rule
+### 5. Pause a policy
 > **_PATCH Request_**
 
 ```
@@ -846,7 +850,7 @@ Responses
 }
 ```
 
-#### 13. Unpause a paymaster rule
+### 6. Unpause a policy
 > **_PATCH Request_**
 
 ```
@@ -881,3 +885,75 @@ Responses
 }
 ```
 
+## Using Webhooks with the SDK
+
+When building out the `paymasterServiceData` object you can optionally pass your `webhookData` to it. In the example below we pass a num value of 2 into the webhook data. Our webhook will check this data and verify if the number passed is an even or odd number.
+
+```typescript
+let paymasterServiceData: SponsorUserOperationDto = {
+  mode: PaymasterMode.SPONSORED,
+  smartAccountInfo: {
+    name: "BICONOMY",
+    version: "2.0.0",
+  },
+  calculateGasLimits: true,
+  webhookData: {
+    num: 2,
+  },
+};
+```
+
+The webhookData gets passed to your webhook from our backend like this:
+
+```typescript
+import axios from "axios";
+
+// POST
+const response = await axios.post(webhookUrl, {
+  data: webhookData,
+});
+
+// GET
+const response = await axios.get(webhookUrl, webhookData);
+```
+
+Our backend expects a response in this format:
+
+```typescript
+const webhookResponseData = response.data;
+this.logger.log(
+  `webhookResponseData: ${JSON.stringify(
+    webhookResponseData,
+  )} for dappId: ${dappId}`,
+);
+const { arePoliciesVerified } = webhookResponseData;
+```
+
+`arePoliciesVerified` should either be true or false based on which it gets determined if the webhook conditions are passed or not.
+
+A sample webhook implementation that checks if the num data passed to is even:
+
+```javascript
+const express = require("express");
+const app = express();
+
+app.use(express.json());
+
+app.post("/", (req, res) => {
+  const data = req.body;
+  console.log("data", data);
+  const { num } = data.data;
+
+  if (num % 2 === 0) {
+    res.json({
+      arePoliciesVerified: true,
+    });
+  } else {
+    res.json({
+      arePoliciesVerified: false,
+    });
+  }
+});
+
+app.listen(8080, () => console.log("Server listening on port 8080!"));
+```

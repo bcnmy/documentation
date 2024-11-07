@@ -460,21 +460,28 @@ export const defaultSidebar = [
     ]
   },
   {
+    text: "Contracts & Audits",
+    link: "/contractsAndAudits",
+  },
+  {
+    text: "Supported Networks",
+    link: "/supportedNetworks",
+  },
+  {
     link: "/dashboard",
     text: "Dashboard",
-    collapsed: true,
     items: [
-      { link: "/dashboard/paymaster", text: "Paymaster" },
+      { link: "/dashboard/paymaster", text: "Paymaster & Gas Tank Setup" },
       {
         link: "/dashboard/paymasterRules",
-        text: "Paymaster Rules",
+        text: "Configuring Paymaster Rules",
       },
       {
         link: "/dashboard/spendingLimits",
-        text: "Spending Limits",
+        text: "Spending Limits & Notifications",
       },
-      { link: "/dashboard/organization", text: "Organization" },
-      { link: "/dashboard/apis", text: "APIs" },
+      { link: "/dashboard/organization", text: "Organization Management" },
+      { link: "/dashboard/apis", text: "API Endpoints & Webhooks" },
     ],
   },
   // {
@@ -534,14 +541,7 @@ export const defaultSidebar = [
   //     link: "/smart-account/7579methods",
   //   }]
   // },
-  {
-    text: "Contracts & Audits",
-    link: "/contractsAndAudits",
-  },
-  {
-    text: "Supported Networks",
-    link: "/supportedNetworks",
-  },
+
   {
     text: "Infra",
     items: [
