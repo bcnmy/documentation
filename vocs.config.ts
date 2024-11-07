@@ -3,138 +3,138 @@ import { config } from "dotenv";
 
 config();
 
-export const defaultSidebar = [
-  { link: "/overview", text: "Overview" },
-  { link: "/quickstart-react", text: "Quickstart: React" },
-  { link: "/quickstart", text: "Quickstart: Core SDK" },
+export const smartAccountsV2Sidebar = [
+  { link: "/smartAccountsV2/overview", text: "Overview" },
+  { link: "/smartAccountsV2/quickstart-react", text: "Quickstart: React" },
+  { link: "/smartAccountsV2/quickstart", text: "Quickstart: Core SDK" },
   {
-    link: "/react",
+    link: "/smartAccountsV2/react",
     text: "React",
     collapsed: true,
     items: [
       {
-        link: "/react/BiconomyProvider",
+        link: "/smartAccountsV2/react/BiconomyProvider",
         text: "BiconomyProvider",
       },
       {
-        link: "/react/useBatchSession",
+        link: "/smartAccountsV2/react/useBatchSession",
         text: "UseBatchSession",
       },
       {
-        link: "/react/useCreateBatchSession",
+        link: "/smartAccountsV2/react/useCreateBatchSession",
         text: "UseCreateBatchSession",
       },
       {
-        link: "/react/useCreateSession",
+        link: "/smartAccountsV2/react/useCreateSession",
         text: "UseCreateSession",
       },
       {
-        link: "/react/useDeploySmartAccount",
+        link: "/smartAccountsV2/react/useDeploySmartAccount",
         text: "UseDeploySmartAccount",
       },
-      { link: "/react/useGasEstimate", text: "UseGasEstimate" },
+      { link: "/smartAccountsV2/react/useGasEstimate", text: "UseGasEstimate" },
       {
-        link: "/react/useSendGasTokenTransaction",
+        link: "/smartAccountsV2/react/useSendGasTokenTransaction",
         text: "UseSendGasTokenTransaction",
       },
       {
-        link: "/react/useSendSponsoredTransaction",
+        link: "/smartAccountsV2/react/useSendSponsoredTransaction",
         text: "UseSendSponsoredTransaction",
       },
       {
-        link: "/react/useSendTransaction",
+        link: "/smartAccountsV2/react/useSendTransaction",
         text: "UseSendTransaction",
       },
       {
-        link: "/react/useSendWithdrawals",
+        link: "/smartAccountsV2/react/useSendWithdrawals",
         text: "UseSendWithdrawals",
       },
-      { link: "/react/useSession", text: "UseSession" },
+      { link: "/smartAccountsV2/react/useSession", text: "UseSession" },
       {
-        link: "/react/useCreateSessionWithDistributedKey",
+        link: "/smartAccountsV2/react/useCreateSessionWithDistributedKey",
         text: "UseCreateSessionWithDistributedKey",
       },
       {
-        link: "/react/useSessionWithDistributedKey",
+        link: "/smartAccountsV2/react/useSessionWithDistributedKey",
         text: "UseSessionWithDistributedKey",
       },
       {
-        link: "/react/useSmartAccount",
+        link: "/smartAccountsV2/react/useSmartAccount",
         text: "UseSmartAccount",
       },
-      { link: "/react/useTokenFees", text: "UseTokenFees" },
-      { link: "/react/useUserOpWait", text: "UseUserOpWait" },
+      { link: "/smartAccountsV2/react/useTokenFees", text: "UseTokenFees" },
+      { link: "/smartAccountsV2/react/useUserOpWait", text: "UseUserOpWait" },
     ],
   },
   {
-    link: "/tutorials",
+    link: "/smartAccountsV2/tutorials",
     text: "Tutorials",
     collapsed: true,
     items: [
 
-      { link: "/tutorials/sendSimpleTransaction", text: "Send a simple transaction" },
-      { link: "/tutorials/sendTransactionsBatch", text: "Send transactions batch" },
-      { link: "/tutorials/sendGasless", text: "Send a gasless transaction" },
+      { link: "/smartAccountsV2/tutorials/sendSimpleTransaction", text: "Send a simple transaction" },
+      { link: "/smartAccountsV2/tutorials/sendTransactionsBatch", text: "Send transactions batch" },
+      { link: "/smartAccountsV2/tutorials/sendGasless", text: "Send a gasless transaction" },
       {
-        link: "/tutorials/payERC20Token",
+        link: "/smartAccountsV2/tutorials/payERC20Token",
         text: "Pay gas in ERC20 token",
       },
       {
-        link: "/tutorials/parallelUserOps",
+        link: "/smartAccountsV2/tutorials/parallelUserOps",
         text: "Send parallel userOps",
       },
       {
-        link: "/tutorials/sessions",
+        link: "/smartAccountsV2/tutorials/sessions",
         text: "Sessions",
         items: [
           {
-            link: "/tutorials/sessions/createSession",
+            link: "/smartAccountsV2/tutorials/sessions/createSession",
             text: "Create Session",
           },
           {
-            link: "/tutorials/sessions/useSession",
+            link: "/smartAccountsV2/tutorials/sessions/useSession",
             text: "Use Session",
           },
           {
-            link: "/tutorials/sessions/createBatchSession",
+            link: "/smartAccountsV2/tutorials/sessions/createBatchSession",
             text: "Create Batch Session",
           },
           {
-            link: "/tutorials/sessions/useBatchSession",
+            link: "/smartAccountsV2/tutorials/sessions/useBatchSession",
             text: "Use Batch Session",
           },
           {
-            link: "/tutorials/sessions/customSessionStorage",
+            link: "/smartAccountsV2/tutorials/sessions/customSessionStorage",
             text: "Custom Session Storage",
           },
         ],
       },
       {
-        link: "/tutorials/customValidationModule",
+        link: "/smartAccountsV2/tutorials/customValidationModule",
         text: "Custom Validation Module",
       },
       {
-        link: "/tutorials/utils",
+        link: "/smartAccountsV2/tutorials/utils",
         text: "Utils",
         items: [
           {
-            link: "/tutorials/utils/offsetGasValues",
+            link: "/smartAccountsV2/tutorials/utils/offsetGasValues",
             text: "Offset Gas Values",
           },
           {
-            link: "/tutorials/utils/transferOwnership",
+            link: "/smartAccountsV2/tutorials/utils/transferOwnership",
             text: "Transfer Ownership",
           },
           {
-            link: "/tutorials/utils/DAN",
+            link: "/smartAccountsV2/tutorials/utils/DAN",
             text: "DAN",
             items: [
               {
-                link: "/tutorials/utils/DAN/generateSessionKey",
+                link: "/smartAccountsV2/tutorials/utils/DAN/generateSessionKey",
                 text: "Generate session key",
               },
               {
-                link: "/tutorials/utils/DAN/signMessage",
+                link: "/smartAccountsV2/tutorials/utils/DAN/signMessage",
                 text: "Sign message",
               },
             ],
@@ -142,222 +142,222 @@ export const defaultSidebar = [
         ],
       },
       {
-        link: "/tutorials/apiIntegration",
+        link: "/smartAccountsV2/tutorials/apiIntegration",
         text: "API Integration",
         collapsed: true,
         items: [
           {
-            link: "/tutorials/apiIntegration/userSponsored",
+            link: "/smartAccountsV2/tutorials/apiIntegration/userSponsored",
             text: "User sponsored",
           },
           {
-            link: "/tutorials/apiIntegration/paymasterSponsored",
+            link: "/smartAccountsV2/tutorials/apiIntegration/paymasterSponsored",
             text: "Paymaster Sponsored",
           },
           {
-            link: "/tutorials/apiIntegration/paymasterERC20",
+            link: "/smartAccountsV2/tutorials/apiIntegration/paymasterERC20",
             text: "Paymaster ERC20",
           },
           
           {
-            link: "/tutorials/apiIntegration/signUserOperation",
+            link: "/smartAccountsV2/tutorials/apiIntegration/signUserOperation",
             text: "Sign userOp",
           },
           
         ],
       },   
-      { link: "/tutorials/v4Migration", text: "V4 Migration" },
+      { link: "/smartAccountsV2/tutorials/v4Migration", text: "V4 Migration" },
       {
         text: "Migrate from stackUp",
-        link: "/tutorials/migrate",
+        link: "/smartAccountsV2/tutorials/migrate",
       },
     ],
   },
   {
-    link: "/account",
+    link: "/smartAccountsV2/account",
     text: "Smart Account",
     collapsed: true,
     items: [
-      { link: "/account/integration", text: "Integration" },
-      { link: "/account/methods", text: "Methods" },
+      { link: "/smartAccountsV2/account/integration", text: "Integration" },
+      { link: "/smartAccountsV2/account/methods", text: "Methods" },
       {
-        link: "/account/signers",
+        link: "/smartAccountsV2/account/signers",
         text: "Signers",
         items: [
           {
-            link: "/account/signers/eoa",
+            link: "/smartAccountsV2/account/signers/eoa",
             text: "Eoa",
             items: [
               {
-                link: "/account/signers/eoa/ethers",
+                link: "/smartAccountsV2/account/signers/eoa/ethers",
                 text: "Ethers",
               },
               {
-                link: "/account/signers/eoa/viem",
+                link: "/smartAccountsV2/account/signers/eoa/viem",
                 text: "Viem",
               },
               {
-                link: "/account/signers/eoa/wagmi",
+                link: "/smartAccountsV2/account/signers/eoa/wagmi",
                 text: "Wagmi",
               },
             ],
           },
-          { link: "/account/signers/capsule", text: "Capsule" },
-          { link: "/account/signers/dfns", text: "Dfns" },
-          { link: "/account/signers/dynamic", text: "Dynamic" },
-          { link: "/account/signers/magic", text: "Magic" },
+          { link: "/smartAccountsV2/account/signers/capsule", text: "Capsule" },
+          { link: "/smartAccountsV2/account/signers/dfns", text: "Dfns" },
+          { link: "/smartAccountsV2/account/signers/dynamic", text: "Dynamic" },
+          { link: "/smartAccountsV2/account/signers/magic", text: "Magic" },
           {
-            link: "/account/signers/particle",
+            link: "/smartAccountsV2/account/signers/particle",
             text: "Particle",
           },
           {
-            link: "/account/signers/passport",
+            link: "/smartAccountsV2/account/signers/passport",
             text: "Passport",
           },
-          { link: "/account/signers/privy", text: "Privy" },
+          { link: "/smartAccountsV2/account/signers/privy", text: "Privy" },
           { link: "/account/signers/turnkey", text: "Turnkey" },
           {
-            link: "/account/signers/web3auth",
+            link: "/smartAccountsV2/account/signers/web3auth",
             text: "Web3auth",
           },
         ],
       },
-      { link: "/account/fiatonramp", text: "Enable Fiat On-Ramp" },
+      { link: "/smartAccountsV2/account/fiatonramp", text: "Enable Fiat On-Ramp" },
     ],
   },
   {
-    link: "/bundler",
+    link: "/smartAccountsV2/bundler",
     text: "Bundler",
     collapsed: true,
     items: [
       {
-        link: "/bundler/api",
+        link: "/smartAccountsV2/bundler/api",
         text: "Api",
         items: [
-          { link: "/bundler/api/explorer", text: "Explorer" },
+          { link: "/smartAccountsV2/bundler/api/explorer", text: "Explorer" },
           
           {
-            link: "/bundler/api/estimate-useroperation-gas",
+            link: "/smartAccountsV2/bundler/api/estimate-useroperation-gas",
             text: "eth_estimateUserOperationGas",
           },
           {
-            link: "/bundler/api/send-UserOperation",
+            link: "/smartAccountsV2/bundler/api/send-UserOperation",
             text: "eth_sendUserOperation",
           },
           {
-            link: "/bundler/api/get-useroperation-receipt",
+            link: "/smartAccountsV2/bundler/api/get-useroperation-receipt",
             text: "eth_getUserOperationReceipt",
           },
           {
-            link: "/bundler/api/get-useroperation-by-hash",
+            link: "/smartAccountsV2/bundler/api/get-useroperation-by-hash",
             text: "eth_getUserOperationByHash",
           },
-          { link: "/bundler/api/chainId", text: "eth_chainId" },
+          { link: "/smartAccountsV2/bundler/api/chainId", text: "eth_chainId" },
           {
-            link: "/bundler/api/supported-EntryPoints",
+            link: "/smartAccountsV2/bundler/api/supported-EntryPoints",
             text: "eth_supportedEntryPoints",
           },
           {
-            link: "/bundler/api/get-gas-fee-values",
+            link: "/smartAccountsV2/bundler/api/get-gas-fee-values",
             text: "biconomy_getGasFeeValues",
           },
           {
-            link: "/bundler/api/get-useroperation-status",
+            link: "/smartAccountsV2/bundler/api/get-useroperation-status",
             text: "biconomy_getUserOperationStatus",
           },     
         ],
       },
       {
-        link: "/bundler/bundlermethods",
+        link: "/smartAccountsV2/bundler/bundlermethods",
         text: "Bundler Methods",
       },
-      { link: "/bundler/integration", text: "Integration" },
-      { link: "/bundler/usingViem", text: "Using Viem" },
+      { link: "/smartAccountsV2/bundler/integration", text: "Integration" },
+      { link: "/smartAccountsV2/bundler/usingViem", text: "Using Viem" },
     ],
   },
   {
-    link: "/paymaster",
+    link: "/smartAccountsV2/paymaster",
     text: "Paymaster",
     collapsed: true,
     items: [
       {
-        link: "/paymaster/7677",
+        link: "/smartAccountsV2/paymaster/7677",
         text: "7677",
         items: [
           {
-            link: "/paymaster/7677/pm_getPaymasterData",
+            link: "/smartAccountsV2/paymaster/7677/pm_getPaymasterData",
             text: "pm_getPaymasterData",
           },
           {
-            link: "/paymaster/7677/pm_getPaymasterStubData",
+            link: "/smartAccountsV2/paymaster/7677/pm_getPaymasterStubData",
             text: "pm_getPaymasterStubData",
           },
           // { link: "/paymaster/7677/usingViem", text: "Using Viem" },
         ],
       },
       {
-        link: "/paymaster/api",
+        link: "/smartAccountsV2/paymaster/api",
         text: "Api",
         items: [
           {
-            link: "/paymaster/api/explorer",
+            link: "/smartAccountsV2/paymaster/api/explorer",
             text: "Explorer",
           },
           {
-            link: "/paymaster/api/get-fee-quotes",
+            link: "/smartAccountsV2/paymaster/api/get-fee-quotes",
             text: "pm_getFeeQuoteOrData",
           },
           {
-            link: "/paymaster/api/sponsor-useroperation",
+            link: "/smartAccountsV2/paymaster/api/sponsor-useroperation",
             text: "pm_sponsorUserOperation",
           },
           {
-            link: "/paymaster/api/webhookapi",
+            link: "/smartAccountsV2/paymaster/api/webhookapi",
             text: "Webhook api",
           },
         ],
       },
-      { link: "/paymaster/integration", text: "Integration" },
-      { link: "/paymaster/methods", text: "Methods" },
+      { link: "/smartAccountsV2/paymaster/integration", text: "Integration" },
+      { link: "/smartAccountsV2/paymaster/methods", text: "Methods" },
     ],
   },
   {
-    link: "/gasEstimations",
+    link: "/smartAccountsV2/gasEstimations",
     text: "Gas Estimations",
     collapsed: true,
     items: [
       {
-        link: "/gasEstimations/integration",
+        link: "/smartAccountsV2/gasEstimations/integration",
         text: "Integration",
       },
-      { link: "/gasEstimations/methods", text: "Methods" },
+      { link: "/smartAccountsV2/gasEstimations/methods", text: "Methods" },
     ],
   },
   {
-    link: "/modules",
+    link: "/smartAccountsV2/modules",
     text: "Modules",
     collapsed: true,
     items: [
-      { link: "/modules/ecdsa", text: "Ecdsa" },
-      { link: "/modules/multichain", text: "Multichain" },
+      { link: "/smartAccountsV2/modules/ecdsa", text: "Ecdsa" },
+      { link: "/smartAccountsV2/modules/multichain", text: "Multichain" },
       {
-        link: "/modules/sessions",
+        link: "/smartAccountsV2/modules/sessions",
         text: "Sessions",
         items: [
           {
-            link: "/modules/sessions/abiSessionValidationModule",
+            link: "/smartAccountsV2/modules/sessions/abiSessionValidationModule",
             text: "AbiSessionValidationModule",
           },
           {
-            link: "/modules/sessions/DistributedSessions",
+            link: "/smartAccountsV2/modules/sessions/DistributedSessions",
             text: "DistributedSessions",
           },
           {
-            link: "/modules/sessions/BatchedSession",
+            link: "/smartAccountsV2/modules/sessions/BatchedSession",
             text: "BatchedSession",
           },
           {
-            link: "/modules/sessions/sessionvalidationmodule",
+            link: "/smartAccountsV2/modules/sessions/sessionvalidationmodule",
             text: "Sessionvalidationmodule",
           },
         ],
@@ -365,41 +365,23 @@ export const defaultSidebar = [
     ],
   },
 
+  { link: "/smartAccountsV2/contracts", text: "Contracts" },
+  { link: "/smartAccountsV2/audits", text: "Audits" },
   {
-    link: "/dashboard",
-    text: "Dashboard",
-    collapsed: true,
-    items: [
-      { link: "/dashboard/paymaster", text: "Paymaster" },
-      {
-        link: "/dashboard/paymasterRules",
-        text: "Paymaster Rules",
-      },
-      {
-        link: "/dashboard/spendingLimits",
-        text: "Spending Limits",
-      },
-      { link: "/dashboard/organization", text: "Organization" },
-      { link: "/dashboard/apis", text: "APIs" },
-    ],
-  },
-  { link: "/contracts", text: "Contracts" },
-  { link: "/audits", text: "Audits" },
-  {
-    link: "/troubleshooting",
+    link: "/smartAccountsV2/troubleshooting",
     text: "Troubleshooting",
     collapsed: true,
     items: [
       {
-        link: "/troubleshooting/commonerrors",
+        link: "/smartAccountsV2/troubleshooting/commonerrors",
         text: "Common errors",
       },
-      { link: "/troubleshooting/polyfill", text: "Polyfill" },
+      { link: "/smartAccountsV2/troubleshooting/polyfill", text: "Polyfill" },
     ],
   },
 
-  { link: "/FAQ", text: "FAQ" },
-  { link: "/supportedNetworks", text: "SupportedNetworks" },
+  { link: "/smartAccountsV2/FAQ", text: "FAQ" },
+  { link: "/smartAccountsV2/supportedNetworks", text: "SupportedNetworks" },
 ];
 
 export const addOnsSidebar = [
@@ -438,29 +420,29 @@ export const addOnsSidebar = [
   
 ]
 
-export const nexusSidebar = [
+export const defaultSidebar = [
   {
     text: "Overview",
-    link: "/nexus",
+    link: "/overview",
   },
   {
     text: "Quickstart",
-    link: "/nexus/quickstart",
+    link: "/quickstart",
   },
   {
     text: "Tutorials",
     items: [
       {
         text: "How to send gasless transactions",
-        link: "/nexus/tutorials/gasless",
+        link: "/tutorials/gasless",
       },
       {
         text: "How to send batch transactions",
-        link: "/nexus/tutorials/batch",
+        link: "/tutorials/batch",
       },
       // {
       //   text: "How to use smart sessions",
-      //   link: "/nexus/tutorials/smart-sessions",
+      //   link: "/tutorials/smart-sessions",
       // }
     ]
   },
@@ -469,30 +451,48 @@ export const nexusSidebar = [
     items: [
       {
         text: "Integration",
-        link: "/nexus/nexus-client",
+        link: "/nexus-client",
       },
       {
         text: "Methods",
-        link: "/nexus/nexus-client/methods",
+        link: "/nexus-client/methods",
       }
     ]
   },
+  {
+    link: "/dashboard",
+    text: "Dashboard",
+    collapsed: true,
+    items: [
+      { link: "/dashboard/paymaster", text: "Paymaster" },
+      {
+        link: "/dashboard/paymasterRules",
+        text: "Paymaster Rules",
+      },
+      {
+        link: "/dashboard/spendingLimits",
+        text: "Spending Limits",
+      },
+      { link: "/dashboard/organization", text: "Organization" },
+      { link: "/dashboard/apis", text: "APIs" },
+    ],
+  },
   // {
   //   text: "ERC-7579 Modules",
-  //   link: "/nexus/modules",
+  //   link: "/modules",
   //   collapsed: false,
   //   items: [
   //     {
-  //       link: "/nexus/modules/validators",
+  //       link: "/modules/validators",
   //       text: "Validators",
   //       collapsed: true,
   //       items: [
   //         {
-  //           link: "/nexus/modules/validators/k1Validator",
+  //           link: "/modules/validators/k1Validator",
   //           text: "K1Validator (ECDSA)",
   //           items: [
   //             {
-  //               link: "/nexus/modules/validators/k1Validator/tutorial",
+  //               link: "/modules/validators/k1Validator/tutorial",
   //               text: "Tutorial"
   //             }
   //           ]
@@ -500,24 +500,24 @@ export const nexusSidebar = [
   //       ]
   //     },
   //     {
-  //       link: "/nexus/modules/executors",
+  //       link: "/modules/executors",
   //       text: "Executors",
   //       collapsed: true,
   //       items: [
   //         {
-  //           link: "/nexus/modules/executors/OwnableExecutor",
+  //           link: "/modules/executors/OwnableExecutor",
   //           text: "OwnableExecutor",
   //           items: [
   //             {
-  //               link: "/nexus/modules/executors/OwnableExecutor",
+  //               link: "/modules/executors/OwnableExecutor",
   //               text: "Overview"
   //             },
   //             {
-  //               link: "/nexus/modules/executors/OwnableExecutor/methods",
+  //               link: "/modules/executors/OwnableExecutor/methods",
   //               text: "Methods"
   //             },
   //             {
-  //               link: "/nexus/modules/executors/OwnableExecutor/tutorial",
+  //               link: "/modules/executors/OwnableExecutor/tutorial",
   //               text: "Tutorial"
   //             }
   //           ]
@@ -528,31 +528,31 @@ export const nexusSidebar = [
   // },
   // {
   //   text: "Nexus Smart Account",
-  //   link: "/nexus/smart-account",
+  //   link: "/smart-account",
   //   items: [{
   //     text: "ERC-7579 Methods",
-  //     link: "/nexus/smart-account/7579methods",
+  //     link: "/smart-account/7579methods",
   //   }]
   // },
   {
     text: "Contracts & Audits",
-    link: "/nexus/contractsAndAudits",
+    link: "/contractsAndAudits",
   },
   {
     text: "Supported Networks",
-    link: "/nexus/supportedNetworks",
+    link: "/supportedNetworks",
   },
   {
     text: "Infra",
     items: [
       {
         text: "Bundler",
-        link: "/nexus/infra/bundler/integration",
+        link: "/infra/bundler/integration",
         
       },
       {
         text: "Paymaster",
-        link: "/nexus/infra/paymaster/integration",
+        link: "/infra/paymaster/integration",
       }
     ]
   },
@@ -579,12 +579,12 @@ export default defineConfig({
   sidebar: {
     "/": defaultSidebar,
     "/addOns": addOnsSidebar,
-    "/nexus": nexusSidebar
+    "/smartAccountsV2": smartAccountsV2Sidebar,
   },
   topNav: [
-    { text: 'Docs', link: '/nexus', match: "/nexus"},
+    { text: 'Docs', link: '/overview', match: "/overview"},
     { text: 'Previous', items: [
-      { text: 'SDK v4', link: '/quickstart-react'},
+      { text: 'SDK v4 (Smart Accounts V2)', link: '/smartAccountsV2/quickstart-react'},
       { text: 'Legacy docs', link: 'https://legacy-docs.biconomy.io/' },
     ]},
     { text: 'Add Ons', link: '/addOns/overview', match: "/addOns" },

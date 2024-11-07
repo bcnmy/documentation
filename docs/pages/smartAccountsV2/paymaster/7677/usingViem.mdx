@@ -1,0 +1,80 @@
+---
+sidebar_position: 3
+custom_edit_url: https://github.com/bcnmy/docs/blob/master/docs/Paymaster/7677/usingViem.mdx
+---
+
+## Using Viem SDK
+
+This guide focuses on using the Biconomy bundler & paymaster with the Viem SDK to execute gasless transactions. You can use any of the [smart accounts](https://viem.sh/account-abstraction/accounts/smart) supported by viem.
+
+### Create paymaster client 
+
+Pass the biconomy paymaster URL to [createPaymasterClient](https://viem.sh/account-abstraction/clients/paymaster) to create paymaster instance.
+
+:::info
+Biconomy paymaster requires the paymaster context to be provided as per [pm_getPaymasterStubData](/smartAccountsV2/paymaster/7677/pm_getPaymasterStubData)
+:::
+
+```typescript
+import { createPublicClient, http, parseEther } from 'viem';
+import { createBundlerClient, toCoinbaseSmartAccount, createPaymasterClient, toSoladySmartAccount } from 'viem/account-abstraction';
+import { sepolia } from 'viem/chains';
+import { privateKeyToAccount } from 'viem/accounts';
+
+const main = async () => {
+  const client = createPublicClient({
+    chain: sepolia,
+    transport: http(),
+  })
+
+  const owner = privateKeyToAccount('PRIVATE_KEY')
+  console.log(owner.address)
+
+  const account = await toCoinbaseSmartAccount({
+    client,
+    owners: [owner]
+  })
+
+  const paymasterClient = createPaymasterClient({
+    transport: http('BICONOMY_PAYMASTER_URL'),
+  })
+
+  const bundlerClient = createBundlerClient({
+    account,
+    client,
+    paymasterContext: {
+        "mode": "SPONSORED",
+        "calculateGasLimits": true,
+        "expiryDuration": 300, // duration (secs) for which the generate paymasterAndData will be valid. Default duration is 300 secs.
+        "sponsorshipInfo": {
+          "webhookData": {},
+          "smartAccountInfo": {
+              "name": "BICONOMY",
+              "version": "2.0.0"
+          }
+        }
+    },
+    paymaster: paymasterClient,
+    transport: http('https://bundler.biconomy.io/api/v2/11155111/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44'),
+  })
+
+  console.log(account.address);
+
+  const userOpHash = await bundlerClient.sendUserOperation({
+    account,
+    calls: [{
+      to: '0xcb98643b8786950F0461f3B0edf99D88F274574D',
+      value: parseEther('0.001')
+    }]
+  })
+  console.log(userOpHash)
+}
+
+main()
+```
+
+:::info
+  The Bundler URL provided above is a testnet endpoint. To obtain the mainnet Bundler URL, log in to the [Dashboard](https://dashboard.biconomy.io/).
+::::
+
+

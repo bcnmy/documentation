@@ -1,0 +1,54 @@
+# k1Validator module tutorial 
+
+## Installing and using a K1Validator Module
+
+This example demonstrates how to install a K1Validator module on a Nexus Smart Account using the SDK.
+
+## Setup
+
+First, import the necessary dependencies and set up your smart account:
+
+```typescript
+import { createWalletClient, http } from "viem";
+import { baseSepolia } from "viem/chains";
+import { createSmartAccountClient, ModuleType, K1_VALIDATOR } from "@biconomy/account";
+
+// Setup your wallet client
+const walletClient = createWalletClient({
+  account,
+  chain: baseSepolia,
+  transport: http()
+});
+
+// Create your smart account
+const smartAccount = await createSmartAccountClient({
+  signer: walletClient,
+  bundlerUrl: "https://bundler.biconomy.io/api/v2/...", // Your bundler URL
+});
+```
+
+Now, let's install the K1Validator module:
+
+```typescript
+// Encode the owner address (usually the signer's address)
+const ownerAddress = await walletClient.account.address;
+const encodedOwnerAddress = encodePacked(["address"], [ownerAddress]);
+
+// Install the module
+const userOpReceipt = await smartAccount.installModule({
+  moduleAddress: K1_VALIDATOR,
+  type: 'validator',
+  data: encodedOwnerAddress
+});
+```
+
+After installation, you can verify if the module is installed
+
+```typescript
+const isInstalled = await smartAccount.isModuleInstalled({
+  moduleAddress: K1_VALIDATOR_ADDRESS,
+  type: 'validator'
+});
+```
+
+Now we can send user ops and do actions like minting an NFT, the same way we did it in the [Quickstart](/quickstart) using the `k1Validator` as the validation module.
