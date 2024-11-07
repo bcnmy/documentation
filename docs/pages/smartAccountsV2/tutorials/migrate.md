@@ -18,7 +18,7 @@ Biconomy provides a complete solution for leveraging Smart Accounts, Paymasters,
 | eth_sendUserOperation | [eth_sendUserOperation](/smartAccountsV2/bundler/api/send-UserOperation) |
 | eth_getUserOperationReceipt | [eth_getUserOperationReceipt](/smartAccountsV2/bundler/api/get-useroperation-receipt) | 
 | eth_getUserOperationByHash | [eth_getUserOperationByHash](/smartAccountsV2/bundler/api/get-useroperation-by-hash) |
-| eth_supportedEntryPoints | [eth_supportedEntryPoints](/smartAccountsV2bundler/api/supported-EntryPoints) |
+| eth_supportedEntryPoints | [eth_supportedEntryPoints](/smartAccountsV2/bundler/api/supported-EntryPoints) |
 | eth_chainId | [eth_chainId](/smartAccountsV2/bundler/api/chainId) |
 
 All paymaster URLs allow you to use both Sponsorship and Token Paymasters. To switch between paymasters you will simply change the Mode of a specific request.
