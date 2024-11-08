@@ -310,11 +310,7 @@ export const smartAccountsV2Sidebar = [
           {
             link: "/smartAccountsV2/paymaster/api/sponsor-useroperation",
             text: "pm_sponsorUserOperation",
-          },
-          {
-            link: "/smartAccountsV2/paymaster/api/webhookapi",
-            text: "Webhook api",
-          },
+          }
         ],
       },
       { link: "/smartAccountsV2/paymaster/integration", text: "Integration" },
