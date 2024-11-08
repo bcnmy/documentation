@@ -1,0 +1,52 @@
+---
+sidebar_position: 2
+custom_edit_url: https://github.com/bcnmy/docs/blob/master/docs/Bundler/integration.mdx
+---
+
+# Integration
+
+This guide focuses on the code to integrate the Bundler. To see how this interacts with other packages in the sdk you can view the [Smart Accounts Integration page](/smartAccountsV2/account/integration).
+
+## Installation
+
+First, install the required packages for initializing the Bundler and Smart Account.
+
+```bash
+npm install @biconomy/account
+```
+
+## Integration
+
+:::info
+
+[Click here](/dashboard) to learn more about our dashboard and how to get your own bundler url.
+:::
+
+To create a bundler instance pass the bundler url, with other optional params.
+
+```typescript
+import { createBundler } from "@biconomy/account";
+
+const userOpReceiptMaxDurationIntervals: { [key in number]?: number } = {
+  [80002]: 60000,
+};
+
+const bundler = await createBundler({
+  bundlerUrl: "", // <-- Read about this at https://docs.biconomy.io/dashboard#bundler-url
+  userOpReceiptMaxDurationIntervals,
+});
+```
+
+**Parameters**
+
+- bundlerUrl(`string`, required): bundler url from the dashboard
+- [userOpReceiptIntervals](https://bcnmy.github.io/biconomy-client-sdk/classes/Bundler.html#UserOpReceiptIntervals)(`object`, optional): The polling interval per chain for the tx receipt in milliseconds. Default value is 5 seconds.
+- [userOpWaitForTxHashIntervals](https://bcnmy.github.io/biconomy-client-sdk/classes/Bundler.html#UserOpWaitForTxHashIntervals)(`object`, optional): The polling interval per chain for the tx result in milliseconds. Default value is 0.5 seconds.
+- [userOpReceiptMaxDurationIntervals](https://bcnmy.github.io/biconomy-client-sdk/classes/Bundler.html#userOpReceiptMaxDurationIntervals)(`object`, optional): The maximum duration in milliseconds per chain to wait for the tx receipt. Default value is 30 seconds.
+- [userOpWaitForTxHashMaxDurationIntervals](https://bcnmy.github.io/biconomy-client-sdk/classes/Bundler.html#UserOpWaitForTxHashMaxDurationIntervals)(`object`, optional): The maximum duration in milliseconds per chain to wait for the tx hash. Default value is 20 seconds.
+
+**returns**
+
+- [bundler](https://bcnmy.github.io/biconomy-client-sdk/classes/Bundler.html)(`Promise<Bundler>`): bundler instance
+
+Once initialized you will be able to pass this Bundler instance to the Smart Account configuration to use in conjunction with Smart Accounts. See our [tutorials](/smartAccountsV2/tutorials) for in depth integrations of the Smart Account and Bundler.

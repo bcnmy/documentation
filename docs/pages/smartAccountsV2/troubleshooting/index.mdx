@@ -1,0 +1,10 @@
+# TroubleShooting
+
+If you’re having trouble executing transactions, try the following troubleshooting steps:
+
+- Verify that you are using the correct Bundler URL, Paymaster ID, and Chain ID. 
+- Ensure that you are passing the paid rpc url in the [createSmartAccountClient](/smartAccountsV2/account/methods#createsmartaccountclient) method.
+- For gasless transactions, confirm that there are sufficient funds in the Paymaster. Additionally, make sure the SPONSORED flag is set in the [sendTransaction](/smartAccountsV2/tutorials/sendGasless/#step-3-send-the-transaction-and-wait-for-the-transaction-hash) function.
+- If you are transferring tokens from a smart account, ensure that the tokens are held within the smart account, not the EOA. For more examples, visit the [SDK-examples](https://github.com/bcnmy/sdk-examples) repository.
+
+If you encounter specific errors, check the [common errors](/smartAccountsV2/troubleshooting/commonerrors) and [FAQs](/smartAccountsV2/FAQ) for further guidance.
