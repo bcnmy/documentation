@@ -436,10 +436,10 @@ export const defaultSidebar = [
         text: "How to send batch transactions",
         link: "/tutorials/batch",
       },
-      // {
-      //   text: "How to use smart sessions",
-      //   link: "/tutorials/smart-sessions",
-      // }
+      {
+        text: "How to use smart sessions",
+        link: "/tutorials/smart-sessions",
+      }
     ]
   },
   {
