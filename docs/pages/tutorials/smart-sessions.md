@@ -60,7 +60,7 @@ const hash = await nexusClient.installModule({
     module: sessionsModule.moduleInitData
 })
 const { success: installSuccess } = await nexusClient.waitForUserOperationReceipt({ hash });
-const nexusSessionClient = nexusClient.extend( smartSessionCreateActions(sessionsModule));
+const nexusSessionClient = nexusClient.extend(smartSessionCreateActions(sessionsModule));
 ```
 
 ### Create a Smart Session
@@ -94,13 +94,8 @@ const { success } = await nexusClient.waitForUserOperationReceipt({
     hash: createSessionsResponse.userOpHash
 });
 ```
-::::
-
-## Use the Smart Session
-::::steps
 
 ### Create active session data
-
 The `sessionData` object serves as the configuration for using a smart session. It includes the session owner’s public key, the granter’s account address, and the specific permissions (via permissionId) for actions the session is allowed to perform. 
 
 ```typescript
@@ -112,7 +107,30 @@ const sessionData: SessionData = {
         mode: SmartSessionMode.USE
     }
 };
+
+const compressedSessionData = JSON.stringify(sessionData);
 ```
+It’s crucial to save the compressedSessionData after the user grants permission. This data can include user-specific preferences, or any other session-related information. There are two main options to store this data:
+- Local Storage: Save SessionData as a string on the client side. (Local storage requires data to be stored as a string.)
+- Database Storage: Alternatively, you can save this data in your dapp’s database.
+
+Use the `JSON.stringify()` function to prepare the session data for storage. 
+
+::::
+
+## Use the Smart Session
+
+Assume that the user has left the dapp and is returning to resume their session. The SessionData from their previous session is necessary to continue seamlessly.
+
+::::steps
+
+### Retrieve the saved `compressedSessionData`
+
+```typescript
+const sessionData = JSON.parse(compressedSessionData) as SessionData
+```
+Decompress this data using the `JSON.parse()` function to restore it to its original structure, making it ready for use.
+
 
 ### Create a Nexus Client for Using the Session
 
@@ -122,6 +140,7 @@ We need a new Nexus client that is associated with the session. This client will
 - Signer: The session owner's private key, which will sign actions during the session.
 
 ```typescript
+
 const smartSessionNexusClient = await createNexusSessionClient({
     chain: baseSepolia,
     accountAddress: sessionData.granter,
