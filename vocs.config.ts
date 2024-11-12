@@ -412,10 +412,10 @@ export const defaultSidebar = [
         text: "How to send batch transactions",
         link: "/tutorials/batch",
       },
-      // {
-      //   text: "How to use smart sessions",
-      //   link: "/tutorials/smart-sessions",
-      // }
+      {
+        text: "How to use smart sessions",
+        link: "/tutorials/smart-sessions",
+      }
     ]
   },
   {
@@ -431,15 +431,15 @@ export const defaultSidebar = [
       },
       {
         text: "DAN Client",
-        link: "/nexus-client/dan-nexus-client",
+        link: "/nexus-client/dan",
         items: [
           {
             text: "Overview",
-            link: "/nexus-client/dan-nexus-client",
+            link: "/nexus-client/dan",
           },
           {
             text: "Methods",
-            link: "/nexus-client/dan-nexus-client/methods",
+            link: "/nexus-client/dan/methods",
           }
         ]
       }
