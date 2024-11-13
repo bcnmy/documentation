@@ -51,14 +51,6 @@ export const smartAccountsV2Sidebar = [
       },
       { link: "/smartAccountsV2/react/useSession", text: "UseSession" },
       {
-        link: "/smartAccountsV2/react/useCreateSessionWithDistributedKey",
-        text: "UseCreateSessionWithDistributedKey",
-      },
-      {
-        link: "/smartAccountsV2/react/useSessionWithDistributedKey",
-        text: "UseSessionWithDistributedKey",
-      },
-      {
         link: "/smartAccountsV2/react/useSmartAccount",
         text: "UseSmartAccount",
       },
@@ -125,20 +117,6 @@ export const smartAccountsV2Sidebar = [
             link: "/smartAccountsV2/tutorials/utils/transferOwnership",
             text: "Transfer Ownership",
           },
-          {
-            link: "/smartAccountsV2/tutorials/utils/DAN",
-            text: "DAN",
-            items: [
-              {
-                link: "/smartAccountsV2/tutorials/utils/DAN/generateSessionKey",
-                text: "Generate session key",
-              },
-              {
-                link: "/smartAccountsV2/tutorials/utils/DAN/signMessage",
-                text: "Sign message",
-              },
-            ],
-          },
         ],
       },
       {
@@ -158,12 +136,11 @@ export const smartAccountsV2Sidebar = [
             link: "/smartAccountsV2/tutorials/apiIntegration/paymasterERC20",
             text: "Paymaster ERC20",
           },
-          
+
           {
             link: "/smartAccountsV2/tutorials/apiIntegration/signUserOperation",
             text: "Sign userOp",
           },
-          
         ],
       },   
       { link: "/smartAccountsV2/tutorials/v4Migration", text: "V4 Migration" },
@@ -264,7 +241,7 @@ export const smartAccountsV2Sidebar = [
           {
             link: "/smartAccountsV2/bundler/api/get-useroperation-status",
             text: "biconomy_getUserOperationStatus",
-          },     
+          },
         ],
       },
       {
@@ -413,8 +390,7 @@ export const addOnsSidebar = [
     text: "RAAS Integration",
     link: "/addOns/raasProvider",
   },
-  
-]
+];
 
 export const defaultSidebar = [
   {
@@ -452,6 +428,20 @@ export const defaultSidebar = [
       {
         text: "Methods",
         link: "/nexus-client/methods",
+      },
+      {
+        text: "DAN Client",
+        link: "/nexus-client/dan",
+        items: [
+          {
+            text: "Overview",
+            link: "/nexus-client/dan",
+          },
+          {
+            text: "Methods",
+            link: "/nexus-client/dan/methods",
+          }
+        ]
       }
     ]
   },
@@ -590,20 +580,20 @@ export default defineConfig({
   ],
   socials: [
     {
-      icon: 'discord',
-      link: 'https://discord.com/invite/biconomy',
+      icon: "discord",
+      link: "https://discord.com/invite/biconomy",
     },
     {
-      icon: 'github',
-      link: 'https://github.com/bcnmy/documentation',
+      icon: "github",
+      link: "https://github.com/bcnmy/documentation",
     },
     {
-      icon: 'warpcast',
-      link: 'https://warpcast.com/biconomy',
+      icon: "warpcast",
+      link: "https://warpcast.com/biconomy",
     },
     {
-      icon: 'x',
-      link: 'https://x.com/biconomy',
+      icon: "x",
+      link: "https://x.com/biconomy",
     },
   ],
   vite: {

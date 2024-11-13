@@ -3,13 +3,13 @@ This is a [Vocs](https://vocs.dev) project bootstrapped with the Vocs CLI.
 ### Installation
 
 ```bash 
-npm i vocs
+bun i
 ```
 
 ### Local Development
 
 ```bash 
-npm run dev
+bun run dev
 ```
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 

@@ -103,7 +103,7 @@ const sessionData: SessionData = {
     granter: nexusClient.account.address,
     sessionPublicKey,
     moduleData: {
-        permissionId: cachedPermissionId,
+        permissionIds: [cachedPermissionId],
         mode: SmartSessionMode.USE
     }
 };
@@ -283,7 +283,7 @@ export const createAccountAndSendTransaction = async () => {
         granter: nexusClient.account.address,
         sessionPublicKey,
         moduleData: {
-            permissionId: cachedPermissionId,
+            permissionIds: [cachedPermissionId],
             mode: SmartSessionMode.USE
         }
     }
@@ -310,11 +310,10 @@ export const createAccountAndSendTransaction = async () => {
 
     // 4. Send transactions with sessions
     const userOpHash = await useSmartSessionNexusClient.usePermission({
-        actions: [
+        calls: [
             {
-                target: "0xabc",
-                value: 0n,
-                callData: encodeFunctionData({
+                to: "0xabc",
+                data: encodeFunctionData({
                     abi: CounterAbi,
                     functionName: "incrementNumber"
                 })
