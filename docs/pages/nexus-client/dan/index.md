@@ -64,7 +64,6 @@ await ownableDanClient.waitForUserOperationReceipt({ hash })
 
 // Prepare a user operation to withdraw 1 wei to userTwo
 // This demonstrates a simple transaction that requires multi-sig approval
-// @ts-ignore
 const withdrawalUserOp = await ownableDanClient.prepareUserOperation({
   calls: [
     {
