@@ -545,6 +545,7 @@ export const defaultSidebar = [
 ]
 
 export default defineConfig({
+  banner:  "EthGlobal hackathon quick guide: https://github.com/bcnmy/ethglobal-workshop",
   theme: {
     accentColor: "#FF4E17",
   },
