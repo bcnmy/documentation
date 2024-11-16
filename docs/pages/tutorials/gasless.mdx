@@ -1,0 +1,78 @@
+## Sending Gasless Transactions with Nexus SDK ⚡️
+
+Gasless transactions enable users to interact with the blockchain without paying for gas fees. This is achieved through the use of a paymaster, which sponsors the transaction fees on behalf of the user. In this tutorial, we will guide you through the process of sending gasless transactions using the Nexus SDK.
+
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/bcnmy/examples/tree/main/nextjs-tutorial-gasless-transaction?embed=1&file=index.ts&hideNavigation=1&hideDevTools=true&terminalHeight=1&hideExplorer=1&devtoolsheight=1&ctl=1"></iframe>
+
+
+::::steps
+
+### Set up an owner account
+First, we need to set up an Owner for the Smart Account which will be used to sign User Operations (transactions) for the Smart Account.
+
+```typescript twoslash
+import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
+
+const privateKey = generatePrivateKey();
+const account = privateKeyToAccount(`${privateKey}`);
+```
+
+### Set up Nexus client with paymaster
+Login to the [Dashboard](https://dashboard.biconomy.io/) and setup a v2 paymaster. Let's configure a client for the Smart Account with a `paymasterUrl` to enable gasless transactions. A `bundlerUrl` is required to submit transactions to the Network, which will initialize the Smart Account.
+
+```typescript twoslash
+import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk";
+import { baseSepolia } from "viem/chains"; 
+import { http, parseEther } from "viem";
+import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
+
+const privateKey = generatePrivateKey();
+const account = privateKeyToAccount(`${privateKey}`);
+
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703"; // [!code focus:8]
+
+const nexusClient = await createNexusClient({
+    signer: account,
+    chain: baseSepolia,
+    transport: http(),
+    bundlerTransport: http(bundlerUrl),
+    paymaster: createBicoPaymasterClient({paymasterUrl})
+});
+```
+
+### Send gasless transaction
+Next, define the transaction you want to send. Use the `sendTransaction` method to send the transaction. Since we have a paymaster configured, this transaction will be gasless.
+
+```typescript twoslash
+
+import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk";
+import { baseSepolia } from "viem/chains"; 
+import { http, parseEther } from "viem";
+import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
+
+const privateKey = generatePrivateKey();
+const account = privateKeyToAccount(`${privateKey}`);
+
+const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
+const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703";
+
+const nexusClient = await createNexusClient({
+    signer: account,
+    chain: baseSepolia,
+    transport: http(),
+    bundlerTransport: http(bundlerUrl),
+    paymaster: createBicoPaymasterClient({paymasterUrl})
+}); // [!code focus:7]
+
+const hash = await nexusClient.sendTransaction({ calls:  
+    [{to : '0xf5715961C550FC497832063a98eA34673ad7C816', value: parseEther('0')}] },
+); 
+console.log("Transaction hash: ", hash) 
+const receipt = await nexusClient.waitForTransactionReceipt({ hash });
+
+```
+
+By following these steps, you have successfully sent a gasless transaction using the Nexus SDK. For more advanced features and options, refer to the official documentation.
+
+[See sendTransaction Docs](/nexus-client/methods#sendtransaction)

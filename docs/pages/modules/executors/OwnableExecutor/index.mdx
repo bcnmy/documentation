@@ -1,0 +1,25 @@
+# OwnableExecutor Module
+
+The `OwnableExecutor` is an execution module designed for ERC7579-compliant smart accounts. It allows designated owners to execute transactions on behalf of the account and pay for gas.
+
+## Key Features
+
+- Multiple owner management for smart accounts
+- Transaction execution by owners
+- Batch transaction support
+
+## Core Functionality
+
+### Owner Management
+
+- `onInstall`: Initializes the module with an initial owner
+- `addOwner`: Adds a new owner to the account
+- `removeOwner`: Removes an existing owner from the account
+- `getOwners`: Retrieves the list of owners for an account
+
+### Transaction Execution
+
+- `executeOnOwnedAccount`: Allows an owner to execute a single transaction
+- `executeBatchOnOwnedAccount`: Enables batch transaction execution by an owner
+
+For more information about the smart contract please go to [OwnableExcecutor](https://github.com/rhinestonewtf/core-modules/blob/main/src/OwnableExecutor/OwnableExecutor.sol)

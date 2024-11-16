@@ -8,29 +8,55 @@ import { HomePage } from 'vocs/components'
 
 <HomePage.Root>
   <HomePage.Logo />
-  <HomePage.Tagline>Biconomy is the world's most advanced ERC-4337 account abstraction infrastructure platform. Leverage our highly customisable transaction infra to build seamless dApps for every user.</HomePage.Tagline>
-  <HomePage.InstallPackage name="@biconomy/account" type="add" />
+  <HomePage.Tagline>Unlock seamless dApp experiences for all users with Biconomy, the pioneering ERC-4337 account abstraction infrastructure platform, offering unparalleled customizability in transaction infrastructure.</HomePage.Tagline>
+  <HomePage.InstallPackage name="@biconomy/sdk viem @rhinestone/module-sdk" type="add" />
   {/* <HomePage.Description>Superpowers for your Web3 stack.</HomePage.Description> */}
   <HomePage.Buttons>
-    <HomePage.Button href="/quickstart-react" variant="accent">Get started</HomePage.Button>
+    <HomePage.Button href="/quickstart" variant="accent">Get started</HomePage.Button>
     <HomePage.Button href="https://dashboard.biconomy.io/">Dashboard</HomePage.Button>
   </HomePage.Buttons>
 
 <div className="mx-0 mt-4 md:mx-4 xl:-mx-12 2xl:-mx-24">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div>
-            ## [<span className="underline text-orange-600 hover:text-orange-800 hover:underline">sdk →</span>](/quickstart-react)
-            Our TypeScript library built on viem for interacting with ERC-4337 bundlers, paymasters, and user operations.
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
+            <h3 className="text-orange-600 font-bold text-xl mb-2">
+                <a href="/overview" className="no-underline hover:text-orange-800">
+                    Nexus SDK →
+                </a>
+            </h3>
+            <a href="/overview">
+                The most advanced ERC-7579 compliant modular smart accounts, designed for flexible, gas-efficient operations and seamless integration with third-party modules.
+            </a>
         </div>
-        <div>
-            ## [<span className="underline text-blue-600 hover:text-blue-800 hover:underline">Bundler →</span>](/bundler)
-            Powering smart accounts by relaying ERC-4337 user operations for fast and reliable on-chain inclusion.
+        <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
+            <h3 className="text-orange-600 font-bold text-xl mb-2">
+                <a href="/infra/bundler/integration" className="no-underline hover:text-orange-800">
+                    Bundler & Paymaster (Entrypoint v7) →
+                </a>
+            </h3>
+            Utilize Bundler APIs to batch and relay multiple ERC-4337 user operations and paymasters for gasless transactions.
         </div>
-        <div>
-            ## [<span className="underline text-teal-600 hover:text-teal-800 hover:underline">Paymasters →</span>](/paymaster)
-            Sponsoring the gas fees for user operations on hundreds of chains with a simple API endpoint.
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+        <div className="p-6 border border-gray-200 rounded-lg opacity-50 blur-[0.2px]">
+            <h3 className="text-[#ff4e17] font-bold text-xl mb-2">
+                <a href="/smartAccountsV2/quickstart-react" className="no-underline hover:text-[#ff2600]">
+                    SDK V4 (Smart accounts V2) →
+                </a>
+            </h3>
+            Explore the full capabilities of our Smart Accounts V2 Platform, Paymasters, and Bundlers with our comprehensive TypeScript-based account abstraction toolkit.
+        </div>
+        <div className="p-6 border border-gray-200 rounded-lg opacity-50 blur-[0.2px]">
+            <h3 className="text-orange-600 font-bold text-xl mb-2">
+                <a href="/smartAccountsV2/bundler" className="no-underline hover:text-orange-800">
+                    Bundler & Paymaster (Entrypoint v6) →
+                </a>
+            </h3>
+            Utilize Bundler APIs to batch and relay multiple ERC-4337 user operations and paymasters for gasless transactions.
         </div>
     </div>
 </div>
 
+
 </HomePage.Root>
+

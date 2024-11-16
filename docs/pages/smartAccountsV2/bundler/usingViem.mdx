@@ -1,0 +1,62 @@
+---
+sidebar_position: 3
+custom_edit_url: https://github.com/bcnmy/docs/blob/master/docs/Bundler/usingViem.mdx
+---
+
+## Using Viem SDK
+
+This guide explains how to use the Biconomy Bundler with the Viem SDK to perform smart account transactions. You can use any of the [smart accounts](https://viem.sh/account-abstraction/accounts/smart) supported by viem.
+
+### Create bundler client 
+
+- Follow the step-by-step guide for executing a transaction with the [viem SDK](https://viem.sh/account-abstraction/guides/sending-user-operations).
+- To create a bundler instance, pass the Biconomy Bundler URL to the [createBundlerClient](https://viem.sh/account-abstraction/guides/sending-user-operations#2-set-up-a-bundler-client) method. 
+
+In the example below, we will send 0.001 ETH to a random address.
+
+```typescript
+import { createPublicClient, http, parseEther } from 'viem';
+import { createBundlerClient, toCoinbaseSmartAccount, createPaymasterClient, toSoladySmartAccount } from 'viem/account-abstraction';
+import { sepolia } from 'viem/chains';
+import { privateKeyToAccount } from 'viem/accounts';
+
+const main = async () => {
+  const client = createPublicClient({
+    chain: sepolia,
+    transport: http(),
+  })
+
+  const owner = privateKeyToAccount('PRIVATE_KEY')
+  console.log(owner.address)
+
+  const account = await toCoinbaseSmartAccount({
+    client,
+    owners: [owner]
+  })
+
+  const bundlerClient = createBundlerClient({ // [!code focus]
+    account, // [!code focus]
+    client, // [!code focus]
+    transport: http('https://bundler.biconomy.io/api/v2/11155111/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44'), // [!code focus]
+  }) // [!code focus]
+
+  console.log(account.address);
+
+  const userOpHash = await bundlerClient.sendUserOperation({
+    account,
+    calls: [{
+      to: '0xcb98643b8786950F0461f3B0edf99D88F274574D',
+      value: parseEther('0.001')
+    }]
+  })
+  console.log(userOpHash)
+}
+
+main()
+```
+
+:::info
+  The Bundler URL provided above is a testnet endpoint. To obtain the mainnet Bundler URL, log in to the [Dashboard](https://dashboard.biconomy.io/).
+::::
+
+
