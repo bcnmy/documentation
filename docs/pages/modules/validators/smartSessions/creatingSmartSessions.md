@@ -16,29 +16,21 @@ Creates a new session with specified permissions and rules.
 ```typescript twoslash [example.ts]
 import { nexusClient } from "./nexusClient"
 import { smartSessionCreateActions } from "@biconomy/sdk"
-const sessionNexusClient = nexusClient.extend(
-  smartSessionCreateActions(sessionsModule)
-);
 
 const response = await sessionNexusClient.grantPermission({
-  sessionRequestedInfo: [{
-    sessionPublicKey: "0x...",
-    actionPoliciesInfo: [{
-      contractAddress: "0x...",
-      functionSelector: "0x...",
-      rules: [{
-        condition: ParamCondition.LESS_THAN,
-        offsetIndex: 1,
-        isLimited: true,
-        ref: maxValue,
-        usage: {
-          limit: BigInt(maxValue),
-          used: BigInt(0)
-        }
-      }]
-    }]
-  }]
+  sessionRequestedInfo: [
+      {
+        sessionPublicKey, // session key signer
+        actionPoliciesInfo: [
+          {
+            contractAddress: "0x...", // contract address
+            functionSelector: "0x273ea3e3"
+          }
+        ]
+      }
+    ]
 });
+
 ```
 
 ```typescript twoslash [nexusClient.ts] filename="nexusClient.ts"

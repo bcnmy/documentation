@@ -20,7 +20,8 @@ import { encodeFunctionData } from "viem"
 // Initialize the module for using permissions
 const usePermissionsModule = toSmartSessionsValidator({
   account: nexusClient.account,
-  signer: sessionKey // The session key granted permission
+  signer: sessionKey, // The session key granted permission
+  moduleData: sessionData.moduleData // This is the module data returned from the createSessions step
 });
 
 // Extend the client with session usage capabilities
@@ -86,6 +87,13 @@ Returns a promise that resolves to a user operation hash. This hash can be used 
 import { nexusClient } from "./nexusClient"
 import { danActions, smartSessionUseActions } from "@biconomy/sdk"
 import { parseEther } from "viem"
+
+// Initialize the module for using permissions. The moduleData includes the keyGenData
+const usePermissionsModule = toSmartSessionsValidator({
+  account: nexusClient.account,
+  signer: dappAccount,
+  moduleData // This includes the keyGenData
+})
 
 // Extend client with DAN + SS actions
   const danSessionClient = nexusClient
