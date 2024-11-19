@@ -503,11 +503,12 @@ export const defaultSidebar = [
       {
         link: "/modules/validators",
         text: "Validators",
-        collapsed: true,
+        collapsed: false,
         items: [
           {
             link: "/modules/validators/smartSessions",
             text: "Smart Sessions",
+            collapsed: false,
             items: [
               {
                 link: "/modules/validators/smartSessions/creatingSmartSessions",
@@ -553,7 +554,6 @@ export const defaultSidebar = [
 ]
 
 export default defineConfig({
-  banner:  "EthGlobal hackathon quick guide: https://github.com/bcnmy/ethglobal-workshop",
   theme: {
     accentColor: "#FF4E17",
   },

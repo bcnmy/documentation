@@ -88,8 +88,6 @@ const createSessionsResponse = await nexusSessionClient.grantPermission({
     sessionRequestedInfo
 });
 
-const [cachedPermissionId] = createSessionsResponse.permissionIds;
-
 const { success } = await nexusClient.waitForUserOperationReceipt({ 
     hash: createSessionsResponse.userOpHash
 });
@@ -103,7 +101,7 @@ const sessionData: SessionData = {
     granter: nexusClient.account.address,
     sessionPublicKey,
     moduleData: {
-        permissionIds: [cachedPermissionId],
+        permissionIds: createSessionsResponse.permissionIds,
         mode: SmartSessionMode.USE
     }
 };
@@ -267,13 +265,10 @@ export const createAccountAndSendTransaction = async () => {
         sessionRequestedInfo
     })
 
-    const [cachedPermissionId] = createSessionsResponse.permissionIds
-
     const { success } =
         await nexusClient.waitForUserOperationReceipt({
             hash: createSessionsResponse.userOpHash
         })
-
 
     // Use the Smart Session
 
@@ -282,7 +277,7 @@ export const createAccountAndSendTransaction = async () => {
         granter: nexusClient.account.address,
         sessionPublicKey,
         moduleData: {
-            permissionIds: [cachedPermissionId],
+            permissionIds: createSessionsResponse.permissionIds,
             mode: SmartSessionMode.USE
         }
     }

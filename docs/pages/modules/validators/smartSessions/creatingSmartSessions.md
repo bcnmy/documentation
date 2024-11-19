@@ -16,9 +16,6 @@ Creates a new session with specified permissions and rules.
 ```typescript twoslash [example.ts]
 import { nexusClient } from "./nexusClient"
 import { smartSessionCreateActions } from "@biconomy/sdk"
-const sessionNexusClient = nexusClient.extend(
-  smartSessionCreateActions(sessionsModule)
-);
 
 const response = await sessionNexusClient.grantPermission({
   sessionRequestedInfo: [{
@@ -39,6 +36,7 @@ const response = await sessionNexusClient.grantPermission({
     }]
   }]
 });
+
 ```
 
 ```typescript twoslash [nexusClient.ts] filename="nexusClient.ts"
