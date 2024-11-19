@@ -71,14 +71,9 @@ const main = async () => {
         signWith: signWith, 
     })
 
-     const smartAccountOwner = createWalletClient({  // [!code focus:14] 
-        account: turnkeyAccount,
-        transport: http("https://sepolia.base.org"),
-    })
-
     const nexusClient: NexusClient = await createNexusClient({
         chain: baseSepolia,
-        signer: smartAccountOwner.account,
+        signer: turnkeyAccount,
         transport: http("https://sepolia.base.org"),
         bundlerTransport: http(bundlerUrl),
     })
