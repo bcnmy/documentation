@@ -493,34 +493,23 @@ export const defaultSidebar = [
           {
             link: "/modules/validators/smartSessions",
             text: "Smart Sessions",
-          }
+            items: [
+              {
+                link: "/modules/validators/smartSessions/creatingSmartSessions",
+                text: "Creating Smart Sessions"
+              },
+              {
+                link: "/modules/validators/smartSessions/usingSmartSessions",
+                text: "Using Smart Sessions"
+              }
+            ]
+          },
+          {
+            link: "/modules/validators/ownableValidator",
+            text: "Ownables (Multisig)",
+          },
         ]
       },
-      // {
-      //   link: "/modules/executors",
-      //   text: "Executors",
-      //   collapsed: true,
-      //   items: [
-      //     {
-      //       link: "/modules/executors/OwnableExecutor",
-      //       text: "OwnableExecutor",
-      //       items: [
-      //         {
-      //           link: "/modules/executors/OwnableExecutor",
-      //           text: "Overview"
-      //         },
-      //         {
-      //           link: "/modules/executors/OwnableExecutor/methods",
-      //           text: "Methods"
-      //         },
-      //         {
-      //           link: "/modules/executors/OwnableExecutor/tutorial",
-      //           text: "Tutorial"
-      //         }
-      //       ]
-      //     }
-      //   ]
-      // },
     ]
   },
   {

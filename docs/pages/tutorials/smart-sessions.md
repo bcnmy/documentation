@@ -175,11 +175,10 @@ Now that we have everything set up, we can perform an action with the smart sess
 
 ```typescript
 const userOpHash = await useSmartSessionNexusClient.usePermission({
-    actions: [
+    calls: [
         {
-            target: "0xabc", // Replace with your target contract address
-            value: 0n,
-            callData: encodeFunctionData({
+            to: "0xabc", // Replace with your target contract address
+            data: encodeFunctionData({
                 abi: CounterAbi,
                 functionName: "incrementNumber"
             })
