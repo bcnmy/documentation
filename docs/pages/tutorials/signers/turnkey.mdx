@@ -1,0 +1,90 @@
+## How to use turnkey signer with Biconomy smart accounts
+
+Turnkey is a key infrastructure provider with a great developer API and a powerful security policy engine. By integrating Turnkey with Biconomy, you can build custodial Account Abstraction (AA) wallets that leverage Turnkey's security while enabling advanced features like gas sponsorship, transaction batching, and more.
+
+## Setup
+To integrate Turnkey with Biconomy, start by creating an application with Turnkey.
+
+For detailed guidance, refer to the [Turnkey documentation](https://docs.turnkey.com/). You can also explore their quick-start [examples](https://docs.turnkey.com/getting-started/examples) to get up and running quickly.
+
+## Integration
+Integrating Biconomy with Turnkey is simple once your project is set up. Turnkey offers an Externally Owned Account (EOA) wallet that can serve as the signer for Biconomy smart accounts.
+
+::::steps
+
+### Create the `TurnkeyClient` and a `Turnkey viem account`
+After following the Turnkey documentation, you will have access to a TurnkeyClient. An example is shown below that you can pass as an owner to createSmartAccountClient:
+
+```typescript twoslash
+import { createWalletClient, http } from "viem";
+import { baseSepolia } from "viem/chains";
+import { ApiKeyStamper } from "@turnkey/sdk-server";
+import { TurnkeyClient } from "@turnkey/http";
+import { createAccount } from "@turnkey/viem";
+
+const main = async () => {
+    const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`
+    const apiPublicKey = '';
+    const apiPrivateKey = '';
+    const stamper = new ApiKeyStamper({ apiPublicKey, apiPrivateKey });
+    const signWith = ""; // create an address in the  turnkey dashboard
+
+    // Param options here will be specific to your project.  See the Turnkey docs for more info.
+    const turnkeyClient = new TurnkeyClient({ baseUrl:  "https://api.turnkey.com" }, stamper)
+    
+    const turnkeyAccount = await createAccount({
+        client: turnkeyClient,
+        organizationId: '',
+        signWith: signWith, 
+    })
+}
+
+main();
+
+```
+
+### Create the Biconomy client
+
+Next, use the Turnkey viem account to initialize the Biconomy Nexus Client:
+
+```typescript twoslash
+import { createWalletClient, http } from "viem";
+import { baseSepolia } from "viem/chains";
+import { ApiKeyStamper } from "@turnkey/sdk-server";
+import { TurnkeyClient } from "@turnkey/http";
+import { createAccount } from "@turnkey/viem";
+import { createNexusClient, NexusClient } from "@biconomy/sdk";  // [!code focus] 
+
+const main = async () => {
+    const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`
+    const apiPublicKey = '';
+    const apiPrivateKey = '';
+    const stamper = new ApiKeyStamper({ apiPublicKey, apiPrivateKey });
+    const signWith = "";
+
+    // Param options here will be specific to your project.  See the Turnkey docs for more info.
+    const turnkeyClient = new TurnkeyClient({ baseUrl:  "https://api.turnkey.com" }, stamper)
+    
+    const turnkeyAccount = await createAccount({
+        client: turnkeyClient,
+        organizationId: '',
+        signWith: signWith, 
+    })
+
+     const smartAccountOwner = createWalletClient({  // [!code focus:14] 
+        account: turnkeyAccount,
+        transport: http("https://sepolia.base.org"),
+    })
+
+    const nexusClient: NexusClient = await createNexusClient({
+        chain: baseSepolia,
+        signer: smartAccountOwner.account,
+        transport: http("https://sepolia.base.org"),
+        bundlerTransport: http(bundlerUrl),
+    })
+
+}
+
+main();
+
+```
