@@ -420,10 +420,25 @@ export const defaultSidebar = [
         text: "Signers",
         items: [
           {
-            text: "How to use turnkey signer",
+            text: "How to use a Turnkey signer",
             link: "/tutorials/signers/turnkey",
           },
-          
+          {
+            text: "How to use a Dynamic signer",
+            link: "/tutorials/signers/dynamic",
+          },
+          {
+            text: "How to use a Capsule signer",
+            link: "/tutorials/signers/capsule",
+          },
+          {
+            text: "How to use a Passport signer",
+            link: "/tutorials/signers/passport",
+          },
+          {
+            text: "How to use a DFNS signer",
+            link: "/tutorials/signers/dfns",
+          },
         ]
       },
     ]

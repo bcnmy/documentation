@@ -1,0 +1,65 @@
+# How to use a Capsule signer with Biconomy
+
+[Capsule](https://www.usecapsule.com/) is a signing solution that you can use to create secure, embedded MPC wallets with just an email or a social login. Capsule wallets are portable across applications, recoverable, and programmable, so your users do not need to create different signers or contract accounts for every application they use.
+
+Read below to learn how to configure your app to create smart accounts for all your users using Capsule and Biconomy. This guide assumes you are using React or a React based web framework such as Next JS. For Capsule guides in other frameworks, check out the Capsule developer docs or get in touch via hello@usecapsule.com.
+
+::::steps
+
+### Install the dependencies
+
+```bash
+npm i @usecapsule/web-sdk @usecapsule/viem-v2-integration @biconomy/sdk viem
+```
+
+### Create the Capsule owner
+
+You will need to do some initial setup and get API keys from capsule, for additional help check out the [Capsule Starter Guide](https://docs.usecapsule.com/getting-started/initial-setup/web-modal-and-sdk-setup).
+
+```ts
+import { http } from "viem";
+import { baseSepolia } from "viem/chains";
+import Capsule, { Environment } from "@usecapsule/web-sdk";
+import { createCapsuleViemClient } from "@usecapsule/viem-v2-integration";
+import { createNexusClient, NexusClient } from "@biconomy/sdk";
+
+// Param options here will be specific to your project.  See the Capsule docs for more info.
+const capsule = new Capsule(Environment.BETA, "");
+
+// Follow the Capsule docs for more instructions on creating the Viem client https://docs.usecapsule.com/integration-guide/signing-transactions
+const smartAccountOwner = createCapsuleViemClient(capsule, {
+    chain: baseSepolia,
+    transport: http("https://sepolia.base.org"),
+})
+```
+
+### Create the SmartAccountClient
+
+Create the smart account client using the Capsule signer client. 
+
+```ts
+import { http } from "viem";
+import { baseSepolia } from "viem/chains";
+import Capsule, { Environment } from "@usecapsule/web-sdk";
+import { createNexusClient, NexusClient } from "@biconomy/sdk";
+import { createCapsuleViemClient } from "@usecapsule/viem-v2-integration"
+
+const capsule = new Capsule(Environment.BETA, "YOUR_API_KEY");
+
+// Follow the Capsule docs for more instructions on creating the Viem client https://docs.usecapsule.com/integration-guide/signing-transactions
+const smartAccountOwner = createCapsuleViemClient(capsule, {
+    chain: baseSepolia,
+    transport: http("https://sepolia.base.org"),
+})
+const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`
+
+const nexusClient: NexusClient = await createNexusClient({
+    chain: baseSepolia,
+    signer: smartAccountOwner,
+    transport: http("https://sepolia.base.org"),
+    bundlerTransport: http(bundlerUrl),
+})
+
+```
+
+::::

@@ -1,0 +1,70 @@
+# How to use a Dynamic signer with Biconomy
+
+Dynamic.xyz is a web3 login solution for everyone, offering straightforward onboarding and embedded wallet options for newcomers and elegant and smart login flows for crypto-native users. We aim to abstract away the complexities of user management, offering powerful developer tools around authentication, authorization and onboarding.
+
+::::steps
+
+### Install the dependencies
+
+```bash
+npm i @dynamic-labs/sdk-react-core @dynamic-labs/wagmi-connector @dynamic-labs/ethereum @biconomy/sdk viem wagmi
+```
+
+### Create the Dynamic provider
+
+Following Dynamic's [quickstart guide](https://docs.dynamic.xyz/quickstart), set up the Dynamic provider in your app. Also integrate the DynamicWagmiConnector, which will allow you to use Dynamic as a signer.
+
+```ts
+import { DynamicContextProvider, DynamicWidget } from "@dynamic-labs/sdk-react-core";
+import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
+import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
+
+export const App = () => {
+  return (
+    <DynamicContextProvider
+      settings={{
+        // Find your environment id at https://app.dynamic.xyz/dashboard/developer
+        environmentId: "REPLACE-WITH-YOUR-ENVIRONMENT-ID",
+        walletConnectors: [EthereumWalletConnectors],
+      }}
+    >
+      <DynamicWagmiConnector>
+        <DynamicWidget />
+      </DynamicWagmiConnector>
+    </DynamicContextProvider>
+  );
+};
+```
+
+### Create the SmartAccountClient
+
+Create the smart account client using the Dynamic signer. 
+Note: Inside any component which is wrapped by DynamicContextProvider, you can access any of [the provided hooks](https://docs.dynamic.xyz/react-sdk/hooks/hooks-introduction). While you can access the full context via usedynamiccontext, we are most interested in the users currently connected wallets which we can easily access via useuserwallets.
+
+```ts
+import { createWalletClient, http } from "viem";
+import { baseSepolia } from "viem/chains";
+import { createNexusClient, NexusClient } from "@biconomy/sdk";
+import { useUserWallets } from "@dynamic-labs/sdk-react-core";
+import { useWalletClient } from "wagmi";
+
+const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`
+
+const {
+  data: walletClient
+} = useWalletClient()
+
+const smartAccountOwner = createWalletClient({
+    account: walletClient?.account,
+    transport: http("https://sepolia.base.org"),
+})
+
+const nexusClient: NexusClient = await createNexusClient({
+    chain: baseSepolia,
+    signer: smartAccountOwner,
+    transport: http("https://sepolia.base.org"),
+    bundlerTransport: http(bundlerUrl),
+})
+```
+
+::::

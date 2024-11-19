@@ -1,0 +1,136 @@
+# How to use a Passport signer with Biconomy
+
+[Passport](https://docs.0xpass.io/) is an MPC-based programmable, distributed, and non-custodial key management system, that allows users to generate wallets, scoped to their application, either via user Passkeys or any developer defined authentication method. Our signer allows you to sign messages and transactions with a Passport Network account.
+
+::::steps
+
+### Install the dependencies
+
+```bash
+npm i @0xpass/passport @0xpass/webauthn-signer @0xpass/passport-viem @0xpass/key-signer @biconomy/sdk viem
+```
+
+### Create the Passport signer
+
+To use Passport, you'll first need to make sure you have configured a scope for your application. For this you can follow the guides below:
+
+- Refer to the [Passport documentation](https://docs.0xpass.io/) for instructions on setting up your application with Passport.
+- For a primer on setting up your scope you can check [here](https://docs.0xpass.io/authentication/configuring-your-scope).
+
+Passport offers a Passkey signer, which follows the webauthn standard, which is a user owned authentication method that allows users to sign messages and transactions with their Passkey.
+
+:::code-group
+
+```ts [Passkey Signer]
+import { Passport, TESTNET_RSA_PUBLIC_KEY } from "@0xpass/passport";
+import { WebauthnSigner } from "@0xpass/webauthn-signer";
+import { KeySigner } from "@0xpass/key-signer";
+import { createPassportClient } from "@0xpass/passport-viem";
+import { http } from "viem";
+import { baseSepolia } from "viem/chains";
+
+// The rpId and rpName are the same as the ones you set up in your passport application scope. They follow the webauthn standard, of the following values
+// rpId: the domain of where the passkey is generated
+// rpName: human readable name for the domain
+// You can read more on this here https://docs.0xpass.io/authentication/configuring-your-scope#scope-configuration
+const webauthnSigner = new WebAuthnSigner({
+  rpId: "rpId",
+  rpName: "rpName",
+});
+
+const passport = new Passport({
+  scope_id: "scope_id", // <-- Replace this with your scope id you get after configuring your scope by following the Passport documentation
+  signer: webauthnSigner,
+  enclave_public_key: TESTNET_RSA_PUBLIC_KEY,
+});
+
+const fallbackProvider = http("https://sepolia.base.org");
+
+await passport.setupEncryption();
+// Only need to call this once to register the user passkey to your passport application scope
+await passport.register({
+  username: "test",
+  userDisplayName: "test",
+});
+
+const [authenticatedHeader] = await passport.authenticate({
+  username: "test",
+  userDisplayName: "test",
+});
+
+const signer = await createPassportClient(
+  authenticatedHeader,
+  fallbackProvider,
+  baseSepolia,
+  "https://tiramisu.0xpass.io"
+);
+
+```
+
+```ts [Developer Owned Auth Signer]
+import { Passport, TESTNET_RSA_PUBLIC_KEY } from "@0xpass/passport";
+import { WebauthnSigner } from "@0xpass/webauthn-signer";
+import { KeySigner } from "@0xpass/key-signer";
+import { createPassportClient } from "@0xpass/passport-viem";
+import { http } from "viem";
+import { baseSepolia } from "viem/chains";
+
+
+const keySigner = new KeySigner(process.env.PRIVATE_KEY, true);
+
+const passport = new Passport({
+  scope_id: "scope_id" // <-- Replace this with your scope id you get after configuring your scope by following the Passport documentation,
+  signer: keySigner,
+  enclave_public_key: TESTNET_RSA_PUBLIC_KEY,
+});
+
+const fallbackProvider = http("https://sepolia.base.org");
+
+await passport.setupEncryption();
+// Only need to call this once to register the user identifier you authenticate with to your passport application scope
+await passport.delegatedRegisterAccount({ username: "test" });
+
+passport.setUserData({ username: "test" });
+
+const signer = await createPassportClient(
+  await passport.getDelegatedAuthenticatedHeaders(),
+  fallbackProvider,
+  baseSepolia,
+  "https://tiramisu.0xpass.io"
+);
+
+```
+:::
+
+### Create the SmartAccountClient
+
+Create the smart account client using the Capsule signer client. 
+
+```ts
+import { Passport, TESTNET_RSA_PUBLIC_KEY } from "@0xpass/passport";
+import { WebauthnSigner } from "@0xpass/webauthn-signer";
+import { KeySigner } from "@0xpass/key-signer";
+import { createPassportClient } from "@0xpass/passport-viem";
+import { http } from "viem";
+import { baseSepolia } from "viem/chains";
+import { createNexusClient, NexusClient } from "@biconomy/sdk";
+
+const connect = async () => {
+  try {
+    const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`
+
+    const nexusClient: NexusClient = await createNexusClient({
+        chain: baseSepolia,
+        signer: signer,
+        transport: http("https://sepolia.base.org"),
+        bundlerTransport: http(bundlerUrl),
+    })
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+```
+
+::::
