@@ -1,0 +1,65 @@
+## How to use Particle signer with Biconomy smart accounts
+
+One way to utilize Social Logins is via [Particle Network](https://particle.network/). This section will give you code snippets for creating Biconomy Smart Accounts with Particle Network. Particle Network allows you to introduce familiar Web2 experiences, with the following code snippets you can unlock: authentication with email to create a smart account as well as authentication with different social providers to create a Smart Account.
+
+## Setup
+To use Particle Network with Biconomy, first create an application that integrates with Particle Network.
+
+Refer to the [Particle Network documentation](https://docs.particle.network/) site for instructions on setting up an application with the Particle Network.
+For a quick start, Particle Network provides a guide, available [here](https://docs.particle.network/getting-started/get-started).
+
+## Integration
+
+::::steps
+
+### Install the dependencies
+
+```bash
+npm i @particle-network/auth @particle-network/provider @biconomy/sdk viem
+```
+
+### Create the `ParticleNetwork`
+Particle auth will require api keys which you can get from the [Particle Dashboard](https://docs.particle.network/getting-started/dashboard).
+
+```typescript
+import { ParticleNetwork } from "@particle-network/auth"
+import { ParticleProvider } from "@particle-network/provider"
+ 
+// Param options here will be specific to your project.  See the Particle docs for more info.
+const particle = new ParticleNetwork({
+	projectId,
+	clientKey,
+	appId,
+	chainName,
+	chainId,
+})
+const smartAccountOwner = new ParticleProvider(particle.auth)
+
+```
+
+### Create the Biconomy client
+
+Next, use the Particle Network account to initialize the Biconomy Nexus Client:
+
+```typescript
+import { ParticleNetwork } from "@particle-network/auth"
+import { ParticleProvider } from "@particle-network/provider"
+import { createNexusClient, NexusClient } from "@biconomy/sdk"; 
+import { baseSepolia } from "viem/chains";
+import { http } from "viem";
+
+const main = async () => {
+    const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`
+
+    const nexusClient: NexusClient = await createNexusClient({
+        chain: baseSepolia,
+        signer: smartAccountOwner,
+        transport: http("https://sepolia.base.org"),
+        bundlerTransport: http(bundlerUrl),
+    })
+
+}
+
+main();
+
+```
