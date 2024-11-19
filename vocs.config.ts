@@ -415,7 +415,17 @@ export const defaultSidebar = [
       {
         text: "How to use smart sessions",
         link: "/tutorials/smart-sessions",
-      }
+      },
+      {
+        text: "Signers",
+        items: [
+          {
+            text: "How to use turnkey signer",
+            link: "/tutorials/signers/turnkey",
+          },
+          
+        ]
+      },
     ]
   },
   {

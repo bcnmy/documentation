@@ -27,6 +27,9 @@
 		"@tanstack/react-query": "^5.51.1",
 		"@types/react-dom": "^18.3.0",
 		"viem": "^2.17.3",
-		"wagmi": "^2.10.11"
+		"wagmi": "^2.10.11",
+    "@turnkey/http": "^2.15.0",
+    "@turnkey/sdk-server": "^1.5.0",
+    "@turnkey/viem": "^0.6.2"
   }
 }
