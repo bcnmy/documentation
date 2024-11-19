@@ -420,10 +420,25 @@ export const defaultSidebar = [
         text: "Signers",
         items: [
           {
-            text: "How to use turnkey signer",
+            text: "How to use a Turnkey signer",
             link: "/tutorials/signers/turnkey",
           },
-          
+          {
+            text: "How to use a Dynamic signer",
+            link: "/tutorials/signers/dynamic",
+          },
+          {
+            text: "How to use a Capsule signer",
+            link: "/tutorials/signers/capsule",
+          },
+          {
+            text: "How to use a Passport signer",
+            link: "/tutorials/signers/passport",
+          },
+          {
+            text: "How to use a DFNS signer",
+            link: "/tutorials/signers/dfns",
+          },
         ]
       },
     ]
@@ -480,63 +495,47 @@ export const defaultSidebar = [
       { link: "/dashboard/apis", text: "API Endpoints & Webhooks" },
     ],
   },
-  // {
-  //   text: "ERC-7579 Modules",
-  //   link: "/modules",
-  //   collapsed: false,
-  //   items: [
-  //     {
-  //       link: "/modules/validators",
-  //       text: "Validators",
-  //       collapsed: true,
-  //       items: [
-  //         {
-  //           link: "/modules/validators/k1Validator",
-  //           text: "K1Validator (ECDSA)",
-  //           items: [
-  //             {
-  //               link: "/modules/validators/k1Validator/tutorial",
-  //               text: "Tutorial"
-  //             }
-  //           ]
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       link: "/modules/executors",
-  //       text: "Executors",
-  //       collapsed: true,
-  //       items: [
-  //         {
-  //           link: "/modules/executors/OwnableExecutor",
-  //           text: "OwnableExecutor",
-  //           items: [
-  //             {
-  //               link: "/modules/executors/OwnableExecutor",
-  //               text: "Overview"
-  //             },
-  //             {
-  //               link: "/modules/executors/OwnableExecutor/methods",
-  //               text: "Methods"
-  //             },
-  //             {
-  //               link: "/modules/executors/OwnableExecutor/tutorial",
-  //               text: "Tutorial"
-  //             }
-  //           ]
-  //         }
-  //       ]
-  //     },
-  //   ]
-  // },
-  // {
-  //   text: "Nexus Smart Account",
-  //   link: "/smart-account",
-  //   items: [{
-  //     text: "ERC-7579 Methods",
-  //     link: "/smart-account/7579methods",
-  //   }]
-  // },
+  {
+    text: "ERC-7579 Modules",
+    link: "/modules",
+    collapsed: false,
+    items: [
+      {
+        link: "/modules/validators",
+        text: "Validators",
+        collapsed: false,
+        items: [
+          {
+            link: "/modules/validators/smartSessions",
+            text: "Smart Sessions",
+            collapsed: false,
+            items: [
+              {
+                link: "/modules/validators/smartSessions/creatingSmartSessions",
+                text: "Creating Smart Sessions"
+              },
+              {
+                link: "/modules/validators/smartSessions/usingSmartSessions",
+                text: "Using Smart Sessions"
+              }
+            ]
+          },
+          {
+            link: "/modules/validators/ownableValidator",
+            text: "Ownables (Multisig)",
+          },
+        ]
+      },
+    ]
+  },
+  {
+    text: "Nexus Smart Account",
+    link: "/smart-account",
+    items: [{
+      text: "ERC-7579 Methods",
+      link: "/smart-account/7579methods",
+    }]
+  },
 
   {
     text: "Infra",
@@ -555,7 +554,6 @@ export const defaultSidebar = [
 ]
 
 export default defineConfig({
-  banner:  "EthGlobal hackathon quick guide: https://github.com/bcnmy/ethglobal-workshop",
   theme: {
     accentColor: "#FF4E17",
   },

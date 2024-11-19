@@ -1,56 +1,113 @@
-Nexus opens up a world of possibilities for developers looking to create powerful, efficient, and adaptable blockchain applications.
+# Modules
 
-Nexus is following the [ERC-7579](https://eips.ethereum.org/EIPS/eip-7579#modules) specification. ERC-7579 is the standard for minimal _modular_ smart accounts.
-Thus, modules are crucial component that allows to add features and extend the functionality of Nexus.
+Modules are designed to extend the functionality of smart contract accounts in a consistent and predictable manner. This guide explains how modules work and how to interact with them in the Nexus SDK.
 
-There are currently 4 module types specified in ERC-7579 and all of them are supported by Nexus:
-- Validators: validate userOperations as per [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337).
-- Executors: can initiate executions on behalf of the Smart Account they are installed on. 
-- Fallback handlers: extend the native functionality of the Smart Account. Calls to functions which are not implemented in the Smart Account are forwarded to fallbacks handlers.
-- Hooks: hook executions by executing code before and after execution.
+## Module Extension Pattern
 
-## Installation
-### Install module
-Nexus implements ERC-7579 `installModule` interface for the installation of the modules.
-It allows specifying which module to install and accepts data to perform the initial configuration for a module being installed.
-Another important parameter that has to be provided at module installation is the `moduleTypeId`.
+The Nexus SDK uses a module extension pattern to maintain efficient bundle sizes and enable tree-shaking. Here's why:
 
-### Module Type Id
-It is an incremental identifier, which must be used by accounts, modules and other entities to identify the module type.
-- Validator modules have `type id: 1`
-- Executors have `type id: 2`
-- Fallback Handlers have `type id: 3`
-- and Hooks have `type id: 4`
-Every module self-reports its type via `isModuleType(uint256 moduleTypeId)` method.
-Module can implements several types, i.e. be a validator and an executor at the same time.
+- **Tree-shaking Optimization**: If all module actions were included in the base NexusClient, your bundle would include code for every possible module, even ones you don't use.
+- **Flexible Integration**: Developers can choose which modules to include, reducing bundle size by only importing needed functionality.
+- **Type Safety**: Each module extension adds its own type definitions, providing proper TypeScript support for module-specific actions.
 
-There is `Module type id: 0 ` which means the Multitype installation. It allows installing the module as several types in course of the same `installModule` call.
+For example, instead of:
+```typescript
+// ❌ This would include ALL module code in your bundle
+const nexusClient = createNexusClient({
+  // config
+  modules: [sessionsModule, securityModule, otherModules...]
+});
+```
 
-### Module enable mode
-There is another way to install the module.
-Sometimes, there can be a situation, when user wants to use the modules, which is not enabled yet. In this case we'd want to avoid sending a separate userOperation that installs the module. If the module we want to install before the usage is executor, this can be simply solved by batching `installModule(executor)` call before the call that goes through this executor. However, that would not work for validators, as validation phase in 4337 goes before execution, thus the new validator should be enabled _before_ it is used for the validation.
-Enable Mode allows to enable the module in the beginning of the validation phase. To achieve this, user signs the data object that describes which module is going to be installed and how it should be configured during the installation.
-Any module type can be installed via Module Enable Mode, however we believe it makes most sense for validators and hooks.
+We use:
+```typescript
+// ✅ Only the sessions module code is included
+const nexusClient = await createNexusClient({ /* config */ });
+const sessionNexusClient = nexusClient.extend(smartSessionCreateActions(sessionsModule));
+```
 
-## Usage of Modules
-Modules are used according to their types.
-### Usage of validators 
-Validators validate userOperations. The validators address should be encoded into the `userOp.nonce` field. Nexus decodes this address and forwards the validation flow to the appropriate validator.
-### Usage of executors
-Executors can be called directly or via Nexus.execute. The most important ability of executors is to perform actions on behalf of Nexus they are installed on by calling ERC-7579' `executeFromExecutor` method. For example, Executors can implement some complex logic of conditionally batching actions together.
-### Usage of fallback handlers
-Sometimes, developers may want to add native functions to Nexus. To avoid dealing with upgrades, a Fallback can be installed on Nexus, and Nexus will forward the calls to non-existent methods to such modules that implement them.
-### Usage of hooks
-Hooks are used to actually 'hook' executions. For example they can store (ideally, temporarily) some data that reflect the state before the execution, and then compare it to what the state is after the execution. Hooks are the most convenient way to implement spending limits for Nexus for example.
+## General Module Interaction Pattern
 
-## Querying installed modules
-There are two methods of querying this.
-One can check if a given module is installed as a given type on a given Nexus, by calling `Nexus.isModuleInstalled` method.
-If one just needs to learn what modules are installed, there are dedicated methods for it:
-- getValidatorsPaginated for validators
-- getExecutorsPaginated for executors
-- getActiveHook for the hook. As you may see, only one hook can be enabled at a given time (this can be a hook multiplexer though).
-- getFallbackHandlerBySelector to check where the implementation for a method with given selector lives
+Interacting with a module typically follows these steps:
 
-## Uninstalling the module
-When uninstalling the module it is very important to provide the appropriate data that will deinitialize the module (by clearing its state or in any other way). Leaving module initialized (configured for a given Smart Account) after its uninstallation may lead to unexpected behaviours when the module will be installed on the same Smart Account next time.
+1. **Create the module**
+2. **Install the module**
+3. **Extend the Nexus client with module-specific actions**
+4. **Use the module's functionality**
+
+## Step-by-Step Guide
+
+### 1. Create the module
+
+Use the appropriate `to[ModuleName]` function to create a module instance:
+
+```typescript
+const myModule = to[ModuleName]({
+  account: nexusClient.account,
+  signer: eoaAccount,
+  moduleInitArgs: {
+    // Module-specific initialization arguments
+  }
+})
+```
+
+### 2. Install the module
+
+Install the module on your Nexus client's smart contract account:
+
+```typescript
+const hash = await nexusClient.installModule({
+  module: myModule.moduleInitData
+});
+
+// Wait for the installation to be confirmed
+const { success } = await nexusClient.waitForUserOperationReceipt({ hash });
+```
+
+### 3. Extend the Nexus client
+
+Extend your Nexus client with module-specific actions:
+
+```typescript
+const extendedNexusClient = nexusClient.extend([ModuleName]Actions(myModule));
+```
+
+### 4. Use the module's functionality
+
+Use the extended Nexus client to interact with the module's features:
+
+```typescript
+const result = await extendedNexusClient.[moduleSpecificAction]({
+  // Action-specific parameters
+});
+```
+
+## Example: Multisig Module
+
+Here's an example of how to use the Smart Sessions module:
+
+```typescript
+// 1. Create the module
+const ownableModule = toOwnableValidator({
+  account: nexusClient.account,
+  signer: account,
+  moduleInitArgs: {
+    threshold: 1n,
+    owners: [publicKey]
+  }
+})
+
+// 2. Install the module
+const hash = await nexusClient.installModule({
+  module: ownableModule.moduleInitData
+})
+
+// 3. Extend the Nexus client
+const ownableDanClient = nexusClient
+  .extend(ownableActions(ownableModule))
+
+// 4. Use the module's functionality
+const newSignature = await ownableNexusClient.prepareSignatures({
+  signatures: ["0x...", "0x..."]
+})
+```

@@ -88,8 +88,6 @@ const createSessionsResponse = await nexusSessionClient.grantPermission({
     sessionRequestedInfo
 });
 
-const [cachedPermissionId] = createSessionsResponse.permissionIds;
-
 const { success } = await nexusClient.waitForUserOperationReceipt({ 
     hash: createSessionsResponse.userOpHash
 });
@@ -103,7 +101,7 @@ const sessionData: SessionData = {
     granter: nexusClient.account.address,
     sessionPublicKey,
     moduleData: {
-        permissionIds: [cachedPermissionId],
+        permissionIds: createSessionsResponse.permissionIds,
         mode: SmartSessionMode.USE
     }
 };
@@ -175,11 +173,10 @@ Now that we have everything set up, we can perform an action with the smart sess
 
 ```typescript
 const userOpHash = await useSmartSessionNexusClient.usePermission({
-    actions: [
+    calls: [
         {
-            target: "0xabc", // Replace with your target contract address
-            value: 0n,
-            callData: encodeFunctionData({
+            to: "0xabc", // Replace with your target contract address
+            data: encodeFunctionData({
                 abi: CounterAbi,
                 functionName: "incrementNumber"
             })
@@ -268,13 +265,10 @@ export const createAccountAndSendTransaction = async () => {
         sessionRequestedInfo
     })
 
-    const [cachedPermissionId] = createSessionsResponse.permissionIds
-
     const { success } =
         await nexusClient.waitForUserOperationReceipt({
             hash: createSessionsResponse.userOpHash
         })
-
 
     // Use the Smart Session
 
@@ -283,7 +277,7 @@ export const createAccountAndSendTransaction = async () => {
         granter: nexusClient.account.address,
         sessionPublicKey,
         moduleData: {
-            permissionIds: [cachedPermissionId],
+            permissionIds: createSessionsResponse.permissionIds,
             mode: SmartSessionMode.USE
         }
     }
