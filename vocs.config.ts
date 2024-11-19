@@ -415,7 +415,32 @@ export const defaultSidebar = [
       {
         text: "How to use smart sessions",
         link: "/tutorials/smart-sessions",
-      }
+      },
+      {
+        text: "Signers",
+        items: [
+          {
+            text: "How to use a Turnkey signer",
+            link: "/tutorials/signers/turnkey",
+          },
+          {
+            text: "How to use a Dynamic signer",
+            link: "/tutorials/signers/dynamic",
+          },
+          {
+            text: "How to use a Capsule signer",
+            link: "/tutorials/signers/capsule",
+          },
+          {
+            text: "How to use a Passport signer",
+            link: "/tutorials/signers/passport",
+          },
+          {
+            text: "How to use a DFNS signer",
+            link: "/tutorials/signers/dfns",
+          },
+        ]
+      },
     ]
   },
   {
@@ -483,34 +508,23 @@ export const defaultSidebar = [
           {
             link: "/modules/validators/smartSessions",
             text: "Smart Sessions",
-          }
+            items: [
+              {
+                link: "/modules/validators/smartSessions/creatingSmartSessions",
+                text: "Creating Smart Sessions"
+              },
+              {
+                link: "/modules/validators/smartSessions/usingSmartSessions",
+                text: "Using Smart Sessions"
+              }
+            ]
+          },
+          {
+            link: "/modules/validators/ownableValidator",
+            text: "Ownables (Multisig)",
+          },
         ]
       },
-      // {
-      //   link: "/modules/executors",
-      //   text: "Executors",
-      //   collapsed: true,
-      //   items: [
-      //     {
-      //       link: "/modules/executors/OwnableExecutor",
-      //       text: "OwnableExecutor",
-      //       items: [
-      //         {
-      //           link: "/modules/executors/OwnableExecutor",
-      //           text: "Overview"
-      //         },
-      //         {
-      //           link: "/modules/executors/OwnableExecutor/methods",
-      //           text: "Methods"
-      //         },
-      //         {
-      //           link: "/modules/executors/OwnableExecutor/tutorial",
-      //           text: "Tutorial"
-      //         }
-      //       ]
-      //     }
-      //   ]
-      // },
     ]
   },
   {

@@ -10,8 +10,11 @@
   "dependencies": {
     "@biconomy/sdk": "^0.0.10",
     "@biconomy/sdk-canary": "0.0.21",
+    "@dynamic-labs/sdk-react-core": "^3.6.3",
     "@types/react": "^18.3.12",
     "@typescript/twoslash": "^3.2.8",
+    "@usecapsule/viem-v2-integration": "^2.7.0",
+    "@usecapsule/web-sdk": "^2.7.0",
     "dotenv": "^16.4.5",
     "linkinator": "^6.1.2",
     "react": "^18.3.1",
@@ -22,11 +25,14 @@
     "vocs": "^1.0.0-alpha.62"
   },
   "devDependencies": {
-		"@biconomy/account": "4.5.7",
-		"@biconomy/use-aa": "1.1.1",
-		"@tanstack/react-query": "^5.51.1",
-		"@types/react-dom": "^18.3.0",
-		"viem": "^2.17.3",
-		"wagmi": "^2.10.11"
+    "@biconomy/account": "4.5.7",
+    "@biconomy/use-aa": "1.1.1",
+    "@tanstack/react-query": "^5.51.1",
+    "@turnkey/http": "^2.15.0",
+    "@turnkey/sdk-server": "^1.5.0",
+    "@turnkey/viem": "^0.6.2",
+    "@types/react-dom": "^18.3.0",
+    "viem": "^2.17.3",
+    "wagmi": "^2.12.33"
   }
 }
