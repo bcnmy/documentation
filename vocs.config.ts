@@ -439,6 +439,14 @@ export const defaultSidebar = [
             text: "How to use a DFNS signer",
             link: "/tutorials/signers/dfns",
           },
+          {
+            text: "How to use a Particle signer",
+            link: "/tutorials/signers/particle",
+          },
+          {
+            text: "How to use a Magic signer",
+            link: "/tutorials/signers/magic",
+          }
         ]
       },
     ]
