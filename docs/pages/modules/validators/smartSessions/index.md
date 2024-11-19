@@ -1,186 +1,44 @@
 # Smart Sessions
 
-Smart Sessions is a powerful module that enables secure, granular delegation of account permissions through session-based access control. It allows dApps to perform actions on behalf of users even when they're offline, while maintaining strict security boundaries.
+Smart sessions enable powerful UX improvements for web3 applications by allowing users to delegate specific permissions to session keys. This creates a more seamless user experience while maintaining security through granular controls.
 
-## Overview
+## Why Sessions Matter
 
-Smart Sessions provide:
-- Granular permission control for specific contract functions
-- Parameter-level validation rules
-- Usage limits and time-based constraints
+Smart sessions solve several critical UX challenges in web3:
 
-## Key Concepts
+1. **Reduced Transaction Friction**: Instead of requiring users to sign every transaction, session keys can handle repeated actions automatically within defined parameters.
 
-### Session Types
+2. **Enhanced Security**: Rather than storing a user's primary wallet key in a browser, applications can use temporary session keys with limited permissions and expiration dates.
 
-Basic Sessions provide:
-- Direct session key management
-- Suitable for simple delegation scenarios
-- Perfect for recurring operations
+3. **Granular Control**: Users can grant very specific permissions to session keys, such as:
+   - Maximum transaction amounts
+   - Specific contract interactions
+   - Time-based restrictions
+   - Usage limits
+   - Parameter-based rules
 
-### Permission Rules
+## Real World Examples
 
-Rules define the constraints for delegated actions. Each rule consists of:
+Smart sessions enable seamless experiences like:
 
-```typescript
-type Rule = {
-  condition: ParamCondition;     // Comparison operation
-  offsetIndex: number;           // Parameter position in calldata
-  isLimited: boolean;           // Whether usage is tracked
-  ref: AnyReferenceValue;       // Value to compare against
-  usage: {                      // Usage tracking (if limited)
-    limit: bigint;              // Maximum allowed uses
-    used: bigint;               // Current use count
-  }
-}
+- **Gaming**: Players can pre-authorize common in-game actions without constant signing
+- **DeFi**: Trading apps can execute trades within user-defined limits
+- **NFT Markets**: Marketplaces can list/delist items without repeated signatures
+- **Social Platforms**: Apps can post content or interact with smart contracts seamlessly
 
-enum ParamCondition {
-  EQUAL = 0,
-  GREATER_THAN = 1,
-  LESS_THAN = 2,
-  GREATER_THAN_OR_EQUAL = 3,
-  LESS_THAN_OR_EQUAL = 4,
-  NOT_EQUAL = 5
-}
-```
+## Technical Benefits
 
+1. **Gas Optimization**: Session keys can batch multiple transactions and optimize gas usage
+2. **Flexible Implementation**: Supports various validation schemes (time-based, value-limited, etc.)
+3. **Composable Security**: Combine multiple policies to create sophisticated permission systems
+4. **Standards Compliant**: Built on established standards like ERC-7579 for maximum compatibility
 
-#### Understanding Offset Calculation
+## User Experience Impact
 
-The `offsetIndex` in a rule determines which 32-byte word in the calldata to validate. 
+- **Reduced Cognitive Load**: Users don't need to understand every transaction detail
+- **Familiar Web2 Feel**: Actions feel instant and seamless like traditional web applications
+- **Maintained Security**: Users retain full control through granular permissions
+- **Better Error Handling**: Applications can handle failed transactions more gracefully
 
-1. **Static Parameters** (uint, address, bool, etc.):
-```typescript
-// For a function: transfer(address to, uint256 amount)
-const rules = [
-  {
-    offsetIndex: 0,  // 'to' address parameter
-    // ... other rule properties
-  },
-  {
-    offsetIndex: 1,  // 'amount' parameter
-    // ... other rule properties
-  }
-];
-```
-
-## Usage Examples
-
-### Creating a Session
-
-```typescript
-import { type LocalAccount, type Address } from "viem";
-import { type NexusClient } from "@biconomy/sdk";
-
-// Initialize the smart sessions module
-const sessionsModule = toSmartSessionsValidator({
-  account: nexusClient.account,
-  signer: eoaAccount
-});
-
-// Define session permissions
-const sessionRequestedInfo = [{
-  sessionPublicKey,
-  actionPoliciesInfo: [{
-    contractAddress: targetContract,
-    functionSelector: "0x...", // Function selector
-    rules: [
-      {
-        condition: ParamCondition.LESS_THAN,
-        offsetIndex: 0,
-        isLimited: true,
-        ref: maxValue,
-        usage: {
-          limit: BigInt(maxValue),
-          used: BigInt(0)
-        }
-      }
-    ]
-  }]
-}];
-
-// Grant permission
-const createSessionsResponse = await nexusClient
-  .extend(smartSessionCreateActions(sessionsModule))
-  .grantPermission({ sessionRequestedInfo });
-```
-
-### Using a Session Permission
-
-```typescript
-import { type LocalAccount, type Address } from "viem";
-import { type NexusClient } from "@biconomy/sdk";
-
-// Initialize the module for using permissions
-const usePermissionsModule = toSmartSessionsValidator({
-  account: nexusClient.account,
-  signer: sessionKey // The session key granted permission
-});
-
-// Extend the client with session usage capabilities
-const sessionClient = nexusClient
-  .extend(smartSessionUseActions(usePermissionsModule));
-
-// Use the session to make a transaction
-const userOpHash = await sessionClient.usePermission({
-  calls: [{
-    to: targetContract,
-    data: encodeFunctionData({
-      abi: contractABI,
-      functionName: "transfer",
-      args: [recipientAddress, amount]
-    })
-  }]
-});
-
-// Wait for the transaction to be mined
-const receipt = await sessionClient.waitForUserOperationReceipt({ hash: userOpHash });
-```
-
-## Best Practices
-
-1. **Rule Definition**
-   - Set appropriate parameter validation rules
-   - Use usage limits for sensitive operations
-   - Consider time-based constraints when needed
-   - Properly calculate offsets for dynamic parameters
-
-2. **Security**
-   - Regularly rotate session keys
-   - Implement proper session key storage
-   - Validate all parameters before session creation
-
-3. **Error Handling**
-   - Validate all parameters before creating sessions
-   - Handle permission revocation gracefully
-   - Monitor usage limits
-   - Implement proper error recovery mechanisms
-
-## Advanced Features
-
-### Parameter Validation
-Smart Sessions support complex parameter validation through rules:
-
-```typescript
-const rules: Rule[] = [
-  {
-    // Ensure parameter equals specific address
-    condition: ParamCondition.EQUAL,
-    offsetIndex: 0,
-    isLimited: false,
-    ref: targetAddress
-  },
-  {
-    // Limit transaction value
-    condition: ParamCondition.LESS_THAN,
-    offsetIndex: 1,
-    isLimited: true,
-    ref: maxAmount,
-    usage: {
-      limit: BigInt(maxAmount),
-      used: BigInt(0)
-    }
-  }
-];
-```
+Smart sessions represent a crucial evolution in web3 UX, bridging the gap between blockchain security and seamless user experiences.
 
