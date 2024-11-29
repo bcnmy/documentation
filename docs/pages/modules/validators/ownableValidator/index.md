@@ -196,5 +196,5 @@ const signatures = await Promise.all([
 
 // 6. Combine signatures and execute
 userOp.signature = await ownableNexusClient.prepareSignatures({ signatures });
-const txHash = await nexusClient.sendUserOperation(userOp);
+const uoHash = await nexusClient.sendUserOperation(userOp);
 ```
