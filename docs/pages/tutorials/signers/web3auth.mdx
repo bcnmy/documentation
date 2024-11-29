@@ -1,0 +1,95 @@
+# How to use Web3Auth with Biconomy smart accounts
+
+[Web3Auth](https://web3auth.io/) is a pluggable auth infrastructure that aggregates OAuth providers, different wallets, and existing key management solutions. It provides a seamless authentication experience while maintaining high security standards.
+
+::::steps
+
+### Install the dependencies
+
+:::code-group
+
+```bash [npm]
+npm install @web3auth/modal @web3auth/base @biconomy/sdk viem @web3auth/ethereum-provider
+```
+
+```bash [pnpm]
+pnpm add @web3auth/modal @web3auth/base @biconomy/sdk viem @web3auth/ethereum-provider
+```
+
+```bash [yarn]
+yarn add @web3auth/modal @web3auth/base @biconomy/sdk viem @web3auth/ethereum-provider
+```
+
+```bash [bun]
+bun add @web3auth/modal @web3auth/base @biconomy/sdk viem @web3auth/ethereum-provider
+```
+
+:::
+
+### Setup Web3Auth
+
+```ts twoslash
+// @errors: 2322
+import { Web3Auth } from "@web3auth/modal";
+import { CHAIN_NAMESPACES } from "@web3auth/base";
+import { createWalletClient, custom, http, type WalletClient } from "viem";
+import { baseSepolia } from "viem/chains";
+import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+import { createNexusClient, type EthereumProvider } from "@biconomy/sdk";
+
+// Chain configuration for Base Sepolia
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0x14a33", // Base Sepolia
+  rpcTarget: "https://sepolia.base.org",
+  displayName: "Base Sepolia",
+  blockExplorerUrl: "https://sepolia.basescan.org",
+  ticker: "ETH",
+  tickerName: "Ethereum",
+  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png"
+};
+
+// Initialize the private key provider
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: { chainConfig }
+});
+
+// Initialize Web3Auth
+const web3auth = new Web3Auth({
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Get from Web3Auth Dashboard
+  privateKeyProvider,
+  web3AuthNetwork: "sapphire_devnet",
+  chainConfig,
+  uiConfig: {
+    appName: "Your App Name",
+    mode: "dark",
+    loginMethodsOrder: ["google", "facebook"]
+  }
+});
+
+await web3auth.initModal();
+
+// Connect and get the provider
+const web3authProvider = (await web3auth.connect()) as EthereumProvider
+
+if (!web3authProvider) {
+  throw new Error("No provider found");
+}
+
+const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`;
+
+const nexusClient = await createNexusClient({
+  chain: baseSepolia,
+  signer: web3authProvider,
+  transport: http(),
+  bundlerTransport: http(bundlerUrl),
+});
+
+const txHash = await nexusClient.sendTransaction({
+  calls: [{  
+    to: "0x...",
+    value: 1n
+  }]
+});
+
+```
