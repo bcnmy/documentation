@@ -18,17 +18,23 @@ import { nexusClient } from "./nexusClient"
 import { smartSessionCreateActions } from "@biconomy/sdk"
 
 const response = await sessionNexusClient.grantPermission({
-  sessionRequestedInfo: [
-      {
-        sessionPublicKey, // session key signer
-        actionPoliciesInfo: [
-          {
-            contractAddress: "0x...", // contract address
-            functionSelector: "0x273ea3e3"
-          }
-        ]
-      }
-    ]
+  sessionRequestedInfo: [{
+    sessionPublicKey: "0x...",
+    actionPoliciesInfo: [{
+      contractAddress: "0x...",
+      functionSelector: "0x...",
+      rules: [{
+        condition: ParamCondition.LESS_THAN,
+        offsetIndex: 1,
+        isLimited: true,
+        ref: maxValue,
+        usage: {
+          limit: BigInt(maxValue),
+          used: BigInt(0)
+        }
+      }]
+    }]
+  }]
 });
 
 ```

@@ -1,0 +1,61 @@
+## How to use Magic signer with Biconomy smart accounts
+
+[Magic](https://magic.link/) makes it easy to authenticate users and integrate them into your Web3 dApps quickly.
+By integrating Magic with the Biconomy SDK, you can pair Magic’s seamless social login experience with smart wallets powered by Nexus accounts. This enables features like gas sponsorship, transaction batching, and more, ensuring a frictionless experience for your users.
+
+## Integration
+
+::::steps
+
+### Install the dependencies
+
+```bash
+npm i @magic-ext/oauth magic-sdk @biconomy/sdk viem
+```
+
+### Create the `Magic object`
+After following the Magic documentation, you will have access to a MagicBase object as shown below that you can pass as an owner to createeSmartAccountClient:
+
+```typescript 
+import { OAuthExtension } from "@magic-ext/oauth"
+import { Magic as MagicBase } from "magic-sdk"
+ 
+const magic = new MagicBase(process.env.MAGIC_API_KEY as string, {
+	network: {
+		rpcUrl: "https://sepolia.base.org",
+		chainId: 84532,
+	},
+	extensions: [new OAuthExtension()],
+})
+ 
+// Get the Provider from Magic and convert it to a smartAccountOwner
+const smartAccountOwner = await magic.wallet.getProvider()
+
+```
+
+### Create the Biconomy client
+
+Next, use the Magic account to initialize the Biconomy Nexus Client:
+
+```typescript
+import { OAuthExtension } from "@magic-ext/oauth"
+import { Magic as MagicBase } from "magic-sdk"
+import { createNexusClient, NexusClient } from "@biconomy/sdk"; 
+import { baseSepolia } from "viem/chains";
+import { http } from "viem";
+
+const main = async () => {
+    const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`
+
+    const nexusClient: NexusClient = await createNexusClient({
+        chain: baseSepolia,
+        signer: smartAccountOwner,
+        transport: http("https://sepolia.base.org"),
+        bundlerTransport: http(bundlerUrl),
+    })
+
+}
+
+main();
+
+```
