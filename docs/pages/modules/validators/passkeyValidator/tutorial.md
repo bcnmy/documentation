@@ -15,32 +15,39 @@ NEXT_PUBLIC_PAYMASTER_URL=your_paymaster_url
 
 ## Step 1: Create Nexus Client
 
-```typescript
+```typescript twoslash"
 import { createNexusClient, createBicoPaymasterClient } from '@biconomy/sdk'
 import { baseSepolia } from 'wagmi/chains'
-import { http } from 'wagmi'
+import { http, useAccount, useWalletClient } from 'wagmi'
 
-async function initNexusClient(walletClient) {
-  const nexusClient = await createNexusClient({
-    signer: walletClient,
-    chain: baseSepolia,  // or your preferred chain
-    paymaster: createBicoPaymasterClient({
-      paymasterUrl: process.env.NEXT_PUBLIC_PAYMASTER_URL || "",
-    }),
-    transport: http(),
-    bundlerTransport: http(process.env.NEXT_PUBLIC_BUNDLER_URL),
-  });
-  
-  return nexusClient;
+const account = useAccount()
+const { data: walletClient } = useWalletClient({ account: account.address })
+
+async function initNexusClient() {
+  if(walletClient) {
+    const nexusClient = await createNexusClient({
+      signer: walletClient,
+      chain: baseSepolia,  // or your preferred chain
+      paymaster: createBicoPaymasterClient({
+        paymasterUrl: process.env.NEXT_PUBLIC_PAYMASTER_URL || "",
+      }),
+      transport: http(),
+      bundlerTransport: http(process.env.NEXT_PUBLIC_BUNDLER_URL),
+    });
+    
+    return nexusClient;
+  }
+  throw new Error('Wallet client not found')
 }
 ```
 
 ## Step 2: Register a New Passkey
 
-```typescript
+```typescript twoslash
 import { toWebAuthnKey, toPasskeyValidator, WebAuthnMode } from '@biconomy/passkey'
+import { NexusClient } from '@biconomy/sdk'
 
-async function registerPasskey(nexusClient, passkeyName) {
+async function registerPasskey(nexusClient: NexusClient, passkeyName: string) {
   // Create WebAuthn key
   // Ideally "passkeyName" would be set by the user in the UI
   const webAuthnKey = await toWebAuthnKey({
@@ -50,7 +57,7 @@ async function registerPasskey(nexusClient, passkeyName) {
 
   // Create passkey validator
   const passkeyValidator = await toPasskeyValidator({
-    account: nexusClient?.account,
+    account: nexusClient.account,
     webAuthnKey,
   })
 
@@ -69,14 +76,17 @@ async function registerPasskey(nexusClient, passkeyName) {
 
 ## Step 3: Login with Existing Passkey
 
-```typescript
-async function loginPasskey(nexusClient) {
+```typescript twoslash
+import { NexusClient } from '@biconomy/sdk'
+import { toWebAuthnKey, WebAuthnMode, toPasskeyValidator } from '@biconomy/passkey'
+
+async function loginPasskey(nexusClient: NexusClient) {
   const webAuthnKey = await toWebAuthnKey({
     mode: WebAuthnMode.Login,
   })
 
   const passkeyValidator = await toPasskeyValidator({
-    account: nexusClient?.account,
+    account: nexusClient.account,
     webAuthnKey,
   })
   
@@ -86,8 +96,10 @@ async function loginPasskey(nexusClient) {
 
 ## Step 4: Install Passkey Validator Module
 
-```typescript
-async function installPasskeyValidator(nexusClient, passkeyValidator) {
+```typescript twoslash
+import type { NexusClient, Module } from '@biconomy/sdk'
+
+async function installPasskeyValidator(nexusClient: NexusClient, passkeyValidator: Module) {
   const passkeyValidatorAddress = "0xD990393C670dCcE8b4d8F858FB98c9912dBFAa06"
   const userOpHash = await nexusClient?.installModule({
     module: {
@@ -104,22 +116,20 @@ async function installPasskeyValidator(nexusClient, passkeyValidator) {
 
 ## Step 5: Using Passkey for Transactions
 
-```typescript
-async function sendTransactionWithPasskey(walletClient, passkeyValidator, recipientAddress) {
-  // Create new nexus client instance with passkey validator
-  const nexusClientWithPasskey = await createNexusClient({
-    signer: walletClient,
-    chain: baseSepolia,
-    paymaster: createBicoPaymasterClient({
-      paymasterUrl: process.env.NEXT_PUBLIC_PAYMASTER_URL || "",
-    }),
-    transport: http(),
-    module: passkeyValidator,
-    bundlerTransport: http(process.env.NEXT_PUBLIC_BUNDLER_URL),
-  });
+```typescript twoslash
+import { createNexusClient, createBicoPaymasterClient, type Module, type NexusClient, moduleActivator } from '@biconomy/sdk'
+import { baseSepolia } from 'wagmi/chains'
+import { http, useAccount, useWalletClient } from 'wagmi'
+import type { Address } from 'viem'
 
+const account = useAccount()
+const { data: walletClient } = useWalletClient({ account: account.address })
+
+async function sendTransactionWithPasskey(nexusClient: NexusClient, passkeyValidator: Module, recipientAddress: Address) {
+  // Extend NexusClient with passkey validator
+  nexusClient.extend(moduleActivator(passkeyValidator));
   // Send transaction
-  const hash = await nexusClientWithPasskey.sendTransaction({
+  const hash = await nexusClient.sendTransaction({
     calls: [
       {
         to: recipientAddress,
@@ -129,23 +139,21 @@ async function sendTransactionWithPasskey(walletClient, passkeyValidator, recipi
   });
 
   // Wait for confirmation
-  const receipt = await nexusClientWithPasskey.waitForTransactionReceipt({ hash });
+  const receipt = await nexusClient.waitForTransactionReceipt({ hash });
   return receipt;
 }
 ```
 
 ## Step 6: Uninstall Passkey Validator (Optional)
 
-```typescript
-async function uninstallPasskeyValidator(nexusClient, passkeyValidator) {
-  const nexusClientWithPasskey = await createNexusClient({
-    // ... same configuration as above
-    module: passkeyValidator,
-  });
+```typescript twoslash
+import { type NexusClient, type Module, createNexusClient, moduleActivator } from '@biconomy/sdk'
 
-  const userOpHash = await nexusClientWithPasskey?.uninstallModule({
+async function uninstallPasskeyValidator(nexusClient: NexusClient, passkeyValidator: Module) {
+  nexusClient.extend(moduleActivator(passkeyValidator));
+  const userOpHash = await nexusClient?.uninstallModule({
     module: {
-      address: PASSKEY_VALIDATOR_ADDRESS,
+      address: passkeyValidator.address,
       type: "validator",
       deInitData: "0x"
     }

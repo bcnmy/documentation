@@ -16,21 +16,23 @@ The `PasskeyValidator` is a WebAuthn-based validator module for ERC-7579 complia
 - Passwordless authentication for user operations using biometrics
 
 ### Authentication Operations
-```typescript
+```typescript twoslash"
+import { toWebAuthnKey, WebAuthnMode } from "@biconomy/passkey";
+
 // Create new passkey
-const webAuthnKey = await toWebAuthnKey({
+const registerWebAuthnKey = await toWebAuthnKey({
     passkeyName: "accountName",
     mode: WebAuthnMode.Register
 })
 
 // Login with existing passkey
-const webAuthnKey = await toWebAuthnKey({
+const loginWebAuthnKey = await toWebAuthnKey({
     mode: WebAuthnMode.Login
 })
 ```
 
 ### Signature Format
-```typescript
+```solidity twoslash
 type WebAuthnSignature = {
     authenticatorData: bytes,
     clientDataJSON: string,
