@@ -413,6 +413,10 @@ export const defaultSidebar = [
 		link: "/quickstart",
 	},
 	{
+		text: "Supported Networks",
+		link: "/supportedNetworks",
+	},
+	{
 		text: "Tutorials",
 		items: [
 			{
@@ -496,10 +500,6 @@ export const defaultSidebar = [
 	{
 		text: "Contracts & Audits",
 		link: "/contractsAndAudits",
-	},
-	{
-		text: "Supported Networks",
-		link: "/supportedNetworks",
 	},
 	{
 		link: "/dashboard",
