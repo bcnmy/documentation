@@ -333,10 +333,6 @@ export const smartAccountsV2Sidebar = [
 						text: "AbiSessionValidationModule",
 					},
 					{
-						link: "/smartAccountsV2/modules/sessions/DistributedSessions",
-						text: "DistributedSessions",
-					},
-					{
 						link: "/smartAccountsV2/modules/sessions/BatchedSession",
 						text: "BatchedSession",
 					},
@@ -531,12 +527,20 @@ export const defaultSidebar = [
 						collapsed: false,
 						items: [
 							{
-								link: "/modules/validators/smartSessions/creatingSmartSessions",
-								text: "Creating Smart Sessions",
+								link: "/modules/validators/smartSessions/grantingSmartSessions",
+								text: "Granting Smart Sessions",
 							},
 							{
 								link: "/modules/validators/smartSessions/usingSmartSessions",
 								text: "Using Smart Sessions",
+							},
+							{
+								link: "/modules/validators/smartSessions/policies",
+								text: "Policies",
+							},
+							{
+								link: "/modules/validators/smartSessions/types",
+								text: "Types",
 							},
 						],
 					},
