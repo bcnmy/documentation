@@ -333,10 +333,6 @@ export const smartAccountsV2Sidebar = [
 						text: "AbiSessionValidationModule",
 					},
 					{
-						link: "/smartAccountsV2/modules/sessions/DistributedSessions",
-						text: "DistributedSessions",
-					},
-					{
 						link: "/smartAccountsV2/modules/sessions/BatchedSession",
 						text: "BatchedSession",
 					},
@@ -481,20 +477,6 @@ export const defaultSidebar = [
 				text: "Methods",
 				link: "/nexus-client/methods",
 			},
-			{
-				text: "DAN Client",
-				link: "/nexus-client/dan",
-				items: [
-					{
-						text: "Overview",
-						link: "/nexus-client/dan",
-					},
-					{
-						text: "Methods",
-						link: "/nexus-client/dan/methods",
-					},
-				],
-			},
 		],
 	},
 	{
@@ -529,23 +511,76 @@ export const defaultSidebar = [
 				collapsed: false,
 				items: [
 					{
+						link: "/modules/validators/k1Validator",
+						text: "K1 Validator",
+						collapsed: false,
+						items: [
+							{
+								link: "/modules/validators/k1Validator/tutorial",
+								text: "Tutorial",
+							},
+						],
+					},
+					{
 						link: "/modules/validators/smartSessions",
 						text: "Smart Sessions",
 						collapsed: false,
 						items: [
 							{
-								link: "/modules/validators/smartSessions/creatingSmartSessions",
-								text: "Creating Smart Sessions",
+								link: "/modules/validators/smartSessions/grantingSmartSessions",
+								text: "Granting Smart Sessions",
 							},
 							{
 								link: "/modules/validators/smartSessions/usingSmartSessions",
 								text: "Using Smart Sessions",
+							},
+							{
+								link: "/modules/validators/smartSessions/policies",
+								text: "Policies",
+								collapsed: false,
+								items: [
+									{
+										link: "/modules/validators/smartSessions/policies/universalActionPolicy",
+										text: "Universal Action Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/sudoPolicy",
+										text: "Sudo Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/spendingLimitPolicy",
+										text: "Spending Limit Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/timeRangePolicy",
+										text: "Time Range Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/valueLimitPolicy",
+										text: "Value Limit Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/usageLimitPolicy",
+										text: "Usage Limit Policy",
+									},
+								],
 							},
 						],
 					},
 					{
 						link: "/modules/validators/ownableValidator",
 						text: "Ownables (Multisig)",
+					},
+					{
+						link: "/modules/validators/passkeyValidator",
+						text: "Passkey Validator",
+						collapsed: false,
+						items: [
+							{
+								link: "/modules/validators/passkeyValidator/tutorial",
+								text: "Tutorial",
+							},
+						],
 					},
 				],
 			},
