@@ -481,20 +481,6 @@ export const defaultSidebar = [
 				text: "Methods",
 				link: "/nexus-client/methods",
 			},
-			{
-				text: "DAN Client",
-				link: "/nexus-client/dan",
-				items: [
-					{
-						text: "Overview",
-						link: "/nexus-client/dan",
-					},
-					{
-						text: "Methods",
-						link: "/nexus-client/dan/methods",
-					},
-				],
-			},
 		],
 	},
 	{
@@ -529,6 +515,17 @@ export const defaultSidebar = [
 				collapsed: false,
 				items: [
 					{
+						link: "/modules/validators/k1Validator",
+						text: "K1 Validator",
+						collapsed: false,
+						items: [
+							{
+								link: "/modules/validators/k1Validator/tutorial",
+								text: "Tutorial",
+							}
+						],
+					},
+					{
 						link: "/modules/validators/smartSessions",
 						text: "Smart Sessions",
 						collapsed: false,
@@ -546,6 +543,17 @@ export const defaultSidebar = [
 					{
 						link: "/modules/validators/ownableValidator",
 						text: "Ownables (Multisig)",
+					},
+					{
+						link: "/modules/validators/passkeyValidator",
+						text: "Passkey Validator",
+						collapsed: false,
+						items: [
+							{
+								link: "/modules/validators/passkeyValidator/tutorial",
+								text: "Tutorial",
+							}
+						],
 					},
 				],
 			},
