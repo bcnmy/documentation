@@ -1,8 +1,8 @@
-# Create Smart Sessions Actions
-
-> **Important**: The k1Validator module must be the active nexus module for creating smart sessions. This is automatically handled when you extend your client with `smartSessionCreateActions`.
+# Granting Smart Sessions
 
 The Smart Sessions module provides two key actions when using `smartSessionCreateActions`: `grantPermission` and `trustAttesters`.
+
+> **Important**: The k1Validator module must be the active nexus module for creating smart sessions. This is automatically handled when you extend your client with `smartSessionCreateActions`.
 
 ## grantPermission
 
@@ -14,52 +14,64 @@ Creates a new session with specified permissions and rules.
 :::code-group
 
 ```typescript twoslash [example.ts]
-import { nexusClient } from "./nexusClient"
+import { usersNexusClient } from "./client"
 import { smartSessionCreateActions } from "@biconomy/sdk"
 
-const response = await sessionNexusClient.grantPermission({
+const response = await usersNexusClient.grantPermission({
   sessionRequestedInfo: [{
     sessionPublicKey: "0x...",
     actionPoliciesInfo: [{
       contractAddress: "0x...",
       functionSelector: "0x...",
-      rules: [{
-        condition: ParamCondition.LESS_THAN,
-        offsetIndex: 1,
-        isLimited: true,
-        ref: maxValue,
-        usage: {
-          limit: BigInt(maxValue),
-          used: BigInt(0)
-        }
-      }]
+      sudo: true
     }]
   }]
 });
 
 ```
 
-```typescript twoslash [nexusClient.ts] filename="nexusClient.ts"
+```ts twoslash [client.ts] filename="client.ts"
+import { OneOf, Address, Hex, http } from "viem"
+import { ActionPolicyInfo, CreateSessionDataParams, toSmartSessionsValidator, smartSessionCreateActions } from "@biconomy/sdk-canary"
 import { privateKeyToAccount } from "viem/accounts";
 import { createNexusClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
-import { http } from "viem"; 
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
 
-export const nexusClient = await createNexusClient({ 
-    signer: account, 
-    chain: baseSepolia,
-    transport: http(), 
-    bundlerTransport: http(bundlerUrl), 
-});
+const nexusClient = await createNexusClient({
+  signer: account, 
+  chain: baseSepolia,
+  transport: http(), 
+  bundlerTransport: http(bundlerUrl), 
+})
+
+// ---cut---
+const sessionsModule = toSmartSessionsValidator({
+  account: nexusClient.account,
+  signer: account
+})
+
+// Install the smart sessions module on the Nexus client's smart contract account
+const hash = await nexusClient.installModule({
+  module: sessionsModule.moduleInitData
+})
+
+const { success } = await nexusClient.waitForUserOperationReceipt({ hash })
+
+// Extend the Nexus client with smart session creation actions
+export const usersNexusClient = nexusClient.extend(
+  smartSessionCreateActions(sessionsModule)
+)
 ```
 
 :::
 
 ### Parameters
+
+> **Note**: For a detailed reference of all available configuration options and their types, see the [Smart Session Types](/modules/validators/smartSessions/policies) documentation. This will help you understand how different parameters map to policies and how they can be combined.
 
 ```typescript
 import { type Address } from "viem"
@@ -138,37 +150,52 @@ Adds trusted attesters for session validation.
 :::code-group
 
 ```typescript twoslash [example.ts]
-import { nexusClient } from "./nexusClient"
+import { usersNexusClient } from "./client"
 import { smartSessionCreateActions } from "@biconomy/sdk"
 import { MOCK_ATTESTER_ADDRESS, REGISTRY_ADDRESS } from "@rhinestone/module-sdk"
-const sessionNexusClient = nexusClient.extend(
-  smartSessionCreateActions(sessionsModule)
-);
 
-const response = await sessionNexusClient.trustAttesters({
+const response = await usersNexusClient.trustAttesters({
   attesters: [MOCK_ATTESTER_ADDRESS],
   registryAddress: REGISTRY_ADDRESS
 });
 ```
 
-```typescript twoslash [nexusClient.ts] filename="nexusClient.ts"
+```ts twoslash [client.ts] filename="client.ts"
+import { OneOf, Address, Hex, http } from "viem"
+import { ActionPolicyInfo, CreateSessionDataParams, toSmartSessionsValidator, smartSessionCreateActions } from "@biconomy/sdk-canary"
 import { privateKeyToAccount } from "viem/accounts";
 import { createNexusClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
-import { http } from "viem"; 
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
 
-export const nexusClient = await createNexusClient({ 
-    signer: account, 
-    chain: baseSepolia,
-    transport: http(), 
-    bundlerTransport: http(bundlerUrl), 
-});
-```
+const nexusClient = await createNexusClient({
+  signer: account, 
+  chain: baseSepolia,
+  transport: http(), 
+  bundlerTransport: http(bundlerUrl), 
+})
 
+// ---cut---
+const sessionsModule = toSmartSessionsValidator({
+  account: nexusClient.account,
+  signer: account
+})
+
+// Install the smart sessions module on the Nexus client's smart contract account
+const hash = await nexusClient.installModule({
+  module: sessionsModule.moduleInitData
+})
+
+const { success } = await nexusClient.waitForUserOperationReceipt({ hash })
+
+// Extend the Nexus client with smart session creation actions
+export const usersNexusClient = nexusClient.extend(
+  smartSessionCreateActions(sessionsModule)
+)
+```
 :::
 
 ### Parameters

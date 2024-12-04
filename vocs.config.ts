@@ -333,10 +333,6 @@ export const smartAccountsV2Sidebar = [
 						text: "AbiSessionValidationModule",
 					},
 					{
-						link: "/smartAccountsV2/modules/sessions/DistributedSessions",
-						text: "DistributedSessions",
-					},
-					{
 						link: "/smartAccountsV2/modules/sessions/BatchedSession",
 						text: "BatchedSession",
 					},
@@ -522,7 +518,7 @@ export const defaultSidebar = [
 							{
 								link: "/modules/validators/k1Validator/tutorial",
 								text: "Tutorial",
-							}
+							},
 						],
 					},
 					{
@@ -531,12 +527,43 @@ export const defaultSidebar = [
 						collapsed: false,
 						items: [
 							{
-								link: "/modules/validators/smartSessions/creatingSmartSessions",
-								text: "Creating Smart Sessions",
+								link: "/modules/validators/smartSessions/grantingSmartSessions",
+								text: "Granting Smart Sessions",
 							},
 							{
 								link: "/modules/validators/smartSessions/usingSmartSessions",
 								text: "Using Smart Sessions",
+							},
+							{
+								link: "/modules/validators/smartSessions/policies",
+								text: "Policies",
+								collapsed: false,
+								items: [
+									{
+										link: "/modules/validators/smartSessions/policies/universalActionPolicy",
+										text: "Universal Action Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/sudoPolicy",
+										text: "Sudo Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/spendingLimitPolicy",
+										text: "Spending Limit Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/timeRangePolicy",
+										text: "Time Range Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/valueLimitPolicy",
+										text: "Value Limit Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/usageLimitPolicy",
+										text: "Usage Limit Policy",
+									},
+								],
 							},
 						],
 					},
@@ -552,7 +579,7 @@ export const defaultSidebar = [
 							{
 								link: "/modules/validators/passkeyValidator/tutorial",
 								text: "Tutorial",
-							}
+							},
 						],
 					},
 				],

@@ -139,7 +139,7 @@ We need a new Nexus client that is associated with the session. This client will
 
 ```typescript
 
-const smartSessionNexusClient = await createNexusSessionClient({
+const smartSessionNexusClient = await createNexusClient({
     chain: baseSepolia,
     accountAddress: sessionData.granter,
     signer: sessionOwner,
@@ -197,7 +197,6 @@ console.log(`Transaction hash: ${userOpHash}`);
 import {
     createNexusClient, toSmartSessionsValidator, smartSessionCreateActions,
     smartSessionUseActions, CreateSessionDataParams, SessionData,
-    createNexusSessionClient
 } from "@biconomy/sdk";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { baseSepolia } from "viem/chains";
@@ -283,7 +282,7 @@ export const createAccountAndSendTransaction = async () => {
     }
 
     // 2. Create a Nexus Client for Using the Session
-    const smartSessionNexusClient = await createNexusSessionClient({
+    const smartSessionNexusClient = await createNexusClient({
         chain: baseSepolia,
         accountAddress: sessionData.granter,
         signer: sessionOwner,
