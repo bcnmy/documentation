@@ -71,7 +71,7 @@ export const usersNexusClient = nexusClient.extend(
 
 ### Parameters
 
-> **Note**: For a detailed reference of all available configuration options and their types, see the [Smart Session Types](/modules/validators/smartSessions/types) documentation. This will help you understand how different parameters map to policies and how they can be combined.
+> **Note**: For a detailed reference of all available configuration options and their types, see the [Smart Session Types](/modules/validators/smartSessions/policies) documentation. This will help you understand how different parameters map to policies and how they can be combined.
 
 ```typescript
 import { type Address } from "viem"

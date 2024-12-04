@@ -518,7 +518,7 @@ export const defaultSidebar = [
 							{
 								link: "/modules/validators/k1Validator/tutorial",
 								text: "Tutorial",
-							}
+							},
 						],
 					},
 					{
@@ -537,10 +537,33 @@ export const defaultSidebar = [
 							{
 								link: "/modules/validators/smartSessions/policies",
 								text: "Policies",
-							},
-							{
-								link: "/modules/validators/smartSessions/types",
-								text: "Types",
+								collapsed: false,
+								items: [
+									{
+										link: "/modules/validators/smartSessions/policies/universalActionPolicy",
+										text: "Universal Action Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/sudoPolicy",
+										text: "Sudo Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/spendingLimitPolicy",
+										text: "Spending Limit Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/timeRangePolicy",
+										text: "Time Range Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/valueLimitPolicy",
+										text: "Value Limit Policy",
+									},
+									{
+										link: "/modules/validators/smartSessions/policies/usageLimitPolicy",
+										text: "Usage Limit Policy",
+									},
+								],
 							},
 						],
 					},
@@ -556,7 +579,7 @@ export const defaultSidebar = [
 							{
 								link: "/modules/validators/passkeyValidator/tutorial",
 								text: "Tutorial",
-							}
+							},
 						],
 					},
 				],
