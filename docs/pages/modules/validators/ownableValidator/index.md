@@ -28,20 +28,13 @@ const hash = await ownableNexusClient.addOwner({
 
 #### Parameters
 
-```typescript
-type AddOwnerParameters = {
-  /** The smart account to add the owner to. Uses client's account if not provided */
-  account?: ModularSmartAccount
-  /** Address of the new owner */
-  owner: Hex
-  /** Maximum fee per gas unit */
-  maxFeePerGas?: bigint
-  /** Maximum priority fee per gas unit */
-  maxPriorityFeePerGas?: bigint
-  /** Transaction nonce. Auto-determined if not provided */
-  nonce?: bigint
-}
-```
+| Parameter | Type | Description | Required |
+|-----------|------|-------------|-----------|
+| account | ModularSmartAccount | The smart account to add the owner to. Uses client's account if not provided | No |
+| owner | Hex | Address of the new owner | Yes |
+| maxFeePerGas | bigint | Maximum fee per gas unit | No |
+| maxPriorityFeePerGas | bigint | Maximum priority fee per gas unit | No |
+| nonce | bigint | Transaction nonce. Auto-determined if not provided | No |
 
 #### Response
 Returns a promise that resolves to the transaction hash (`Hex`).
@@ -60,20 +53,13 @@ const hash = await ownableNexusClient.removeOwner({
 
 #### Parameters
 
-```typescript
-type RemoveOwnerParameters = {
-  /** The smart account to remove the owner from. Uses client's account if not provided */
-  account?: ModularSmartAccount
-  /** Address of the owner to remove */
-  owner: Hex
-  /** Maximum fee per gas unit */
-  maxFeePerGas?: bigint
-  /** Maximum priority fee per gas unit */
-  maxPriorityFeePerGas?: bigint
-  /** Transaction nonce. Auto-determined if not provided */
-  nonce?: bigint
-}
-```
+| Parameter | Type | Description | Required |
+|-----------|------|-------------|-----------|
+| account | ModularSmartAccount | The smart account to remove the owner from. Uses client's account if not provided | No |
+| owner | Hex | Address of the owner to remove | Yes |
+| maxFeePerGas | bigint | Maximum fee per gas unit | No |
+| maxPriorityFeePerGas | bigint | Maximum priority fee per gas unit | No |
+| nonce | bigint | Transaction nonce. Auto-determined if not provided | No |
 
 ### getThreshold
 
@@ -87,12 +73,9 @@ const threshold = await ownableNexusClient.getThreshold();
 
 #### Parameters
 
-```typescript
-type GetThresholdParameters = {
-  /** The smart account to query. Uses client's account if not provided */
-  account?: ModularSmartAccount
-}
-```
+| Parameter | Type | Description | Required |
+|-----------|------|-------------|-----------|
+| account | ModularSmartAccount | The smart account to query. Uses client's account if not provided | No |
 
 #### Response
 Returns a promise that resolves to the current threshold value (`number`).
@@ -111,20 +94,13 @@ const hash = await ownableNexusClient.setThreshold({
 
 #### Parameters
 
-```typescript
-type SetThresholdParameters = {
-  /** The smart account to update. Uses client's account if not provided */
-  account?: ModularSmartAccount
-  /** New threshold value */
-  threshold: bigint
-  /** Maximum fee per gas unit */
-  maxFeePerGas?: bigint
-  /** Maximum priority fee per gas unit */
-  maxPriorityFeePerGas?: bigint
-  /** Transaction nonce. Auto-determined if not provided */
-  nonce?: bigint
-}
-```
+| Parameter | Type | Description | Required |
+|-----------|------|-------------|-----------|
+| account | ModularSmartAccount | The smart account to update. Uses client's account if not provided | No |
+| threshold | bigint | New threshold value | Yes |
+| maxFeePerGas | bigint | Maximum fee per gas unit | No |
+| maxPriorityFeePerGas | bigint | Maximum priority fee per gas unit | No |
+| nonce | bigint | Transaction nonce. Auto-determined if not provided | No |
 
 ### prepareSignatures
 
@@ -140,14 +116,10 @@ const combinedSignature = await ownableNexusClient.prepareSignatures({
 
 #### Parameters
 
-```typescript
-type PrepareSignaturesParameters = {
-  /** The smart account context. Uses client's account if not provided */
-  account?: ModularSmartAccount
-  /** Array of signatures to combine */
-  signatures: Hex[]
-}
-```
+| Parameter | Type | Description | Required |
+|-----------|------|-------------|-----------|
+| account | ModularSmartAccount | The smart account context. Uses client's account if not provided | No |
+| signatures | Hex[] | Array of signatures to combine | Yes |
 
 #### Response
 Returns a promise that resolves to the combined signature (`Hex`).

@@ -428,6 +428,10 @@ export const defaultSidebar = [
 				link: "/tutorials/smart-sessions",
 			},
 			{
+				text: "How to use PassKey",
+				link: "/tutorials/passKey",
+			},
+			{
 				text: "Signers",
 				items: [
 					{
@@ -574,13 +578,6 @@ export const defaultSidebar = [
 					{
 						link: "/modules/validators/passkeyValidator",
 						text: "Passkey Validator",
-						collapsed: false,
-						items: [
-							{
-								link: "/modules/validators/passkeyValidator/tutorial",
-								text: "Tutorial",
-							},
-						],
 					},
 				],
 			},

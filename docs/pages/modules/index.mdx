@@ -1,10 +1,10 @@
 # Modules
 
-Modules are designed to extend the functionality of smart contract accounts in a consistent and predictable manner. This guide explains how modules work and how to interact with them in the Nexus SDK.
+Modules are designed to extend the functionality of smart contract accounts in a consistent and predictable manner. This guide explains how modules work and how to interact with them in the SDK.
 
 ## Module Extension Pattern
 
-The Nexus SDK uses a module extension pattern to maintain efficient bundle sizes and enable tree-shaking. Here's why:
+The SDK uses a module extension pattern to maintain efficient bundle sizes and enable tree-shaking. Here's why:
 
 - **Tree-shaking Optimization**: If all module actions were included in the base NexusClient, your bundle would include code for every possible module, even ones you don't use.
 - **Flexible Integration**: Developers can choose which modules to include, reducing bundle size by only importing needed functionality.

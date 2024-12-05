@@ -32,16 +32,15 @@ const loginWebAuthnKey = await toWebAuthnKey({
 ```
 
 ### Signature Format
-```solidity twoslash
-type WebAuthnSignature = {
-    authenticatorData: bytes,
-    clientDataJSON: string,
-    responseTypeLocation: uint256,
-    r: uint256,
-    s: uint256,
-    usePrecompiled: bool
-}
-```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| authenticatorData | bytes | Raw authenticator data from WebAuthn response |
+| clientDataJSON | string | Client data in JSON format containing challenge and origin |
+| responseTypeLocation | uint256 | Location identifier for the response type |
+| r | uint256 | R component of the ECDSA signature |
+| s | uint256 | S component of the ECDSA signature |
+| usePrecompiled | bool | Flag to indicate if precompiled contract should be used |
 
 ## Security Features
 
