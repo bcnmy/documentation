@@ -101,7 +101,7 @@ The `sessionData` object serves as the configuration for using a smart session. 
 const sessionData: SessionData = {
     granter: nexusClient.account.address,
     sessionPublicKey,
-    description: "Smart Session for Incrementing Number",
+    description: `Permission to increment number at ${"0xabc"} on behalf of ${nexusClient.account.address.slice(0, 6)} `, // Optional
     moduleData: {
         ...createSessionsResponse,
         mode: SmartSessionMode.USE
