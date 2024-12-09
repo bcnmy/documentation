@@ -70,6 +70,7 @@ To create a smart session, first define the session's permissions by specifying 
 The `grantPermission` function submits this information to the blockchain, assigning a unique `permissionId` to track and manage the session's permissions.
 
 ```typescript
+
 const sessionOwner = privateKeyToAccount(generatePrivateKey())
 const sessionPublicKey = sessionOwner.address;
 
@@ -100,19 +101,20 @@ The `sessionData` object serves as the configuration for using a smart session. 
 const sessionData: SessionData = {
     granter: nexusClient.account.address,
     sessionPublicKey,
+    description: `Permission to increment number at ${"0xabc"} on behalf of ${nexusClient.account.address.slice(0, 6)} `, // Optional
     moduleData: {
-        permissionIds: createSessionsResponse.permissionIds,
+        ...createSessionsResponse,
         mode: SmartSessionMode.USE
     }
 };
 
-const compressedSessionData = JSON.stringify(sessionData);
+const compressedSessionData = stringify(sessionData);
 ```
 It’s crucial to save the compressedSessionData after the user grants permission. This data can include user-specific preferences, or any other session-related information. There are two main options to store this data:
 - Local Storage: Save SessionData as a string on the client side. (Local storage requires data to be stored as a string.)
 - Database Storage: Alternatively, you can save this data in your dapp’s database.
 
-Use the `JSON.stringify()` function to prepare the session data for storage. 
+Use the `stringify()` (exported from `@biconomy/sdk`) function to prepare the session data for storage. It does the same as `JSON.stringify()` but it accommodates bigints.
 
 ::::
 
@@ -125,9 +127,9 @@ Assume that the user has left the dapp and is returning to resume their session.
 ### Retrieve the saved `compressedSessionData`
 
 ```typescript
-const sessionData = JSON.parse(compressedSessionData) as SessionData
+const sessionData = parse(compressedSessionData) as SessionData
 ```
-Decompress this data using the `JSON.parse()` function to restore it to its original structure, making it ready for use.
+Decompress this data using the `parse()` function to restore it to its original structure, making it ready for use. The `parse()` function does the same as `JSON.parse()` but it accommodates bigints.
 
 
 ### Create a Nexus Client for Using the Session
