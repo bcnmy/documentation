@@ -420,6 +420,10 @@ export const defaultSidebar = [
 				link: "/tutorials/gasless",
 			},
 			{
+				text: "How to pay gas in ERC20 tokens",
+				link: "/tutorials/tokenPaymaster",
+			},
+			{
 				text: "How to send batch transactions",
 				link: "/tutorials/batch",
 			},

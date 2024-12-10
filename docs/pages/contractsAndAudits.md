@@ -9,6 +9,14 @@
 | Account Factory  | 0x000000226cada0d8b36034F5D5c06855F59F6F3A  |
 | Entrypoint V7 | 0x0000000071727de22e5e9d8baf0edac6f37da032 |
 | Sponsorship Paymaster | 0x0000006087310897e0BFfcb3f0Ed3704f7146852 |
+| Token Paymaster | 0x.... |
+
+## Token Paymaster Supported Tokens
+
+| Token       |                  Ethereum                   |                  Base                      |                  Base Sepolia              |
+|-------------|---------------------------------------------|--------------------------------------------|--------------------------------------------|
+| USDC        | 0x036cbd53842c5426634e7929541ec2318f3dcf7e  | 0x036cbd53842c5426634e7929541ec2318f3dcf7e | 0x036cbd53842c5426634e7929541ec2318f3dcf7e |
+| DAI         | 0x036cbd53842c5426634e7929541ec2318f3dcf7e  | 0x036cbd53842c5426634e7929541ec2318f3dcf7e | 0x036cbd53842c5426634e7929541ec2318f3dcf7e |
 
 ## Audits
 
