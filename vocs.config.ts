@@ -401,7 +401,7 @@ export const addOnsSidebar = [
 
 export const defaultSidebar = [
 	{
-		text: "Overview",
+		text: "Ove	rview",
 		link: "/overview",
 	},
 	{
@@ -482,6 +482,33 @@ export const defaultSidebar = [
 				link: "/nexus-client/methods",
 			},
 		],
+	},
+	{
+		text: "Experimental MEE",
+		items: [
+			{
+				text: "SDK",
+				link: '/experimentalMee'
+			},
+			{
+				text: "Supertransactions",
+				link: "/experimentalMee/supertransactions"
+			},
+			{
+				text: "MEE",
+				link: "/experimentalMee/mee"
+			},
+			{
+				text: "Biconomy MEE Explorer ⤴",
+				link: "https://meescan.biconomy.io",
+				target: "_blank"
+			},
+			{
+				text: "MEE Demo - Abstracted AAVE ⤴",
+				link: "https://demo-aave.biconomy.io",
+				target: "_blank"
+			}
+		]
 	},
 	{
 		text: "Contracts & Audits",
@@ -607,6 +634,7 @@ export const defaultSidebar = [
 		],
 	},
 ];
+
 
 export default defineConfig({
 	theme: {
