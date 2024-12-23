@@ -1,0 +1,271 @@
+# Biconomy MEE SDK Implementation Guide
+
+## Initial Setup
+
+### 1. Installation
+Install the required packages:
+```bash
+npm install @biconomy/experimental-mee viem
+```
+
+### 2. Important Note About Accounts
+When using the MEE SDK, there are two types of accounts you'll work with:
+- EOA (Externally Owned Account): Used only for signing
+- Smart Contract Account (SCA): Where your funds need to be
+
+⚠️ **CRITICAL**: Your funds must be on the Smart Contract Account (SCA), not your EOA. The EOA is only used for signing transactions, while the SCA is where all operations happen.
+
+## Overview
+The Biconomy MEE SDK provides a powerful abstraction layer for executing complex multi-chain operations through Supertransactions. A key feature of the SDK is its automatic orchestration capability - you simply define the operations you want to perform, and the SDK, together with the MEE network, automatically:
+
+- Determines dependencies between operations
+- Handles cross-chain bridging requirements
+- Sequences transactions in the correct order
+- Manages transaction completion verification
+- Coordinates different providers for optimal execution
+
+For example, if you create a Supertransaction that needs to:
+1. Swap tokens on Optimism
+2. Use the resulting tokens on Base
+3. Finally deposit into a protocol on Arbitrum
+
+The SDK will automatically figure out that it needs to:
+- Wait for the swap to complete on Optimism
+- Bridge the tokens to Base
+- Wait for bridge confirmation
+- Execute the Base operation
+- Bridge to Arbitrum
+- Complete the final deposit
+
+All of this complex orchestration happens behind the scenes - you just define what you want to achieve, and the SDK handles the rest.
+
+## Implementation Steps
+
+### 1. Initialize Account and Service
+
+First, set up the basic infrastructure needed to interact with the MEE:
+
+```typescript
+const eoa = privateKeyToAccount(PRIV_KEY);
+const meeService = createMeeService({
+    meeNodeUrl: "https://mee-node.biconomy.io",
+});
+```
+
+This creates:
+- An EOA (Externally Owned Account) from your private key
+- A connection to the MEE network for executing Supertransactions
+
+### 2. Set Up Token Mappings
+
+Define the USDC token addresses across different chains:
+
+```typescript
+const mcUSDC = buildMultichainAddressMapping([
+    mapAddressToChain("0x036C...", baseSepolia.id),
+    mapAddressToChain("0x75fa...", arbitrumSepolia.id),
+]);
+```
+
+This creates a mapping that:
+- Tracks USDC addresses on each chain
+- Provides easy access via `mcUSDC.on(chainId)`
+- Ensures consistent token addressing
+
+### 3. Initialize Multi-Chain Account and Check Balances
+
+Create a smart account and verify your balances:
+
+```typescript
+const mcNexus = await toMultichainNexusAccount({
+    chains: [baseSepolia, arbitrumSepolia],
+    signer: eoa,
+});
+
+// Get your Smart Contract Account addresses for each chain
+const baseAddress = mcNexus.deploymentOn(baseSepolia.id).address;
+const arbitrumAddress = mcNexus.deploymentOn(arbitrumSepolia.id).address;
+
+console.log('Your SCA address on Base Sepolia:', baseAddress);
+console.log('Your SCA address on Arbitrum Sepolia:', arbitrumAddress);
+
+// Check your USDC balances
+const usdcBalance = await getUnifiedERC20Balance({
+    multichainAccount: mcNexus,
+    tokenMapping: mcUSDC,
+});
+
+console.log('USDC Balances:', {
+    total: usdcBalance.balance.toString(),
+    breakdown: usdcBalance.breakdown.map(b => ({
+        chainId: b.chainId,
+        balance: b.balance.toString()
+    }))
+});
+
+// ⚠️ Ensure you have sufficient USDC in your SCA addresses, not your EOA!
+```
+
+### 4. Build Operations (User Operations)
+
+User Operations (UserOps) are abstracted transaction objects that define what actions should be executed on each chain. They represent the actual operations your smart account will perform.
+
+```typescript
+// User Operation for Arbitrum Sepolia
+const userOpArb = buildAbstractUserOp({
+    calls: [{
+        to: mcUSDC.on(arbitrumSepolia.id),
+        gasLimit: 100000n,
+        data: encodeFunctionData({
+            abi: erc20Abi,
+            functionName: 'transfer',
+            args: [
+                mcNexus.deploymentOn(arbitrumSepolia.id).address,  // your SCA address
+                parseUnits('0.3', 6)  // 0.3 USDC (6 decimals)
+            ]
+        })
+    }],
+    chainId: arbitrumSepolia.id
+});
+
+// User Operation for Base Sepolia
+const userOpBase = buildAbstractUserOp({
+    calls: [{
+        to: mcUSDC.on(baseSepolia.id),
+        gasLimit: 100000n,
+        data: encodeFunctionData({
+            abi: erc20Abi,
+            functionName: 'transfer',
+            args: [
+                mcNexus.deploymentOn(baseSepolia.id).address,  // your SCA address
+                parseUnits('0.3', 6)  // 0.3 USDC (6 decimals)
+            ]
+        })
+    }],
+    chainId: baseSepolia.id
+});
+```
+
+Each UserOp contains:
+- `calls`: Array of transactions to execute
+- `to`: Target contract address (USDC contract)
+- `gasLimit`: Maximum gas to use
+- `data`: Encoded function call data
+- `chainId`: Target chain for execution
+
+### 5. Request Execution Quote
+
+Get a quote for executing the Supertransaction:
+
+```typescript
+const quote = await meeService.getQuote({
+    account: mcNexus,
+    supertransaction: {
+        instructions: [userOpArb, userOpBase],
+        feeToken: {
+            chainId: arbitrumSepolia.id,
+            address: mcUSDC.on(arbitrumSepolia.id)
+        }
+    }
+});
+```
+
+### 6. Execute the Supertransaction
+
+Finally, execute the operations:
+
+```typescript
+const hash = await meeService.execute({
+    quote: quote,
+    signature: formatMeeSignature({
+        signedHash: await eoa.signMessage({
+            message: { raw: quote.hash }
+        }),
+        executionMode: 'direct-to-mee'
+    })
+});
+
+console.log('Supertransaction hash:', hash.hash);
+```
+
+[Previous sections remain the same until the execution step, then add:]
+
+### 6. Execute the Supertransaction
+
+Finally, execute the operations:
+
+```typescript
+const hash = await meeService.execute({
+    quote: quote,
+    signature: formatMeeSignature({
+        signedHash: await eoa.signMessage({
+            message: { raw: quote.hash }
+        }),
+        executionMode: 'direct-to-mee'
+    })
+});
+
+console.log('Supertransaction hash:', hash.hash);
+```
+
+### 7. Monitor Execution Progress
+
+You can monitor the progress of your Supertransaction execution by visiting:
+```
+https://meescan.biconomy.io/details/{hash}
+```
+Replace `{hash}` with your Supertransaction hash.
+
+The MEE Scanner will show you:
+- Real-time execution status
+- Progress across different chains
+- Details of each operation
+- Transaction confirmations
+- Any errors or issues that occur
+
+## Best Practices
+
+### Account Management
+1. Always verify funds are in your SCA, not EOA
+2. Use `mcNexus.deploymentOn(chainId).address` to get correct addresses
+3. Check balances before executing transactions
+4. Keep track of your addresses on each chain
+
+### Balance Verification
+```typescript
+// Example of checking balances before operation
+async function verifyBalance() {
+    const balance = await getUnifiedERC20Balance({
+        multichainAccount: mcNexus,
+        tokenMapping: mcUSDC
+    });
+    
+    console.log('Balances across chains:', {
+        total: balance.balance.toString(),
+        breakdown: balance.breakdown.map(b => ({
+            chainId: b.chainId,
+            balance: b.balance.toString()
+        }))
+    });
+    
+    // Ensure sufficient balance
+    if (balance.balance < requiredAmount) {
+        throw new Error('Insufficient balance in Smart Contract Account');
+    }
+}
+```
+
+### Error Handling
+Important checks to implement:
+- Token balance verification
+- Account deployment status
+- Chain availability
+- Transaction confirmation
+- Recovery procedures
+
+### Security Considerations
+1. Secure private key management
+2. Verify token approvals
+3. Check execution quotes
+4. Monitor transaction status
+5. Implement timeout handling
