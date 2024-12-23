@@ -35,12 +35,16 @@ const paymasterContext = toBiconomyTokenPaymasterContext({
     feeTokenAddress: baseSepoliaUSDC
 })
 
+const paymaster = createBicoPaymasterClient({
+    transport: http(paymasterUrl)
+})
+
 const nexusClient = await createNexusClient({
     signer: account,
     chain: baseSepolia,
     transport: http(),
     bundlerTransport: http(bundlerUrl),
-    paymaster: createBicoPaymasterClient({paymasterUrl}),
+    paymaster,
     paymasterContext
 });
 ```
@@ -62,6 +66,11 @@ const account = privateKeyToAccount(`${privateKey}`);
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703";
 const baseSepoliaUSDC = "0x036cbd53842c5426634e7929541ec2318f3dcf7e";
+const recipientAddress = "0x0000000000000000000000000000000000000000";
+
+const paymaster = createBicoPaymasterClient({
+    transport: http(paymasterUrl)
+})
 
 const paymasterContext = toBiconomyTokenPaymasterContext({
     feeTokenAddress: baseSepoliaUSDC
@@ -72,7 +81,7 @@ const nexusClient = await createNexusClient({
     chain: baseSepolia,
     transport: http(),
     bundlerTransport: http(bundlerUrl),
-    paymaster: createBicoPaymasterClient({paymasterUrl}),
+    paymaster,
     paymasterContext
 }); // [!code focus:7]
 
@@ -105,6 +114,11 @@ const account = privateKeyToAccount(`${privateKey}`);
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703";
 const baseSepoliaUSDC = "0x036cbd53842c5426634e7929541ec2318f3dcf7e";
+const recipientAddress = "0x0000000000000000000000000000000000000000";
+
+const paymaster = createBicoPaymasterClient({
+    transport: http(paymasterUrl)
+})
 
 const paymasterContext = toBiconomyTokenPaymasterContext({
     feeTokenAddress: baseSepoliaUSDC
@@ -115,7 +129,7 @@ const nexusClient = await createNexusClient({
     chain: baseSepolia,
     transport: http(),
     bundlerTransport: http(bundlerUrl),
-    paymaster: createBicoPaymasterClient({paymasterUrl}),
+    paymaster,
     paymasterContext
 }); // [!code focus:7]
 
