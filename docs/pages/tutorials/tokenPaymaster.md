@@ -18,7 +18,7 @@ const account = privateKeyToAccount(`${privateKey}`);
 Login to the [Dashboard](https://dashboard.biconomy.io/) and setup a v2 paymaster. Let's configure a client for the Smart Account with a `paymasterUrl` to enable it. A `bundlerUrl` is required to submit transactions to the Network, which will initialize the Smart Account.
 
 ```typescript twoslash
-import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk";
+import { createNexusClient, createBicoPaymasterClient, toBiconomyTokenPaymasterContext } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther } from "viem";
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
@@ -30,27 +30,26 @@ const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-
 const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703"; // [!code focus:16]
 const baseSepoliaUSDC = "0x036cbd53842c5426634e7929541ec2318f3dcf7e"; 
 
+const paymasterContext = toBiconomyTokenPaymasterContext({
+    feeTokenAddress: baseSepoliaUSDC
+})
+
 const nexusClient = await createNexusClient({
     signer: account,
     chain: baseSepolia,
     transport: http(),
     bundlerTransport: http(bundlerUrl),
     paymaster: createBicoPaymasterClient({paymasterUrl}),
-    paymasterContext: { 
-        mode: "ERC20",
-        tokenInfo: {
-          feeTokenAddress: baseSepoliaUSDC
-        }
-    }
+    paymasterContext
 });
 ```
 
 ### Sending a transaction and paying the gas with USDC
-Next, define the transaction you want to send. Use the `sendTransaction` method to send the transaction. Since we have a paymaster configured, this transaction will be gasless.
+Next, define the transaction you want to send. Use the `sendTokenPaymasterUserOp` method to send the user operation using the Token Paymaster.
 
 ```typescript twoslash
 
-import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk";
+import { createNexusClient, createBicoPaymasterClient, toBiconomyTokenPaymasterContext } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther } from "viem";
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
@@ -62,26 +61,31 @@ const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-
 const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703";
 const baseSepoliaUSDC = "0x036cbd53842c5426634e7929541ec2318f3dcf7e";
 
+const paymasterContext = toBiconomyTokenPaymasterContext({
+    feeTokenAddress: baseSepoliaUSDC
+})
+
 const nexusClient = await createNexusClient({
     signer: account,
     chain: baseSepolia,
     transport: http(),
     bundlerTransport: http(bundlerUrl),
     paymaster: createBicoPaymasterClient({paymasterUrl}),
-    paymasterContext: { 
-        mode: "ERC20",
-        tokenInfo: {
-          feeTokenAddress: baseSepoliaUSDC
-        }
-    }
+    paymasterContext
 }); // [!code focus:7]
 
-const hash = await nexusClient.sendTransaction({ calls:  
-    [{to : '0xf5715961C550FC497832063a98eA34673ad7C816', value: parseEther('0')}] },
-); 
-console.log("Transaction hash: ", hash) 
-const receipt = await nexusClient.waitForTransactionReceipt({ hash });
+const userOpHash = await nexusClient.sendTokenPaymasterUserOp({
+    calls: [
+        {
+            to: recipientAddress,
+            value: 1n,
+            data: "0x"
+        }
+    ],
+    feeTokenAddress: baseSepoliaUSDCAddress
+})
 
+const receipt = await nexusClient.waitForUserOperationReceipt({ hash: userOpHash })
 ```
 
 For a complete list of supported ERC20 tokens that can be used for gas payment, check out our [supported tokens documentation](/contractsAndAudits#token-paymaster-supported-tokens).

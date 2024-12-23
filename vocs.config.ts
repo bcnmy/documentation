@@ -424,6 +424,10 @@ export const defaultSidebar = [
 				link: "/tutorials/tokenPaymaster",
 			},
 			{
+				text: "How to get fee quotes from the Token Paymaster",
+				link: "/tutorials/getQuotes",
+			},
+			{
 				text: "How to send batch transactions",
 				link: "/tutorials/batch",
 			},
