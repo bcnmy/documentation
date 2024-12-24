@@ -420,6 +420,220 @@ export const defaultSidebar = [
         link: "/tutorials/gasless",
       },
       {
+        text: "How to pay gas in ERC20 tokens",
+        link: "/tutorials/tokenPaymaster",
+      },
+      {
+        text: "How to get fee quotes from the Token Paymaster",
+        link: "/tutorials/getQuotes",
+      },
+      {
+        text: "How to send batch transactions",
+        link: "/tutorials/batch",
+      },
+      {
+        text: "How to use smart sessions",
+        link: "/tutorials/smart-sessions",
+      },
+      {
+        text: "How to use PassKey",
+        link: "/tutorials/passKey",
+      },
+      {
+        text: "Signers",
+        items: [
+          {
+            text: "How to use a Turnkey signer",
+            link: "/tutorials/signers/turnkey",
+          },
+          {
+            text: "How to use a Dynamic signer",
+            link: "/tutorials/signers/dynamic",
+          },
+          {
+            text: "How to use a Capsule signer",
+            link: "/tutorials/signers/capsule",
+          },
+          {
+            text: "How to use a Passport signer",
+            link: "/tutorials/signers/passport",
+          },
+          {
+            text: "How to use a DFNS signer",
+            link: "/tutorials/signers/dfns",
+          },
+          {
+            text: "How to use a Particle signer",
+            link: "/tutorials/signers/particle",
+          },
+          {
+            text: "How to use a Magic signer",
+            link: "/tutorials/signers/magic",
+          },
+          {
+            text: "How to use a Web3Auth signer",
+            link: "/tutorials/signers/web3auth",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    text: "Nexus Client",
+    items: [
+      {
+        text: "Integration",
+        link: "/nexus-client",
+      },
+      {
+        text: "Methods",
+        link: "/nexus-client/methods",
+      },
+    ],
+  },
+  {
+    text: "Contracts & Audits",
+    link: "/contractsAndAudits",
+  },
+  {
+    link: "/dashboard",
+    text: "Dashboard",
+    items: [
+      { link: "/dashboard/paymaster", text: "Paymaster & Gas Tank Setup" },
+      {
+        link: "/dashboard/paymasterRules",
+        text: "Configuring Paymaster Rules",
+      },
+      {
+        link: "/dashboard/spendingLimits",
+        text: "Spending Limits & Notifications",
+      },
+      { link: "/dashboard/organization", text: "Organization Management" },
+      { link: "/dashboard/apis", text: "API Endpoints & Webhooks" },
+    ],
+  },
+  {
+    text: "ERC-7579 Modules",
+    link: "/modules",
+    collapsed: false,
+    items: [
+      {
+        link: "/modules/validators",
+        text: "Validators",
+        collapsed: false,
+        items: [
+          {
+            link: "/modules/validators/k1Validator",
+            text: "K1 Validator",
+            collapsed: false,
+            items: [
+              {
+                link: "/modules/validators/k1Validator/tutorial",
+                text: "Tutorial",
+              },
+            ],
+          },
+          {
+            link: "/modules/validators/smartSessions",
+            text: "Smart Sessions",
+            collapsed: false,
+            items: [
+              {
+                link: "/modules/validators/smartSessions/grantingSmartSessions",
+                text: "Granting Smart Sessions",
+              },
+              {
+                link: "/modules/validators/smartSessions/usingSmartSessions",
+                text: "Using Smart Sessions",
+              },
+              {
+                link: "/modules/validators/smartSessions/policies",
+                text: "Policies",
+                collapsed: false,
+                items: [
+                  {
+                    link: "/modules/validators/smartSessions/policies/universalActionPolicy",
+                    text: "Universal Action Policy",
+                  },
+                  {
+                    link: "/modules/validators/smartSessions/policies/sudoPolicy",
+                    text: "Sudo Policy",
+                  },
+                  {
+                    link: "/modules/validators/smartSessions/policies/spendingLimitPolicy",
+                    text: "Spending Limit Policy",
+                  },
+                  {
+                    link: "/modules/validators/smartSessions/policies/timeRangePolicy",
+                    text: "Time Range Policy",
+                  },
+                  {
+                    link: "/modules/validators/smartSessions/policies/valueLimitPolicy",
+                    text: "Value Limit Policy",
+                  },
+                  {
+                    link: "/modules/validators/smartSessions/policies/usageLimitPolicy",
+                    text: "Usage Limit Policy",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            link: "/modules/validators/ownableValidator",
+            text: "Ownables (Multisig)",
+          },
+          {
+            link: "/modules/validators/passkeyValidator",
+            text: "Passkey Validator",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    text: "Nexus Smart Account",
+    link: "/smart-account",
+    items: [
+      {
+        text: "ERC-7579 Methods",
+        link: "/smart-account/7579methods",
+      },
+    ],
+  },
+  {
+    text: "Infra",
+    items: [
+      {
+        text: "Bundler",
+        link: "/infra/bundler/integration",
+      },
+      {
+        text: "Paymaster",
+        link: "/infra/paymaster/integration",
+      },
+    ],
+  },
+  {
+    text: "Overview",
+    link: "/overview",
+  },
+  {
+    text: "Quickstart",
+    link: "/quickstart",
+  },
+  {
+    text: "Supported Networks",
+    link: "/supportedNetworks",
+  },
+  {
+    text: "Tutorials",
+    items: [
+      {
+        text: "How to send gasless transactions",
+        link: "/tutorials/gasless",
+      },
+      {
         text: "How to send batch transactions",
         link: "/tutorials/batch",
       },
