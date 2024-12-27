@@ -443,6 +443,10 @@ export const defaultSidebar = [
         text: "Signers",
         items: [
           {
+            text: "How to use a Privy signer",
+            link: "/tutorials/signers/privy",
+          },
+          {
             text: "How to use a Turnkey signer",
             link: "/tutorials/signers/turnkey",
           },
