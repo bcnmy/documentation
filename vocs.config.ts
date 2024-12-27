@@ -611,6 +611,12 @@ export const defaultSidebar = [
       {
         text: "Paymaster",
         link: "/infra/paymaster/integration",
+        items: [
+          {
+            text: "Supported Tokens",
+            link: "/infra/paymaster/supportedTokens",
+          },
+        ],
       },
     ],
   }
