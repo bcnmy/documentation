@@ -23,13 +23,6 @@
 | Sponsorship Paymaster | `0x00000072a5F551D6E80b2f6ad4fB256A27841Bbc` |
 | Token Paymaster | `0x00000000301515A5410e0d768aF4f53c416edf19` |
 
-## Token Paymaster Supported Tokens
-
-| Token       |                  Ethereum                   |                  Base                      |                  Base Sepolia              |
-|-------------|---------------------------------------------|--------------------------------------------|--------------------------------------------|
-| USDC        | 0x036cbd53842c5426634e7929541ec2318f3dcf7e  | 0x036cbd53842c5426634e7929541ec2318f3dcf7e | 0x036cbd53842c5426634e7929541ec2318f3dcf7e |
-| DAI         | 0x036cbd53842c5426634e7929541ec2318f3dcf7e  | 0x036cbd53842c5426634e7929541ec2318f3dcf7e | 0x036cbd53842c5426634e7929541ec2318f3dcf7e |
-
 ## Audits
 
 ### Nexus
