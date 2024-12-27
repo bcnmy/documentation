@@ -1,0 +1,162 @@
+# How to use Privy signer with Biconomy
+
+[Privy](https://www.privy.io/) is a platform that provides user onboarding and embedded wallet infrastructure for applications built on blockchain technology. 
+
+Read below to learn how to configure your app to create Nexus smart accounts for all your users using Privy signers.
+
+::::steps
+
+### Install the dependencies
+
+```bash
+npm i @privy-io/react-auth @biconomy/sdk viem @tanstack/react-query 
+```
+
+### Wrap your app with the PrivyProvider
+
+```ts
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { type ReactNode, useState } from 'react'
+import { PrivyProvider } from '@privy-io/react-auth';
+
+export function App {
+  const [queryClient] = useState(() => new QueryClient())
+
+  return (
+    <PrivyProvider 
+      appId="APP_ID"
+      config={{
+        /* Replace this with your desired login methods */
+        loginMethods: ['email', 'wallet'],
+        /* Replace this with your desired appearance configuration */
+        appearance: {
+          theme: 'light',
+          accentColor: '#676FFF',
+          logo: 'your-logo-url'
+        },
+        embeddedWallets: {
+          createOnLogin: 'users-without-wallets',
+          noPromptOnSignature: true
+        }
+      }}
+    >
+        <QueryClientProvider client={queryClient}>
+            {props.children}
+        </QueryClientProvider>
+    </PrivyProvider>
+  )
+}
+```
+
+### Login with your Privy embedded wallet 
+
+```ts
+import { http } from "viem";
+import { baseSepolia } from "viem/chains";
+import { createNexusClient, NexusClient } from "@biconomy/sdk";
+import { useWallets, usePrivy } from '@privy-io/react-auth'; // [!code focus]  
+
+export default function Home() {
+    const { login } = usePrivy(); // [!code focus]  
+
+    return (
+        <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+            <button className="bg-blue-500 text-white p-2 rounded-md" onClick={login}>Login</button> // [!code focus]  
+        </div>
+    );
+}
+```
+
+### Connect the Privy signer with Nexus 
+
+```ts
+import { http } from "viem";
+import { baseSepolia } from "viem/chains";
+import { createNexusClient, NexusClient } from "@biconomy/sdk";
+import { useWallets, usePrivy } from '@privy-io/react-auth';
+
+export default function Home() {
+    const { login } = usePrivy(); 
+    const { wallets } = useWallets(); // [!code focus] 
+    const [nexusClient, setNexusClient] = useState<NexusClient | null>(null);
+
+    useEffect(() => { // [!code focus:12] 
+        const embeddedWallet = wallets.find((wallet) => (wallet.walletClientType === 'privy'));
+        if (embeddedWallet) {
+            (async () => {
+                const provider = await embeddedWallet.getEthersProvider(); 
+                const signer = provider.getSigner();
+                const nexusClient = await createNexusClient({ 
+                    signer, 
+                    chain: baseSepolia,
+                    transport: http(),
+                    bundlerTransport: http(BUNDLER_URL), // Get your BUNDLER_URL from the Biconomy Dashboard
+                });
+
+                setNexusClient(nexusClient);
+            })();
+        }
+    }, [wallets]);
+
+    return (
+        <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+            {nexusClient && <div>Nexus Client: {nexusClient.account.address}</div>}
+            <button className="bg-blue-500 text-white p-2 rounded-md" onClick={login}>Login</button>
+        </div>
+    );
+}
+```
+
+### Send a transaction with Nexus and Privy   
+
+```ts
+import { http } from "viem";
+import { baseSepolia } from "viem/chains";
+import { createNexusClient, NexusClient } from "@biconomy/sdk";
+import { useWallets, usePrivy } from '@privy-io/react-auth';
+
+export default function Home() {
+    const { login } = usePrivy();
+    const { wallets } = useWallets();
+    const [nexusClient, setNexusClient] = useState<NexusClient | null>(null);
+
+    useEffect(() => {
+        const embeddedWallet = wallets.find((wallet) => (wallet.walletClientType === 'privy'));
+        if (embeddedWallet) {
+            (async () => {
+                const provider = await embeddedWallet.getEthersProvider();
+                const signer = provider.getSigner();
+                const nexusClient = await createNexusClient({
+                    signer,
+                    chain: baseSepolia,
+                    transport: http(),
+                    bundlerTransport: http(BUNDLER_URL),
+                });
+
+                setNexusClient(nexusClient);
+            })();
+        }
+    }, [wallets]);
+
+    const sendDummyTx = async () => { // [!code focus:12] 
+        if (!nexusClient) return;
+        const hash = await nexusClient?.sendTransaction({
+            calls: [
+                {
+                    to: "0x0000000000000000000000000000000000000000",
+                    data: "0x",
+                    value: BigInt(1),
+                }
+            ]
+        });
+    }
+
+    return (
+        <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+            {nexusClient && <div>Nexus Client: {nexusClient.account.address}</div>}
+            <button className="bg-blue-500 text-white p-2 rounded-md" onClick={login}>Login</button>
+            {nexusClient && <button className="bg-blue-500 text-white p-2 rounded-md" onClick={sendDummyTx}>Send Dummy Tx</button>} // [!code focus] 
+        </div>
+    );
+}
+```
