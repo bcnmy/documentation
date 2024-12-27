@@ -61,6 +61,7 @@ Please note that we will be reviewing DEX activity on each network to determine 
 | ------------ | --------------- | -------------------------------------------| 
 | ETH          | Ether           | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
 | DAI          | Dai Stablecoin  | 0x50c5725949a6f0c72e6c4a641f24049a917db0cb | 
+| USDC         | USD Coin        | 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913 | 
 | USDbC        | USD Base Coin   | 0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca | 
 | cbETH        | Coinbase Wrapped Staked ETH     | 0x2ae3f1ec7f1f5012cfeab0185bfc7aa3cf0dec22 | 
 | YFI          | yearn.finance   | 0x9eaf8c1e34f05a589eda6bafdf391cf6ad3cb239 | 
@@ -79,6 +80,13 @@ Please note that we will be reviewing DEX activity on each network to determine 
 | USDT         | Tether USD     | 0xe01435b1767aed7c25c943facbdb582b6278650f |
 | DAI          | Dai Stablecoin | 0x174956bdfbceb6e53089297cce4fe2825e58d92c |
 
+### Base Sepolia Testnet 84532
+
+| Token symbol | Token name     | Token Address                              |
+| ------------ | -------------- | ------------------------------------------ | 
+| ETH          | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
+| USDC         | USD Coin       | 0x036cbd53842c5426634e7929541ec2318f3dcf7e |
+| DAI          | Dai Stablecoin | 0x7683022d84f726a96c4a6611cd31dbf5409c0ac9 |
 
 ### BNB Smart Chain Mainnet 56
 
