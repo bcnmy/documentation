@@ -1,0 +1,71 @@
+# Understanding getUnifiedERC20Balance
+
+The `getUnifiedERC20Balance` function is a powerful utility that aggregates ERC20 token balances across multiple chains into a single, unified view. It's particularly useful when you need to understand your total token position across different networks.
+
+## Usage
+
+```typescript
+const unifiedBalance = await getUnifiedERC20Balance({
+    multichainERC20: mcUSDC,  // Your multichain token contract
+    multichainAccount: mcNexus // Your multichain account
+});
+
+console.log('Total balance across all chains:', unifiedBalance.balance.toString());
+console.log('Token decimals:', unifiedBalance.decimals);
+
+// View breakdown by chain
+unifiedBalance.breakdown.forEach(item => {
+    console.log(`Chain ${item.chainId}: ${item.balance.toString()}`);
+});
+```
+
+## Return Value Structure
+
+The function returns a comprehensive balance object:
+
+```typescript
+type UnifiedERC20Balance = {
+    // Total balance across all chains
+    balance: bigint,
+    // Token decimals (must be consistent across chains)
+    decimals: number,
+    // Per-chain breakdown
+    breakdown: Array<{
+        chainId: number,
+        balance: bigint,
+        decimals: number
+    }>,
+    // Reference to the original token contract
+    token: MultichainContract<typeof erc20Abi>
+}
+```
+
+## How It Works
+
+The function:
+1. Takes a multichain token contract and account
+2. Queries balances on each chain where the token is deployed
+3. Verifies decimal consistency across all deployments
+4. Aggregates the total balance
+5. Provides both the total and per-chain breakdown
+
+## Error Handling
+
+The function performs important validations:
+- Checks account initialization on each chain
+- Verifies token decimal consistency
+- Throws clear error messages if requirements aren't met
+
+## Example Use Cases
+
+Useful for scenarios like:
+- Checking if you have enough total tokens for a cross-chain operation
+- Displaying user balances in a DApp interface
+- Finding chains with the highest token balances
+- Monitoring token distribution across networks
+
+## Important Notes
+
+- All token deployments must have the same number of decimals
+- Account must be initialized on all chains where you want to check balances
+- Returns raw bigint values - remember to format with decimals for display
