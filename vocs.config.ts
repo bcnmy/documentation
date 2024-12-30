@@ -522,7 +522,23 @@ export const defaultSidebar = [
         text: "Supertransactions Explained",
         link: "/experimentalMee/supertransactions"
       },
-      
+      {
+        text: "Utility Functions",
+        items: [
+          {
+            text: 'GetUnifiedERC20Balance',
+            link: '/experimentalMee/utils/getunifiederc20balance'
+          },
+          {
+            text: 'RequireERC20Balance',
+            link: '/experimentalMee/utils/requireerc20balance'
+          },
+          {
+            text: 'BridgingPlugin',
+            link: '/experimentalMee/utils/bridgingplugin'
+          }
+        ]
+      }
     ]
   },
   {
