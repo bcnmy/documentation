@@ -1,0 +1,197 @@
+# MEE Bridging Plugins
+
+Bridging plugins are modular components that enable the MEE SDK to integrate with different cross-chain bridge protocols. Each plugin encapsulates the logic for interacting with a specific bridge, allowing the SDK to optimize routes across multiple bridges and chains.
+
+## Plugin Architecture
+
+A bridging plugin is defined by the `BridgingPlugin` interface:
+
+```typescript
+type BridgingPlugin = {
+    encodeBridgeUserOp: (params: BridgingUserOpParams) => Promise<BridgingPluginResult>;
+};
+```
+
+The plugin takes bridging parameters and returns a user operation that can be executed by the MEE service:
+
+```typescript
+type BridgingUserOpParams = {
+    fromChain: Chain;              // Source chain
+    toChain: Chain;                // Destination chain
+    multichainAccount: MultichainSmartAccount;  // User's account
+    tokenMapping: MultichainAddressMapping;     // Token addresses
+    bridgingAmount: bigint;        // Amount to bridge
+};
+
+type BridgingPluginResult = {
+    userOp: MeeUserOp;             // The operation to execute
+    receivedAtDestination?: bigint; // Expected output amount
+    bridgingDurationExpectedMs?: number; // Expected bridge time
+};
+```
+
+## Creating Your Own Plugin
+
+Here's a step-by-step guide to implementing a bridge plugin, using the Across protocol as an example:
+
+1. **Setup Basic Structure**
+```typescript
+export const MyBridgePlugin: BridgingPlugin = {
+    encodeBridgeUserOp: async (params) => {
+        const {
+            bridgingAmount,
+            fromChain,
+            toChain,
+            multichainAccount,
+            tokenMapping,
+        } = params;
+
+        // Your implementation here
+    }
+};
+```
+
+2. **Get Required Addresses**
+```typescript
+// Get token addresses on both chains
+const inputToken = tokenMapping.on(fromChain.id);
+const outputToken = tokenMapping.on(toChain.id);
+
+// Get user's account addresses
+const depositor = multichainAccount.deploymentOn(fromChain.id).address;
+const recipient = multichainAccount.deploymentOn(toChain.id).address;
+```
+
+3. **Handle Bridge-Specific Logic**
+```typescript
+// Example: Fetch bridge fees
+const bridgeFees = await fetchBridgeFees({
+    amount: bridgingAmount,
+    sourceChain: fromChain.id,
+    destChain: toChain.id
+});
+
+// Calculate actual amount received after fees
+const outputAmount = bridgingAmount - bridgeFees;
+```
+
+4. **Create Required Transactions**
+```typescript
+// Usually includes approval and bridge transactions
+const approveCall: AbstractCall = {
+    to: inputToken,
+    gasLimit: 100000n,
+    data: encodeFunctionData({
+        abi: erc20Abi,
+        functionName: "approve",
+        args: [bridgeAddress, bridgingAmount]
+    })
+};
+
+const bridgeCall: AbstractCall = {
+    to: bridgeAddress,
+    gasLimit: 150000n,
+    data: encodeFunctionData({
+        abi: bridgeAbi,
+        functionName: "bridge",
+        args: [/* bridge-specific args */]
+    })
+};
+```
+
+5. **Return Bridge Operation**
+```typescript
+const userOp = buildMeeUserOp({
+    calls: [approveCall, bridgeCall],
+    chainId: fromChain.id
+});
+
+return {
+    userOp,
+    receivedAtDestination: outputAmount,
+    bridgingDurationExpectedMs: expectedDuration
+};
+```
+
+## How Plugins Are Used
+
+The MEE SDK uses plugins to optimize bridge routes:
+
+1. **Route Discovery**
+```typescript
+// SDK queries all available plugins
+const bridgeQueries = sourceBalances.flatMap(source => 
+    bridgingPlugins.map(plugin => 
+        queryBridge({
+            fromChain,
+            toChain,
+            plugin,
+            amount: source.balance,
+            multichainAccount,
+            tokenMapping,
+        })
+    )
+);
+```
+
+2. **Route Optimization**
+```typescript
+// Results are sorted by efficiency
+.sort((a, b) =>
+    Number((b.receivedAtDestination * 10000n) / b.amount) -
+    Number((a.receivedAtDestination * 10000n) / a.amount)
+);
+```
+
+3. **Route Selection**
+The SDK selects the best routes based on:
+- Amount received after fees
+- Bridge duration
+- Bridge reliability
+- Gas costs
+
+## Best Practices
+
+1. **Error Handling**
+```typescript
+try {
+    const bridgeFees = await fetchBridgeFees(/*...*/);
+} catch (error) {
+    // Return null to indicate bridge unavailable
+    return null;
+}
+```
+
+2. **Gas Estimation**
+- Always provide conservative gas limits
+- Account for varying gas costs across chains
+- Include buffer for token approvals
+
+3. **Amount Calculation**
+- Account for all fees and slippage
+- Return accurate `receivedAtDestination` amounts
+- Consider minimum bridge amounts
+
+4. **Bridge Duration**
+- Provide accurate `bridgingDurationExpectedMs` when possible
+- This helps the MEE service optimize operation timing
+
+## Integration Example
+
+Here's how to register your plugin with the SDK:
+
+```typescript
+const quote = await supertransaction()
+    .injectAccount(mcNexus)
+    .addInstructions(
+        await requireErc20Balance({
+            amount: supplyAmount,
+            chain: base,
+            token: xUSDC,
+            bridgingPlugins: [MyBridgePlugin, AcrossPlugin]
+        })
+    )
+    .getQuote(meeService);
+```
+
+The SDK will automatically evaluate your plugin alongside others to find the optimal bridging route.

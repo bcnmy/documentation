@@ -1,271 +1,359 @@
 # Biconomy MEE SDK Implementation Guide
 
-## Initial Setup
+## Introduction
+The Biconomy MEE SDK revolutionizes how we think about cross-chain operations. Imagine being able to gather funds scattered across multiple blockchains and use them in a single operation, all with just one signature. This is now possible through ERC7579-compliant smart accounts and the MEE orchestration service.
 
-### 1. Installation
-Install the required packages:
+For example, you might have 300 USDC on Optimism, 400 on Polygon, and 300 on Base, but want to supply 1000 USDC to Aave on Arbitrum. Traditionally, this would require multiple manual bridge operations, waiting for confirmations, and then interacting with Aave. With the MEE SDK, this becomes a single atomic operation. The MEE service handles all the complexity - it bridges funds from multiple sources simultaneously, waits for all confirmations, and only then executes your Aave supply transaction.
+
+This orchestration opens up powerful new possibilities. You could automatically move lending positions to the highest-yielding chain by unwinding a position on one chain and rebuilding it on another. Or distribute tokens from a single source to multiple destinations across different chains. Perhaps you need to gather liquidity from multiple chains to perform a large DEX trade - the MEE SDK makes this seamless.
+The magic happens through the MEE service's intelligent orchestration. When you initiate a transaction, the service:
+
+- Computes the optimal route for moving your funds
+- Executes all necessary bridges simultaneously
+- Monitors the arrival of funds across chains
+- Automatically proceeds with your intended operation once all prerequisites are met
+
+And because all of this happens through ERC7579-compliant smart accounts, you maintain full security and control while gaining unprecedented cross-chain capabilities.
+Let's dive into how you can implement this in your own applications.
+
+## Initial Setup & Core Concepts
+
+### Understanding Account Types
+Before diving into implementation, it's crucial to understand the two types of accounts you'll be working with:
+
+1. **EOA (Externally Owned Account)**: 
+   - This is your traditional private key-controlled account
+   - Used ONLY for signing transactions
+   - ⚠️ DO NOT store your funds here
+
+2. **Smart Contract Account (SCA)**:
+   - This is where all your funds MUST be stored
+   - All operations happen through this account
+   - Generated automatically for each chain
+
+🚨 **CRITICAL WARNING**: Your funds must be on the Smart Contract Account (SCA), not your EOA. Many users make the mistake of sending funds to their EOA - this will not work with the MEE SDK.
+
+### Installation
+First, install the required packages:
 ```bash
 npm install @biconomy/experimental-mee viem
 ```
 
-### 2. Important Note About Accounts
-When using the MEE SDK, there are two types of accounts you'll work with:
-- EOA (Externally Owned Account): Used only for signing
-- Smart Contract Account (SCA): Where your funds need to be
-
-⚠️ **CRITICAL**: Your funds must be on the Smart Contract Account (SCA), not your EOA. The EOA is only used for signing transactions, while the SCA is where all operations happen.
-
-## Overview
-The Biconomy MEE SDK provides a powerful abstraction layer for executing complex multi-chain operations through Supertransactions. A key feature of the SDK is its automatic orchestration capability - you simply define the operations you want to perform, and the SDK, together with the MEE network, automatically:
-
-- Determines dependencies between operations
-- Handles cross-chain bridging requirements
-- Sequences transactions in the correct order
-- Manages transaction completion verification
-- Coordinates different providers for optimal execution
-
-For example, if you create a Supertransaction that needs to:
-1. Swap tokens on Optimism
-2. Use the resulting tokens on Base
-3. Finally deposit into a protocol on Arbitrum
-
-The SDK will automatically figure out that it needs to:
-- Wait for the swap to complete on Optimism
-- Bridge the tokens to Base
-- Wait for bridge confirmation
-- Execute the Base operation
-- Bridge to Arbitrum
-- Complete the final deposit
-
-All of this complex orchestration happens behind the scenes - you just define what you want to achieve, and the SDK handles the rest.
-
 ## Implementation Steps
 
-### 1. Initialize Account and Service
+### 1. Initialize Core Services
 
-First, set up the basic infrastructure needed to interact with the MEE:
+First, set up the MEE service which will handle all your cross-chain operations:
 
 ```typescript
-const eoa = privateKeyToAccount(PRIV_KEY);
 const meeService = createMeeService({
     meeNodeUrl: "https://mee-node.biconomy.io",
 });
+
+// Create a signer from your private key
+const signer = privateKeyToAccount(
+    "your-private-key-here"  // ⚠️ Never commit this to source control!
+);
 ```
 
-This creates:
-- An EOA (Externally Owned Account) from your private key
-- A connection to the MEE network for executing Supertransactions
+### 2. Set Up Multi-Chain Account
 
-### 2. Set Up Token Mappings
-
-Define the USDC token addresses across different chains:
-
-```typescript
-const mcUSDC = buildMultichainAddressMapping([
-    mapAddressToChain("0x036C...", baseSepolia.id),
-    mapAddressToChain("0x75fa...", arbitrumSepolia.id),
-]);
-```
-
-This creates a mapping that:
-- Tracks USDC addresses on each chain
-- Provides easy access via `mcUSDC.on(chainId)`
-- Ensures consistent token addressing
-
-### 3. Initialize Multi-Chain Account and Check Balances
-
-Create a smart account and verify your balances:
+Create your Smart Contract Account infrastructure across multiple chains:
 
 ```typescript
 const mcNexus = await toMultichainNexusAccount({
-    chains: [baseSepolia, arbitrumSepolia],
-    signer: eoa,
+    chains: [polygon, optimism, base],  // Specify which chains you'll operate on
+    signer: signer,
 });
 
-// Get your Smart Contract Account addresses for each chain
-const baseAddress = mcNexus.deploymentOn(baseSepolia.id).address;
-const arbitrumAddress = mcNexus.deploymentOn(arbitrumSepolia.id).address;
+// Get your SCA addresses for each chain
+const optimismAddress = mcNexus.deploymentOn(optimism.id).address;
+const baseAddress = mcNexus.deploymentOn(base.id).address;
+const polygonAddress = mcNexus.deploymentOn(polygon.id).address;
 
-console.log('Your SCA address on Base Sepolia:', baseAddress);
-console.log('Your SCA address on Arbitrum Sepolia:', arbitrumAddress);
+console.log('Your SCA addresses:');
+console.log('Optimism:', optimismAddress);
+console.log('Base:', baseAddress);
+console.log('Polygon:', polygonAddress);
 
-// Check your USDC balances
-const usdcBalance = await getUnifiedERC20Balance({
-    multichainAccount: mcNexus,
-    tokenMapping: mcUSDC,
-});
-
-console.log('USDC Balances:', {
-    total: usdcBalance.balance.toString(),
-    breakdown: usdcBalance.breakdown.map(b => ({
-        chainId: b.chainId,
-        balance: b.balance.toString()
-    }))
-});
-
-// ⚠️ Ensure you have sufficient USDC in your SCA addresses, not your EOA!
+// ⚠️ Remember: Send your funds to these addresses, not your EOA!
 ```
 
-### 4. Build Operations (User Operations)
+### 3. Initialize Multi-Chain Contracts
 
-User Operations (UserOps) are abstracted transaction objects that define what actions should be executed on each chain. They represent the actual operations your smart account will perform.
+Set up your token and protocol contract interfaces across chains:
 
 ```typescript
-// User Operation for Arbitrum Sepolia
-const userOpArb = buildAbstractUserOp({
-    calls: [{
-        to: mcUSDC.on(arbitrumSepolia.id),
-        gasLimit: 100000n,
-        data: encodeFunctionData({
-            abi: erc20Abi,
-            functionName: 'transfer',
-            args: [
-                mcNexus.deploymentOn(arbitrumSepolia.id).address,  // your SCA address
-                parseUnits('0.3', 6)  // 0.3 USDC (6 decimals)
-            ]
-        })
-    }],
-    chainId: arbitrumSepolia.id
+// Set up USDC across chains
+const xUSDC = getMultichainContract({
+    abi: erc20Abi,
+    deployments: [
+        ["0x0b2c639c533813f4aa9d7837caf62653d097ff85", optimism.id],
+        ["0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", base.id],
+    ],
 });
 
-// User Operation for Base Sepolia
-const userOpBase = buildAbstractUserOp({
-    calls: [{
-        to: mcUSDC.on(baseSepolia.id),
-        gasLimit: 100000n,
-        data: encodeFunctionData({
-            abi: erc20Abi,
-            functionName: 'transfer',
-            args: [
-                mcNexus.deploymentOn(baseSepolia.id).address,  // your SCA address
-                parseUnits('0.3', 6)  // 0.3 USDC (6 decimals)
-            ]
-        })
-    }],
-    chainId: baseSepolia.id
+// Set up AAVE lending pool across chains
+const xAAVE = getMultichainContract({
+    abi: parseAbi([
+        "function supply(address asset, uint256 amount, address onBehalfOf, uint16 referralCode)",
+    ]),
+    deployments: [
+        ["0x794a61358D6845594F94dc1DB02A252b5b4814aD", optimism.id],
+        ["0xA238Dd80C259a72e81d7e4664a9801593F98d1c5", base.id],
+    ],
 });
 ```
 
-Each UserOp contains:
-- `calls`: Array of transactions to execute
-- `to`: Target contract address (USDC contract)
-- `gasLimit`: Maximum gas to use
-- `data`: Encoded function call data
-- `chainId`: Target chain for execution
+### 4. Define Your Operation Parameters
 
-### 5. Request Execution Quote
-
-Get a quote for executing the Supertransaction:
+Set up the parameters for your operations:
 
 ```typescript
-const quote = await meeService.getQuote({
-    account: mcNexus,
-    supertransaction: {
-        instructions: [userOpArb, userOpBase],
-        feeToken: {
-            chainId: arbitrumSepolia.id,
-            address: mcUSDC.on(arbitrumSepolia.id)
-        }
-    }
-});
+// Define the amount you want to supply (1 USDC in this example)
+const supplyAmount = parseUnits("1", 6);  // USDC has 6 decimals
+
+// zeroAddress is used when you want to supply funds for yourself
+// If you want to supply for another address, replace zeroAddress with that address
+const zeroAddress = "0x0000000000000000000000000000000000000000";
 ```
 
-### 6. Execute the Supertransaction
+### 5. Build and Execute the Supertransaction
 
-Finally, execute the operations:
+Now, build your transaction using the fluent builder pattern:
 
 ```typescript
-const hash = await meeService.execute({
-    quote: quote,
-    signature: formatMeeSignature({
-        signedHash: await eoa.signMessage({
-            message: { raw: quote.hash }
-        }),
-        executionMode: 'direct-to-mee'
-    })
-});
-
-console.log('Supertransaction hash:', hash.hash);
-```
-
-[Previous sections remain the same until the execution step, then add:]
-
-### 6. Execute the Supertransaction
-
-Finally, execute the operations:
-
-```typescript
-const hash = await meeService.execute({
-    quote: quote,
-    signature: formatMeeSignature({
-        signedHash: await eoa.signMessage({
-            message: { raw: quote.hash }
-        }),
-        executionMode: 'direct-to-mee'
-    })
-});
-
-console.log('Supertransaction hash:', hash.hash);
-```
-
-### 7. Monitor Execution Progress
-
-You can monitor the progress of your Supertransaction execution by visiting:
-```
-https://meescan.biconomy.io/details/{hash}
-```
-Replace `{hash}` with your Supertransaction hash.
-
-The MEE Scanner will show you:
-- Real-time execution status
-- Progress across different chains
-- Details of each operation
-- Transaction confirmations
-- Any errors or issues that occur
-
-## Best Practices
-
-### Account Management
-1. Always verify funds are in your SCA, not EOA
-2. Use `mcNexus.deploymentOn(chainId).address` to get correct addresses
-3. Check balances before executing transactions
-4. Keep track of your addresses on each chain
-
-### Balance Verification
-```typescript
-// Example of checking balances before operation
-async function verifyBalance() {
-    const balance = await getUnifiedERC20Balance({
-        multichainAccount: mcNexus,
-        tokenMapping: mcUSDC
-    });
+const quote = await supertransaction()
+    // Inject your multi-chain account
+    .injectAccount(mcNexus)
     
-    console.log('Balances across chains:', {
-        total: balance.balance.toString(),
-        breakdown: balance.breakdown.map(b => ({
-            chainId: b.chainId,
-            balance: b.balance.toString()
-        }))
-    });
+    // Specify which token to use for gas payments and on which chain
+    .payGasWith("USDC", { on: optimism.id })
     
-    // Ensure sufficient balance
-    if (balance.balance < requiredAmount) {
-        throw new Error('Insufficient balance in Smart Contract Account');
-    }
-}
+    // Add your transaction instructions
+    .addInstructions(
+        // First, ensure the required USDC balance is available on Base
+        // requireErc20Balance is a powerful function that ensures you have
+        // the required token balance on the specified chain. If the balance
+        // isn't available, it'll automatically find optimal bridging routes
+        // from multiple chains to make sure the required amount is available.
+        // If the amount isn't available across any chains, it'll throw an error.
+        await requireErc20Balance({
+            amount: supplyAmount,  // Amount needed on the target chain
+            chain: base,          // Target chain where balance is required
+            token: xUSDC,        // Token contract interface
+        }),
+        
+        // Then, supply to AAVE on Base
+        xAAVE.on(base.id).supply({
+            args: [
+                xUSDC.addressOn(base.id),    // token to supply
+                supplyAmount - parseUnits("0.2", 6),  // amount minus some buffer for fees
+                zeroAddress,  // beneficiary (zero = supply to yourself)
+                0,  // referral code
+            ],
+            gasLimit: 100_000n,
+        })
+    )
+    // Get quote from MEE service
+    .getQuote(meeService);
+
+// Execute the transaction
+const result = await meeService.execute(
+    await signMeeQuote({
+        executionMode: 'direct-to-mee',
+        quote,
+        signer
+    })
+);
+
+console.log("Supertransaction hash:", result.hash);
 ```
 
-### Error Handling
-Important checks to implement:
-- Token balance verification
-- Account deployment status
-- Chain availability
-- Transaction confirmation
-- Recovery procedures
+### 6. Monitor Your Transaction
 
-### Security Considerations
-1. Secure private key management
-2. Verify token approvals
-3. Check execution quotes
-4. Monitor transaction status
-5. Implement timeout handling
+Track your transaction progress at:
+```
+https://meescan.biconomy.io/details/{your-transaction-hash}
+```
+
+Replace `{your-transaction-hash}` with `result.hash` from the previous step.
+
+## Understanding requireErc20Balance
+
+The `requireErc20Balance` function is the MEE SDK's power tool for cross-chain token management. Its most remarkable feature is the ability to bridge tokens from multiple source chains to your target chain with just a single signature.
+
+Consider this example:
+```typescript
+await requireErc20Balance({
+    amount: parseUnits("1000", 6),  // Need 1000 USDC
+    chain: base,                     // On Base chain
+    token: xUSDC,                    // USDC token contract
+})
+```
+
+When you execute this, the function:
+1. Checks if you already have 1000 USDC on Base
+2. If not, it scans your other chains (like Optimism and Polygon)
+3. Automatically calculates the best way to move your tokens
+
+The real magic happens when your tokens are spread across chains. For instance, if you have:
+- 400 USDC on Optimism
+- 600 USDC on Polygon
+- Need 1000 USDC on Base
+
+With a single signature, `requireErc20Balance` will orchestrate both bridges simultaneously:
+- Bridge 400 USDC from Optimism → Base
+- Bridge 600 USDC from Polygon → Base 
+
+The function handles all the complexity of approvals, bridge interactions, and confirmations behind the scenes. You don't need to worry about manually coordinating multiple bridge transactions or managing complex cross-chain workflows. Just tell it how much you need and where you need it - the function handles everything else.
+
+Let's break down what's happening in this transaction:
+
+1. The SDK first checks if you have enough USDC on Base chain using `requireErc20Balance`
+2. If the balance isn't sufficient, it will automatically:
+   - Check balances across all configured chains
+   - Calculate optimal bridging routes from multiple source chains
+   - Orchestrate complex multi-hop bridges if necessary (e.g., Chain A → Chain B → Base)
+   - Execute necessary approvals and transfers
+   - Wait for bridge confirmations
+3. If the required amount isn't available across ANY chains:
+   - The function will throw an error
+   - No transaction will be executed
+   - You'll need to ensure sufficient funds exist somewhere in your SCA network
+3. Once the balance is confirmed, it executes the AAVE supply transaction
+4. All gas fees are paid in USDC on Optimism (as specified in `payGasWith`)
+
+## Best Practices and Warnings
+
+### Pre-execution Checklist
+Before executing any transaction:
+
+1. **Balance Location**: 
+   - ✅ Funds in SCA addresses
+   - ❌ NOT in EOA address
+
+2. **Gas Token**:
+   - Ensure you have enough USDC on the specified gas chain (Optimism in this example)
+   - The SDK will use this to pay for all cross-chain operations
+
+3. **Buffer Amounts**:
+   - Always leave some buffer in your amounts for fees
+   - Note how we subtract `parseUnits("0.2", 6)` from the supply amount
+
+### Missing features
+
+Right now, there is no way for contracts across chains to share context on e.g.
+- How much was bridged
+- Output of operation on source chains
+
+This will all be solved in a big upcoming release - the Composability Stack!
+
+### Considerations
+
+1. **Address Verification**:
+   - Always verify SCA addresses before sending funds
+   - Use the `mcNexus.deploymentOn(chainId).address` method
+   - Double-check all contract addresses
+
+2. **Transaction Monitoring**:
+   - Always monitor complex transactions on MEEscan
+   - Set up proper error handling
+   - Implement timeout mechanisms for long-running operations
+
+## Understanding Bridge Plugins
+
+Behind the scenes, the MEE SDK uses a system of bridge plugins to handle cross-chain token transfers. Each plugin encapsulates the logic for interacting with a specific bridge protocol. When you use `requireErc20Balance`, the SDK automatically selects and uses the appropriate bridge plugin based on the best available route.
+
+Here's an example of how a bridge plugin works, using the Across Protocol implementation:
+
+```typescript
+import { Address, parseAbi } from "abitype";
+import { encodeFunctionData, erc20Abi } from "viem";
+import { AbstractCall, buildMeeUserOp } from "../workflow";
+import { BridgingPlugin, BridgingPluginResult, BridgingUserOpParams } from "../utils/syntax/bridging-builder";
+
+export const AcrossPlugin: BridgingPlugin = {
+  encodeBridgeUserOp: async (params: BridgingUserOpParams): Promise<BridgingPluginResult> => {
+    const {
+      bridgingAmount,
+      fromChain,
+      multichainAccount,
+      toChain,
+      tokenMapping,
+    } = params;
+
+    // Get token addresses and user accounts on both chains
+    const inputToken = tokenMapping.on(fromChain.id);
+    const outputToken = tokenMapping.on(toChain.id);
+    const depositor = multichainAccount.deploymentOn(fromChain.id).address;
+    const recipient = multichainAccount.deploymentOn(toChain.id).address;
+
+    // Get bridge fees from Across API
+    const suggestedFees = await acrossGetSuggestedFees({
+      amount: bridgingAmount,
+      destinationChainId: toChain.id,
+      inputToken,
+      outputToken,
+      originChainId: fromChain.id,
+    });
+
+    // Calculate output amount after fees
+    const outputAmount = BigInt(bridgingAmount) - BigInt(suggestedFees.totalRelayFee.total);
+
+    // Create approval transaction for bridge
+    const approveCall: AbstractCall = {
+      to: inputToken,
+      gasLimit: 100000n,
+      data: encodeFunctionData({
+        abi: erc20Abi,
+        functionName: "approve",
+        args: [suggestedFees.spokePoolAddress, bridgingAmount],
+      }),
+    };
+
+    // Create bridge deposit transaction
+    const depositCall: AbstractCall = {
+      to: suggestedFees.spokePoolAddress,
+      gasLimit: 150000n,
+      data: encodeFunctionData({
+        abi: depositV3abi,
+        args: [
+          depositor,
+          recipient,
+          inputToken,
+          outputToken,
+          bridgingAmount,
+          outputAmount,
+          BigInt(toChain.id),
+          suggestedFees.exclusiveRelayer,
+          parseInt(suggestedFees.timestamp),
+          fillDeadline,
+          parseInt(suggestedFees.exclusivityDeadline),
+          "0x", // message
+        ],
+      }),
+    };
+
+    // Build and return the user operation
+    const userOp = buildMeeUserOp({
+      calls: [approveCall, depositCall],
+      chainId: fromChain.id,
+    });
+
+    return {
+      userOp: userOp,
+      receivedAtDestination: outputAmount,
+      bridgingDurationExpectedMs: undefined,
+    };
+  },
+};
+```
+
+This plugin demonstrates how the SDK:
+1. Takes parameters like amount, source/destination chains, and token addresses
+2. Handles bridge-specific requirements (like fetching fees from Across's API)
+3. Creates the necessary approval and deposit transactions
+4. Returns a structured user operation that the SDK can execute
+
+The beauty is that you never need to interact with these plugins directly - the SDK automatically chooses and uses the optimal bridge based on your requirements.

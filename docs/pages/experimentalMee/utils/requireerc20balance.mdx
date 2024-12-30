@@ -1,0 +1,167 @@
+# requireErc20Balance
+
+A powerful function that ensures token availability on a target chain by orchestrating cross-chain bridges from multiple source chains in a single operation.
+
+## Function Signature
+
+```typescript
+async function requireErc20Balance(params: {
+    amount: bigint;        // Amount needed on target chain
+    chain: Chain;          // Target chain
+    token: MultichainContract<typeof erc20Abi>;  // Token contract
+}): Promise<MeeUserOp>
+```
+
+## Core Functionality
+
+This function ensures you have enough tokens on your target chain by:
+1. Checking current balance on the target chain
+2. If insufficient, scanning all configured chains for available balances
+3. Automatically creating bridging operations from multiple source chains
+4. All through a single signature
+
+## Example Usage
+
+Basic usage to ensure USDC availability on Base:
+```typescript
+const supplyAmount = parseUnits("1000", 6);
+
+const quote = await supertransaction()
+    .injectAccount(mcNexus)
+    .payGasWith("USDC", { on: optimism.id })
+    .addInstructions(
+        await requireErc20Balance({
+            amount: supplyAmount,
+            chain: base,
+            token: xUSDC,
+        })
+    )
+    .getQuote(meeService);
+```
+
+## How It Works
+
+Given your token balances:
+```
+Optimism: 400 USDC
+Polygon:  600 USDC
+Base:     0 USDC  (target chain)
+```
+
+When requesting 1000 USDC on Base, the function will:
+1. Detect insufficient balance on Base
+2. Find available balances on Optimism and Polygon
+3. Create a single operation that:
+   - Bridges 400 USDC from Optimism → Base
+   - Bridges 600 USDC from Polygon → Base
+   - Coordinates timing of all operations
+
+## Advanced Features
+
+### Bridge Selection
+The function uses the SDK's bridge routing system to:
+- Select optimal bridges between chains
+- Calculate and factor in bridge fees
+- Handle gas token conversions if needed
+
+### Error Handling
+Throws descriptive errors when:
+- Insufficient total balance across all chains
+- Target chain not supported
+- Bridge routes unavailable
+
+### Timing Management
+- Coordinates multiple bridge operations
+- Ensures all funds arrive before proceeding
+- Handles bridge confirmation timeouts
+
+## Integration Example
+
+Complex DeFi operation requiring tokens from multiple chains:
+```typescript
+const quote = await supertransaction()
+    .injectAccount(mcNexus)
+    .payGasWith("USDC", { on: optimism.id })
+    .addInstructions(
+        // First ensure USDC availability
+        await requireErc20Balance({
+            amount: supplyAmount,
+            chain: base,
+            token: xUSDC,
+        }),
+        // Then use the USDC for your operation
+        xAAVE.on(base.id).supply({
+            args: [
+                xUSDC.addressOn(base.id),
+                supplyAmount - parseUnits("0.2", 6),
+                zeroAddress,
+                0,
+            ],
+            gasLimit: 100_000n,
+        })
+    )
+    .getQuote(meeService);
+```
+
+## Security Considerations
+
+- All operations are executed through ERC7579-compliant smart accounts
+- Each bridge operation is validated on-chain
+- All steps require only a single signature from the user
+- Bridge selection and routing is done locally in the SDK
+- The MEE service only handles execution orchestration
+
+## Common Use Cases
+
+1. **DeFi Position Management**
+   ```typescript
+   // Move lending position to highest yield chain
+   await requireErc20Balance({
+       amount: totalPositionSize,
+       chain: targetChain,
+       token: xUSDC,
+   })
+   ```
+
+2. **Treasury Management**
+   ```typescript
+   // Consolidate treasury funds to one chain
+   await requireErc20Balance({
+       amount: requiredAmount,
+       chain: treasuryChain,
+       token: xUSDC,
+   })
+   ```
+
+3. **Multi-Chain Liquidity**
+   ```typescript
+   // Gather liquidity for a large DEX trade
+   await requireErc20Balance({
+       amount: tradeSize,
+       chain: dexChain,
+       token: xUSDC,
+   })
+   ```
+
+## Tips and Best Practices
+
+1. Always include buffer for fees:
+   ```typescript
+   const bufferAmount = supplyAmount + parseUnits("0.2", 6);
+   ```
+
+2. Monitor transaction progress:
+   ```typescript
+   console.log("MEEscan URL:", `https://meescan.biconomy.io/details/${result.hash}`);
+   ```
+
+3. Implement proper error handling:
+   ```typescript
+   try {
+       await requireErc20Balance({/*...*/})
+   } catch (error) {
+       if (error.message.includes('insufficient balance')) {
+           // Handle insufficient funds
+       }
+   }
+   ```
