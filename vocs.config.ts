@@ -500,6 +500,32 @@ export const defaultSidebar = [
     link: "/contractsAndAudits",
   },
   {
+    text: "Modular Execution Environment",
+    items: [
+      {
+        text: "Getting started",
+        link: "/experimentalMee"
+      },
+      {
+        text: "Multichain Contract Mapping",
+        link: "/experimentalMee/multichain-contract"
+      },
+      {
+        text: "Multichain Smart Accounts",
+        link: "/experimentalMee/multichain-smart-account"
+      },
+      {
+        text: "MEEs Explained",
+        link: "/experimentalMee/mee"
+      },
+      {
+        text: "Supertransactions Explained",
+        link: "/experimentalMee/supertransactions"
+      },
+      
+    ]
+  },
+  {
     link: "/dashboard",
     text: "Dashboard",
     items: [

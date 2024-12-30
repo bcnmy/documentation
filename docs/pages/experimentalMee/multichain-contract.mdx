@@ -1,0 +1,80 @@
+# Understanding MultichainContract
+
+The `MultichainContract` is a powerful abstraction in the MEE SDK that lets you interact with the same contract across multiple chains using a single, unified interface. Think of it as a "master remote control" that can operate the same contract regardless of which chain it's deployed on.
+
+## Creating a MultichainContract
+
+Here's how you create one:
+
+```typescript
+const mcUSDC = getMultichainContract({
+    abi: erc20Abi,
+    deployments: [
+        ["0x0b2c639c533813f4aa9d7837caf62653d097ff85", optimism.id],
+        ["0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", base.id],
+    ],
+});
+```
+
+This creates a contract instance that knows about USDC on both Optimism and Base chains.
+
+## Reading From Multiple Chains
+
+One of the most powerful features is the ability to read from multiple chains in a single call:
+
+```typescript
+// Read USDC balances across multiple chains
+const balances = await mcUSDC.read({
+    account: mcNexus,
+    functionName: "balanceOf",
+    args: [accountAddress],
+    onChains: [optimism, base],
+});
+
+// balances will be an array of:
+// [
+//   { chainId: optimism.id, result: 1000000n },
+//   { chainId: base.id, result: 2000000n }
+// ]
+```
+
+Instead of making separate RPC calls and handling responses for each chain, you get all the data in one clean operation.
+
+## Encoding Chain-Specific Actions
+
+When you need to create transactions, the `.on(chainId)` method lets you specify which chain you're targeting:
+
+```typescript
+// Create a transfer operation on Optimism
+const transferOp = mcUSDC.on(optimism.id).transfer({
+    args: [recipientAddress, parseUnits("100", 6)],
+    gasLimit: 100000n
+});
+
+// Create an approval operation on Base
+const approvalOp = mcUSDC.on(base.id).approve({
+    args: [spenderAddress, parseUnits("1000", 6)],
+    gasLimit: 100000n
+});
+```
+
+Each operation is automatically encoded with the correct contract address for that specific chain. The SDK handles all the details of proper encoding and chain-specific parameters.
+
+## Type Safety
+
+The `MultichainContract` is fully typed - you get autocomplete for:
+- Contract functions available in your ABI
+- Function arguments with proper types
+- Return types from read operations
+
+If you try to call a function that doesn't exist in the ABI or pass incorrect arguments, you'll get a TypeScript error at compile time.
+
+## Common Use Cases
+
+The `MultichainContract` excels at scenarios like:
+- Checking balances across multiple chains before initiating a transfer
+- Creating complex multi-chain operations where you need to interact with the same contract on different chains
+- Building interfaces that need to show data from multiple chains simultaneously
+- Encoding chain-specific transactions as part of larger multi-chain workflows
+
+The beauty of this abstraction is that it handles all the complexity of cross-chain contract interactions while presenting a clean, unified interface for your code.
