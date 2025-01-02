@@ -1,24 +1,28 @@
-# Supported Networks
+# Supported Networks (Chains)
 
-| Network                      | Bundler | Sponsorship PM | Token PM |
-|-----------------------------|---------|----------------------|-----------------|
-| Ethereum Mainnet            | ✅      | ✅                   | ✅              |
-| Ethereum Sepolia            | ✅      | ✅                   | ✅              |
-| Base Mainnet                | ✅      | ✅                   | ✅              |
-| Base Testnet                | ✅      | ✅                   | ✅              |
-| OP Mainnet                  | ✅      | ✅                   | ✅              |
-| OP Sepolia Testnet          | ✅      | ✅                   | ✅              |
-| Scroll Mainnet              | ✅      | ✅                   | ✅              |
-| Scroll Sepolia Testnet      | ✅      | ✅                   | ✅              |
-| Arbitrum Mainnet            | ✅      | ✅                   | ✅              |
-| Arbitrum Sepolia Testnet    | ✅      | ✅                   | ✅              |
-| Binance Smart Chain Mainnet | ✅      | ✅                   | ✅              |
-| Binance Smart Chain Testnet | ✅      | ✅                   | ✅              |
-| Polygon Amoy Testnet        | ✅      | ✅                   | ❌              |
-| Polygon Mainnet             | ✅      | ✅                   | ✅              |
-| Gnosis Mainnet              | ✅      | ✅                   | ✅              |
-| Gnosis Chiado Testnet       | ✅      | ✅                   | ❌              |
-| Berachain Bartio Testnet    | ✅      | ✅                   | ❌              |
+:::info
+Click the table headers to view the real-time list of deployed contracts on [contractscan](https://contractscan.xyz/).
+:::
+
+
+| Network                      | Bundler | Sponsorship PM (Infra) | Token PM (Infra) | [Sponsorship PM Contract](https://contractscan.xyz/contract/0x0000006087310897e0BFfcb3f0Ed3704f7146852) | [Token PM Contract](https://contractscan.xyz/contract/0x00000000301515A5410e0d768aF4f53c416edf19) | [Nexus Contract](https://contractscan.xyz/contract/0x0000002D6DB27c52E3C11c1Cf24072004AC75cBa) |
+|-----------------------------|---------|----------------------|-----------------|----------------------|-----------------|-----------------|
+| Ethereum Mainnet            | ✅      | ✅                   | ✅              | ❌                   | ❌              | ❌              |
+| Ethereum Sepolia            | ✅      | ✅                   | ✅              | ✅                   | ✅              | ✅              |
+| Base Mainnet                | ✅      | ✅                   | ✅              | ✅                   | ✅              | ✅              |
+| Base Testnet                | ✅      | ✅                   | ✅              | ✅                   | ✅              | ✅              |
+| OP Mainnet                  | ✅      | ✅                   | ✅              | ✅                   | ✅              | ✅              |
+| OP Sepolia Testnet          | ✅      | ✅                   | ✅              | ✅                   | ✅              | ✅              |
+| Scroll Mainnet              | ✅      | ✅                   | ✅              | ❌                   | ✅              | ✅              |
+| Scroll Sepolia Testnet      | ✅      | ✅                   | ✅              | ❌                   | ✅              | ✅              |
+| Arbitrum Mainnet            | ✅      | ✅                   | ✅              | ❌                   | ✅              | ✅              |
+| Arbitrum Sepolia Testnet    | ✅      | ✅                   | ✅              | ❌                   | ✅              | ✅              |
+| Binance Smart Chain Mainnet | ✅      | ✅                   | ✅              | ❌                   | ✅              | ✅              |
+| Binance Smart Chain Testnet | ✅      | ✅                   | ✅              | ❌                   | ✅              | ✅              |
+| Polygon Amoy Testnet        | ✅      | ✅                   | ❌              | ❌                   | ❌              | ✅              |
+| Polygon Mainnet             | ✅      | ✅                   | ✅              | ❌                   | ❌              | ✅              |
+| Gnosis Mainnet              | ✅      | ✅                   | ✅              | ✅                   | ✅              | ✅              |
+| Gnosis Chiado Testnet       | ✅      | ✅                   | ❌              | ❌                   | ❌              | ✅              |
 
 *PM = Paymaster
 

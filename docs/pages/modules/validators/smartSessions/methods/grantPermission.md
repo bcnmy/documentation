@@ -1,4 +1,4 @@
-# Granting Smart Sessions
+# Grant Permission
 
 The Smart Sessions module provides two key actions when using `smartSessionCreateActions`: `grantPermission` and `trustAttesters`.
 
@@ -9,7 +9,6 @@ The Smart Sessions module provides two key actions when using `smartSessionCreat
 Creates a new session with specified permissions and rules.
 
 ### Usage
-
 
 :::code-group
 
@@ -34,14 +33,14 @@ const response = await usersNexusClient.grantPermission({
 import { OneOf, Address, Hex, http } from "viem"
 import { ActionPolicyInfo, CreateSessionDataParams, toSmartSessionsValidator, smartSessionCreateActions } from "@biconomy/sdk-canary"
 import { privateKeyToAccount } from "viem/accounts";
-import { createNexusClient } from "@biconomy/sdk";
+import { createSmartAccountClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
 
-const nexusClient = await createNexusClient({
+const nexusClient = await createSmartAccountClient({
   signer: account, 
   chain: baseSepolia,
   transport: http(), 
@@ -164,14 +163,14 @@ const response = await usersNexusClient.trustAttesters({
 import { OneOf, Address, Hex, http } from "viem"
 import { ActionPolicyInfo, CreateSessionDataParams, toSmartSessionsValidator, smartSessionCreateActions } from "@biconomy/sdk-canary"
 import { privateKeyToAccount } from "viem/accounts";
-import { createNexusClient } from "@biconomy/sdk";
+import { createSmartAccountClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 
 const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
 
-const nexusClient = await createNexusClient({
+const nexusClient = await createSmartAccountClient({
   signer: account, 
   chain: baseSepolia,
   transport: http(), 

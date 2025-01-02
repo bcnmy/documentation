@@ -53,7 +53,7 @@ export function App {
 ```ts
 import { http } from "viem";
 import { baseSepolia } from "viem/chains";
-import { createNexusClient, NexusClient } from "@biconomy/sdk";
+import { createSmartAccountClient, NexusClient } from "@biconomy/sdk";
 import { useWallets, usePrivy } from '@privy-io/react-auth'; // [!code focus]  
 
 export default function Home() {
@@ -72,7 +72,7 @@ export default function Home() {
 ```ts
 import { http } from "viem";
 import { baseSepolia } from "viem/chains";
-import { createNexusClient, NexusClient } from "@biconomy/sdk";
+import { createSmartAccountClient, NexusClient } from "@biconomy/sdk";
 import { useWallets, usePrivy } from '@privy-io/react-auth';
 
 export default function Home() {
@@ -86,7 +86,7 @@ export default function Home() {
             (async () => {
                 const provider = await embeddedWallet.getEthersProvider(); 
                 const signer = provider.getSigner();
-                const nexusClient = await createNexusClient({ 
+                const nexusClient = await createSmartAccountClient({ 
                     signer, 
                     chain: baseSepolia,
                     transport: http(),
@@ -112,7 +112,7 @@ export default function Home() {
 ```ts
 import { http } from "viem";
 import { baseSepolia } from "viem/chains";
-import { createNexusClient, NexusClient } from "@biconomy/sdk";
+import { createSmartAccountClient, NexusClient } from "@biconomy/sdk";
 import { useWallets, usePrivy } from '@privy-io/react-auth';
 
 export default function Home() {
@@ -126,7 +126,7 @@ export default function Home() {
             (async () => {
                 const provider = await embeddedWallet.getEthersProvider();
                 const signer = provider.getSigner();
-                const nexusClient = await createNexusClient({
+                const nexusClient = await createSmartAccountClient({
                     signer,
                     chain: baseSepolia,
                     transport: http(),

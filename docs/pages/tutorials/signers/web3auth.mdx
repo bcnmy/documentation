@@ -35,7 +35,7 @@ import { CHAIN_NAMESPACES } from "@web3auth/base";
 import { createWalletClient, custom, http, type WalletClient } from "viem";
 import { baseSepolia } from "viem/chains";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
-import { createNexusClient, type EthereumProvider } from "@biconomy/sdk";
+import { createSmartAccountClient, type EthereumProvider } from "@biconomy/sdk";
 
 // Chain configuration for Base Sepolia
 const chainConfig = {
@@ -78,7 +78,7 @@ if (!web3authProvider) {
 
 const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`;
 
-const nexusClient = await createNexusClient({
+const nexusClient = await createSmartAccountClient({
   chain: baseSepolia,
   signer: web3authProvider,
   transport: http(),

@@ -8,9 +8,9 @@
 		"preview": "vocs preview"
 	},
 	"dependencies": {
-		"@biconomy/sdk": "^0.0.21",
+		"@biconomy/sdk": "^0.0.22",
 		"@biconomy/passkey": "0.0.2",
-		"@biconomy/sdk-canary": "0.0.22",
+		"@biconomy/sdk-canary": "0.0.23",
 		"@dynamic-labs/sdk-react-core": "^3.6.3",
 		"@types/react": "^18.3.12",
 		"@typescript/twoslash": "^3.2.8",
