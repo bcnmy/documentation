@@ -25,7 +25,7 @@ const account = privateKeyToAccount(`${privateKey}`);
 A Smart Account needs access to the Network to query for information about its state (e.g., nonce, address, etc.). Let's configure a client for the Smart Account. A `bundlerUrl` is required to submit User Operations to the Network, which will initialize the Smart Account.
 
 ```typescript twoslash
-import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk";
+import { createSmartAccountClient, createBicoPaymasterClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http } from "viem"; 
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
@@ -36,7 +36,7 @@ const account = privateKeyToAccount(`${privateKey}`);
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; // [!code focus:12]
 const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703";
 
-const nexusClient = await createNexusClient({ 
+const nexusClient = await createSmartAccountClient({ 
     signer: account, 
     chain: baseSepolia, 
     transport: http(), 
@@ -50,7 +50,7 @@ const nexusClient = await createNexusClient({
 Next, define the transactions you want to send in a batch. Each transaction should specify the necessary parameters. Use the `sendTransaction` method to send the batch of transactions.
 
 ```typescript twoslash
-import { createNexusClient, createBicoPaymasterClient } from "@biconomy/sdk";
+import { createSmartAccountClient, createBicoPaymasterClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther } from "viem"; 
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
@@ -61,7 +61,7 @@ const account = privateKeyToAccount(`${privateKey}`);
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; 
 const paymasterUrl = "https://paymaster.biconomy.io/api/v2/84532/F7wyL1clz.75a64804-3e97-41fa-ba1e-33e98c2cc703"; 
 
-const nexusClient = await createNexusClient({ 
+const nexusClient = await createSmartAccountClient({ 
     signer: account, 
     chain: baseSepolia, 
     transport: http(), 

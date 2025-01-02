@@ -13,7 +13,7 @@ The SDK uses a module extension pattern to maintain efficient bundle sizes and e
 For example, instead of:
 ```typescript
 // ❌ This would include ALL module code in your bundle
-const nexusClient = createNexusClient({
+const nexusClient = createSmartAccountClient({
   // config
   modules: [sessionsModule, securityModule, otherModules...]
 });
@@ -22,7 +22,7 @@ const nexusClient = createNexusClient({
 We use:
 ```typescript
 // ✅ Only the sessions module code is included
-const nexusClient = await createNexusClient({ /* config */ });
+const nexusClient = await createSmartAccountClient({ /* config */ });
 const sessionNexusClient = nexusClient.extend(smartSessionCreateActions(sessionsModule));
 ```
 
