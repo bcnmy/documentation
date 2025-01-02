@@ -47,7 +47,7 @@ A `bundlerUrl` is required to submit User Operations to the Network, which will 
 
 ```typescript twoslash
 import { privateKeyToAccount } from "viem/accounts";
-import { createNexusClient } from "@biconomy/sdk"; // [!code focus]
+import { createSmartAccountClient } from "@biconomy/sdk"; // [!code focus]
 import { baseSepolia } from "viem/chains"; // [!code focus]
 import { http, parseEther } from "viem"; // [!code focus]
 
@@ -55,7 +55,7 @@ const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44"; // [!code focus]
 
-const nexusClient = await createNexusClient({ // [!code focus]
+const nexusClient = await createSmartAccountClient({ // [!code focus]
     signer: account, // [!code focus]
     chain: baseSepolia, // [!code focus]
     transport: http(), // [!code focus]
@@ -64,7 +64,7 @@ const nexusClient = await createNexusClient({ // [!code focus]
 const smartAccountAddress = await nexusClient.account.address; // [!code focus]
 ```
 
-[See createNexusClient Docs](/nexus-client)
+[See createSmartAccountClient Docs](/nexus-client)
 
 ### Send User Operation
 
@@ -76,7 +76,7 @@ Ensure your smart account has sufficient funds to execute the transaction below.
 
 ```typescript twoslash
 import { privateKeyToAccount } from "viem/accounts";
-import { createNexusClient } from "@biconomy/sdk";
+import { createSmartAccountClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther } from "viem"; 
 
@@ -84,7 +84,7 @@ const privateKey = "PRIVATE_KEY";
 const account = privateKeyToAccount(`0x${privateKey}`)
 const bundlerUrl = "https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44";
 
-const nexusClient = await createNexusClient({ 
+const nexusClient = await createSmartAccountClient({ 
     signer: account, 
     chain: baseSepolia,
     transport: http(), 

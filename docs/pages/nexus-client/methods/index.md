@@ -1,5 +1,7 @@
 # Base ERC-7579 Methods
 
+The Nexus Client provides several methods for interacting with User Operations and the blockchain:
+
 ## `installModule`
 Installs the module on the smart account.
 
@@ -192,3 +194,22 @@ const userOpReceipt: UserOpReceipt = await smartAccount.sendTransactionWithExecu
 **Returns**
 
 - `Promise<UserOpReceipt>`: A promise of [UserOpReceipt](https://github.com/bcnmy/biconomy-client-sdk/blob/b3fe78f74ec366f50bbbb5ad8cf043e689df6bff/src/bundler/utils/Types.ts#L23) 
+
+## Transaction Methods
+- [sendTransaction](/nexus-client/methods/sendTransaction) - Submit a User Operation to the pool
+- [sendUserOperation](/nexus-client/methods/sendUserOperation) - Submit a customized User Operation
+- [sendTokenPaymasterUserOp](/nexus-client/methods/sendTokenPaymasterUserOp) - Send a User Operation with token paymaster
+
+## Preparation Methods
+- [prepareTokenPaymasterUserOp](/nexus-client/methods/prepareTokenPaymasterUserOp) - Prepare a User Operation with token paymaster
+- [prepareUserOperation](/nexus-client/methods/prepareUserOperation) - Prepare a User Operation without sending
+
+## Status & Information Methods
+- [waitForUserOperationReceipt](/nexus-client/methods/waitForUserOperationReceipt) - Wait for a User Operation to be included in a block
+- [estimateUserOperationGas](/nexus-client/methods/estimateUserOperationGas) - Estimate gas values for a User Operation
+- [getUserOperation](/nexus-client/methods/getUserOperation) - Get information about a User Operation
+- [debugUserOperation](/nexus-client/methods/debugUserOperation) - Debug a User Operation with detailed information
+
+## Network Methods
+- [getSupportedEntryPoints](/nexus-client/methods/getSupportedEntryPoints) - Get supported EntryPoints
+- [getChainId](/nexus-client/methods/getChainId) - Get the current chain ID

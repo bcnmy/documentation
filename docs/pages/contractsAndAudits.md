@@ -3,25 +3,25 @@
 ## Nexus v1.0.1 Production Contracts
 | Name    | Address    | 
 |-------------|-------------|
-| Nexus implementation  | `0x000000008761E87F023f65c49DC9cb1C7EdFEaaf`  |
-| K1 Validator  | `0x0000002D6DB27c52E3C11c1Cf24072004AC75cBa`  | 
-| K1 Validator Factory  | `0x00000024115AA990F0bAE0B6b0D5B8F68b684cd6`  | 
-| Account Factory  | `0x000000226cada0d8b36034F5D5c06855F59F6F3A`  |
-| Bootstrap  | `0x000000F5b753Fdd20C5CA2D7c1210b3Ab1EA5903`  |
-| Entrypoint V7 | `0x0000000071727de22e5e9d8baf0edac6f37da032` |
+| Nexus implementation  | [`0x000000008761E87F023f65c49DC9cb1C7EdFEaaf`](https://contractscan.xyz/contract/0x000000008761E87F023f65c49DC9cb1C7EdFEaaf)  |
+| K1 Validator  | [`0x0000002D6DB27c52E3C11c1Cf24072004AC75cBa`](https://contractscan.xyz/contract/0x0000002D6DB27c52E3C11c1Cf24072004AC75cBa)  | 
+| K1 Validator Factory  | [`0x00000024115AA990F0bAE0B6b0D5B8F68b684cd6`](https://contractscan.xyz/contract/0x00000024115AA990F0bAE0B6b0D5B8F68b684cd6)  | 
+| Account Factory  | [`0x000000226cada0d8b36034F5D5c06855F59F6F3A`](https://contractscan.xyz/contract/0x000000226cada0d8b36034F5D5c06855F59F6F3A)  |
+| Bootstrap  | [`0x000000F5b753Fdd20C5CA2D7c1210b3Ab1EA5903`](https://contractscan.xyz/contract/0x000000F5b753Fdd20C5CA2D7c1210b3Ab1EA5903)  |
+| Entrypoint V7 | [`0x0000000071727de22e5e9d8baf0edac6f37da032`](https://contractscan.xyz/contract/0x0000000071727de22e5e9d8baf0edac6f37da032) |
 
 ### Paymaster contracts
 #### Base and Optimism
 | Name    | Address    | 
 |-------------|-------------|
-| Sponsorship Paymaster | `0x0000006087310897e0BFfcb3f0Ed3704f7146852` |
-| Token Paymaster | `0x00000000301515A5410e0d768aF4f53c416edf19` |
+| Sponsorship Paymaster | [`0x0000006087310897e0BFfcb3f0Ed3704f7146852`](https://contractscan.xyz/contract/0x0000006087310897e0BFfcb3f0Ed3704f7146852) |
+| Token Paymaster | [`0x00000000301515A5410e0d768aF4f53c416edf19`](https://contractscan.xyz/contract/0x00000000301515A5410e0d768aF4f53c416edf19) |
 
 ### Other chains
 | Name    | Address    | 
 |-------------|-------------|
-| Sponsorship Paymaster | `0x00000072a5F551D6E80b2f6ad4fB256A27841Bbc` |
-| Token Paymaster | `0x00000000301515A5410e0d768aF4f53c416edf19` |
+| Sponsorship Paymaster | [`0x00000072a5F551D6E80b2f6ad4fB256A27841Bbc`](https://contractscan.xyz/contract/0x00000072a5F551D6E80b2f6ad4fB256A27841Bbc) |
+| Token Paymaster | [`0x00000000301515A5410e0d768aF4f53c416edf19`](https://contractscan.xyz/contract/0x00000000301515A5410e0d768aF4f53c416edf19) |
 
 ## Audits
 
@@ -46,10 +46,10 @@
 ## MEE Contracts
 | Name    | Address    | 
 |-------------|-------------|
-|  MEE Entrypoint | `0xE854C84cD68fC434cB3B0042c29235D452cAD977` |
-|  MEE Validator | `0x068EA3E30788ABaFDC6fD0b38d20BD38a40a2B3D` |
+|  MEE Entrypoint | [`0xE854C84cD68fC434cB3B0042c29235D452cAD977`](https://contractscan.xyz/contract/0xE854C84cD68fC434cB3B0042c29235D452cAD977) |
+|  MEE Validator | [`0x068EA3E30788ABaFDC6fD0b38d20BD38a40a2B3D`](https://contractscan.xyz/contract/0x068EA3E30788ABaFDC6fD0b38d20BD38a40a2B3D) |
 
-Supported chains:
+Supported chains (all addresses above are clickable links to ContractScan):
 | Network            | Supported     |
 | ------------------ | ----------- |
 | Ethereum Sepolia   | ✅           |

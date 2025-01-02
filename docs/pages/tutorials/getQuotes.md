@@ -19,7 +19,7 @@ const account = privateKeyToAccount(`${privateKey}`);
 Login to the [Dashboard](https://dashboard.biconomy.io/) and setup a v2 paymaster. Let's configure a client for the Smart Account with a `paymasterUrl` to enable it. A `bundlerUrl` is required to submit transactions to the Network, which will initialize the Smart Account.
 
 ```typescript twoslash
-import { createNexusClient, createBicoPaymasterClient, toBiconomyTokenPaymasterContext } from "@biconomy/sdk";
+import { createSmartAccountClient, createBicoPaymasterClient, toBiconomyTokenPaymasterContext } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther } from "viem";
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
@@ -39,7 +39,7 @@ const paymaster = createBicoPaymasterClient({
     transport: http(paymasterUrl)
 })
 
-const nexusClient = await createNexusClient({
+const nexusClient = await createSmartAccountClient({
     signer: account,
     chain: baseSepolia,
     transport: http(),
@@ -55,7 +55,7 @@ We will use the `maxGasFee` and `decimal` from the quote to calculate the fee am
 
 ```typescript twoslash
 
-import { createNexusClient, createBicoPaymasterClient, toBiconomyTokenPaymasterContext } from "@biconomy/sdk";
+import { createSmartAccountClient, createBicoPaymasterClient, toBiconomyTokenPaymasterContext } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther, parseUnits } from "viem";
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
@@ -76,7 +76,7 @@ const paymasterContext = toBiconomyTokenPaymasterContext({
     feeTokenAddress: baseSepoliaUSDC
 })
 
-const nexusClient = await createNexusClient({
+const nexusClient = await createSmartAccountClient({
     signer: account,
     chain: baseSepolia,
     transport: http(),
@@ -103,7 +103,7 @@ const usdcFeeAmount = parseUnits(
 
 ### Sending a transaction and paying the gas with USDC
 ```typescript twoslash
-import { createNexusClient, createBicoPaymasterClient, toBiconomyTokenPaymasterContext } from "@biconomy/sdk";
+import { createSmartAccountClient, createBicoPaymasterClient, toBiconomyTokenPaymasterContext } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
 import { http, parseEther, parseUnits } from "viem";
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
@@ -124,7 +124,7 @@ const paymasterContext = toBiconomyTokenPaymasterContext({
     feeTokenAddress: baseSepoliaUSDC
 })
 
-const nexusClient = await createNexusClient({
+const nexusClient = await createSmartAccountClient({
     signer: account,
     chain: baseSepolia,
     transport: http(),

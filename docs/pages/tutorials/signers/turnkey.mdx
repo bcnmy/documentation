@@ -53,7 +53,7 @@ import { baseSepolia } from "viem/chains";
 import { ApiKeyStamper } from "@turnkey/sdk-server";
 import { TurnkeyClient } from "@turnkey/http";
 import { createAccount } from "@turnkey/viem";
-import { createNexusClient, NexusClient } from "@biconomy/sdk";  // [!code focus] 
+import { createSmartAccountClient, NexusClient } from "@biconomy/sdk";  // [!code focus] 
 
 const main = async () => {
     const bundlerUrl = `https://bundler.biconomy.io/api/v3/84532/nJPK7B3ru.dd7f7861-190d-41bd-af80-6877f74b8f44`
@@ -71,7 +71,7 @@ const main = async () => {
         signWith: signWith, 
     })
 
-    const nexusClient: NexusClient = await createNexusClient({
+    const nexusClient: NexusClient = await createSmartAccountClient({
         chain: baseSepolia,
         signer: turnkeyAccount,
         transport: http("https://sepolia.base.org"),

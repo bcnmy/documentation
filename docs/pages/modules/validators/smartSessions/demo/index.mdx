@@ -1,0 +1,78 @@
+import Demo from "../../../../../src/components/Demo";
+
+# Smart Sessions Demo
+
+- Use the interactive demo below directly in the docs, or...
+- Visit [demo-smart-sessions.biconomy.io](https://demo-smart-sessions.biconomy.io/) to use it in a new window or...
+- Explore or clone [the example repository on GitHub](https://github.com/bcnmy/examples/tree/main/nextjs-demo-smart-sessions) to run it locally
+
+<Demo/>
+
+## Key Features
+
+
+### Single Dapp Session Key Pattern
+- Uses a single session key owned by the dapp for all users
+- Users grant limited trading permissions to this trusted dapp key
+- No need for database or key management infrastructure
+- Highly secure as only one private key needs to be protected
+- Permissions are strictly limited to swapping a specific number of tokens
+
+### Benefits of this Pattern:
+- **Simplified Key Management**: Dapp maintains just one session key
+- **Reduced Infrastructure**: No need to store or manage multiple user keys
+- **Enhanced Security**: Single point of security for the dapp's session key
+- **Scalable**: Can handle unlimited users with the same session key
+- **Limited Scope**: Each user's permission grant is strictly bounded to specific action on a specific contract
+
+### Universal Action Policy
+Restricts which smart contract functions can be called and with what parameters:
+- Whitelisted contract addresses only
+- Specific function calls (e.g., mint functions)
+- Maximum transaction amounts
+- Parameter validation for each action
+
+### Time Constraints
+Time Range Policy ensures security through time-bound sessions:
+- Sessions expire after 24 hours
+- Automatic deactivation after expiry
+- Requires new session creation for continued access
+
+## How It Works
+
+1. When you connect your wallet, the app creates a new session with specific validation policies and action permissions.
+
+2. Each session is configured with:
+   - Whitelisted contract addresses
+   - Specific function selectors for minting
+   - Maximum transaction limits
+   - Time-based constraints
+
+3. The session key remains in the dapp's custody while allowing execution within the defined boundaries.
+
+4. All transactions are fully on-chain and verifiable through your smart account.
+
+## Gas Sponsorship
+
+This app uses Biconomy's Paymaster to sponsor gas fees for users, making the experience completely gasless:
+- Covers all gas costs for automated actions
+- Maintains a gas tank for transaction sponsorship
+- Implements configurable spending limits and rules
+- Provides real-time monitoring and notifications
+
+## Technical Implementation
+
+The demo app is built using:
+- Next.js 14 with App Router
+- Biconomy SDK for Smart Account and Smart Sessions
+- TailwindCSS for styling
+- Shadcn/ui for UI components
+
+## Try It Yourself
+
+1. Connect your wallet
+2. Create a session key with custom permissions
+3. Use the session key to swap tokens on a DEX
+4. Observe gas savings and improved UX with permissions
+
+For more details, check out the [complete source code](https://github.com/bcnmy/examples/tree/main/nextjs-demo-smart-sessions) or visit our [Smart Sessions documentation](/modules/validators/smartSessions).
