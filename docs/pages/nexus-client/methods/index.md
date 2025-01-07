@@ -209,6 +209,7 @@ const userOpReceipt: UserOpReceipt = await smartAccount.sendTransactionWithExecu
 - [estimateUserOperationGas](/nexus-client/methods/estimateUserOperationGas) - Estimate gas values for a User Operation
 - [getUserOperation](/nexus-client/methods/getUserOperation) - Get information about a User Operation
 - [debugUserOperation](/nexus-client/methods/debugUserOperation) - Debug a User Operation with detailed information
+- [getUserOperationReceipt](/nexus-client/methods/getUserOperationReceipt) - Get the User Operation Receipt given a User Operation hash
 
 ## Network Methods
 - [getSupportedEntryPoints](/nexus-client/methods/getSupportedEntryPoints) - Get supported EntryPoints
