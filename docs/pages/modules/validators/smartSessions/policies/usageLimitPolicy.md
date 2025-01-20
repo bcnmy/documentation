@@ -37,7 +37,7 @@ declare module "@biconomy/sdk-canary" {
 }
 
 import { OneOf, Address, Hex, http } from "viem"
-import { ActionPolicyInfo, CreateSessionDataParams, toSmartSessionsValidator, smartSessionCreateActions, createSmartAccountClient } from "@biconomy/sdk-canary"
+import { ActionPolicyInfo, CreateSessionDataParams, toSmartSessionsValidator, smartSessionCreateActions, createSmartAccountClient } from "@biconomy/sdk"
 import { privateKeyToAccount } from "viem/accounts";
 import { baseSepolia } from "viem/chains"; 
 
