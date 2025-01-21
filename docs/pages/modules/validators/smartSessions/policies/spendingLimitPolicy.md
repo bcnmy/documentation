@@ -9,7 +9,7 @@ The spending limits policy provides fine-grained control over ERC20 token transf
 ```ts twoslash [spendingLimits.ts] filename="spendingLimits.ts"
 import { usersNexusClient } from "./client.ts";
 import { parseUnits, toFunctionSelector } from "viem";
-import { ParamCondition } from "@biconomy/sdk-canary";
+import { ParamCondition } from "@biconomy/sdk";
 
 const createSessionsResponse = await usersNexusClient.grantPermission({
   sessionRequestedInfo: [
@@ -52,7 +52,7 @@ const createSessionsResponse = await usersNexusClient.grantPermission({
 ```ts twoslash [client.ts] filename="client.ts"
 
 import { OneOf, Address, Hex, http } from "viem"
-import { ActionPolicyInfo, CreateSessionDataParams, toSmartSessionsValidator, smartSessionCreateActions } from "@biconomy/sdk-canary"
+import { ActionPolicyInfo, CreateSessionDataParams, toSmartSessionsValidator, smartSessionCreateActions } from "@biconomy/sdk"
 import { privateKeyToAccount } from "viem/accounts";
 import { createSmartAccountClient } from "@biconomy/sdk";
 import { baseSepolia } from "viem/chains"; 
