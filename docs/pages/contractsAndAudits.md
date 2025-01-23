@@ -44,10 +44,20 @@
 ⚠️ Those contracts are not audited. They are not recommended for production use.
 
 ## MEE Contracts
+
+### Arbitrum, Base, Optimism, Polygon, Scroll : Mainnets and Testnets
+| Name    | Address    | 
+|-------------|-------------|
+|  MEE Entrypoint | [`0x9186C05E88B1061Ae49C0F275D9b4c5db0817E61`](https://contractscan.xyz/contract/0x9186C05E88B1061Ae49C0F275D9b4c5db0817E61) |
+|  MEE Validator | [`0xFbCbF8314DE6DA57ea2Bc4710115F5271041CA50`](https://contractscan.xyz/contract/0xFbCbF8314DE6DA57ea2Bc4710115F5271041CA50) |
+| ETH Forwarder | [`0x16007Dad4739b3094434B54072Fb9C094cE970c2`](https://contractscan.xyz/contract/0x16007Dad4739b3094434B54072Fb9C094cE970c2) |
+
+### Rest of the chains
 | Name    | Address    | 
 |-------------|-------------|
 |  MEE Entrypoint | [`0xE854C84cD68fC434cB3B0042c29235D452cAD977`](https://contractscan.xyz/contract/0xE854C84cD68fC434cB3B0042c29235D452cAD977) |
 |  MEE Validator | [`0x068EA3E30788ABaFDC6fD0b38d20BD38a40a2B3D`](https://contractscan.xyz/contract/0x068EA3E30788ABaFDC6fD0b38d20BD38a40a2B3D) |
+| ETH Forwarder | [`0x825F70AF8F0Cdf5D00E5524376b59C9456af1E69`](https://contractscan.xyz/contract/0x825F70AF8F0Cdf5D00E5524376b59C9456af1E69) |
 
 Supported chains (all addresses above are clickable links to ContractScan):
 | Network            | Supported     |
@@ -68,6 +78,8 @@ Supported chains (all addresses above are clickable links to ContractScan):
 | Binance Smart Chain Mainnet         | ✅           |
 | Binance Smart Chain Testnet         | ✅           |
 | Berachain Bartio Testnet         | ✅           |
+| Blast Mainnet         | ✅           |
+| Blast Sepolia         | ✅           |
 
 
 ## Nexus v1.1.0-alpha Experimental Contracts
