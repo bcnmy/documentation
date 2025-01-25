@@ -1,8 +1,54 @@
-## ERC20 Gas Payments
+# ERC20 Gas Payments
 
 Our Paymaster not only allows you to sponsor transactions for your users but also allows users to pay for transactions using ERC20 tokens. Below are the supported tokens list grouped by chain.
 
 Please note that we will be reviewing DEX activity on each network to determine additional ERC20 token support on an ongoing basis.
+
+## Mainnets
+
+### Ethereum Mainnet 1
+
+| Token symbol | Token name                       | Token Address                              | 
+| ------------ | -------------------------------- | ------------------------------------------ |
+| ETH          | Ether                            | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
+| USDC         | USD Coin                         | 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 |
+| USDT         | Tether USD                       | 0xdac17f958d2ee523a2206206994597c13d831ec7 | 
+| DAI          | Dai Stablecoin                   | 0x6b175474e89094c44da98b954eedeac495271d0f | 
+| stETH        | Liquid staked Ether 2.0          | 0xae7ab96520de3a18e5e111b5eaab095312d7fe84 |
+| wstETH       | Wrapped liquid staked Ether 2.0  | 0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0 |
+
+### Base 8453
+
+| Token symbol | Token name      | Token Address                              | 
+| ------------ | --------------- | -------------------------------------------| 
+| ETH          | Ether           | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
+| wstETH       | Wrapped liquid staked Ether 2.0  | 0xc1cba3fcea344f92d9239c08c0568f6f2f0ee452 |
+| DAI          | Dai Stablecoin  | 0x50c5725949a6f0c72e6c4a641f24049a917db0cb | 
+| USDC         | USD Coin        | 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913 | 
+| USDbC        | USD Base Coin   | 0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca | 
+| cbETH        | Coinbase Wrapped Staked ETH     | 0x2ae3f1ec7f1f5012cfeab0185bfc7aa3cf0dec22 | 
+| YFI          | yearn.finance   | 0x9eaf8c1e34f05a589eda6bafdf391cf6ad3cb239 | 
+| PRIME        | PRIME           | 0xfA980cEd6895AC314E7dE34Ef1bFAE90a5AdD21b | 
+| KNC          | Kyber Network Crystal v2 | 0x28fe69ff6864c1c218878bdca01482d36b9d57b1 | 
+| SDEX         | SmarDex Token   | 0xfd4330b0312fdeec6d4225075b82e00493ff2e3f | 
+| RETH         | Rocket Pool ETH | 0xb6fe221fe9eef5aba221c348ba20a1bf5e73624c | 
+| DEGEN        | Degen           | 0x4ed4e862860bed51a9570b96d89af5e1b0efefed |
+
+### Optimism Mainnet 10
+
+| Token symbol | Token name                      | Token Address                              |
+| ------------ | ------------------------------- | ------------------------------------------ |
+| ETH          | Ether                           | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
+| WETH         | Wrapped Ether                   | 0x4200000000000000000000000000000000000006 |
+| DAI          | Dai Stablecoin                  | 0xda10009cbd5d07dd0cecc66161fc93d7c9000da1 |
+| USDT         | Tether USD                      | 0x94b008aa00579c1307b0ef2c499ad98a8ce58e58 |
+| WBTC         | Wrapped Bitcoin                 | 0x68f180fcce6836688e9084f035309e29bf0a2095 |
+| USDC         | USD Coin                        | 0x7f5c764cbc14f9669b88837ca1490cca17c31607 |
+| wstETH       | Wrapped liquid staked Ether 2.0 | 0x1f32b1c2345538c0c6f582fcb022739c4a194ebb |
+| BUSD         | BUSD Token                      | 0x9c9e5fd8bbc25984b178fdce6117defa39d2db39 |
+| LINK         | ChainLink Token                 | 0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6 |
+| OP           | Optimism                        | 0x4200000000000000000000000000000000000042 |
+| THALES       | Thales DAO Token                | 0x217d47011b23bb961eb6d93ca9945b7501a5bb11 |
 
 ### Arbitrum One Mainnet 42161
 
@@ -19,74 +65,17 @@ Please note that we will be reviewing DEX activity on each network to determine 
 | UNI          | Uniswap                         | 0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0 |
 | DPX          | Dopex Governance Token          | 0x6c2c06790b3e3e3c38e12ee22f8183b37a13ee55 |
 | JOE          | JoeToken                        | 0x371c7ec6d8039ff7933a2aa28eb827ffe1f52f07 |
+| LINK         | ChainLink Token                 | 0xf97f4df75117a78c1a5a0dbb814af92458539fb4 |
+| WETH         | Wrapped Ether                   | 0x82af49447d8a07e3bd95bd0d56f35241523fbab1 |
 
-
-### Arbitrum Goerli 421613
+### Scroll Mainnet 534352
 
 | Token symbol  | Token name     | Token Address                              |
 | ------------  | -------------- | ------------------------------------------ | 
 | ETH           | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
-| USDC          | USD Coin       | 0x9ff2a6b0cdc4ab06bbe231327edfe493f130a994 | 
-| USDT          | Tether USD     | 0x466cd6f70015e11dc53e5757b4bcfeccd7c31139 | 
-| LINK          | Chainlink token | 0x6bdb7fe59ec323b6a9bc96a988a971eeda3958d9 | 
-
-
-### Avalanche Mainnet 43114
-
-| Token symbol | Token name     | Token Address                              |
-| ------------ | -------------- | ------------------------------------------ |
-| AVAX         | Avalanche      | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
-| WETH         | Wrapped Ether  | 0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab |
-| WAVAX        | Wrapped AVAX   | 0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7 |
-| USDC         | USD Coin       | 0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664 |
-| USDT         | Tether USD     | 0xc7198437980c041c805a1edcba50c1ce5db95118 |
-| WBTC         | Wrapped BTC    | 0x50b7545627a5162f82a992c33b87adc75187b218 |
-| DAI          | Dai Stablecoin | 0xd586e7f844cea2f87f50152665bcbc2c279d8d70 |
-| BUSD         | BUSD Token     | 0x19860ccb0a68fd4213ab9d8266f7bbf05a8dde98 |
-| USDC         | USD Coin       | 0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e |
-| TUSD         | TrueUSD        | 0x1c20e891bab6b1727d14da358fae2984ed9b59eb |
-
-
-### Avalanche Fuji Testnet 43113
-
-| Token symbol | Token name     | Token Address                              |
-| ------------ | -------------- | ------------------------------------------ | 
-| AVAX         | Avalanche      | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
-| USDT         | Tether USD     | 0xa7b3002ec739077057689a389460a0e7c0367369 |
-
-
-### Base 8453
-
-| Token symbol | Token name      | Token Address                              | 
-| ------------ | --------------- | -------------------------------------------| 
-| ETH          | Ether           | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
-| DAI          | Dai Stablecoin  | 0x50c5725949a6f0c72e6c4a641f24049a917db0cb | 
-| USDC         | USD Coin        | 0x833589fcd6edb6e08f4c7c32d4f71b54bda02913 | 
-| USDbC        | USD Base Coin   | 0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca | 
-| cbETH        | Coinbase Wrapped Staked ETH     | 0x2ae3f1ec7f1f5012cfeab0185bfc7aa3cf0dec22 | 
-| YFI          | yearn.finance   | 0x9eaf8c1e34f05a589eda6bafdf391cf6ad3cb239 | 
-| PRIME        | PRIME           | 0xfA980cEd6895AC314E7dE34Ef1bFAE90a5AdD21b | 
-| KNC          | Kyber Network Crystal v2 | 0x28fe69ff6864c1c218878bdca01482d36b9d57b1 | 
-| SDEX         | SmarDex Token   | 0xfd4330b0312fdeec6d4225075b82e00493ff2e3f | 
-| RETH         | Rocket Pool ETH | 0xb6fe221fe9eef5aba221c348ba20a1bf5e73624c | 
-
-
-### Base Goerli Testnet 84531
-
-| Token symbol | Token name     | Token Address                              |
-| ------------ | -------------- | ------------------------------------------ | 
-| ETH          | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
-| USDC         | USD Coin       | 0xd6a8c1eee4d4e4ef998b911b03d52bc301d9b332 |
-| USDT         | Tether USD     | 0xe01435b1767aed7c25c943facbdb582b6278650f |
-| DAI          | Dai Stablecoin | 0x174956bdfbceb6e53089297cce4fe2825e58d92c |
-
-### Base Sepolia Testnet 84532
-
-| Token symbol | Token name     | Token Address                              |
-| ------------ | -------------- | ------------------------------------------ | 
-| ETH          | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
-| USDC         | USD Coin       | 0x036cbd53842c5426634e7929541ec2318f3dcf7e |
-| DAI          | Dai Stablecoin | 0x7683022d84f726a96c4a6611cd31dbf5409c0ac9 |
+| wstETH        | Wrapped liquid staked Ether 2.0 | 0xf610a9dfb7c89644979b4a0f27063e9e7d7cda32 | 
+| USDT          | Tether USD     | 0xf55bec9cafdbe8730f096aa55dad6d22d44099df |
+| USDC          | USD Coin       | 0x06efdbff2a14a7c8e15944d1f4a48f9f95f663a4 |
 
 ### BNB Smart Chain Mainnet 56
 
@@ -94,6 +83,7 @@ Please note that we will be reviewing DEX activity on each network to determine 
 | ------------ | ----------------- | ------------------------------------------ |
 | BNB          | BNB               | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
 | WBNB         | Wrapped BNB       | 0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c |
+| WSTETH       | Wrapped liquid staked Ether 2.0 | 0x26c5e01524d2E6280A48F2c50fF6De7e52E9611C |
 | USDT         | Tether USD        | 0x55d398326f99059ff775485246999027b3197955 |
 | CAKE         | PancakeSwap Token | 0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82 |
 | BUSD         | BUSD Token        | 0xe9e7cea3dedca5984780bafc599bd69add087d56 |
@@ -106,72 +96,6 @@ Please note that we will be reviewing DEX activity on each network to determine 
 | MATIC        | Matic Token       | 0xcc42724c6683b7e57334c4e856f4c9965ed682bd |
 | UNI          | Uniswap           | 0xbf5140a22578168fd562dccf235e5d43a02ce9b1 |
 | LINK         | ChainLink Token   | 0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd |
-
-
-### BNB Smart Chain Testnet 97
-| Token symbol | Token name        | Token Address                              | 
-| ------------ | ----------------- | ------------------------------------------ | 
-| ETH          | Ether             | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
-| USDC         | USD Coin          | 0x1ffa9c87ead57adc9e4f9a7d26ec3a52150db3b0 | 
-| USDT         | Tether USD        | 0x03bbb5660b8687c2aa453a0e42dcb6e0732b1266 | 
-| DAI          | Dai Stablecoin    | 0x355c8c8395fadf2eaa6bb27f86e53e432e3de4e6 | 
-| AAVE         | Aave token        | 0xc1537ab4f2e0b1c578baea06b5baae8f87ce971c | 
-| CAKE         | PancakeSwap Token | 0x81f9e7a56f6869a9a8c385d1e0701b312439501f | 
-| LINK         | ChainLink Token   | 0xdeb12ea437c116ed823ab49244cafec4e41704cb | 
-
-
-### Ethereum Mainnet 1
-
-| Token symbol | Token name     | Token Address                              | 
-| ------------ | -------------- | ------------------------------------------ |
-| ETH          | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
-| USDC         | USD Coin       | 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 |
-| USDT         | Tether USD     | 0xdac17f958d2ee523a2206206994597c13d831ec7 | 
-| DAI          | Dai Stablecoin | 0x6b175474e89094c44da98b954eedeac495271d0f | 
-
-
-### Linea 59144
-| Token symbol | Token name      | Token Address                              |
-| ------------ | --------------  | ------------------------------------------ |
-| USDT         | Tether USD      | 0xa219439258ca9da29e9cc4cE5596924745e12b93 |
-| USDC         | USD Coin        | 0x176211869ca2b568f2a7d4ee941e073a821ee1ff |
-
-
-### Moonbeam 1284
-
-| Token symbol | Token name     | Token Address                              | 
-| ------------ | -------------- | ------------------------------------------ |
-| GLMR         | GLMR           | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
-| USDC         | USD Coin       | 0x818ec0a7fe18ff94269904fced6ae3dae6d6dc0b | 
-| USDT         | Tether USD     | 0xefaeee334f0fd1712f9a8cc375f427d9cdd40d73 |
-| DAI          | Dai Stablecoin | 0x765277eebeca2e31912c9946eae1021199b39c61 | 
-| BUSD         | Binance-Peg BUSD Token | 0xa649325aa7c5093d12d6f98eb4378deae68ce23f | 
-
-
-### opBNB Mainnet 204
-
-| Token symbol | Token name     | Token Address                              | 
-| ------------ | -------------- | ------------------------------------------ |
-| BNB          | BNB            | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
-| CUBI         | CubiSwap Finance Token     | 0xb01d49c26416a352fac4fbb3d555d5f2543e3247 | 
-| WBNB         | Dai Stablecoin | 0xb97fe5f3e5bf1ddac8ea1d2fa77f0a45cdb1dcec | 
-| USDT         | Tether USD     | 0x9e5aac1ba1a2e6aed6b32689dfcf62a509ca96f3 | 
-| FDUSD        | First Digital USD | 0x50c5725949a6f0c72e6c4a641f24049a917db0cb | 
-
-
-### Optimism Mainnet 10
-
-| Token symbol | Token name                      | Token Address                              |
-| ------------ | ------------------------------- | ------------------------------------------ |
-| ETH          | Ether                           | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
-| WETH         | Wrapped Ether                   | 0x4200000000000000000000000000000000000006 |
-| DAI          | Dai Stablecoin                  | 0xda10009cbd5d07dd0cecc66161fc93d7c9000da1 |
-| USDT         | Tether USD                      | 0x94b008aa00579c1307b0ef2c499ad98a8ce58e58 |
-| WBTC         | Wrapped Bitcoin                 | 0x68f180fcce6836688e9084f035309e29bf0a2095 |
-| USDC         | USD Coin                        | 0x7f5c764cbc14f9669b88837ca1490cca17c31607 |
-| wstETH       | Wrapped liquid staked Ether 2.0 | 0x1f32b1c2345538c0c6f582fcb022739c4a194ebb |
-| BUSD         | BUSD Token                      | 0x9c9e5fd8bbc25984b178fdce6117defa39d2db39 |
-
 
 ### Polygon Mainnet 137
 
@@ -192,24 +116,70 @@ Please note that we will be reviewing DEX activity on each network to determine 
 | USDC         | USD Coin (PoS)       | 0x2791bca1f2de4661ed88a30c99a7a9449aa84174 |
 | USDT         | Tether USD           | 0xc2132d05d31c914a87c6611c10748aeb04b58e8f |
 | WBTC         | Wrapped BTC          | 0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6 |
+| WSTETH       | Wrapped liquid staked Ether 2.0 | 0x03b54a6e9a984069379fae1a4fc4dbae93b3bccd |
 
+### Gnosis Mainnet 100
 
-### Polygon Amoy 80002
+| Token symbol  | Token name     | Token Address                              |
+| ------------  | -------------- | ------------------------------------------ | 
+| xDAI          | xDAI           | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
+| USDC          | USD//C on xDai | 0xddafbb505ad214d7b80b1f830fccc89b60fb7a83 |
+| USDT          | Tether USD on xDai | 0x4ecaba5870353805a9f068101a40e0f32ed605c6 |
+
+### Blast Mainnet 81457
+
+| Token symbol  | Token name     | Token Address                              |
+| ------------  | -------------- | ------------------------------------------ | 
+| ETH           | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
+| BLAST         | Blast          | 0xb1a5700fa2358173fe465e6ea4ff52e36e88e2ad |
+| USDB          | USDB           | 0x4300000000000000000000000000000000000003 |
+| ESE           | eesee          | 0x491e6de43b55c8eae702edc263e32339da42f58c |
+
+### Sonic Mainnet 
+
+* coming soon *
+
+## Testnets
+
+### Ethereum Sepolia 11155111
 
 | Token symbol | Token name     | Token Address                              |
 | ------------ | -------------- | ------------------------------------------ | 
-| USDC         | USD Coin       | 0xf555F8d9Cf90f9d95D34488e6C852796D9acBd31 | 
-| USDT         | Tether USD     | 0x747A4168DB14F57871fa8cda8B5455D8C2a8e90a | 
-| DAI          | Dai Stablecoin | 0x6Dcc603fdbC7B0847b66aB04F4fB4C668bC6cAA6 | 
+| ETH          | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
+| DAI          | Dai Stablecoin | 0x77ab54631bfbae40383c62044dc30b229c7df9f5 |
 
-### Polygon zkEVM 1101
+### Base Sepolia 84532
 
 | Token symbol | Token name     | Token Address                              |
 | ------------ | -------------- | ------------------------------------------ | 
-| ETH          | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
-| WETH         | Wrapped Ether  | 0x4f9a0e7fd2bf6067db6994cf12e4495df938e6e9 | 
-| USDC         | USD Coin       | 0xa8ce8aee21bc2a48a5ef670afcc9274c7bbbc035 | 
-| USDT         | Tether USD     | 0x1e4a5963abfd975d8c9021ce480b42188849d41d | 
-| DAI          | Dai Stablecoin | 0xc5015b9d9161dca7e18e32f6f25c4ad850731fd4 | 
-| MATIC        | MATIC          | 0xa2036f0538221a77A3937F1379699f44945018d0 | 
-| WBTC         | Wrapped BTC    | 0xea034fb02eb1808c2cc3adbc15f447b93cbe08e1 | 
+| ETH          | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
+| DAI          | Dai Stablecoin | 0x7683022d84f726a96c4a6611cd31dbf5409c0ac9 |
+| USDC         | USDC           | 0x036cbd53842c5426634e7929541ec2318f3dcf7e |
+
+### Optimism Sepolia 84532
+
+| Token symbol | Token name     | Token Address                              |
+| ------------ | -------------- | ------------------------------------------ | 
+| ETH          | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
+| USDC         | USDC           | 0x5fd84259d66Cd46123540766Be93DFE6D43130D7 |
+
+### Arbitrum Sepolia 421614
+
+| Token symbol  | Token name     | Token Address                              |
+| ------------  | -------------- | ------------------------------------------ | 
+| ETH           | Ether          | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
+| USDC          | USD Coin       | 0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d | 
+| USDT          | Tether USD     | 0x93d67359a0f6f117150a70fdde6bb96782497248 | 
+| LINK          | Chainlink token | 0xb1D4538B4571d411F07960EF2838Ce337FE1E80E | 
+
+### BNB Smart Chain Testnet 97
+
+| Token symbol | Token name        | Token Address                              | 
+| ------------ | ----------------- | ------------------------------------------ | 
+| ETH          | Ether             | 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee | 
+| USDC         | USD Coin          | 0x1ffa9c87ead57adc9e4f9a7d26ec3a52150db3b0 | 
+| USDT         | Tether USD        | 0x03bbb5660b8687c2aa453a0e42dcb6e0732b1266 | 
+| DAI          | Dai Stablecoin    | 0x355c8c8395fadf2eaa6bb27f86e53e432e3de4e6 | 
+| AAVE         | Aave token        | 0xc1537ab4f2e0b1c578baea06b5baae8f87ce971c | 
+| CAKE         | PancakeSwap Token | 0x81f9e7a56f6869a9a8c385d1e0701b312439501f | 
+| LINK         | ChainLink Token   | 0xdeb12ea437c116ed823ab49244cafec4e41704cb | 
